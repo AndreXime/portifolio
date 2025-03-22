@@ -1,7 +1,7 @@
 import { Card, CardContent, CardFooter } from '@/components';
 import Image from 'next/image';
 import Link from 'next/link';
-import { IconGithub } from '@/components/ui/Icons';
+import { IconGithub, IconOnline } from '@/components/ui/Icons';
 
 interface ProjectCardProps {
 	title: string;
@@ -9,9 +9,10 @@ interface ProjectCardProps {
 	image: string;
 	link: string;
 	tags: string[];
+	linkOnline?: string;
 }
 
-export default function ProjectCard({ title, description, image, link, tags }: ProjectCardProps) {
+export default function ProjectCard({ title, description, image, link, tags, linkOnline }: ProjectCardProps) {
 	return (
 		<Card className="card-custom">
 			<div className="relative aspect-video">
@@ -35,7 +36,7 @@ export default function ProjectCard({ title, description, image, link, tags }: P
 					))}
 				</div>
 			</CardContent>
-			<CardFooter className="p-4 pt-0">
+			<CardFooter className="p-6 pt-0">
 				<Link
 					href={link}
 					target="_blank"
@@ -43,6 +44,15 @@ export default function ProjectCard({ title, description, image, link, tags }: P
 					<IconGithub className="h-4 w-4" />
 					Ver no Github
 				</Link>
+				{linkOnline && (
+					<Link
+						href={linkOnline}
+						target="_blank"
+						className=" ml-auto inline-flex items-center gap-2 text-sm text-green-600 hover:underline">
+						<IconOnline className="h-4 w-4" />
+						Ver o projeto no ar
+					</Link>
+				)}
 			</CardFooter>
 		</Card>
 	);

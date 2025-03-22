@@ -5,29 +5,35 @@ import { IconGithub, IconLinkedin, IconEmail } from '../ui/Icons';
 export default function Contact() {
 	return (
 		<>
-			<p className="text-gray-600 mb-8">
+			<p className="text-gray-600 mb-8 max-w-[700px] mx-auto md:text-xl">
 				Estou sempre aberto a novas oportunidades e colaborações. Sinta-se à vontade para entrar em contato por meio de
 				qualquer um dos canais abaixo.
 			</p>
 			<div className="flex flex-wrap justify-center gap-4">
 				<Link
-					href="https://github.com"
+					href="https://github.com/AndreXime"
 					target="_blank">
-					<Button className="gap-2 btn-primary">
+					<Button
+						size={'lg'}
+						className="gap-2 btn-primary">
 						<IconGithub className="h-5 w-5" />
 						GitHub
 					</Button>
 				</Link>
 				<Link
-					href="https://linkedin.com"
+					href="https://linkedin.com/in/andreximenes20"
 					target="_blank">
-					<Button className="gap-2 btn-primary">
+					<Button
+						size={'lg'}
+						className="gap-2 btn-primary">
 						<IconLinkedin className="h-5 w-5" />
 						LinkedIn
 					</Button>
 				</Link>
-				<Link href="mailto:hello@example.com">
-					<Button className="gap-2 btn-primary">
+				<Link href="mailto:andreximenesa20@gmail.com">
+					<Button
+						size={'lg'}
+						className="gap-2 btn-primary">
 						<IconEmail className="h-5 w-5" />
 						Email
 					</Button>

@@ -11,19 +11,19 @@ export default function Hero() {
 				</h1>
 
 				<p className="mx-auto max-w-[700px] text-gray-600 md:text-xl">
-					Construindo soluçoes digitais com as tecnologias mais modernas presentes. Planejando desde a logica do banco
+					Construindo soluções digitais com as tecnologias mais modernas presentes. Planejando desde a logica do banco
 					de dados até a interface do usuario.
 				</p>
 			</div>
 			<div className="space-x-4 flex flex-row">
 				<Link
-					href="https://github.com"
+					href="https://github.com/AndreXime"
 					target="_blank">
 					<span className="sr-only">GitHub</span>
 					<IconGithub size={40} />
 				</Link>
 				<Link
-					href="https://linkedin.com"
+					href="https://linkedin.com/in/andreximenes20"
 					target="_blank">
 					<IconLinkedin
 						color="blue"
@@ -32,7 +32,7 @@ export default function Hero() {
 					<span className="sr-only">LinkedIn</span>
 				</Link>
 
-				<Link href="mailto:hello@example.com">
+				<Link href="mailto:andreximenesa20@gmail.com">
 					<IconEmail size={40} />
 					<span className="sr-only">Email</span>
 				</Link>

@@ -7,13 +7,13 @@ const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
 	title: 'André Portifolio',
-	description: 'Full stack developer portfolio showcasing projects and skills',
+	description: 'Portifolio de André Ximenes que mostra projetos e habilidades',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
 	return (
 		<html
-			lang="en"
+			lang="pt-br"
 			suppressHydrationWarning>
 			<body className={`min-h-screen bg-white font-sans antialiased overflow-x-hidden ${inter.className}`}>
 				{children}
