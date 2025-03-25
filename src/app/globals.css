@@ -27,3 +27,20 @@
 		@apply inline-flex items-center gap-2 rounded-md bg-green-50 px-3 py-1.5 text-sm font-medium text-green-600 ring-1 ring-inset ring-green-200;
 	}
 }
+
+@keyframes bounce-high {
+	0%,
+	100% {
+		transform: translateY(0);
+		animation-timing-function: ease-in-out;
+	}
+	50% {
+		transform: translateY(-30px);
+		animation-timing-function: ease-in-out;
+	}
+}
+
+.animate-highbounce {
+	display: inline-block;
+	animation: bounce-high 2s infinite;
+}

@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { IconGithub, IconLinkedin, IconEmail } from '../ui/Icons';
+import { IconGithub, IconLinkedin, IconEmail, IconCV } from '../ui/Icons';
 
 export default function Hero() {
 	return (
@@ -35,6 +35,14 @@ export default function Hero() {
 				<Link href="mailto:andreximenesa20@gmail.com">
 					<IconEmail size={40} />
 					<span className="sr-only">Email</span>
+				</Link>
+
+				<Link
+					href="curriculo.pdf"
+					target="_blank"
+					className="flex items-center justify-center">
+					<IconCV size={40} />
+					<span className="sr-only">Curriculo</span>
 				</Link>
 			</div>
 		</div>
