@@ -9,7 +9,7 @@ export default function Contact() {
 				Estou sempre aberto a novas oportunidades e colaborações. Sinta-se à vontade para entrar em contato por meio de
 				qualquer um dos canais abaixo.
 			</p>
-			<div className="flex flex-wrap justify-center gap-4">
+			<div className="flex flex-col md:flex-row gap-4">
 				<Link
 					href="https://github.com/AndreXime"
 					target="_blank">
@@ -37,7 +37,10 @@ export default function Contact() {
 						size={'lg'}
 						variant={'link'}
 						className="gap-2 btn-primary">
-						<IconEmail className="h-5 w-5" />
+						<IconEmail
+							color="white"
+							className="h-5 w-5"
+						/>
 						Email
 					</Button>
 				</Link>

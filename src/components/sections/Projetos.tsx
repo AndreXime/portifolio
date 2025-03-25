@@ -1,7 +1,26 @@
 import { Card, CardContent, CardFooter } from '@/components';
+import { IconGithub, IconOnline } from '@/components/ui/Icons';
 import Image from 'next/image';
 import Link from 'next/link';
-import { IconGithub, IconOnline } from '@/components/ui/Icons';
+import Projects from '@/content/Projects';
+
+export default function Projetos() {
+	return (
+		<div className="flex flex-wrap justify-center gap-5 p-5">
+			{Projects.map((project) => (
+				<ProjectCard
+					key={project.title}
+					title={project.title}
+					description={project.description}
+					image={project.image}
+					link={project.link}
+					tags={project.tags}
+					linkOnline={project.linkOnline}
+				/>
+			))}
+		</div>
+	);
+}
 
 interface ProjectCardProps {
 	title: string;
@@ -12,7 +31,7 @@ interface ProjectCardProps {
 	linkOnline?: string;
 }
 
-export default function ProjectCard({ title, description, image, link, tags, linkOnline }: ProjectCardProps) {
+function ProjectCard({ title, description, image, link, tags, linkOnline }: ProjectCardProps) {
 	return (
 		<Card className="card-custom">
 			<div className="relative aspect-video">

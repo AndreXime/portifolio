@@ -5,9 +5,12 @@ export default function Hero() {
 	return (
 		<div className="flex flex-col items-center justify-center space-y-4 text-center">
 			<div className="space-y-2">
-				<h1 className="heading tracking-tighter text-3xl sm:text-4xl md:text-5xl lg:text-6xl/none">André Ximenes</h1>
-				<h1 className="heading text-[#FFA500] tracking-tighter text-3xl sm:text-4xl md:text-5xl lg:text-6xl/none">
-					Desenvolvedor FullStack
+				<h1 className="heading tracking-tighter text-4xl md:text-5xl lg:text-6xl/none">
+					André Ximenes
+					<span className="text-[#FFA500]">
+						<br />
+						Desenvolvedor FullStack
+					</span>
 				</h1>
 
 				<p className="mx-auto max-w-[700px] text-gray-600 md:text-xl">
