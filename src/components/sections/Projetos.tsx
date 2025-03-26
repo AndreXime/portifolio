@@ -33,7 +33,7 @@ interface ProjectCardProps {
 
 function ProjectCard({ title, description, image, link, tags, linkOnline }: ProjectCardProps) {
 	return (
-		<Card className="card-custom">
+		<Card className="card-custom md:w-1/2 lg:w-1/3">
 			<div className="relative aspect-video">
 				<Image
 					src={image || '/placeholder.svg'}
@@ -69,7 +69,7 @@ function ProjectCard({ title, description, image, link, tags, linkOnline }: Proj
 						target="_blank"
 						className=" ml-auto inline-flex items-center gap-2 text-sm text-green-600 hover:underline">
 						<IconOnline className="h-4 w-4" />
-						Ver o projeto no ar
+						Ver o projeto online
 					</Link>
 				)}
 			</CardFooter>
