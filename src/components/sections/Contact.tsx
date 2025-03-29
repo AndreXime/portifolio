@@ -7,7 +7,7 @@ export default function Contact() {
 		<>
 			<p className="text-gray-600 mb-8 max-w-[700px] mx-auto md:text-xl">
 				Estou sempre aberto a novas oportunidades e colaborações. Sinta-se à vontade para entrar em contato por meio de
-				qualquer um dos canais abaixo.
+				qualquer um dos meios abaixo.
 			</p>
 			<div className="flex flex-col md:flex-row gap-4">
 				<Link

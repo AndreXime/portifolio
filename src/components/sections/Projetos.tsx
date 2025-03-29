@@ -28,19 +28,23 @@ interface ProjectCardProps {
 	image: string;
 	link: string;
 	tags: string[];
-	linkOnline?: string;
+	linkOnline: string;
 }
 
 function ProjectCard({ title, description, image, link, tags, linkOnline }: ProjectCardProps) {
 	return (
 		<Card className="card-custom md:w-1/2 lg:w-1/3">
 			<div className="relative aspect-video">
-				<Image
-					src={image || '/placeholder.svg'}
-					alt={title}
-					fill
-					className="object-contain transition-transform hover:scale-105"
-				/>
+				<Link
+					href={linkOnline}
+					target="_blank">
+					<Image
+						src={image || '/placeholder.svg'}
+						alt={title}
+						fill
+						className="object-contain transition-transform hover:scale-110"
+					/>
+				</Link>
 			</div>
 			<CardContent className="p-4">
 				<h3 className="font-semibold text-xl mb-2 text-green-600">{title}</h3>
@@ -55,7 +59,7 @@ function ProjectCard({ title, description, image, link, tags, linkOnline }: Proj
 					))}
 				</div>
 			</CardContent>
-			<CardFooter className="p-6 pt-0">
+			<CardFooter className="p-6 pt-0 mt-auto">
 				<Link
 					href={link}
 					target="_blank"
@@ -63,15 +67,13 @@ function ProjectCard({ title, description, image, link, tags, linkOnline }: Proj
 					<IconGithub className="h-4 w-4" />
 					Ver no Github
 				</Link>
-				{linkOnline && (
-					<Link
-						href={linkOnline}
-						target="_blank"
-						className=" ml-auto inline-flex items-center gap-2 text-sm text-green-600 hover:underline">
-						<IconOnline className="h-4 w-4" />
-						Ver o projeto online
-					</Link>
-				)}
+				<Link
+					href={linkOnline}
+					target="_blank"
+					className=" ml-auto inline-flex items-center gap-2 text-sm text-green-600 hover:underline">
+					<IconOnline className="h-4 w-4" />
+					Ver o projeto online
+				</Link>
 			</CardFooter>
 		</Card>
 	);

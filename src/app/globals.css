@@ -1,46 +1,40 @@
 @import 'tailwindcss';
 
-@layer base {
-	body {
-		@apply bg-white text-gray-900;
-	}
+.btn-primary {
+	@apply bg-green-600 text-white hover:bg-green-700 transition-colors;
 }
 
-@layer components {
-	.btn-primary {
-		@apply bg-green-600 text-white hover:bg-green-700 transition-colors;
-	}
-
-	.btn-outline {
-		@apply border border-green-600 text-green-600 hover:bg-green-600 hover:text-white transition-colors;
-	}
-
-	.heading {
-		@apply text-green-600 font-bold;
-	}
-
-	.card-custom {
-		@apply bg-white border border-green-200 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow;
-	}
-
-	.tag {
-		@apply inline-flex items-center gap-2 rounded-md bg-green-50 px-3 py-1.5 text-sm font-medium text-green-600 ring-1 ring-inset ring-green-200;
-	}
+.btn-outline {
+	@apply border border-green-600 text-green-600 hover:bg-green-600 hover:text-white transition-colors;
 }
 
-@keyframes bounce-high {
-	0%,
+.heading {
+	@apply text-green-600 font-bold;
+}
+
+.card-custom {
+	@apply bg-white border border-green-200 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow;
+}
+
+.tag {
+	@apply inline-flex items-center gap-2 rounded-md bg-green-50 px-3 py-1.5 text-sm font-medium text-green-600 ring-1 ring-inset ring-green-200;
+}
+
+@keyframes floatMovement {
+	0% {
+		transform: translateY(0);
+	}
+	33% {
+		transform: translateY(50px);
+	}
+	66% {
+		transform: translateY(-50px);
+	}
 	100% {
 		transform: translateY(0);
-		animation-timing-function: ease-in-out;
-	}
-	50% {
-		transform: translateY(-30px);
-		animation-timing-function: ease-in-out;
 	}
 }
 
-.animate-highbounce {
-	display: inline-block;
-	animation: bounce-high 2s infinite;
+.float-animation {
+	animation: floatMovement 6s infinite ease-in-out;
 }

@@ -32,6 +32,7 @@ export const Technologies = [
 		skills: [
 			{ name: 'Node.js', icon: <IconNodejs className="h-4 w-4" /> },
 			{ name: 'Express', icon: <IconExpress className="h-4 w-4" /> },
+			{ name: 'TypeScript', icon: <IconTypeScript className="h-4 w-4" /> },
 			{ name: 'PostgreSQL', icon: <IconPostgreSQL className="h-4 w-4" /> },
 		],
 	},

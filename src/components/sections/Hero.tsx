@@ -15,7 +15,7 @@ export default function Hero() {
 
 				<p className="mx-auto max-w-[700px] text-gray-600 md:text-xl">
 					Construindo soluções digitais com as tecnologias mais modernas presentes. Planejando desde a logica do banco
-					de dados até a interface do usuario.
+					de dados até a interface do usuário.
 				</p>
 			</div>
 			<div className="space-x-4 flex flex-row">
@@ -45,7 +45,7 @@ export default function Hero() {
 					target="_blank"
 					className="flex items-center justify-center">
 					<IconCV size={40} />
-					<span className="sr-only">Curriculo</span>
+					<span className="sr-only">Currículo</span>
 				</Link>
 			</div>
 		</div>
