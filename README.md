@@ -1,36 +1,10 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+## Meu Portfólio
+Este repositório contém o meu portfólio pessoal, onde apresento alguns dos meus projetos e habilidades como desenvolvedor. Utilizei Next.js, TailwindCSS e TypeScript
 
-## Getting Started
+O portfólio pode ser acessado através do seguinte link:  
+[https://andreximenes.xyz/](https://andreximenes.xyz/)
 
-First, run the development server:
-
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Preview
+<img src="https://github.com/user-attachments/assets/590e8aca-2e3c-4f24-b3e6-f2e0a7f18b86" width=200 height=400>
+<img src="https://github.com/user-attachments/assets/efc4c9ed-ecf5-4bc8-8584-bb7a6a94b6a0" width=200 height=400>
+<img src="https://github.com/user-attachments/assets/181096d0-1358-43c6-b53a-38e4c3592e0f" width=200 height=400>
