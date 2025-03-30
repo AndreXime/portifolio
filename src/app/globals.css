@@ -22,19 +22,19 @@
 
 @keyframes floatMovement {
 	0% {
-		transform: translateY(0);
+		transform: translate(0, 0);
 	}
 	33% {
-		transform: translateY(50px);
+		transform: translate(-19%, 19%);
 	}
 	66% {
-		transform: translateY(-50px);
+		transform: translate(19%, -19%);
 	}
 	100% {
-		transform: translateY(0);
+		transform: translate(0, 0);
 	}
 }
 
 .float-animation {
-	animation: floatMovement 6s infinite ease-in-out;
+	animation: floatMovement 3s infinite linear;
 }
