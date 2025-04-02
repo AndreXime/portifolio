@@ -1,21 +1,15 @@
 import fs from 'fs';
-import path from 'path';
 import yaml from 'js-yaml';
 import { cache } from 'react';
 
-const ProjectsContent = cache((): Project[] => {
-	const filePath = path.join(process.cwd(), 'src', 'content', 'Projects.yaml');
-	const fileContents = fs.readFileSync(filePath, 'utf8');
-	return yaml.load(fileContents) as Project[];
-})();
+const loadYamlContent = <T>(fileName: string): T => {
+	const fileContents = fs.readFileSync(`src/content/${fileName}`, 'utf8');
+	return yaml.load(fileContents) as T;
+};
 
-const TechnologiesContent = cache((): Technology[] => {
-	const filePath = path.join(process.cwd(), 'src', 'content', 'Technologies.yaml');
-	const fileContents = fs.readFileSync(filePath, 'utf8');
-	return yaml.load(fileContents) as Technology[];
-})();
-
-export { ProjectsContent, TechnologiesContent };
+export const ProjectsContent = cache(() => loadYamlContent<Project[]>('Projects.yaml'))();
+export const TechnologiesContent = cache(() => loadYamlContent<Technology[]>('Technologies.yaml'))();
+export const QuestionsContent = cache(() => loadYamlContent<About[]>('Questions.yaml'))();
 
 interface Project {
 	title: string;
@@ -29,4 +23,9 @@ interface Project {
 interface Technology {
 	category: string;
 	skills: { name: string; icon: string }[];
+}
+
+interface About {
+	questao: string;
+	resposta: string;
 }
