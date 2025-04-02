@@ -28,6 +28,25 @@ export const IconCloud = BsCloud;
 export const IconDocument = IoDocumentTextSharp;
 export const IconOnline = RiBaseStationLine;
 
+export const TechnologiesPack = {
+	IconReact,
+	IconNextjs,
+	IconTypeScript,
+	IconTailwindCSS,
+	IconNodejs,
+	IconExpress,
+	IconPostgreSQL,
+	IconDocker,
+	IconCloud,
+	IconGit,
+	IconLinux,
+	IconAlwaysdata,
+	IconCode,
+	IconJest,
+	IconGithub,
+	IconVercel,
+};
+
 export const IconEmail: React.FC<IconBaseProps> = ({ className = '', size = '24', color = 'currentColor' }) => (
 	<svg
 		xmlns="http://www.w3.org/2000/svg"

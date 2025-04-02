@@ -1,14 +1,23 @@
 import { TechStack, Hero, Contact, Projetos } from '@/components';
+import About from '@/components/sections/About';
 import BackgroundEffect from '@/components/ui/BackgroundEffect';
 
 export default function Page() {
 	return (
 		<main className="min-h-screen">
 			<section
-				id="about"
+				id="hero"
 				className="py-20 md:py-24 lg:py-32 px-5 min-h-[70vh] relative">
 				<BackgroundEffect />
 				<Hero />
+			</section>
+
+			<section
+				id="about"
+				className="py-12 md:py-24 lg:py-32 min-h-[60dvh] ">
+				<div className="flex flex-col items-center justify-center space-y-4 text-center mb-10 px-4">
+					<About />
+				</div>
 			</section>
 
 			<section

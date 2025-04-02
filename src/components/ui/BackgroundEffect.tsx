@@ -6,7 +6,9 @@ export default function BackgroundEffect() {
 	const polygonClass = 'absolute bg-gradient-to-tr from-[#ff80b5] to-[#9089fc]';
 
 	return (
-		<div className="absolute inset-0 -z-10 overflow-hidden blur-xl md:blur-2xl">
+		<div
+			className="absolute inset-0 -z-10 overflow-hidden blur-xl md:blur-2xl"
+			aria-hidden="true">
 			{/* Canto superior esquerdo */}
 			<div
 				style={{ clipPath: polygon }}

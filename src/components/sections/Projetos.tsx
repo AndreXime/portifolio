@@ -2,12 +2,12 @@ import { Card, CardContent, CardFooter } from '@/components';
 import { IconGithub, IconOnline } from '@/components/ui/Icons';
 import Image from 'next/image';
 import Link from 'next/link';
-import Projects from '@/content/Projects';
+import { ProjectsContent } from '@/content/index';
 
-export default function Projetos() {
+export default async function Projetos() {
 	return (
 		<div className="flex flex-wrap justify-center gap-5 p-5">
-			{Projects.map((project) => (
+			{ProjectsContent.map((project) => (
 				<ProjectCard
 					key={project.title}
 					title={project.title}

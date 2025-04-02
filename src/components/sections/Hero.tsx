@@ -48,17 +48,6 @@ export default function Hero() {
 					<span className="sr-only">Currículo</span>
 				</Link>
 			</div>
-			<div className="flex flex-col text-left mt-10">
-				<h2 className="heading text-2xl tracking-tighter sm:text-3xl md:text-4xl text-left">Sobre mim</h2>
-				<p className="mx-auto max-w-[700px] text-gray-800 mt-1">
-					Sou estudante de Ciências da Computação com forte interesse em desafios que envolvem raciocínio lógico e
-					resolução de problemas. Desde o ensino médio, venho me aprofundando no universo da programação e participei da
-					Olimpíada Brasileira de Informática. Possuo experiência no desenvolvimento de APIs e interfaces web
-					responsivas, além de estar familiarizado com ferramentas de infraestrutura. Estou em busca de oportunidades
-					onde possa aplicar o que aprendi na faculdade e em projetos pessoais, sempre com o objetivo de contribuir de
-					forma prática e significativa para o desenvolvimento de soluções inovadoras.
-				</p>
-			</div>
 		</div>
 	);
 }
