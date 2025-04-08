@@ -3,7 +3,7 @@ import { IconGithub, IconLinkedin, IconEmail, IconCV } from '../ui/Icons';
 
 export default function Hero() {
 	return (
-		<div className="flex flex-col items-center justify-center space-y-4 text-center">
+		<div className="flex flex-col items-center justify-center space-y-4 text-center bg-transparent">
 			<div className="space-y-2">
 				<h1 className="heading tracking-tighter text-4xl md:text-5xl lg:text-6xl/none">
 					André Ximenes
@@ -41,10 +41,10 @@ export default function Hero() {
 				</Link>
 
 				<Link
-					href="curriculo.pdf"
+					href="/assets/curriculo.pdf"
 					target="_blank"
 					className="flex items-center justify-center">
-					<IconCV size={40} />
+					<IconCV size={37} />
 					<span className="sr-only">Currículo</span>
 				</Link>
 			</div>

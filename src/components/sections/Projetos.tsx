@@ -6,19 +6,30 @@ import { ProjectsContent } from '@/content/index';
 
 export default async function Projetos() {
 	return (
-		<div className="flex flex-wrap justify-center gap-5 p-5">
-			{ProjectsContent.map((project) => (
-				<ProjectCard
-					key={project.title}
-					title={project.title}
-					description={project.description}
-					image={project.image}
-					link={project.link}
-					tags={project.tags}
-					linkOnline={project.linkOnline}
-				/>
-			))}
-		</div>
+		<>
+			<div className="flex flex-col items-center justify-center space-y-4 text-center mb-10 px-4">
+				<div className="space-y-2">
+					<h2 className="heading text-3xl tracking-tighter sm:text-4xl md:text-5xl text-center">Projetos principais</h2>
+					<p className="max-w-[900px] text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed ">
+						Em cada projeto, me esforcei ao máximo para aplicar todo o meu conhecimento, desde o backend para
+						desenvolver a API, passando pela infraestrutura para o deploy, até o design para criar a interface.
+					</p>
+				</div>
+			</div>
+			<div className="flex flex-wrap justify-center gap-5 p-5">
+				{ProjectsContent.map((project) => (
+					<ProjectCard
+						key={project.title}
+						title={project.title}
+						description={project.description}
+						image={project.image}
+						link={project.link}
+						tags={project.tags}
+						linkOnline={project.linkOnline}
+					/>
+				))}
+			</div>
+		</>
 	);
 }
 
@@ -41,7 +52,8 @@ function ProjectCard({ title, description, image, link, tags, linkOnline }: Proj
 					<Image
 						src={image || '/placeholder.svg'}
 						alt={title}
-						fill
+						width={600}
+						height={600}
 						className="object-contain transition-transform hover:scale-110"
 					/>
 				</Link>
@@ -59,7 +71,7 @@ function ProjectCard({ title, description, image, link, tags, linkOnline }: Proj
 					))}
 				</div>
 			</CardContent>
-			<CardFooter className="p-6 pt-0 mt-auto">
+			<CardFooter className="p-4 pt-0 mt-auto">
 				<Link
 					href={link}
 					target="_blank"

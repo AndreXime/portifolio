@@ -4,7 +4,8 @@ import { IconGithub, IconLinkedin, IconEmail, IconDocument } from '../ui/Icons';
 
 export default function Contact() {
 	return (
-		<>
+		<div className="text-center items-center flex flex-col">
+			<h2 className="heading text-3xl tracking-tighter sm:text-4xl md:text-5xl mb-6">Fale comigo!</h2>
 			<p className="text-gray-600 mb-8 max-w-[700px] mx-auto md:text-xl">
 				Estou sempre aberto a novas oportunidades e colaborações. Sinta-se à vontade para entrar em contato por meio de
 				qualquer um dos meios abaixo.
@@ -56,6 +57,6 @@ export default function Contact() {
 					</Button>
 				</Link>
 			</div>
-		</>
+		</div>
 	);
 }

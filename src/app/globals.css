@@ -1,4 +1,5 @@
 @import 'tailwindcss';
+@plugin "daisyui";
 
 .btn-primary {
 	@apply bg-green-600 text-white hover:bg-green-700 transition-colors;
@@ -28,11 +29,17 @@
 	0% {
 		transform: translate(0, 0);
 	}
-	33% {
-		transform: translate(-19%, 19%);
+	20% {
+		transform: translate(-15%, 12%);
 	}
-	66% {
-		transform: translate(19%, -19%);
+	40% {
+		transform: translate(12%, -15%);
+	}
+	60% {
+		transform: translate(-8%, -10%);
+	}
+	80% {
+		transform: translate(10%, 8%);
 	}
 	100% {
 		transform: translate(0, 0);
@@ -40,5 +47,5 @@
 }
 
 .float-animation {
-	animation: floatMovement 3s infinite linear;
+	animation: floatMovement 6s ease-in-out infinite;
 }
