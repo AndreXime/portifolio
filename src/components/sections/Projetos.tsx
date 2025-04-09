@@ -84,7 +84,7 @@ function ProjectCard({ title, description, image, link, tags, linkOnline }: Proj
 					target="_blank"
 					className=" ml-auto inline-flex items-center gap-2 text-sm text-green-600 hover:underline">
 					<IconOnline className="h-4 w-4" />
-					Ver o projeto online
+					Ver online
 				</Link>
 			</CardFooter>
 		</Card>

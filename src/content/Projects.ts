@@ -19,7 +19,7 @@ const Projects = [
 		image: '/assets/futurosoftware.png',
 		link: 'https://github.com/AndreXime/futuro-software',
 		tags: ['Next.js', 'Typescript', 'TailwindCSS', 'Responsivo', 'DaisyUI'],
-		linkOnline: 'https://futuro-software.vercel.app/',
+		linkOnline: 'https://futuro-software.andreximenes.xyz/',
 	},
 ];
 export default Projects;
