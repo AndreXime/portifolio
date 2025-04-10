@@ -17,7 +17,7 @@ export default async function Projetos() {
 				</div>
 			</div>
 			<div className="flex flex-wrap justify-center gap-5 p-5">
-				{ProjectsContent.map((project) => (
+				{ProjectsContent.slice(0, 2).map((project) => (
 					<ProjectCard
 						key={project.title}
 						title={project.title}
@@ -28,6 +28,13 @@ export default async function Projetos() {
 						linkOnline={project.linkOnline}
 					/>
 				))}
+			</div>
+			<div className="flex w-full items-center justify-center">
+				<Link
+					href={'/projetos'}
+					className="btn btn-primary text-xl mt-5 border-0 self-center">
+					Ver todos meus projetos
+				</Link>
 			</div>
 		</>
 	);
@@ -42,7 +49,7 @@ interface ProjectCardProps {
 	linkOnline: string;
 }
 
-function ProjectCard({ title, description, image, link, tags, linkOnline }: ProjectCardProps) {
+export function ProjectCard({ title, description, image, link, tags, linkOnline }: ProjectCardProps) {
 	return (
 		<Card className="card-custom md:w-1/2 lg:w-1/3">
 			<div className="relative aspect-video">
@@ -60,7 +67,7 @@ function ProjectCard({ title, description, image, link, tags, linkOnline }: Proj
 			</div>
 			<CardContent className="p-4">
 				<h3 className="font-semibold text-xl mb-2 text-green-600">{title}</h3>
-				<p className="text-sm text-gray-600 mb-4">{description}</p>
+				<p className="text-sm text-gray-600 mb-4 whitespace-pre-line">{description}</p>
 				<div className="flex flex-wrap gap-2">
 					{tags.map((tag) => (
 						<span

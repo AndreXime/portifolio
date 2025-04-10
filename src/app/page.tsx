@@ -1,6 +1,5 @@
-import { TechStack, Hero, Contact, Projetos } from '@/components';
+import { TechStack, Hero, Contact, Projetos, Navbar } from '@/components';
 import About from '@/components/sections/About';
-import Navbar from '@/components/sections/Navbar';
 import BackgroundEffect from '@/components/ui/BackgroundEffect';
 
 export default function Page() {
