@@ -12,9 +12,10 @@ personalizada, exibindo seus produtos com imagens e informações essenciais, co
 	{
 		title: 'Restaurante Tech',
 		description: `
-Desenvolvi a interface de um sistema de Ponto de Venda (PDV) voltado para restaurantes. A aplicação conta com um cardápio digital, onde é possível simular a adição de itens a mesas específicas, além de telas dedicadas ao gerenciamento de mesas, pedidos, reservas, entregas e interação com a cozinha. Toda a estrutura visual foi pensada para facilitar o fluxo de uso no ambiente do restaurante, priorizando usabilidade e organização.\n
-Apesar de ainda não possuir funcionalidades completas no backend, o projeto já conta com toda a base visual e de navegação pronta, servindo como uma sólida fundação para futuras integrações.		
-		`,
+Desenvolvi a interface de um sistema de Ponto de Venda (PDV) voltado para restaurantes, com foco em usabilidade e eficiência no ambiente operacional.\n
+A aplicação oferece um cardápio digital interativo, permitindo a simulação de pedidos vinculados a mesas específicas, além de telas para gerenciamento de mesas, reservas, entregas, pedidos e comunicação com a cozinha.\n
+Para garantir uma experiência totalmente client-side e offline, implementei o armazenamento local com IndexedDB, eliminando a necessidade de backend durante o uso e testes.
+`,
 		image: '/assets/cozinhatech.png',
 		link: 'https://github.com/AndreXime/restaurante',
 		tags: ['Next.js', 'Typescript', 'TailwindCSS', 'ShadCN', 'v0'],
