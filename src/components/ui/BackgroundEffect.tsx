@@ -1,62 +1,86 @@
+'use client';
+import { useEffect, useState } from 'react';
 /**
  * O container pai deve ter propriedade relativa
  */
 export default function BackgroundEffect() {
+	const [blobs, setBlobs] = useState<React.JSX.Element[] | null>(null);
+
+	useEffect(() => {
+		const numBlobs = 6;
+
+		const newBlobs = Array.from({ length: numBlobs }, (_, i) => {
+			const rows = Math.ceil(Math.sqrt(numBlobs));
+			const cols = rows;
+			const row = Math.floor(i / cols);
+			const col = i % cols;
+
+			const baseTop = (row / rows) * 100;
+			const baseLeft = (col / cols) * 100;
+			const jitter = () => (Math.random() - 0.5) * 20;
+
+			const top = `calc(${baseTop}% + ${jitter()}%)`;
+			const left = `calc(${baseLeft}% + ${jitter()}%)`;
+			const width = `${60 + Math.random() * 30}%`; // 30–60%
+			const height = width;
+			const rotate = -45 + Math.random() * 90; // -45° a +45°
+			const animationDuration = 4 + Math.random() * 4;
+			const animationDelay = Math.random() * 3;
+
+			return (
+				<SVGBlob
+					key={i}
+					top={top}
+					left={left}
+					width={width}
+					height={height}
+					rotate={rotate}
+					animationDuration={animationDuration}
+					animationDelay={animationDelay}
+				/>
+			);
+		});
+
+		setBlobs(newBlobs);
+	}, []);
+
 	return (
 		<div
-			className="absolute inset-0 z-[5] overflow-hidden blur-xl md:blur-2xl"
+			className="absolute inset-0 z-[10] overflow-hidden blur-xl md:blur-3xl"
 			aria-hidden="true">
-			<SVGBlob
-				className="left-[-10%] top-[-10%] w-[45%] h-[45%]"
-				rotate="rotate-[15deg]"
-				opacity="opacity-30"
-			/>
-			<SVGBlob
-				className="right-[-10%] top-[-10%] w-[45%] h-[45%]"
-				rotate="rotate-[20deg]"
-				opacity="opacity-30"
-			/>
-			<SVGBlob
-				className="left-[-10%] bottom-[-10%] w-[55%] h-[55%]"
-				rotate="rotate-[-20deg]"
-				opacity="opacity-40"
-			/>
-			<SVGBlob
-				className="right-[-15%] bottom-[-10%] w-[55%] h-[55%]"
-				rotate="rotate-[45deg]"
-				opacity="opacity-40"
-			/>
-			<SVGBlob
-				className="left-[10%] top-[50%] w-[40%] h-[40%]"
-				rotate="rotate-[25deg]"
-				opacity="opacity-25"
-			/>
-			<SVGBlob
-				className="right-[10%] top-[50%] w-[40%] h-[40%]"
-				rotate="rotate-[-25deg]"
-				opacity="opacity-25"
-			/>
-			<SVGBlob
-				className="left-[50%] top-[10%] w-[35%] h-[35%] -translate-x-1/2"
-				rotate="rotate-[180deg]"
-				opacity="opacity-35"
-			/>
+			{blobs}
 		</div>
 	);
 }
 
 interface SVGBlobProps {
-	className?: string;
-	rotate?: string;
-	opacity?: string;
+	top: string;
+	left: string;
+	width: string;
+	height: string;
+	rotate: number;
+	animationDuration: number;
+	animationDelay: number;
 }
 
-function SVGBlob({ className = '', rotate = 'rotate-0', opacity = 'opacity-30' }: SVGBlobProps) {
+function SVGBlob({ top, left, width, height, rotate, animationDuration, animationDelay }: SVGBlobProps) {
 	return (
 		<svg
 			viewBox="0 0 200 200"
 			xmlns="http://www.w3.org/2000/svg"
-			className={`absolute ${rotate} ${opacity} ${className} float-animation`}>
+			style={{
+				position: 'absolute',
+				top,
+				left,
+				width,
+				height,
+				transform: `rotate(${rotate}deg)`,
+				opacity: 0,
+				animation: `
+					fadeIn 3s ease forwards,
+					floatMovement ${animationDuration}s ease-in-out ${animationDelay}s infinite
+				`,
+			}}>
 			<defs>
 				<linearGradient
 					id="gradient1"

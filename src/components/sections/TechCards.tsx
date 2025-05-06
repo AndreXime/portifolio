@@ -27,7 +27,7 @@ export default function TechStack() {
 									<span
 										key={skill.name}
 										className="tag">
-										<IconComponent size={20} />
+										<IconComponent size={24} />
 										{skill.name}
 									</span>
 								);

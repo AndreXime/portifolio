@@ -46,7 +46,7 @@ export default function Contact() {
 					</Button>
 				</Link>
 				<Link
-					href="curriculo.pdf"
+					href="/assets/curriculo.pdf"
 					target="_blank">
 					<Button
 						size={'lg'}

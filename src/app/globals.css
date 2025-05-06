@@ -46,6 +46,8 @@
 	}
 }
 
-.float-animation {
-	animation: floatMovement 6s ease-in-out infinite;
+@keyframes fadeIn {
+	to {
+		opacity: 0.5;
+	}
 }
