@@ -1,7 +1,10 @@
-import Link from 'next/link';
+'use client';
 import { FaCode } from 'react-icons/fa6';
 
 export default function Navbar() {
+	const scrollToContact = () => {
+		document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+	};
 	return (
 		<>
 			<div className="navbar shadow-sm px-4 fixed top-0 left-0 bg-base-100 z-6">
@@ -12,11 +15,11 @@ export default function Navbar() {
 					</span>
 				</div>
 				<div className="flex-none">
-					<Link
-						href={''}
+					<button
+						onClick={scrollToContact}
 						className="btn btn-ghost btn-primary btn-sm md:btn-md">
 						Entrar em contato
-					</Link>
+					</button>
 				</div>
 			</div>
 			<div className="h-16" />

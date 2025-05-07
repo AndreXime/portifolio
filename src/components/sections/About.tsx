@@ -50,7 +50,7 @@ export default function TechStack() {
 						<div>
 							<h2 className="heading text-3xl tracking-tighter text-center">Algumas Perguntas</h2>
 
-							<div className="space-y-3 px-1 pt-4 md:p-4 mx-auto max-w-[700px] mt-2">
+							<div className="space-y-3 px-1 pt-4 md:p-4 mx-auto max-w-[700px]">
 								{QuestionsContent.map((faq, index) => (
 									<div
 										key={index}
