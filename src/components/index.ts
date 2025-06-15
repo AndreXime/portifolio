@@ -1,9 +1,7 @@
 import Projetos from './sections/Projetos';
-import TechStack from './sections/TechCards';
-import { Card, CardContent, CardFooter } from './ui/Card';
-import { Button } from './ui/Button';
-import Hero from './sections/Hero';
+import Skills from './sections/Skills';
+import Header from './sections/Header';
 import Contact from './sections/Contact';
 import Navbar from './sections/Navbar';
 
-export { Projetos, TechStack, Card, CardContent, CardFooter, Button, Hero, Contact, Navbar };
+export { Projetos, Skills, Header, Contact, Navbar };

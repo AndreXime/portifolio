@@ -1,40 +1,29 @@
-import { TechStack, Hero, Contact, Projetos, Navbar } from '@/components';
-import About from '@/components/sections/About';
+import { Skills, Header, Contact, Projetos, Navbar } from '@/components';
+import Footer from '@/components/sections/Footer';
+import FadeInSection from '@/components/ui/FadeInSection';
 
 export default function Page() {
 	return (
-		<main className="min-h-screen">
+		<main className="flex flex-col min-h-screen bg-slate-900 text-foreground">
 			<Navbar />
 
-			<section
-				id="hero"
-				className="py-20 md:py-32 px-5 min-h-[70vh] relative">
-				<Hero />
-			</section>
+			<FadeInSection>
+				<Header />
+			</FadeInSection>
 
-			<section
-				id="about"
-				className="py-12 md:py-24 lg:py-32 min-h-[60dvh] bg-green-50">
-				<About />
-			</section>
-
-			<section
-				id="projects"
-				className="py-12 md:py-24 lg:py-32 min-h-[60dvh]">
+			<FadeInSection>
 				<Projetos />
-			</section>
+			</FadeInSection>
 
-			<section
-				id="tech"
-				className="py-12 md:py-24 lg:py-32 px-2 min-h-[60dvh] bg-green-50">
-				<TechStack />
-			</section>
+			<FadeInSection>
+				<Skills />
+			</FadeInSection>
 
-			<section
-				id="contact"
-				className="py-12 md:py-24 lg:py-32 px-5 min-h-[40dvh]">
+			<FadeInSection>
 				<Contact />
-			</section>
+			</FadeInSection>
+
+			<Footer />
 		</main>
 	);
 }

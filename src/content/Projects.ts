@@ -18,7 +18,7 @@ Para garantir uma experiência totalmente client-side e offline, implementei o a
 `,
 		image: '/assets/cozinhatech.png',
 		link: 'https://github.com/AndreXime/restaurante',
-		tags: ['Next.js', 'Typescript', 'TailwindCSS', 'ShadCN', 'v0'],
+		tags: ['Next.js', 'Typescript', 'TailwindCSS', 'ShadCN'],
 		linkOnline: 'https://restaurante.andreximenes.xyz/',
 	},
 	{
