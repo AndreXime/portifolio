@@ -1,5 +1,4 @@
 import { TechnologiesContent } from '@/content';
-import Image from 'next/image';
 
 export default function TechStack() {
 	return (
@@ -13,24 +12,14 @@ export default function TechStack() {
 					{TechnologiesContent.map(({ category, skills }) => (
 						<div key={category}>
 							<h3 className="text-xl font-semibold text-white mb-4">{category}</h3>
-							<div className="flex flex-wrap justify-evenly gap-8">
+							<div className="grid [grid-template-columns:repeat(auto-fit,minmax(100px,1fr))] gap-8 ">
 								{skills.map(({ name, Svg }) => {
-									const IconColor = name != 'Jest' ? 'fill-white' : 'text-purple-500';
+									const IconColor = name != 'Jest' ? 'text-white fill-white' : 'text-purple-500';
 									return (
 										<div
 											key={name}
-											className="flex-grow skill-item flex flex-col items-center justify-center p-4 bg-slate-800 rounded-xl transition-transform transform hover:-translate-y-2">
-											{typeof Svg === 'string' ? (
-												<Image
-													src={Svg}
-													alt={name}
-													className="w-12 h-12 mb-2 text-white fill-white"
-													height={500}
-													width={500}
-												/>
-											) : (
-												<Svg className={'w-12 h-12 mb-2 ' + IconColor} />
-											)}
+											className="skill-item flex flex-col items-center justify-center p-4 bg-slate-800 rounded-xl transition-transform transform hover:-translate-y-2">
+											<Svg className={'w-12 h-12 mb-2 ' + IconColor} />
 											<span className="text-slate-200 mt-2">{name}</span>
 										</div>
 									);

@@ -1,29 +1,29 @@
 import { Skills, Header, Contact, Projetos, Navbar } from '@/components';
 import Footer from '@/components/sections/Footer';
-import FadeInSection from '@/components/ui/FadeInSection';
+import FadeInWrapper from '@/components/ui/FadeInSection';
+import FadeInObserver from '@/components/ui/FadeInObserver';
 
 export default function Page() {
 	return (
 		<main className="flex flex-col min-h-screen bg-slate-900 text-foreground">
 			<Navbar />
 
-			<FadeInSection>
-				<Header />
-			</FadeInSection>
+			<Header />
 
-			<FadeInSection>
+			<FadeInWrapper id="projetos">
 				<Projetos />
-			</FadeInSection>
+			</FadeInWrapper>
 
-			<FadeInSection>
+			<FadeInWrapper id="habilidades">
 				<Skills />
-			</FadeInSection>
+			</FadeInWrapper>
 
-			<FadeInSection>
+			<FadeInWrapper id="contato">
 				<Contact />
-			</FadeInSection>
+			</FadeInWrapper>
 
 			<Footer />
+			<FadeInObserver ids={['projetos', 'habilidades', 'contato']} />
 		</main>
 	);
 }

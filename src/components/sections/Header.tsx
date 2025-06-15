@@ -6,7 +6,7 @@ export default function Hero() {
 	return (
 		<section
 			id="sobre"
-			className="py-30">
+			className="sm:pt-40 pt-30 pb-30">
 			<div className="container mx-auto px-6 flex flex-col md:flex-row items-center gap-12">
 				<div className="w-full md:w-1/3 flex justify-center">
 					<div className="relative w-64 h-64 md:w-80 md:h-80">

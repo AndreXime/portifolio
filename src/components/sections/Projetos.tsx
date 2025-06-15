@@ -3,9 +3,7 @@ import Image from 'next/image';
 
 export default async function Projetos() {
 	return (
-		<section
-			id="projetos"
-			className="py-24">
+		<section className="py-24">
 			<div className="container mx-auto px-6 text-center">
 				<h2 className="text-3xl font-bold text-white mb-2">Projetos em Destaque</h2>
 				<p className="text-slate-400 mb-12">Alguns dos trabalhos que me orgulho de ter participado.</p>
