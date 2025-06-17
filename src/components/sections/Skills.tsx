@@ -11,20 +11,23 @@ export default async function TechStack() {
                         <div key={category}>
                             <h3 className="text-xl font-semibold text-white mb-4">{category}</h3>
                             <div className="grid [grid-template-columns:repeat(auto-fit,minmax(100px,1fr))] gap-8 ">
-                                {skills.map(({ name, Icon }) => {
-                                    return (
-                                        <div
-                                            key={name}
-                                            className="skill-item flex flex-col items-center justify-center p-4 bg-slate-800 rounded-xl transition-transform transform hover:-translate-y-2"
-                                        >
-                                            <Icon
-                                                alt={`Icone ${name}`}
-                                                className={`w-12 h-12 mb-2 fill-white text-white`}
-                                            />
-                                            <span className="text-slate-200 mt-2">{name}</span>
+                                {skills.map(({ name, Icon, descricao }) => (
+                                    <div
+                                        key={name}
+                                        className="skill-item group relative flex flex-col items-center justify-center p-4 bg-slate-800 rounded-xl transition-transform transform hover:-translate-y-2"
+                                    >
+                                        <Icon
+                                            alt={`Icone ${name}`}
+                                            className={`w-12 h-12 mb-2 fill-white text-white select-none pointer-events-none`}
+                                        />
+                                        <span className="text-slate-200 mt-2 select-none pointer-events-none">
+                                            {name}
+                                        </span>
+                                        <div className="absolute bottom-full mb-2 w-full max-w-xs break-words rounded-md bg-slate-900 p-2 text-white opacity-0 transition-opacity duration-200 group-hover:opacity-100 group-active:opacity-100 pointer-events-none group-hover:pointer-events-auto group-active:pointer-events-auto z-10">
+                                            {descricao}
                                         </div>
-                                    );
-                                })}
+                                    </div>
+                                ))}
                             </div>
                         </div>
                     ))}
