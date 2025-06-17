@@ -2,7 +2,7 @@ import { TechnologiesContent } from '@/content';
 
 export default async function TechStack() {
     return (
-        <section id="habilidades" className="py-24 bg-slate-900/50">
+        <section id="habilidades" className="py-24 bg-slate-900/50 fade-in-section">
             <div className="container mx-auto px-6 text-center">
                 <h2 className="text-3xl font-bold text-white mb-2">Minhas Habilidades</h2>
                 <p className="text-slate-400 mb-12">Tecnologias que utilizo para construir minhas soluções.</p>

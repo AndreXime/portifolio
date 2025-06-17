@@ -9,7 +9,7 @@ const buttons = [
 
 export default async function Navbar() {
     return (
-        <header className="header-bg fixed top-0 left-0 right-0 z-50 w-full header-bg transition-all duration-300">
+        <nav className="header-bg fixed top-0 left-0 right-0 z-50 w-full header-bg transition-all duration-300">
             <div className="container mx-auto px-6 py-4 flex justify-between items-center">
                 <span className="text-2xl font-bold text-white">André Ximenes</span>
                 <div className="flex items-center gap-6">
@@ -34,6 +34,6 @@ export default async function Navbar() {
                     </a>
                 </div>
             </div>
-        </header>
+        </nav>
     );
 }

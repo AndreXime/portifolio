@@ -1,6 +1,5 @@
 import { Skills, Header, Contact, Projetos, Navbar } from '@/components';
 import Footer from '@/components/sections/Footer';
-import FadeInWrapper from '@/components/ui/FadeInSection';
 import FadeInObserver from '@/components/ui/FadeInObserver';
 
 export default async function Page() {
@@ -10,17 +9,11 @@ export default async function Page() {
 
             <Header />
 
-            <FadeInWrapper id="projetos">
-                <Projetos />
-            </FadeInWrapper>
+            <Projetos />
 
-            <FadeInWrapper id="habilidades">
-                <Skills />
-            </FadeInWrapper>
+            <Skills />
 
-            <FadeInWrapper id="contato">
-                <Contact />
-            </FadeInWrapper>
+            <Contact />
 
             <Footer />
             <FadeInObserver ids={['projetos', 'habilidades', 'contato']} />

@@ -52,7 +52,7 @@ export default function Contact() {
     }
 
     return (
-        <section className="py-24">
+        <section id="contato" className="py-24 fade-in-section">
             <div className="container mx-auto px-6 max-w-3xl text-center">
                 <h2 className="text-3xl font-bold text-white mb-4">Vamos Conversar?</h2>
                 <p className="text-slate-400 mb-10">
