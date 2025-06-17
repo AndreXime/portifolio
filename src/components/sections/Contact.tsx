@@ -9,14 +9,47 @@ const buttons = [
 ];
 
 export default function Contact() {
-    const [showToast, setShowToast] = useState(false);
+    const [showToast, setShowToast] = useState({ status: '', message: '' });
 
-    const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault();
-        setShowToast(true);
-        setTimeout(() => setShowToast(false), 3000);
+    async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+        try {
+            e.preventDefault();
+            const form = new FormData(e.currentTarget);
+
+            const name = form.get('name') as string;
+            const email = form.get('email') as string;
+            const message = form.get('message') as string;
+
+            if (!name || !email || !message) {
+                setShowToast({ status: 'Error', message: 'Preencha todos os campos' });
+                return;
+            }
+
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                setShowToast({ status: 'Error', message: 'Email inválido' });
+                return;
+            }
+
+            const res = await fetch('/api', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ name, email, message }),
+            });
+            const data = await res.json();
+
+            if (res.ok) {
+                setShowToast({ status: 'Sucesso', message: 'Mensagem enviada com sucesso!' });
+            } else {
+                setShowToast({ status: 'Error', message: data.error || 'Erro ao enviar mensagem.' });
+            }
+        } catch (err) {
+            setShowToast({ status: 'Error', message: (err as string) || 'Erro ao enviar mensagem.' });
+        }
+
+        setTimeout(() => setShowToast({ status: '', message: '' }), 3000);
         (e.target as HTMLFormElement).reset();
-    };
+    }
 
     return (
         <section className="py-24">
@@ -73,12 +106,21 @@ export default function Contact() {
                     ))}
                 </div>
             </div>
-            {showToast && (
+            {showToast.status == 'Error' && (
+                <div
+                    id="toast-success"
+                    className="fixed bottom-5 right-5 bg-red-500 text-white py-3 px-5 rounded-lg shadow-xl"
+                >
+                    <p>❌ {showToast.message}</p>
+                </div>
+            )}
+
+            {showToast.status == 'Sucesso' && (
                 <div
                     id="toast-success"
                     className="fixed bottom-5 right-5 bg-green-500 text-white py-3 px-5 rounded-lg shadow-xl"
                 >
-                    <p>✅ Mensagem enviada com sucesso!</p>
+                    <p>✅ {showToast.message}</p>
                 </div>
             )}
         </section>
