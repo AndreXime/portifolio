@@ -45,10 +45,19 @@ Dá pra organizar, editar, importar e exportar os favoritos de forma simples, e 
         title: 'Organizador de Disciplinas - CC UVA',
         description:
             'Site para organizar as disciplinas do curso de Ciência da Computação da UVA, facilitando o planejamento semestral. Permite marcar disciplinas concluídas, calcular disponibilidade com base em pré-requisitos e visualizar a grade de horários em um calendário semanal, com salvamento automático no navegador.',
-        tags: ['Web', 'Organização', 'Educação', 'UI', 'JavaScript'],
+        tags: ['Web', 'Organização', 'Educação', 'UI', 'SPA'],
         image: '/assets/disciplinas-uva.png',
-        linkOnline: 'https://github.com/AndreXime/tasker-cli',
+        linkOnline: 'https://disciplina-uva.andreximenes.xyz/',
         linkGithub: 'https://github.com/AndreXime/organiza-cc-uva',
+    },
+    {
+        title: 'TechVerse',
+        description:
+            'Blog com estética synthwave focado em desenvolvimento, tecnologia e compartilhamento de conhecimento técnico.',
+        tags: ['Blog', 'Next.js', 'Social'],
+        image: '/assets/techverse.png',
+        linkOnline: 'https://techverse.andreximenes.xyz',
+        linkGithub: 'https://github.com/AndreXime/TechVerse',
     },
 ];
 
