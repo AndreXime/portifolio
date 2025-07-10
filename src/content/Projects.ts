@@ -22,26 +22,6 @@ Para garantir uma experiência totalmente client-side e offline, implementei o a
         linkOnline: 'https://restaurante.andreximenes.xyz/',
     },
     {
-        title: 'Librebookmark',
-        description: `
-Criei esse site como uma forma melhor de gerenciar meus favoritos. Sempre achei que os favoritos dos navegadores são meio bagunçados e visualmente poluídos,
-então desenvolvi essa alternativa com uma interface mais agradável e fácil de usar.\n
-O site funciona quase 100% no lado do cliente, guardando tudo direto no navegador.\n
-Dá pra organizar, editar, importar e exportar os favoritos de forma simples, e ele funciona bem tanto no desktop quanto no celular.`,
-        image: '/assets/librebookmark.png',
-        linkGithub: 'https://github.com/AndreXime/LibreBookmark',
-        tags: ['Next.js', 'Browser', 'Typescript', 'TailwindCSS'],
-        linkOnline: 'https://librebookmark.andreximenes.xyz/',
-    },
-    {
-        title: 'Tasker CLI',
-        description:
-            'CLI desenvolvido em Go para gerenciar comandos frequentes no terminal. Permite salvar, executar e organizar comandos personalizados com suporte a parâmetros dinâmicos, armazenamento persistente em JSON e integração automática ao $PATH.',
-        tags: ['Go', 'CLI', 'Automação', 'Terminal', 'Produtividade'],
-        image: '/assets/tasker.png',
-        linkGithub: 'https://github.com/AndreXime/tasker-cli',
-    },
-    {
         title: 'Organizador de Disciplinas - CC UVA',
         description:
             'Site para organizar as disciplinas do curso de Ciência da Computação da UVA, facilitando o planejamento semestral. Permite marcar disciplinas concluídas, calcular disponibilidade com base em pré-requisitos e visualizar a grade de horários em um calendário semanal, com salvamento automático no navegador.',

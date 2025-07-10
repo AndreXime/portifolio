@@ -23,7 +23,7 @@ export default async function TechStack() {
                                         <span className="text-slate-200 mt-2 select-none pointer-events-none">
                                             {name}
                                         </span>
-                                        <div className="absolute bottom-full mb-2 w-full max-w-xs break-words rounded-md bg-slate-900 p-2 text-white opacity-0 transition-opacity duration-200 group-hover:opacity-100 group-active:opacity-100 pointer-events-none group-hover:pointer-events-auto group-active:pointer-events-auto z-10">
+                                        <div className="absolute bottom-full mb-2 w-[120%] max-w-xl break-words rounded-md bg-slate-900 p-2 text-white tooltip-description">
                                             {descricao}
                                         </div>
                                     </div>
