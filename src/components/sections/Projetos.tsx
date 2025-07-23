@@ -24,10 +24,10 @@ export default function Projetos() {
                                 <Image
                                     src={projeto.image}
                                     alt={`Screenshot do ${projeto.title}`}
-                                    className="w-full h-48 object-cover"
+                                    className="w-full h-50 object-cover object-top"
                                     loading="lazy"
-                                    width={500}
-                                    height={500}
+                                    width={600}
+                                    height={600}
                                 />
                             </a>
                             <div className="flex flex-col flex-grow justify-between p-6">
