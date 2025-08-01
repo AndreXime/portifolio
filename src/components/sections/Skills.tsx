@@ -20,9 +20,7 @@ export default async function TechStack() {
                                             alt={`Icone ${name}`}
                                             className={`w-12 h-12 mb-2 fill-white text-white select-none pointer-events-none`}
                                         />
-                                        <span className="text-slate-200 mt-2 select-none pointer-events-none">
-                                            {name}
-                                        </span>
+                                        <span className="text-slate-200 mt-2">{name}</span>
                                         <div className="absolute bottom-full mb-2 w-[120%] max-w-xl break-words rounded-md bg-slate-900 p-2 text-white tooltip-description">
                                             {descricao}
                                         </div>
