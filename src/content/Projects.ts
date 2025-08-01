@@ -39,6 +39,17 @@ ajudando o aluno a organizar sua rotina e evitar conflitos. Todo o progresso é 
         linkGithub: 'https://github.com/AndreXime/organiza-cc-uva',
     },
     {
+        title: 'API Mockup',
+        description: `
+    Desenvolvi uma ferramenta desktop para agilizar e simplificar o desenvolvimento de aplicações frontend.
+    Com esta ferramenta, permiti desenvolvedores criar e servir endpoints de API falsos de forma rápida,
+    definindo o método HTTP, o caminho, a resposta JSON e até simulando rotas que exigem autenticação. Construi o projeto com Go e Wails no backend,
+    e desenvolvi a interface com TypeScript e TailwindCSS que permite gerenciar um servidor HTTP local com apenas um clique.`,
+        tags: ['Go', 'Wails', 'Typescript', 'Vite', 'Developer Tool'],
+        image: '/assets/api-mockup.png',
+        linkGithub: 'https://github.com/AndreXime/api-mockup',
+    },
+    {
         title: 'PixelPress',
         description: `
 Construi uma ferramenta de linha de comando (CLI) em Go para facilitar a edição de imagens em massa com uma interface interativa.
@@ -59,7 +70,7 @@ A aplicação permite que o usuário salve comandos utilizados com frequência.
 É possível executar, listar, adicionar e remover esses favoritos de forma simples e rápida.
 Um dos principais recursos é o suporte a placeholders como $1, que permite a criação de comandos dinâmicos onde um argumento pode 
 ser passado diretamente na execução,
-tornando a ferramenta flexível para diversas situações. Todos os comandos são armazenados localmente em um arquivo JSON na pasta do usuário.
+tornando a ferramenta flexível para diversas situações.
         `,
         image: '/assets/taskrunner.png',
         linkGithub: 'https://github.com/AndreXime/task-runner',

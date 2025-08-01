@@ -84,7 +84,7 @@ export default function Contact() {
                             )}
                         </div>
                     ))}
-                    <div className="text-center">
+                    <div className="text-center w-full">
                         <button
                             type="submit"
                             className="w-full md:w-auto bg-blue-600 hover:bg-blue-500 text-white font-bold py-3 px-8 rounded-lg transition-all duration-200"
@@ -101,7 +101,7 @@ export default function Contact() {
                             aria-label={label}
                             className="text-slate-400 hover:text-blue-500 transition-colors"
                         >
-                            <Icon className="w-8 h-8" />
+                            <Icon className="w-12 h-12" />
                         </a>
                     ))}
                 </div>
