@@ -13,14 +13,14 @@ export default function Projetos() {
         <section id="projetos" className="py-24 fade-in-section">
             <div className="container mx-auto px-6 text-center">
                 <h2 className="text-3xl font-bold text-white mb-2">Projetos em Destaque</h2>
-                <p className="text-slate-400 mb-12">Alguns dos trabalhos que me orgulho de ter participado.</p>
+                <p className="text-slate-400 mb-12">Alguns dos trabalhos que me orgulho de ter construido.</p>
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {projetosVisiveis.map((projeto) => (
                         <div
                             key={projeto.title}
                             className="bg-slate-800/50 rounded-lg overflow-hidden flex flex-col h-full shadow-lg transition-transform transform hover:-translate-y-2"
                         >
-                            <a href={projeto.linkOnline || '#'}>
+                            <a href={projeto.linkOnline || '#'} target="_blank" rel="noopener noreferrer">
                                 <Image
                                     src={projeto.image}
                                     alt={`Screenshot do ${projeto.title}`}
@@ -52,6 +52,8 @@ export default function Projetos() {
                                 >
                                     {projeto.linkOnline && (
                                         <Link
+                                            target="_blank"
+                                            rel="noopener noreferrer"
                                             href={projeto.linkOnline}
                                             className="bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-500 transition-colors"
                                         >
@@ -59,6 +61,8 @@ export default function Projetos() {
                                         </Link>
                                     )}
                                     <Link
+                                        target="_blank"
+                                        rel="noopener noreferrer"
                                         href={projeto.linkGithub}
                                         className="bg-slate-700 text-white py-2 px-4 rounded-lg hover:bg-slate-600 transition-colors"
                                     >
