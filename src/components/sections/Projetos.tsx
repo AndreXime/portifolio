@@ -1,13 +1,13 @@
 'use client';
-import { ProjectsContent } from '@/content';
+import { ProjectType } from '@/content/Projects';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
 
-export default function Projetos() {
+export default function Projetos({ ProjectsArray }: { ProjectsArray: ProjectType[] }) {
     const [mostrarTodos, setMostrarTodos] = useState(false);
 
-    const projetosVisiveis = mostrarTodos ? ProjectsContent : ProjectsContent.slice(0, 3);
+    const projetosVisiveis = mostrarTodos ? ProjectsArray : ProjectsArray.slice(0, 3);
 
     return (
         <section id="projetos" className="py-24 fade-in-section">
@@ -73,7 +73,7 @@ export default function Projetos() {
                         </div>
                     ))}
                 </div>
-                {ProjectsContent.length > 3 && (
+                {ProjectsArray.length > 3 && (
                     <button
                         onClick={() => setMostrarTodos(!mostrarTodos)}
                         className="mt-12 border-2 border-blue-600 text-blue-500 font-medium py-3 px-8 rounded-lg hover:bg-blue-600 hover:text-white transition-all duration-300"
