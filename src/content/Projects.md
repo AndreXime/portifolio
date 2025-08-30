@@ -25,6 +25,14 @@ description: Para resolver um problema comum entre os alunos de Ciência da Comp
 
 ---
 
+title: Loja Gin API
+image: /assets/lojagin.png
+linkGithub: https://github.com/AndreXime/lojagin-api
+tags: ["Go","Gin", "RESTful API", "Modular"]
+description: Construí uma API RESTful completa para um sistema de e-commerce utilizando Go com o framework Gin. Possui um sistema de autenticação com tokens JWT, operações CRUD completas para gerenciamento de usuários, produtos e categorias, organizando o código de forma modular para facilitar a manutenção. Além disso, desenvolvi toda a funcionalidade de um carrinho de compras, permitindo adicionar, remover itens e finalizar a compra (checkout), utilizando GORM para a interação com o banco de dados. Para garantir a qualidade do sistema, criei uma suíte de testes end-to-end, implementei um sistema de migrations e seeding, e documentei todos os endpoints com Swagger.
+
+---
+
 title: API Mockup
 image: /assets/api-mockup.png
 linkGithub: https://github.com/AndreXime/api-mockup
@@ -38,11 +46,3 @@ image: /assets/editphotocli.png
 linkGithub: https://github.com/AndreXime/pixel-press
 tags: ["Go", "CLI", "Automação", "Edição"]
 description: Construi uma ferramenta de linha de comando (CLI) em Go para facilitar a edição de imagens em massa com uma interface interativa. Para evitar a necessidade de decorar comandos complexos do ffmpeg. A aplicação detecta automaticamente as imagens no diretório, permite selecionar múltiplos arquivos e oferece duas funções principais: conversão de formato e uma compressão inteligente, onde o usuário define um tamanho máximo (em MB) e a ferramenta ajusta a qualidade para atingir aquele objetivo.
-
----
-
-title: TaskRunner
-image: /assets/taskrunner.png
-linkGithub: https://github.com/AndreXime/task-runner
-tags: ["Go", "CLI", "Produtividade"]
-description: Desenvolvi uma ferramenta de linha de comando (CLI) em Go para otimizar a produtividade no terminal. A aplicação permite que o usuário salve comandos utilizados com frequência. É possível executar, listar, adicionar e remover esses favoritos de forma simples e rápida. Um dos principais recursos é o suporte a placeholders como $1, que permite a criação de comandos dinâmicos onde um argumento pode ser passado diretamente na execução, tornando a ferramenta flexível para diversas situações.

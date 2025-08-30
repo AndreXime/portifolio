@@ -7,7 +7,7 @@ Gosto do desafio de pegar problemas complexos e criar sistemas que sejam não s�
 `,
     tag1: 'Formando em Ciência da Computação',
     tag2: 'Desenvolvedor Backend e Frontend',
-    profilePicture: '/assets/profile.jpeg',
+    profilePicture: '/assets/profile.png',
     github: 'https://github.com/AndreXime',
     linkedin: 'https://www.linkedin.com/in/andreximenesdev/',
 };
