@@ -1,4 +1,4 @@
-import TechnologiesContent from '@/content/Technologies';
+import { Tecnologies } from '@/content/About';
 
 export default async function TechStack() {
     return (
@@ -7,7 +7,7 @@ export default async function TechStack() {
                 <h2 className="text-3xl font-bold text-white mb-2">Minhas Habilidades</h2>
                 <p className="text-slate-400 mb-12">Tecnologias que utilizo para construir minhas soluções.</p>
                 <div className="space-y-12">
-                    {TechnologiesContent.map(({ category, skills }) => (
+                    {Tecnologies.map(({ category, skills }) => (
                         <div key={category}>
                             <h3 className="text-xl font-semibold text-white mb-4">{category}</h3>
                             <div className="grid [grid-template-columns:repeat(auto-fit,minmax(100px,1fr))] gap-8 ">

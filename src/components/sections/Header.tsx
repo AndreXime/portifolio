@@ -1,5 +1,5 @@
 'use client';
-import About from '@/content/About';
+import { About } from '@/content/About';
 import Image from 'next/image';
 import { useState } from 'react';
 import { FaGithub, FaLaptopCode, FaLinkedin } from 'react-icons/fa';

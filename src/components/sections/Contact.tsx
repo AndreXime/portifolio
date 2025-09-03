@@ -1,6 +1,6 @@
 'use client';
 import { useState } from 'react';
-import About from '@/content/About';
+import { About } from '@/content/About';
 import { FaGithub, FaLinkedin } from 'react-icons/fa';
 
 const buttons = [

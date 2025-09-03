@@ -1,18 +1,20 @@
 import fs from 'fs';
 import path from 'path';
+import { marked } from 'marked';
 
 export interface ProjectType {
     title: string;
+    shortDescription: string;
     description: string;
-    image: string;
+    images: string[];
     linkGithub: string;
     linkOnline?: string;
-    tags: string[];
 }
 
 type RawProjectData = { [key: string]: string };
 
-function parseProjectsMd(filePath: string): ProjectType[] {
+function parseProjectsMd(filename: string): ProjectType[] {
+    const filePath = path.join(process.cwd(), 'src/content', filename);
     const fileContent = fs.readFileSync(filePath, 'utf-8');
 
     // Separa o arquivo em blocos de projeto usando '---' como delimitador
@@ -28,29 +30,38 @@ function parseProjectsMd(filePath: string): ProjectType[] {
                 const key = match[1];
                 const value = match[2].trim();
                 acc[key] = value;
-            } else if (acc.description) {
-                // Se a linha não tem uma chave e já existe uma descrição,
-                // considera que é uma continuação da descrição.
-                acc.description += '\n' + line.trim();
+                acc.lastKey = key;
+            } else if (acc.lastKey === 'description' || acc.lastKey === 'shortDescription') {
+                // Significa que a linha não tem chave então deve ser linhas extras do description ou shortDescription
+                acc[acc.lastKey] += '\n' + line.trim();
             }
             return acc;
         }, {});
 
-        if (!rawData.title || !rawData.image || !rawData.linkGithub || !rawData.tags || !rawData.description) {
-            throw new Error(`Projeto inválido.\n"${block}"`);
+        if (
+            !rawData.title ||
+            !rawData.image ||
+            !rawData.linkGithub ||
+            !rawData.description ||
+            !rawData.shortDescription
+        ) {
+            throw new Error(`Projeto inválido\n"${block}"`);
         }
+
+        const descriptionHtml = marked(rawData.description.trim(), { async: false });
 
         return {
             title: rawData.title,
-            image: rawData.image,
+            images: JSON.parse(rawData.image),
             linkGithub: rawData.linkGithub,
-            description: rawData.description,
-            tags: JSON.parse(rawData.tags),
+            description: descriptionHtml,
+            shortDescription: rawData.shortDescription,
             ...(rawData.linkOnline && { linkOnline: rawData.linkOnline }),
         };
     });
 }
 
-const mdPath = path.join(process.cwd(), 'src/content/Projects.md');
-const projectsArray = parseProjectsMd(mdPath);
-export default projectsArray;
+const projectsArray = parseProjectsMd('ProjectsPart1.md');
+const projectsArray2 = parseProjectsMd('ProjectsPart2.md');
+
+export default [...projectsArray, ...projectsArray2];

@@ -1,21 +1,16 @@
-function wrapIcon(src: string) {
-    return function iconImg({ alt, className = '', ...props }: React.ImgHTMLAttributes<HTMLImageElement>) {
-        // Png estica demais se usar w-full
-        const finalClass = src.endsWith('.png') ? className.replace(/\bw-full\b/, 'w-9') : className;
-        return <img src={src} alt={alt || 'Icone de tecnologia'} loading="lazy" className={finalClass} {...props} />;
-    };
-}
-
-function wrapIconPair(src1: string, src2: string) {
-    return function iconImg({ alt }: React.ImgHTMLAttributes<HTMLDivElement>) {
-        return (
-            <div className="flex justify-center items-center gap-2 mb-2">
-                <img className="w-10 h-10 md:w-12 md:h-12" src={src1} alt={alt} />
-                <img className="w-10 h-10 md:w-12 md:h-12" src={src2} alt={alt} />
-            </div>
-        );
-    };
-}
+export const About = {
+    salution: 'Prazer, sou o André.',
+    about: `
+Desde pequeno, sempre fui curioso sobre como as coisas funcionam. Com o tempo, essa curiosidade virou paixão por tecnologia o que me levou à Ciência da Computação.
+Hoje, como desenvolvedor, uso <strong>TypeScript</strong> e <strong>Go</strong> para transformar ideias em soluções reais.
+Gosto do desafio de pegar problemas complexos e criar sistemas que sejam não só eficientes, mas também elegantes e fáceis de manter.
+`,
+    tag1: 'Formando em Ciência da Computação',
+    tag2: 'Desenvolvedor Backend e Frontend',
+    profilePicture: '/assets/profile.png',
+    github: 'https://github.com/AndreXime',
+    linkedin: 'https://www.linkedin.com/in/andreximenesdev/',
+};
 
 interface Category {
     category: string;
@@ -26,7 +21,7 @@ interface Category {
     }[];
 }
 
-const Tecnologies: Category[] = [
+export const Tecnologies: Category[] = [
     {
         category: 'Frontend',
         skills: [
@@ -122,4 +117,21 @@ const Tecnologies: Category[] = [
     },
 ];
 
-export default Tecnologies;
+function wrapIcon(src: string) {
+    return function iconImg({ alt, className = '', ...props }: React.ImgHTMLAttributes<HTMLImageElement>) {
+        // Png estica demais se usar w-full
+        const finalClass = src.endsWith('.png') ? className.replace(/\bw-full\b/, 'w-9') : className;
+        return <img src={src} alt={alt || 'Icone de tecnologia'} loading="lazy" className={finalClass} {...props} />;
+    };
+}
+
+function wrapIconPair(src1: string, src2: string) {
+    return function iconImg({ alt }: React.ImgHTMLAttributes<HTMLDivElement>) {
+        return (
+            <div className="flex justify-center items-center gap-2 mb-2 select-none pointer-events-none">
+                <img className="w-10 h-10 md:w-12 md:h-12" src={src1} alt={alt} />
+                <img className="w-10 h-10 md:w-12 md:h-12" src={src2} alt={alt} />
+            </div>
+        );
+    };
+}
