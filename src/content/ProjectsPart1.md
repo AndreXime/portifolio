@@ -1,5 +1,6 @@
 title: ConectaQR
-image: ["/assets/conectaqr.png"]
+folderName: conectaqr
+imagesAmount: 3
 linkGithub: https://github.com/AndreXime/ConnectQR
 linkOnline: https://conectaqr.tech
 shortDescription:
@@ -27,7 +28,8 @@ Eu criei o ConectaQR para ser uma solução completa e acessível para comercian
 ---
 
 title: Restaurante Tech
-image: ["/assets/cozinhatech.png"]
+folderName: restaurante
+imagesAmount: 5
 linkGithub: https://github.com/AndreXime/restaurante
 linkOnline: https://restaurante.andreximenes.xyz/
 shortDescription:
@@ -55,7 +57,8 @@ Eu criei o "Restaurante Tech", um sistema de Ponto de Venda (PDV) para restauran
 ---
 
 title: Organizador de Disciplinas
-image: ["/assets/disciplinas-uva.png"]
+folderName: disciplinas
+imagesAmount: 3
 linkGithub: https://github.com/AndreXime/organiza-cc-uva
 linkOnline: https://disciplina-uva.andreximenes.xyz/
 shortDescription:

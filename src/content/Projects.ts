@@ -40,7 +40,8 @@ function parseProjectsMd(filename: string): ProjectType[] {
 
         if (
             !rawData.title ||
-            !rawData.image ||
+            !rawData.folderName ||
+            !rawData.imagesAmount ||
             !rawData.linkGithub ||
             !rawData.description ||
             !rawData.shortDescription
@@ -48,11 +49,19 @@ function parseProjectsMd(filename: string): ProjectType[] {
             throw new Error(`Projeto inválido\n"${block}"`);
         }
 
+        const folderName = rawData.folderName;
+
+        const amount = Number(rawData.imagesAmount);
+
+        const generatedImages = Array.from({ length: amount }, (_, i) => {
+            return `/assets/${folderName}/photo${i + 1}.png`;
+        });
+
         const descriptionHtml = marked(rawData.description.trim(), { async: false });
 
         return {
             title: rawData.title,
-            images: JSON.parse(rawData.image),
+            images: generatedImages,
             linkGithub: rawData.linkGithub,
             description: descriptionHtml,
             shortDescription: rawData.shortDescription,

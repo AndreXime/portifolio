@@ -1,5 +1,6 @@
 title: Loja Gin API
-image: ["/assets/lojagin.png"]
+folderName: lojagin
+imagesAmount: 2
 linkGithub: https://github.com/AndreXime/lojagin-api
 shortDescription:
 Construí uma API RESTful completa para um sistema de e-commerce utilizando Go com o framework Gin. Possui um sistema de autenticação com tokens JWT, operações CRUD completas para gerenciamento de usuários, produtos e categorias, organizando o código de forma modular para facilitar a manutenção. Além disso, desenvolvi toda a funcionalidade de um carrinho de compras, permitindo adicionar, remover itens e finalizar a compra (checkout), utilizando GORM para a interação com o banco de dados. Para garantir a qualidade do sistema, criei uma suíte de testes end-to-end, implementei um sistema de migrations e seeding, e documentei todos os endpoints com Swagger.
@@ -28,7 +29,8 @@ Eu desenvolvi esta API RESTful como o back-end para um sistema de e-commerce, ut
 ---
 
 title: API Mockup
-image: ["/assets/api-mockup.png"]
+folderName: apimockup
+imagesAmount: 1
 linkGithub: https://github.com/AndreXime/api-mockup
 shortDescription:
 Desenvolvi uma ferramenta desktop para agilizar e simplificar o desenvolvimento de aplicações frontend. Com esta ferramenta, permiti desenvolvedores criar e servir endpoints de API falsos de forma rápida, definindo o método HTTP, o caminho, a resposta JSON e até simulando rotas que exigem autenticação. Construí o projeto com Go e Wails no backend, e desenvolvi a interface com TypeScript e TailwindCSS que permite gerenciar um servidor HTTP local com apenas um clique.
@@ -52,7 +54,8 @@ Eu criei o "API Mockup", uma ferramenta desktop para acelerar o desenvolvimento 
 ---
 
 title: PixelPress
-image: ["/assets/editphotocli.png"]
+folderName: pixelpress
+imagesAmount: 4
 linkGithub: https://github.com/AndreXime/pixel-press
 shortDescription:
 Construí uma ferramenta de linha de comando (CLI) em Go para facilitar a edição de imagens em massa com uma interface interativa. Para evitar a necessidade de decorar comandos complexos do ffmpeg. A aplicação detecta automaticamente as imagens no diretório, permite selecionar múltiplos arquivos e oferece duas funções principais: conversão de formato e uma compressão inteligente, onde o usuário define um tamanho máximo (em MB) e a ferramenta ajusta a qualidade para atingir aquele objetivo.
