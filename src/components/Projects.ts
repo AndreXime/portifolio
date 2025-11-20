@@ -20,14 +20,24 @@ export const projects: Project[] = [
         github: 'https://github.com/AndreXime/restaurante',
     },
     {
-        title: 'Landing Page de Alto Desempenho para Captação de Clientes Freelancer.',
+        title: 'Landing Page para Captação de Clientes Freelancer',
         description:
             'Desenvolvida para empresas descobrirem e contratarem serviços de desenvolvimento. Utiliza a performance do Astro e a confiabilidade do TypeScript. A arquitetura otimizada em UI/UX transforma a experiência do usuário em uma vantagem competitiva, facilitando a decisão de contratação.',
         type: 'landing page',
-        tech: ['TypeScript', 'Astro', 'Preact', 'SSR', 'UX', 'UI'],
+        tech: ['TypeScript', 'Astro', 'Preact', 'SSR', 'UX / UI'],
         image: 'contrate.png',
         link: 'https://contrate.andreximenes.xyz/',
         github: '',
+    },
+    {
+        title: 'MiniHub',
+        description:
+            'Ferramentas para o dia a dia, como gerar senhas ou até mais complexas como gerar um resumo quanto gasta de gasolina com esse trajeto por mẽs',
+        type: 'app',
+        tech: ['TypeScript', 'React', 'Ferramenta para dia a dia', 'UX / UI'],
+        image: 'minihub.png',
+        link: 'https://ferramentas.andreximenes.xyz/',
+        github: 'http://github.com/AndreXime/minihub',
     },
     {
         title: 'Organizador de Disciplinas',

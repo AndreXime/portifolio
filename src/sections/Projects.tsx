@@ -83,6 +83,8 @@ function ProjectCard({ project }: { project: Project; index: number }) {
                     {project.link && (
                         <Link
                             href={project.link}
+                            target="_blank"
+                            rel="noreferrer"
                             className="p-2 bg-white text-slate-900 rounded-full hover:scale-110 transition-transform shadow-lg"
                         >
                             <ExternalLink className="w-5 h-5" />
@@ -91,6 +93,8 @@ function ProjectCard({ project }: { project: Project; index: number }) {
                     {project.github && (
                         <Link
                             href={project.github}
+                            target="_blank"
+                            rel="noreferrer"
                             className="p-2 bg-slate-800 text-white rounded-full hover:scale-110 transition-transform shadow-lg"
                         >
                             <Github className="w-5 h-5" />
