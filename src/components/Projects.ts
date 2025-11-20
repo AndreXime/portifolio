@@ -1,7 +1,7 @@
 export interface Project {
     title: string;
     description: string;
-    type: 'app' | 'api' | 'cli';
+    type: 'app' | 'api' | 'cli' | 'landing page';
     tech: string[];
     image: string;
     link: string;
@@ -18,6 +18,16 @@ export const projects: Project[] = [
         image: 'restaurante.png',
         link: 'https://restaurante.andreximenes.xyz/',
         github: 'https://github.com/AndreXime/restaurante',
+    },
+    {
+        title: 'Landing Page de Alto Desempenho para Captação de Clientes Freelancer.',
+        description:
+            'Desenvolvida para empresas descobrirem e contratarem serviços de desenvolvimento. Utiliza a performance do Astro e a confiabilidade do TypeScript. A arquitetura otimizada em UI/UX transforma a experiência do usuário em uma vantagem competitiva, facilitando a decisão de contratação.',
+        type: 'landing page',
+        tech: ['TypeScript', 'Astro', 'Preact', 'SSR', 'UX', 'UI'],
+        image: 'contrate.png',
+        link: 'https://contrate.andreximenes.xyz/',
+        github: '',
     },
     {
         title: 'Organizador de Disciplinas',

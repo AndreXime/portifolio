@@ -19,6 +19,7 @@ export const Projects = () => {
         { id: 'app', label: 'Web Apps' },
         { id: 'api', label: 'APIs' },
         { id: 'cli', label: 'CLI' },
+        { id: 'landing page', label: 'Landing Page' },
     ] as const;
 
     return (
@@ -87,12 +88,14 @@ function ProjectCard({ project }: { project: Project; index: number }) {
                             <ExternalLink className="w-5 h-5" />
                         </Link>
                     )}
-                    <Link
-                        href={project.github}
-                        className="p-2 bg-slate-800 text-white rounded-full hover:scale-110 transition-transform shadow-lg"
-                    >
-                        <Github className="w-5 h-5" />
-                    </Link>
+                    {project.github && (
+                        <Link
+                            href={project.github}
+                            className="p-2 bg-slate-800 text-white rounded-full hover:scale-110 transition-transform shadow-lg"
+                        >
+                            <Github className="w-5 h-5" />
+                        </Link>
+                    )}
                 </div>
             </div>
             <div className="p-5 flex flex-col flex-grow">
