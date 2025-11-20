@@ -1,24 +1,25 @@
-import { Skills, Header, Contact, Projetos, Navbar } from '@/components';
-import Footer from '@/components/sections/Footer';
-import FadeInObserver from '@/components/ui/FadeInObserver';
-// ProjectsArray precisa ser importado no server side porque lê um arquivo do projeto
-import ProjectsArray from '@/content/Projects';
+import { Navbar } from '../sections/Navbar';
+import { Hero } from '../sections/Hero';
+import { About } from '../sections/About';
+import { TechStack } from '../sections/TechStack';
+import { Projects } from '../sections/Projects';
+import { Contact } from '../sections/Contact';
+import { Footer } from '../sections/Footer';
 
-export default async function Page() {
+function App() {
     return (
-        <main className="flex flex-col min-h-screen bg-slate-900 text-foreground">
+        <div className="bg-background text-textMain font-sans antialiased selection:bg-primary selection:text-white overflow-x-hidden">
             <Navbar />
-
-            <Header />
-
-            <Projetos ProjectsArray={ProjectsArray} />
-
-            <Skills />
-
-            <Contact />
-
+            <main>
+                <Hero />
+                <About />
+                <TechStack />
+                <Projects />
+                <Contact />
+            </main>
             <Footer />
-            <FadeInObserver ids={['projetos', 'habilidades', 'contato']} />
-        </main>
+        </div>
     );
 }
+
+export default App;
