@@ -96,7 +96,7 @@ export const Hero = () => {
                                     {'\n'} ],
                                     {'\n'} <span className="text-blue-300">hardWorker</span>:{' '}
                                     <span className="text-purple-400">true</span>
-                                    {'\n'};
+                                    {'\n'}{'}'}
                                 </code>
                             </pre>
                         </div>

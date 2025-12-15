@@ -47,7 +47,7 @@ export const About = () => {
                                         Desenvolvedor Fullstack na Stackup
                                     </h3>
                                     <span className="text-xs font-mono text-primary bg-primary/10 px-2 py-1 rounded">
-                                        2025 - Presenter
+                                        2025 - Presente
                                     </span>
                                     <p className="text-slate-500 text-sm mt-2">
                                         Estou atualmente trabalhando em uma Software House com as ferramentas mais
