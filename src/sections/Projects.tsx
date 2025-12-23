@@ -92,6 +92,9 @@ function ProjectCard({ project }: { project: Project }) {
 							className="p-2 bg-white text-slate-900 rounded-full hover:scale-110 transition-transform shadow-lg"
 						>
 							<ExternalLink className="w-5 h-5" />
+							<span className="sr-only">
+								Link para o projeto {project.title}
+							</span>
 						</Link>
 					)}
 					{project.github && (
@@ -102,6 +105,9 @@ function ProjectCard({ project }: { project: Project }) {
 							className="p-2 bg-slate-800 text-white rounded-full hover:scale-110 transition-transform shadow-lg"
 						>
 							<Github className="w-5 h-5" />
+							<span className="sr-only">
+								Github para o projeto {project.title}
+							</span>
 						</Link>
 					)}
 				</div>
