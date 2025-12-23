@@ -2,6 +2,7 @@
 import Image from "next/image";
 import { Reveal } from "../components/Reveal";
 import { books, type book } from "@/components/books";
+import { useState } from "react";
 
 const STYLE_MAP: Record<book["state"], string> = {
 	Lido: "bg-emerald-100 text-emerald-700 border-emerald-200",
@@ -11,6 +12,9 @@ const STYLE_MAP: Record<book["state"], string> = {
 };
 
 export function Books() {
+	const [expand, setExpand] = useState(false);
+	const booksView = expand ? books : books.slice(0, 3);
+
 	return (
 		<section
 			id="biblioteca"
@@ -32,9 +36,18 @@ export function Books() {
 					</div>
 
 					<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-						{books.map((book) => (
+						{booksView.map((book) => (
 							<BookCard {...book} key={book.title} />
 						))}
+						<div className="flex justify-center items-center col-span-full">
+							<button
+								type="button"
+								onClick={() => setExpand(!expand)}
+								className={`px-4 py-2 rounded-lg font-medium transition-all bg-primary text-white shadow-lg shadow-blue-500/30`}
+							>
+								{!expand ? "Ver mais livros" : "Esconder livros"}
+							</button>
+						</div>
 					</div>
 				</div>
 			</Reveal>

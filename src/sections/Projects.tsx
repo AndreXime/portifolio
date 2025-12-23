@@ -6,21 +6,24 @@ import { Reveal } from "../components/Reveal";
 import Image from "next/image";
 import Link from "next/link";
 
+const filters: { id: Project["type"] | "all"; label: string }[] = [
+	{ id: "all", label: "Todos" },
+	{ id: "app", label: "Web Apps" },
+	{ id: "api", label: "APIs" },
+	{ id: "cli", label: "CLI" },
+	{ id: "landing page", label: "Landing Page" },
+] as const;
+
 export const Projects = () => {
-	const [filter, setFilter] = useState<"all" | Project["type"]>("all");
+	const [filter, setFilter] = useState<"all" | "minimal" | Project["type"]>(
+		"minimal",
+	);
 
 	const filteredProjects = useMemo(() => {
 		if (filter === "all") return projects;
+		if (filter === "minimal") return projects.slice(0, 3);
 		return projects.filter((p) => p.type === filter);
 	}, [filter]);
-
-	const filters: { id: Project["type"] | "all"; label: string }[] = [
-		{ id: "all", label: "Todos" },
-		{ id: "app", label: "Web Apps" },
-		{ id: "api", label: "APIs" },
-		{ id: "cli", label: "CLI" },
-		{ id: "landing page", label: "Landing Page" },
-	] as const;
 
 	return (
 		<section
@@ -59,6 +62,20 @@ export const Projects = () => {
 						{filteredProjects.map((project) => (
 							<ProjectCard project={project} key={project.title} />
 						))}
+						{(filter === "minimal" || filter === "all") && (
+							<div className="flex justify-center items-center col-span-full">
+								<button
+									type="button"
+									onClick={() =>
+										setFilter(filter === "all" ? "minimal" : "all")
+									}
+									className={`px-4 py-2 rounded-lg font-medium transition-all bg-primary text-white shadow-lg shadow-blue-500/30`}
+								>
+									{filter === "minimal" && "Ver todos projetos"}
+									{filter === "all" && "Esconder projetos"}
+								</button>
+							</div>
+						)}
 					</div>
 				</div>
 			</Reveal>
