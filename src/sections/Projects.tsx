@@ -77,7 +77,7 @@ function ProjectCard({ project }: { project: Project }) {
 				</div>
 
 				<Image
-					src={`/assets/${project.image}`}
+					src={`/projetos/${project.image}`}
 					alt={project.title}
 					className="w-full h-full object-cover pt-6 transition-all duration-700 ease-in-out group-hover:scale-110"
 					fill
