@@ -101,19 +101,19 @@ export const Hero = () => {
 							</CodeLine>
 							<CodeLine indent={1}>
 								<Token type="property">name</Token>:{" "}
-								<Token type="string">"Andre Ximenes"</Token>,
+								<Token type="string">{`"Andre Ximenes"`}</Token>,
 							</CodeLine>
 							<CodeLine indent={1}>
 								<Token type="property">skills</Token>: [
 							</CodeLine>
 							<CodeLine indent={2}>
-								<Token type="string">"TypeScript"</Token>,
+								<Token type="string">{`"TypeScript"`}</Token>,
 							</CodeLine>
 							<CodeLine indent={2}>
-								<Token type="string">"React"</Token>,
+								<Token type="string">{`"React"`}</Token>,
 							</CodeLine>
 							<CodeLine indent={2}>
-								<Token type="string">"Node.js"</Token>
+								<Token type="string">{`"Node.js"`}</Token>
 							</CodeLine>
 							<CodeLine indent={1}>],</CodeLine>
 							<CodeLine indent={1}>
