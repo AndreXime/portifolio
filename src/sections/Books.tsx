@@ -29,15 +29,26 @@ export function Books() {
 							Minha Biblioteca Técnica
 						</h2>
 						<p className="text-slate-600 max-w-2xl mx-auto">
-							Livros que moldaram minha forma de pensar software, organizados
-							por status de leitura e impacto.
+							Livros que moldaram minha forma de pensar como engenheiro de
+							software.
 						</p>
 					</div>
 
 					<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-						{booksView.map((book) => (
-							<BookCard {...book} key={book.title} />
-						))}
+						{booksView.map((book, index) => {
+							let responsiveClass = "";
+
+							if (!expand) {
+								// Se for o 3º item (index 2), só mostra se tiver 3 colunas (lg)
+								if (index === 2) responsiveClass = "hidden lg:block";
+							}
+
+							return (
+								<div key={book.title} className={responsiveClass}>
+									<BookCard {...book} key={book.title} />{" "}
+								</div>
+							);
+						})}
 						<div className="flex justify-center items-center col-span-full">
 							<button
 								type="button"

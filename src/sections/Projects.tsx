@@ -59,9 +59,20 @@ export const Projects = () => {
 					</div>
 
 					<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 min-h-[400px]">
-						{filteredProjects.map((project) => (
-							<ProjectCard project={project} key={project.title} />
-						))}
+						{filteredProjects.map((project, index) => {
+							let responsiveClass = "";
+
+							if (filter === "minimal") {
+								// Se for o 3º item (index 2), só mostra se tiver 3 colunas (lg)
+								if (index === 2) responsiveClass = "hidden lg:block";
+							}
+
+							return (
+								<div key={project.title} className={responsiveClass}>
+									<ProjectCard project={project} />
+								</div>
+							);
+						})}
 						{(filter === "minimal" || filter === "all") && (
 							<div className="flex justify-center items-center col-span-full">
 								<button
