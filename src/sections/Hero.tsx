@@ -2,17 +2,9 @@ import { ArrowDown, Github } from "lucide-react";
 import { Reveal } from "../components/Reveal";
 import Link from "next/link";
 import { socialLinks } from "@/content/social";
+import { CodeLine, CodeWindow, Token } from "@/components/Code";
 
 export const Hero = () => {
-	const highlights = {
-		keyword: "text-purple-400",
-		type: "text-yellow-300",
-		property: "text-blue-300",
-		string: "text-orange-300",
-		boolean: "text-purple-400",
-		comment: "text-slate-500",
-	};
-
 	return (
 		<section
 			id="home"
@@ -71,55 +63,69 @@ export const Hero = () => {
 							style={{ animationDelay: "2s" }}
 						></div>
 
-						<div className="relative bg-slate-900 rounded-xl shadow-2xl p-6 border border-slate-700 rotate-3 hover:rotate-0 transition-transform duration-500">
-							<div className="flex items-center gap-2 mb-4 border-b border-slate-700 pb-4">
-								<div className="w-3 h-3 rounded-full bg-red-500"></div>
-								<div className="w-3 h-3 rounded-full bg-yellow-500"></div>
-								<div className="w-3 h-3 rounded-full bg-green-500"></div>
-								<span className="ml-2 text-xs text-slate-400 font-mono">
-									developer.ts
-								</span>
-							</div>
-							<pre className="font-mono text-sm text-slate-300 overflow-x-auto">
-								<code>
-									<span className={highlights.keyword}>interface</span>{" "}
-									<span className={highlights.type}>Developer</span>
-									{" { \n  "}
-									<span className={highlights.property}>name</span>:{" "}
-									<span className={highlights.type}>string</span>;{"\n  "}
-									<span className={highlights.property}>skills</span>:{" "}
-									<span className={highlights.type}>string</span>[];
-									{"\n  "}
-									<span className={highlights.property}>solutionOriented</span>:{" "}
-									<span className={highlights.type}>boolean</span>;{"\n  "}
-									<span className={highlights.property}>qualityDriven</span>:{" "}
-									<span className={highlights.type}>boolean</span>;{"\n}\n\n"}
-									<span className={highlights.keyword}>const</span>{" "}
-									<span className={highlights.property}>andre</span>:{" "}
-									<span className={highlights.type}>Developer</span> = {"{\n  "}
-									<span className={highlights.property}>name</span>:{" "}
-									<span className={highlights.string}>
-										&quot;Andre Ximenes&quot;
-									</span>
-									,{"\n  "}
-									<span className={highlights.property}>skills</span>: [
-									{"\n    "}
-									<span className={highlights.string}>
-										&quot;TypeScript&quot;
-									</span>
-									,{"\n    "}
-									<span className={highlights.string}>&quot;React&quot;</span>,
-									{"\n    "}
-									<span className={highlights.string}>&quot;Node.js&quot;</span>
-									{"\n  "}],
-									{"\n  "}
-									<span className={highlights.property}>solutionOriented</span>:{" "}
-									<span className={highlights.boolean}>true</span>,{"\n  "}
-									<span className={highlights.property}>qualityDriven</span>:{" "}
-									<span className={highlights.boolean}>true</span>,{"\n}"}
-								</code>
-							</pre>
-						</div>
+						<CodeWindow
+							fileName="developer.ts"
+							className="lg:rotate-3 hover:rotate-0 rotate-0 transition-transform duration-500"
+						>
+							<CodeLine>
+								<Token type="keyword">interface</Token>{" "}
+								<Token type="type">Developer</Token> {"{"}
+							</CodeLine>
+							<CodeLine indent={1}>
+								<Token type="property">name</Token>:{" "}
+								<Token type="type">string</Token>
+								{";"}
+							</CodeLine>
+							<CodeLine indent={1}>
+								<Token type="property">skills</Token>:{" "}
+								<Token type="type">string</Token>[]{";"}
+							</CodeLine>
+							<CodeLine indent={1}>
+								<Token type="property">solutionOriented</Token>:{" "}
+								<Token type="type">boolean</Token>
+								{";"}
+							</CodeLine>
+							<CodeLine indent={1}>
+								<Token type="property">qualityDriven</Token>:{" "}
+								<Token type="type">boolean</Token>
+								{";"}
+							</CodeLine>
+							<CodeLine>{"}"}</CodeLine>
+
+							<CodeLine />
+
+							<CodeLine>
+								<Token type="keyword">const</Token>{" "}
+								<Token type="property">andre</Token>:{" "}
+								<Token type="type">Developer</Token> = {"{"}
+							</CodeLine>
+							<CodeLine indent={1}>
+								<Token type="property">name</Token>:{" "}
+								<Token type="string">"Andre Ximenes"</Token>,
+							</CodeLine>
+							<CodeLine indent={1}>
+								<Token type="property">skills</Token>: [
+							</CodeLine>
+							<CodeLine indent={2}>
+								<Token type="string">"TypeScript"</Token>,
+							</CodeLine>
+							<CodeLine indent={2}>
+								<Token type="string">"React"</Token>,
+							</CodeLine>
+							<CodeLine indent={2}>
+								<Token type="string">"Node.js"</Token>
+							</CodeLine>
+							<CodeLine indent={1}>],</CodeLine>
+							<CodeLine indent={1}>
+								<Token type="property">solutionOriented</Token>:{" "}
+								<Token type="boolean">true</Token>,
+							</CodeLine>
+							<CodeLine indent={1}>
+								<Token type="property">qualityDriven</Token>:{" "}
+								<Token type="boolean">true</Token>,
+							</CodeLine>
+							<CodeLine>{"}"}</CodeLine>
+						</CodeWindow>
 					</div>
 				</Reveal>
 			</div>
