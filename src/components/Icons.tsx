@@ -1,3 +1,4 @@
+/** biome-ignore-all lint/a11y/noSvgWithoutTitle: "" */
 export function wrapIcon(
 	Icon: React.ComponentType<React.SVGProps<SVGSVGElement>>,
 	SecondIcon?: React.ComponentType<React.SVGProps<SVGSVGElement>>,

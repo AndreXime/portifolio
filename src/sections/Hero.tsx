@@ -1,12 +1,7 @@
 import { ArrowDown, Github } from "lucide-react";
 import { Reveal } from "../components/Reveal";
 import Link from "next/link";
-
-export const socialLinks = {
-	email: "andreximenesa20@gmail.com",
-	github: "https://github.com/AndreXime",
-	linkedin: "https://www.linkedin.com/in/andreximenesdev/",
-};
+import { socialLinks } from "@/content/social";
 
 export const Hero = () => {
 	const highlights = {

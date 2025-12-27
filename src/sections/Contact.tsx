@@ -1,9 +1,9 @@
 "use client";
 import { Mail, Linkedin, X, Check, Loader } from "lucide-react";
 import { Reveal } from "../components/Reveal";
-import { socialLinks } from "./Hero";
 import Link from "next/link";
 import { useState } from "react";
+import { socialLinks } from "@/content/social";
 
 export const Contact = () => {
 	const [showToast, setShowToast] = useState({ status: "", message: "" });

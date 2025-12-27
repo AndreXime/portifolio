@@ -1,7 +1,7 @@
 "use client";
 import { useMemo, useState } from "react";
 import { ExternalLink, Github } from "lucide-react";
-import { projects, type Project } from "../components/Projects";
+import { projects, type Project } from "../content/projects";
 import { Reveal } from "../components/Reveal";
 import Image from "next/image";
 import Link from "next/link";
