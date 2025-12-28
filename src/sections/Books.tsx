@@ -3,6 +3,7 @@ import Image from "next/image";
 import { Reveal } from "../components/Reveal";
 import { books, type book } from "@/content/books";
 import { useState } from "react";
+import { Bookmark, CheckCircle2 } from "lucide-react";
 
 const STYLE_MAP: Record<book["state"], string> = {
 	Lido: "bg-emerald-100 text-emerald-700 border-emerald-200",
@@ -12,7 +13,10 @@ const STYLE_MAP: Record<book["state"], string> = {
 
 export function Books() {
 	const [expand, setExpand] = useState(false);
-	const booksView = expand ? books : books.slice(0, 3);
+	const mainBooks = books.slice(0, 6);
+	const secondaryBooks = books.slice(6);
+
+	const booksView = expand ? mainBooks : mainBooks.slice(0, 3);
 
 	return (
 		<section
@@ -35,7 +39,7 @@ export function Books() {
 					</div>
 
 					<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-						{booksView.map((book, index) => {
+						{booksView.slice(0, 6).map((book, index) => {
 							let responsiveClass = "";
 
 							if (!expand) {
@@ -49,13 +53,21 @@ export function Books() {
 								</div>
 							);
 						})}
+
+						{expand && secondaryBooks.length > 0 && (
+							<div className="col-span-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+								{secondaryBooks.map((book) => (
+									<CompactBookItem key={book.title} {...book} />
+								))}
+							</div>
+						)}
 						<div className="flex justify-center items-center col-span-full">
 							<button
 								type="button"
 								onClick={() => setExpand(!expand)}
 								className={`px-4 py-2 rounded-lg font-medium transition-all bg-primary text-white shadow-lg shadow-blue-500/30`}
 							>
-								{!expand ? "Ver mais livros" : "Esconder livros"}
+								{!expand ? "Ver biblioteca completa" : "Esconder livros"}
 							</button>
 						</div>
 					</div>
@@ -82,11 +94,16 @@ function BookCard(book: book) {
 
 			{/* Conteúdo */}
 			<div className="p-6 flex flex-col flex-grow">
-				<div className="flex justify-between items-start mb-3">
+				<div className="flex justify-start items-start mb-3 gap-3">
 					<span
 						className={`text-[10px] uppercase tracking-wider font-bold px-2 py-1 rounded-md border ${STYLE_MAP[book.state]}`}
 					>
 						{book.state}
+					</span>
+					<span
+						className={`text-[10px] uppercase tracking-wider font-bold px-2 py-1 rounded-md border ${STYLE_MAP["Lendo atualmente"]}`}
+					>
+						{book.tag}
 					</span>
 				</div>
 
@@ -100,6 +117,42 @@ function BookCard(book: book) {
 						{book.review || "Sem comentário disponível no momento."}
 					</p>
 				</div>
+			</div>
+		</div>
+	);
+}
+
+function CompactBookItem(book: book) {
+	return (
+		<div className="flex items-center p-3 bg-white rounded-lg border border-slate-100 hover:border-slate-300 transition-colors">
+			{/* Opcional: Miniatura muito pequena ou apenas ícone */}
+			<div className="h-10 w-8 rounded overflow-hidden relative flex-shrink-0 mr-3">
+				<Image
+					src={`/livros/${book.imageurl}`}
+					alt={book.title}
+					width={80}
+					height={80}
+					className="object-cover w-full h-full"
+				/>
+			</div>
+
+			<div className="flex-grow min-w-0">
+				<h4
+					className="text-sm font-medium text-slate-800 truncate"
+					title={book.title}
+				>
+					{book.title}
+				</h4>
+				<p className="text-xs text-slate-500 truncate">{book.author}</p>
+			</div>
+
+			{/* Status simplificado */}
+			<div className="flex-shrink-0 ml-2">
+				{book.state === "Lido" ? (
+					<CheckCircle2 className="w-6 h-6 text-emerald-500" />
+				) : (
+					<Bookmark className="w-6 h-6 text-slate-300" />
+				)}
 			</div>
 		</div>
 	);
