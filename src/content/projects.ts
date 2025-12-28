@@ -26,13 +26,33 @@ export const projects: Project[] = [
 		github: "https://github.com/AndreXime/restaurante",
 	},
 	{
-		title: "Landing Page para Contratação Freelancer",
+		title: "Pagina para Contratação Freelancer",
 		description:
 			"Desenvolvida para empresas descobrirem e contratarem serviços de desenvolvimento. Utiliza a performance do Astro e a confiabilidade do TypeScript. A arquitetura otimizada em UI/UX transforma a experiência do usuário em uma vantagem competitiva, facilitando a decisão de contratação.",
 		type: "landing page",
 		tech: ["TypeScript", "Astro", "Preact", "SSR", "UX / UI"],
 		image: "contrate.png",
 		link: "https://contrate.andreximenes.xyz/",
+		github: "",
+	},
+	{
+		title: "Organizador de Disciplinas",
+		description:
+			"Ferramenta para alunos de Ciência da Computação planejarem semestres, calculando pré-requisitos e montando grade horária visualmente.",
+		type: "app",
+		tech: ["TypeScript", "React", "Local Storage", "Estruturas de Dados"],
+		image: "disciplinas.png",
+		link: "https://disciplina-uva.andreximenes.xyz/",
+		github: "https://github.com/AndreXime/organiza-cc-uva",
+	},
+	{
+		title: "Plataforma ecommerce para venda de eletronicos",
+		description:
+			"Plataforma desenvolvida para ecommerce com visual polido e focado na experiencia de usuario, com todas as funcionalidades essenciais como: Autenticação, Filtragem de produtos, Carrinho e Pagamento.",
+		type: "landing page",
+		tech: ["TypeScript", "Next.js", "React", "UX/UI", "TailwindCSS"],
+		image: "ecommerce.png",
+		link: "https://ecommerce.andreximenes.xyz/",
 		github: "",
 	},
 	{
@@ -46,16 +66,6 @@ export const projects: Project[] = [
 		github: "http://github.com/AndreXime/minihub",
 	},
 	{
-		title: "Organizador de Disciplinas",
-		description:
-			"Ferramenta para alunos de Ciência da Computação planejarem semestres, calculando pré-requisitos e montando grade horária visualmente.",
-		type: "app",
-		tech: ["TypeScript", "React", "Local Storage", "Estruturas de Dados"],
-		image: "disciplinas.png",
-		link: "https://disciplina-uva.andreximenes.xyz/",
-		github: "https://github.com/AndreXime/organiza-cc-uva",
-	},
-	{
 		title: "Loja Gin API",
 		description:
 			"API RESTful completa para e-commerce (carrinho, autenticação JWT, CRUD) construída em Go com o framework Gin e GORM.",
@@ -63,9 +73,7 @@ export const projects: Project[] = [
 		tech: [
 			"Go (Golang)",
 			"Gin Framework",
-			"PostgreSQL",
 			"GORM",
-			"JWT",
 			"Swagger",
 			"Testes E2E",
 			"API REST",
@@ -83,5 +91,15 @@ export const projects: Project[] = [
 		image: "pixelpress.png",
 		link: "",
 		github: "https://github.com/AndreXime/pixel-press",
+	},
+	{
+		title: "Youtube Downloader",
+		description:
+			"Ferramenta CLI para baixar videos e musicas do youtube usando yt-dlp, tendo a possibilidade de baixar a playlist inteira.",
+		type: "cli",
+		tech: ["Go (Golang)", "CLI", "yt-dlp", "Downloader"],
+		image: "yt-downloader.png",
+		link: "",
+		github: "https://github.com/AndreXime/youtube-downloader",
 	},
 ];
