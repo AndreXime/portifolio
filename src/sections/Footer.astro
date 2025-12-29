@@ -1,0 +1,31 @@
+---
+import { socialLinks } from "../content/social";
+import { Github, Linkedin } from "lucide-preact";
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="bg-white border-t border-slate-200 py-12 mt-12">
+  <div class="max-w-7xl mx-auto px-4 text-center">
+    <div class="flex justify-center gap-6 mb-6">
+      <a
+        href={socialLinks.github}
+        aria-label="GitHub"
+        target="_blank"
+        rel="noreferrer"
+        class="text-slate-400 hover:text-primary transition-colors"
+      >
+        <Github class="w-5 h-5" />
+      </a>
+      <a
+        href={socialLinks.linkedin}
+        aria-label="LinkedIn"
+        target="_blank"
+        rel="noreferrer"
+        class="text-slate-400 hover:text-primary transition-colors"
+      >
+        <Linkedin class="w-5 h-5" />
+      </a>
+    </div>
+    <p class="text-slate-500 text-sm">&copy; {currentYear} André Ricardo Ximenes.</p>
+  </div>
+</footer>

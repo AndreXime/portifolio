@@ -1,6 +1,5 @@
-"use client";
 import { Reveal } from "../components/Reveal";
-import { books, type book } from "@/content/books";
+import type { book } from "@/content/books";
 import { useState } from "preact/compat";
 import { Bookmark, CheckCircle2 } from "lucide-preact";
 
@@ -10,7 +9,7 @@ const STYLE_MAP: Record<book["state"], string> = {
   "Na lista de desejos": "bg-slate-100 text-slate-600 border-slate-200",
 };
 
-export function Books() {
+export function Books({ books }: { books: book[] }) {
   const [expand, setExpand] = useState(false);
   const mainBooks = books.slice(0, 6);
   const secondaryBooks = books.slice(6);
@@ -77,8 +76,10 @@ function BookCard(book: book) {
       <div className="relative h-64 w-full bg-slate-100 overflow-hidden flex items-center justify-center border-b border-slate-100">
         <div className="absolute inset-0 bg-gradient-to-t from-slate-900/20 to-transparent z-10" />
         <img
-          src={`/livros/${book.imageurl}`}
+          src={book.image?.src}
           alt={book.title}
+          loading="lazy"
+          decoding="async"
           className="w-auto h-4/5 object-contain transition-transform duration-500 group-hover:scale-105 z-20 shadow-2xl"
           width={180}
           height={240}
@@ -123,10 +124,12 @@ function CompactBookItem(book: book) {
       {/* Opcional: Miniatura muito pequena ou apenas ícone */}
       <div className="h-10 w-8 rounded overflow-hidden relative flex-shrink-0 mr-3">
         <img
-          src={`/livros/${book.imageurl}`}
+          src={book.image?.src}
           alt={book.title}
           width={80}
           height={80}
+          loading="lazy"
+          decoding="async"
           className="object-cover w-full h-full"
         />
       </div>

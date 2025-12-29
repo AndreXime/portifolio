@@ -1,11 +1,14 @@
+import type { ImageMetadata } from "astro";
+
 export interface Project {
 	title: string;
 	description: string;
 	type: "app" | "api" | "cli" | "landing page";
 	tech: string[];
-	image: string;
+	imageUrl: string;
 	link: string;
 	github: string;
+	image?: ImageMetadata;
 }
 
 export const projects: Project[] = [
@@ -21,7 +24,7 @@ export const projects: Project[] = [
 			"Client-Side Architecture",
 			"PDV",
 		],
-		image: "restaurante.png",
+		imageUrl: "restaurante.png",
 		link: "https://restaurante.andreximenes.xyz/",
 		github: "https://github.com/AndreXime/restaurante",
 	},
@@ -31,7 +34,7 @@ export const projects: Project[] = [
 			"Desenvolvida para empresas descobrirem e contratarem serviços de desenvolvimento. Utiliza a performance do Astro e a confiabilidade do TypeScript. A arquitetura otimizada em UI/UX transforma a experiência do usuário em uma vantagem competitiva, facilitando a decisão de contratação.",
 		type: "landing page",
 		tech: ["TypeScript", "Astro", "Preact", "SSR", "UX / UI"],
-		image: "contrate.png",
+		imageUrl: "contrate.png",
 		link: "https://contrate.andreximenes.xyz/",
 		github: "",
 	},
@@ -41,7 +44,7 @@ export const projects: Project[] = [
 			"Ferramenta para alunos de Ciência da Computação planejarem semestres, calculando pré-requisitos e montando grade horária visualmente.",
 		type: "app",
 		tech: ["TypeScript", "React", "Local Storage", "Estruturas de Dados"],
-		image: "disciplinas.png",
+		imageUrl: "disciplinas.png",
 		link: "https://disciplina-uva.andreximenes.xyz/",
 		github: "https://github.com/AndreXime/organiza-cc-uva",
 	},
@@ -51,7 +54,7 @@ export const projects: Project[] = [
 			"Plataforma desenvolvida para ecommerce com visual polido e focado na experiencia de usuario, com todas as funcionalidades essenciais como: Autenticação, Filtragem de produtos, Carrinho e Pagamento.",
 		type: "landing page",
 		tech: ["TypeScript", "Next.js", "React", "UX/UI", "TailwindCSS"],
-		image: "ecommerce.png",
+		imageUrl: "ecommerce.png",
 		link: "https://ecommerce.andreximenes.xyz/",
 		github: "",
 	},
@@ -61,7 +64,7 @@ export const projects: Project[] = [
 			"Ferramentas para o dia a dia, como gerar senhas ou até mais complexas como gerar um resumo quanto gasta de gasolina com esse trajeto por mẽs",
 		type: "app",
 		tech: ["TypeScript", "React", "Ferramenta para dia a dia", "UX / UI"],
-		image: "minihub.png",
+		imageUrl: "minihub.png",
 		link: "https://ferramentas.andreximenes.xyz/",
 		github: "http://github.com/AndreXime/minihub",
 	},
@@ -78,7 +81,7 @@ export const projects: Project[] = [
 			"Testes E2E",
 			"API REST",
 		],
-		image: "lojagin.png",
+		imageUrl: "lojagin.png",
 		link: "",
 		github: "https://github.com/AndreXime/lojagin-api",
 	},
@@ -88,7 +91,7 @@ export const projects: Project[] = [
 			"Ferramenta CLI para edição em massa de imagens com interface interativa, focada em compressão inteligente e conversão de formato.",
 		type: "cli",
 		tech: ["Go (Golang)", "CLI", "FFmpeg", "Otimização de Imagens"],
-		image: "pixelpress.png",
+		imageUrl: "pixelpress.png",
 		link: "",
 		github: "https://github.com/AndreXime/pixel-press",
 	},
@@ -98,7 +101,7 @@ export const projects: Project[] = [
 			"Ferramenta CLI para baixar videos e musicas do youtube usando yt-dlp, tendo a possibilidade de baixar a playlist inteira.",
 		type: "cli",
 		tech: ["Go (Golang)", "CLI", "yt-dlp", "Downloader"],
-		image: "yt-downloader.png",
+		imageUrl: "yt-downloader.png",
 		link: "",
 		github: "https://github.com/AndreXime/youtube-downloader",
 	},

@@ -1,3 +1,5 @@
+import type { ImageMetadata } from "astro";
+
 export interface book {
 	title: string;
 	author: string;
@@ -5,6 +7,7 @@ export interface book {
 	state: "Lido" | "Lendo atualmente" | "Na lista de desejos";
 	tag: string;
 	review?: string;
+	image?: ImageMetadata;	
 }
 
 export const books: book[] = [

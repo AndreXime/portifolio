@@ -1,4 +1,3 @@
-"use client";
 import { Mail, Linkedin, X, Check, Loader } from "lucide-preact";
 import { Reveal } from "../components/Reveal";
 import { useState } from "preact/compat";

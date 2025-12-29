@@ -1,7 +1,6 @@
-"use client";
 import { useMemo, useState } from "preact/compat";
 import { ExternalLink, Github } from "lucide-preact";
-import { projects, type Project } from "../content/projects";
+import { type Project } from "../content/projects";
 import { Reveal } from "../components/Reveal";
 
 const filters: { id: Project["type"] | "all"; label: string }[] = [
@@ -12,7 +11,7 @@ const filters: { id: Project["type"] | "all"; label: string }[] = [
   { id: "landing page", label: "Landing Page" },
 ] as const;
 
-export const Projects = () => {
+export const Projects = ({ projects }: { projects: Project[] }) => {
   const [filter, setFilter] = useState<"all" | "minimal" | Project["type"]>("minimal");
 
   const filteredProjects = useMemo(() => {
@@ -94,8 +93,12 @@ function ProjectCard({ project }: { project: Project }) {
         </div>
 
         <img
-          src={`/projetos/${project.image}`}
+          src={project.image?.src}
+          width={project.image?.width}
+          height={project.image?.height}
           alt={project.title}
+          loading="lazy"
+          decoding="async"
           className="w-full h-full object-cover pt-6 transition-all duration-700 ease-in-out group-hover:scale-110"
         />
 
