@@ -1,0 +1,25 @@
+---
+import MainLayout from '../layout/layout.astro';
+import { Navbar } from "../sections/Navbar";
+import { Hero } from "../sections/Hero";
+import { About } from "../sections/About";
+import { TechStack } from "../sections/TechStack";
+import { Projects } from "../sections/Projects";
+import { Contact } from "../sections/Contact";
+import { Footer } from "../sections/Footer";
+import { Books } from "../sections/Books";
+---
+<MainLayout title="André Portifolio" description="Portifolio de André Ximenes que mostra projetos e habilidades">
+    <div class="bg-background text-textMain font-sans antialiased selection:bg-primary selection:text-white overflow-x-hidden">
+        <Navbar client:load/>
+			<main>
+				<Hero client:visible/>
+				<About client:visible/>
+				<TechStack client:visible/>
+				<Projects client:visible/>
+				<Books client:visible/>
+				<Contact client:visible/>
+			</main>
+        <Footer />
+    </div>
+</MainLayout>
