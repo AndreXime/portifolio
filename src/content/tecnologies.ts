@@ -1,6 +1,5 @@
 import {
 	TypescriptIcon,
-	ViteIcon,
 	NextjsIcon,
 	TailwindIcon,
 	GitIcon,
@@ -14,6 +13,9 @@ import {
 	AWSIcon,
 	GoIcon,
 	GithubIcon,
+	AstroIcon,
+	GinIcon,
+	RedisIcon,
 } from "@/components/Icons";
 
 interface TechItem {
@@ -26,12 +28,18 @@ interface TechItem {
 export const technologies: TechItem[] = [
 	{ name: "TypeScript", role: "Linguagem Principal", icon: TypescriptIcon },
 	{
-		name: "Vite / Next.js",
+		name: "Astro / Next.js",
 		role: "Frontend Framework",
-		icon: ViteIcon,
+		icon: AstroIcon,
 		secondIcon: NextjsIcon,
 	},
 	{ name: "Tailwind CSS / ShadCN", role: "Estilização", icon: TailwindIcon },
+	{
+		name: "Node.js / Bun",
+		role: "Javascript Runtime",
+		icon: NodeJSIcon,
+		secondIcon: BunIcon,
+	},
 	{
 		name: "Git & GitHub",
 		role: "Versionamento",
@@ -39,17 +47,17 @@ export const technologies: TechItem[] = [
 		secondIcon: GithubIcon,
 	},
 	{
-		name: "Node.js / Bun",
-		role: "Backend Runtime",
-		icon: NodeJSIcon,
-		secondIcon: BunIcon,
-	},
-	{
-		name: "Express.js / Hono",
+		name: "Hono / Gin",
 		role: "API Framework",
 		icon: HonoIcon,
+		secondIcon: GinIcon,
 	},
-	{ name: "SQL / PostgreSQL", role: "Banco de Dados", icon: PostgreeICon },
+	{
+		name: "PostgreSQL / Redis",
+		role: "Banco de Dados",
+		icon: PostgreeICon,
+		secondIcon: RedisIcon,
+	},
 	{ name: "Docker", role: "Orquestrador de containers", icon: DockerIcon },
 	{ name: "Linux", role: "Sistema operacional", icon: LinuxIcon },
 	{
