@@ -1,16 +1,136 @@
 ---
 import "./globals.css";
+import { socialLinks } from "../content/social";
 
 const { title, description } = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const socialImageURL = new URL("/og-image.png", Astro.url);
+
+const schema = JSON.stringify({
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "ProfilePage",
+      "@id": `${Astro.site}#profilepage`,
+      url: Astro.site,
+      name: title,
+      description: description,
+      dateCreated: "2025-10-17T00:00:00+00:00", // Data aproximada de criação do site
+      dateModified: new Date().toISOString(), // Data atual da build
+      mainEntity: {
+        "@id": `${Astro.site}#person`,
+      },
+      isPartOf: {
+        "@type": "WebSite",
+        "@id": `${Astro.site}#website`,
+        name: "Portfólio de André Ximenes",
+        url: Astro.site,
+      },
+    },
+    {
+      "@type": "Person",
+      "@id": `${Astro.site}#person`,
+      name: "André Ricardo Ximenes Aragão",
+      givenName: "André",
+      familyName: "Ximenes",
+      alternateName: ["André Ricardo Ximenes", "andrexime"],
+      jobTitle: "Desenvolvedor Fullstack & Engenheiro de Software",
+      description:
+        "Desenvolvedor especializado em TypeScript, Go e React com foco em arquitetura escalável e código limpo.",
+      image: new URL("/me.jpg", Astro.site),
+      url: Astro.site,
+
+      homeLocation: {
+        "@type": "Place",
+        address: {
+          "@type": "PostalAddress",
+          addressLocality: "Sobral",
+          addressRegion: "CE",
+          addressCountry: "BR",
+        },
+      },
+
+      workLocation: {
+        "@type": "Place",
+        name: "Remote",
+        address: {
+          "@type": "PostalAddress",
+          addressCountry: "BR",
+        },
+      },
+
+      sameAs: [socialLinks.github, socialLinks.linkedin],
+
+      // Habilidades Técnicas
+      knowsAbout: [
+        { "@type": "Thing", name: "HTML" },
+        { "@type": "Thing", name: "CSS" },
+        { "@type": "Thing", name: "Tailwind CSS" },
+        { "@type": "Thing", name: "Javascript" },
+        { "@type": "Thing", name: "TypeScript" },
+        { "@type": "Thing", name: "React" },
+        { "@type": "Thing", name: "Next.js" },
+        { "@type": "Thing", name: "Astro" },
+        { "@type": "Thing", name: "Node.js" },
+        { "@type": "Thing", name: "Go (Programming Language)" },
+        { "@type": "Thing", name: "API Rest" },
+        { "@type": "Thing", name: "Software Architecture" },
+      ],
+
+      // Experiência Atual
+      worksFor: {
+        "@type": "Organization",
+        name: "Stackup Software - Software House",
+        url: "https://stackupsoftware.netlify.app/",
+      },
+
+      // Educação
+      alumniOf: {
+        "@type": "EducationalOrganization",
+        name: "Universidade Estadual do Vale do Acaraú",
+        sameAs: "https://www.uva.ce.gov.br",
+      },
+    },
+  ],
+});
 ---
 
-<html lang="pt-br">
+<html lang="pt-BR">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
-    <meta name="description" content={description} />
-    <title>{title}</title>
     <meta name="google-site-verification" content="V6lQaAceqx1PlAlPl025VMbrP0UIHJvDdRxosI7FKSk" />
+    <script type="application/ld+json" set:html={schema} />
+
+    {/* Ícones */}
+    <link rel="icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+
+    {/* SEO Principal */}
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalURL} />
+    <meta name="robots" content="index, follow" />
+    <meta name="author" content="André Ricardo Ximenes" />
+
+    {/* Open Graph / Facebook / LinkedIn / WhatsApp */}
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={socialImageURL} />
+    <meta property="og:site_name" content="André Ximenes | Desenvolvedor Web" />
+    <meta property="og:locale" content="pt_BR" />
+
+    {/* Twitter / X */}
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content={canonicalURL} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={socialImageURL} />
   </head>
   <body class="antialiased scroll-smooth">
     <slot />

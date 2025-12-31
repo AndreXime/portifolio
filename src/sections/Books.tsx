@@ -135,9 +135,9 @@ function CompactBookItem(book: Book) {
       </div>
 
       <div className="flex-grow min-w-0">
-        <h4 className="text-sm font-medium text-slate-800 truncate" title={book.title}>
+        <h3 className="text-sm font-medium text-slate-800 truncate" title={book.title}>
           {book.title}
-        </h4>
+        </h3>
         <p className="text-xs text-slate-500 truncate">{book.author}</p>
       </div>
 
