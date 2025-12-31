@@ -11,7 +11,7 @@ const filters: { id: Project["type"] | "all"; label: string }[] = [
   { id: "landing page", label: "Landing Page" },
 ] as const;
 
-export const Projects = ({ projects }: { projects: Project[] }) => {
+export default function ProjectsSection({ projects }: { projects: Project[] }) {
   const [filter, setFilter] = useState<"all" | "minimal" | Project["type"]>("minimal");
 
   const filteredProjects = useMemo(() => {
@@ -80,7 +80,7 @@ export const Projects = ({ projects }: { projects: Project[] }) => {
       </Reveal>
     </section>
   );
-};
+}
 
 function ProjectCard({ project }: { project: Project }) {
   return (
@@ -93,9 +93,9 @@ function ProjectCard({ project }: { project: Project }) {
         </div>
 
         <img
-          src={project.image?.src}
-          width={project.image?.width}
-          height={project.image?.height}
+          src={project.imageUrl}
+          width={800}
+          height={600}
           alt={project.title}
           loading="lazy"
           decoding="async"

@@ -1,15 +1,15 @@
 import { Reveal } from "../components/Reveal";
-import type { book } from "@/content/books";
+import type { Book } from "@/content/books";
 import { useState } from "preact/compat";
 import { Bookmark, CheckCircle2 } from "lucide-preact";
 
-const STYLE_MAP: Record<book["state"], string> = {
+const STYLE_MAP: Record<Book["state"], string> = {
   Lido: "bg-emerald-100 text-emerald-700 border-emerald-200",
   "Lendo atualmente": "bg-blue-100 text-blue-700 border-blue-200",
   "Na lista de desejos": "bg-slate-100 text-slate-600 border-slate-200",
 };
 
-export function Books({ books }: { books: book[] }) {
+export default function BooksSection({ books }: { books: Book[] }) {
   const [expand, setExpand] = useState(false);
   const mainBooks = books.slice(0, 6);
   const secondaryBooks = books.slice(6);
@@ -69,14 +69,14 @@ export function Books({ books }: { books: book[] }) {
   );
 }
 
-function BookCard(book: book) {
+function BookCard(book: Book) {
   return (
     <div className="bg-white rounded-2xl overflow-hidden border border-slate-200 hover:border-primary/40 flex flex-col h-full transition-all duration-300 hover:shadow-lg group">
       {/* Container da Imagem */}
       <div className="relative h-64 w-full bg-slate-100 overflow-hidden flex items-center justify-center border-b border-slate-100">
         <div className="absolute inset-0 bg-gradient-to-t from-slate-900/20 to-transparent z-10" />
         <img
-          src={book.image?.src}
+          src={book.imageUrl}
           alt={book.title}
           loading="lazy"
           decoding="async"
@@ -118,13 +118,13 @@ function BookCard(book: book) {
   );
 }
 
-function CompactBookItem(book: book) {
+function CompactBookItem(book: Book) {
   return (
     <div className="flex items-center p-3 bg-white rounded-lg border border-slate-100 hover:border-slate-300 transition-colors">
       {/* Opcional: Miniatura muito pequena ou apenas ícone */}
       <div className="h-10 w-8 rounded overflow-hidden relative flex-shrink-0 mr-3">
         <img
-          src={book.image?.src}
+          src={book.imageUrl}
           alt={book.title}
           width={80}
           height={80}

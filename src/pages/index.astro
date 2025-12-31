@@ -1,34 +1,20 @@
 ---
 import MainLayout from "../layout/layout.astro";
-import { Navbar } from "../sections/Navbar";
-import Hero from "../sections/Hero.astro";
-import About from "../sections/About.astro";
-import TechStack from "../sections/TechStack.astro";
-import Footer from "../sections/Footer.astro";
-import { Books } from "../sections/Books";
-import { Projects } from "../sections/Projects";
-import { Contact } from "../sections/Contact";
-import { projects } from "../content/projects";
-import { books } from "../content/books";
+import Navbar from "../sections/Navbar";
+import HeroSection from "../sections/Hero.astro";
+import AboutSection from "../sections/About.astro";
+import TechStackSection from "../sections/TechStack.astro";
+import FooterSection from "../sections/Footer.astro";
+import BooksSection from "../sections/Books";
+import ProjectsSection from "../sections/Projects";
+import ContactSection from "../sections/Contact";
+import { Projects } from "../content/projects";
+import { Books } from "../content/books";
+import { optimizeProjectsImages, optimizeBooksImages } from "../lib/optimizeImages";
 
-const projectImages = import.meta.glob<{ default: ImageMetadata }>("../assets/projetos/*.{jpeg,jpg,png,gif}");
-const bookImages = import.meta.glob<{ default: ImageMetadata }>("../assets/livros/*.{jpeg,jpg,png,gif}");
+const optimizedProjects = await optimizeProjectsImages(Projects);
 
-const optimizedProjects = await Promise.all(
-  projects.map(async (project) => {
-    const imagePath = `../assets/projetos/${project.imageUrl}`;
-    const imageModule = await projectImages[imagePath]();
-    return { ...project, image: imageModule.default };
-  })
-);
-
-const optimizedBooks = await Promise.all(
-  books.map(async (book) => {
-    const imagePath = `../assets/livros/${book.imageurl}`;
-    const imageModule = await bookImages[imagePath]();
-    return { ...book, image: imageModule.default };
-  })
-);
+const optimizedBooks = await optimizeBooksImages(Books);
 ---
 
 <MainLayout title="André Portifolio" description="Portifolio de André Ximenes que mostra projetos e habilidades">
@@ -37,13 +23,13 @@ const optimizedBooks = await Promise.all(
   >
     <Navbar client:idle />
     <main>
-      <Hero />
-      <About />
-      <TechStack />
-      <Projects client:visible projects={optimizedProjects} />
-      <Books client:visible books={optimizedBooks} />
-      <Contact client:visible />
+      <HeroSection />
+      <AboutSection />
+      <TechStackSection />
+      <ProjectsSection client:visible projects={optimizedProjects} />
+      <BooksSection client:visible books={optimizedBooks} />
+      <ContactSection client:visible />
     </main>
-    <Footer />
+    <FooterSection />
   </div>
 </MainLayout>

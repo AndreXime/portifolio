@@ -9,7 +9,7 @@ const navLinks = [
   { name: "Biblioteca", href: "#biblioteca" },
 ];
 
-export const Navbar = () => {
+export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const handleSmoothScroll = (e: MouseEvent, href: string) => {
@@ -110,4 +110,4 @@ export const Navbar = () => {
       )}
     </nav>
   );
-};
+}

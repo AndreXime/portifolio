@@ -1,5 +1,6 @@
 {
-  "compilerOptions": {
+    "extends": "astro/tsconfigs/base",
+    "compilerOptions": {
     "target": "ES2017",
     "lib": [
       "dom",
@@ -30,12 +31,12 @@
     "jsxImportSource": "preact"
   },
   "include": [
-    "next-env.d.ts",
+    ".astro/types.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    ".next/types/**/*.ts"
   ],
   "exclude": [
+    "dist",
     "node_modules"
   ]
 }

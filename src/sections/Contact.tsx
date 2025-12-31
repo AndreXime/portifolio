@@ -5,7 +5,7 @@ import type { FormEvent } from "preact/compat";
 
 import { socialLinks } from "@/content/social";
 
-export const Contact = () => {
+export default function Contact() {
   const [showToast, setShowToast] = useState({ status: "", message: "" });
   const [loading, setLoading] = useState(false);
 
@@ -176,4 +176,4 @@ export const Contact = () => {
       </div>
     </section>
   );
-};
+}
