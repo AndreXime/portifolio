@@ -10,7 +10,7 @@ export interface Project {
 
 export const Projects: Project[] = [
   {
-    title: "Restaurante Tech",
+    title: "PDV para Restaurantes (Offline-First)",
     description:
       "Sistema de Ponto de Venda (PDV) completo para restaurantes, 100% offline, usando IndexedDB para armazenamento local de dados.",
     type: "app",
@@ -20,7 +20,7 @@ export const Projects: Project[] = [
     github: "https://github.com/AndreXime/restaurante",
   },
   {
-    title: "Pagina para Contratação Freelancer",
+    title: "Plataforma de Captação B2B para Freelancers",
     description:
       "Desenvolvida para empresas descobrirem e contratarem serviços de desenvolvimento. Utiliza a performance do Astro e a confiabilidade do TypeScript. A arquitetura otimizada em UI/UX transforma a experiência do usuário em uma vantagem competitiva, facilitando a decisão de contratação.",
     type: "landing page",
@@ -30,7 +30,7 @@ export const Projects: Project[] = [
     github: "",
   },
   {
-    title: "Organizador de Disciplinas",
+    title: "Planejador Acadêmico",
     description:
       "Ferramenta para alunos de Ciência da Computação planejarem semestres, calculando pré-requisitos e montando grade horária visualmente.",
     type: "app",
@@ -40,7 +40,7 @@ export const Projects: Project[] = [
     github: "https://github.com/AndreXime/organiza-cc-uva",
   },
   {
-    title: "Plataforma ecommerce para venda de eletronicos",
+    title: "E-commerce de Eletrônicos",
     description:
       "Plataforma desenvolvida para ecommerce com visual polido e focado na experiencia de usuario, com todas as funcionalidades essenciais como: Autenticação, Filtragem de produtos, Carrinho e Pagamento.",
     type: "landing page",
@@ -50,7 +50,7 @@ export const Projects: Project[] = [
     github: "",
   },
   {
-    title: "MiniHub",
+    title: "MiniHub: Utilitários para Produtividade",
     description:
       "Ferramentas para o dia a dia, como gerar senhas ou até mais complexas como gerar um resumo quanto gasta de gasolina com esse trajeto por mẽs",
     type: "app",
@@ -60,7 +60,7 @@ export const Projects: Project[] = [
     github: "http://github.com/AndreXime/minihub",
   },
   {
-    title: "Loja Gin API",
+    title: "E-commerce RESTful API",
     description:
       "API RESTful completa para e-commerce (carrinho, autenticação JWT, CRUD) construída em Go com o framework Gin e GORM.",
     type: "api",
@@ -70,7 +70,7 @@ export const Projects: Project[] = [
     github: "https://github.com/AndreXime/lojagin-api",
   },
   {
-    title: "PixelPress",
+    title: "PixelPress: Processador de Imagens via CLI",
     description:
       "Ferramenta CLI para edição em massa de imagens com interface interativa, focada em compressão inteligente e conversão de formato.",
     type: "cli",
@@ -80,7 +80,7 @@ export const Projects: Project[] = [
     github: "https://github.com/AndreXime/pixel-press",
   },
   {
-    title: "Youtube Downloader",
+    title: "Media Downloader via Linha de Comando",
     description:
       "Ferramenta CLI para baixar videos e musicas do youtube usando yt-dlp, tendo a possibilidade de baixar a playlist inteira.",
     type: "cli",

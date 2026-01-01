@@ -1,75 +1,80 @@
 ---
-import { BookOpen, Terminal } from "lucide-preact";
+import { BookOpen, CodeXml, User } from "lucide-preact";
 import { Reveal } from "../components/Reveal";
 ---
 
 <section id="sobre" class="py-20 bg-white border-y border-slate-100">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="flex flex-col md:flex-row gap-16">
-      <div class="md:w-1/2">
-        <Reveal client:visible>
-          <h2 class="text-3xl font-bold text-slate-900 mb-6">Sobre Mim</h2>
-          <p class="text-slate-600 mb-4 leading-relaxed">
-            Atualmente cursando Ciência da Computação, sou apaixonado por entender como as coisas funcionam &quot;por
-            baixo dos panos&quot;. Minha jornada começou com curiosidade e se transformou em uma carreira focada em
-            desenvolvimento web moderno.
-          </p>
-          <p class="text-slate-600 mb-6 leading-relaxed">
-            Valorizo código limpo, tipagem estática e arquiteturas escaláveis. Gosto do desafio de pegar problemas
-            complexos e criar sistemas que sejam não só eficientes, mas também elegantes e fáceis de manter.
-          </p>
-
-          <div class="grid grid-cols-2 gap-4 mt-8">
-            <div class="p-4 bg-slate-50 rounded-lg border border-slate-100">
-              <BookOpen class="w-6 h-6 text-primary mb-2" />
-              <h3 class="font-bold text-slate-800">Educação</h3>
-              <p class="text-sm text-slate-500">Bachalerado em Ciência da Computação</p>
-              <p class="text-xs text-slate-400">Em andamento</p>
-            </div>
-            <div class="p-4 bg-slate-50 rounded-lg border border-slate-100">
-              <Terminal class="w-6 h-6 text-primary mb-2" />
-              <h3 class="font-bold text-slate-800">Experiência</h3>
-              <p class="text-sm text-slate-500">Desenvolvimento Web FullStack</p>
-              <p class="text-xs text-slate-400">6 meses trabalhando</p>
-            </div>
-          </div>
-        </Reveal>
+    <Reveal client:visible>
+      <div class="text-center">
+        <div
+          class="inline-block px-3 py-1 mb-4 text-xs font-mono text-primary bg-white rounded-full border border-primary/20 shadow-sm"
+        >
+          Me conheça
+        </div>
+        <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-4">Sobre mim</h2>
       </div>
+      <div class="flex justify-center items-center flex-col w-full px-2 md:px-16 lg:px-24 pb-8 pt-2 mb-4">
+        {/* O QUE EU FAÇO: Versatilidade Tech + UX/UI */}
+        <p class="text-slate-600 mb-4 leading-relaxed">
+          No dia a dia, atuo em todo o stack. No backend, uso a eficiência de Go e Node.js para criar APIs seguras e
+          rápidas. No frontend, foco na experiência do usuário (UX/UI) para entregar interfaces intuitivas. Meu trabalho
+          é conectar essas duas pontas, garantindo que a alta performance do servidor se traduza em uma experiência
+          fluida e ágil para quem navega.
+        </p>
 
-      <div class="md:w-1/2">
-        <Reveal delay={200} client:visible>
-          <h2 class="text-3xl font-bold text-slate-900 mb-6">Jornada</h2>
-          <div class="border-l-2 border-slate-200 pl-8 space-y-8 relative">
-            <div class="relative">
-              <div class="absolute -left-[41px] top-1 w-5 h-5 rounded-full border-4 border-white bg-primary"></div>
-              <h3 class="text-lg font-bold text-slate-800">Desenvolvedor Fullstack na Stackup</h3>
-              <span class="text-xs font-mono text-primary bg-primary/10 px-2 py-1 rounded"> 2025 - Presente </span>
-              <p class="text-slate-500 text-sm mt-2">
-                Estou atualmente trabalhando em uma Software House com as ferramentas mais modernas como Typescript,
-                Next.js, TailwindCSS, ShadCN, Hono, Prisma e AWS. Além disso estou aplicando conhecimento teoricos na
-                faculdade como desenhar diagramas ER do banco de dados e levantamento de requisitos
-              </p>
-            </div>
-            <div class="relative">
-              <div class="absolute -left-[41px] top-1 w-5 h-5 rounded-full border-4 border-white bg-primary"></div>
-              <h3 class="text-lg font-bold text-slate-800">Ciência da Computação</h3>
-              <span class="text-xs font-mono text-primary bg-primary/10 px-2 py-1 rounded"> 2023 - Presente </span>
-              <p class="text-slate-500 text-sm mt-2">
-                Estudando na Universidade Estadual do Vale do Acaráu. Obtendo o conhecimento teorico que todo
-                desenvolvedor deve ter.
-              </p>
-            </div>
-            <div class="relative">
-              <div class="absolute -left-[41px] top-1 w-5 h-5 rounded-full border-4 border-white bg-slate-300"></div>
-              <h3 class="text-lg font-bold text-slate-800">Início dos Estudos</h3>
-              <span class="text-xs font-mono text-slate-500 bg-slate-100 px-2 py-1 rounded">2023</span>
-              <p class="text-slate-500 text-sm mt-2">
-                Primeiro contato com lógica de programação e algoritmos, durante a Olimpíada Brasileira de Informática.
-              </p>
-            </div>
-          </div>
-        </Reveal>
+        {/* MEU DIFERENCIAL: O Pragmatismo (A parte que você gostou) */}
+        <p class="text-slate-600 mb-4 leading-relaxed">
+          Meu principal diferencial é o equilíbrio entre qualidade técnica e entrega de valor. Estudo arquitetura de
+          software e "Clean Code" não por purismo, mas para facilitar a vida de quem vai manter o código no futuro. Sei
+          a hora certa de aplicar um padrão complexo e a hora de optar por uma solução simples e direta, evitando o
+          excesso de engenharia que trava projetos.
+        </p>
+
+        {/* CONCLUSÃO: Foco em Resultado */}
+        <p class="text-slate-600 leading-relaxed">
+          No fim das contas, acredito que tecnologia é um meio, não o fim. Meu foco está em resolver problemas reais e
+          colocar o software no ar funcionando, pois o código mais valioso não é o mais complexo, mas sim aquele que
+          está rodando em produção e gerando resultado.
+        </p>
       </div>
+    </Reveal>
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <Reveal client:visible delay={400}>
+        <div class="p-8 rounded-2xl border border-slate-100 shadow-2xl flex flex-col h-full">
+          <div class="flex items-center gap-4 mb-6">
+            <BookOpen class="w-6 h-6 text-primary" />
+            <h3 class="text-2xl font-bold text-slate-900">Educação</h3>
+          </div>
+          <h4 class="font-medium text-slate-800">Ciência da Computação</h4>
+          <p class="text-slate-500 text-sm mb-4">Universidade Estadual do Vale do Acaraú • 2023 - Presente</p>
+          <p class="text-slate-600 text-sm leading-relaxed">
+            Na graduação consolido minha base técnica, utilizando a <strong>Engenharia de Software</strong> para levantamento
+            de requisitos e <strong>Banco de Dados</strong> para modelagem com diagramas DER, além de aplicar <strong
+              >POO</strong
+            > e <strong>Estrutura de Dados</strong> para garantir que o código seja escalável e fácil de manter.
+          </p>
+        </div>
+      </Reveal>
+      <Reveal client:visible delay={600}>
+        <div class="p-8 rounded-2xl border border-slate-100 shadow-2xl flex flex-col h-full">
+          <div class="flex items-center gap-4 mb-6">
+            <CodeXml class="w-6 h-6 text-primary" />
+            <h3 class="text-2xl font-bold text-slate-900">Experiência</h3>
+          </div>
+
+          <h4 class="font-medium text-slate-800">Desenvolvedor Fullstack</h4>
+          <p class="text-slate-500 text-sm mb-4">Stackup Software • 2025 - Presente</p>
+          <p class="text-slate-600 text-sm leading-relaxed">
+            Responsável pelo ciclo completo de aplicações, desde o <strong>levantamento de requisitos</strong> e <strong
+              >modelagem de dados</strong
+            > até o frontend com <strong>Next.js, Tailwind e Shadcn/ui</strong>. No backend, desenvolvi APIs com <strong
+              >Hono e TypeScript</strong
+            >, implementei funções <strong>AWS Lambda</strong> para processamento escalável e gerenciei infraestrutura incluindo
+            <strong>CORS, S3</strong> e sistemas de <strong>geração de documentos via código</strong>.
+          </p>
+        </div>
+      </Reveal>
     </div>
   </div>
 </section>

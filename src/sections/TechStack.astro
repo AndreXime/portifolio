@@ -1,5 +1,5 @@
 ---
-import { technologies } from "../content/tecnologies";
+import { technologies, words } from "../content/tecnologies";
 import { Reveal } from "../components/Reveal";
 import { IconWrapper } from "../components/Icons";
 ---
@@ -7,6 +7,11 @@ import { IconWrapper } from "../components/Icons";
 <section id="stack" class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
   <div class="text-center mb-16">
     <Reveal client:visible>
+      <div
+        class="inline-block px-3 py-1 mb-4 text-xs font-mono text-primary bg-white rounded-full border border-primary/20 shadow-sm"
+      >
+        Habilidades
+      </div>
       <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-4">Tecnologias & Ferramentas</h2>
       <p class="text-slate-500 max-w-2xl mx-auto">Minha caixa de ferramentas para construir soluções robustas.</p>
     </Reveal>
@@ -15,7 +20,7 @@ import { IconWrapper } from "../components/Icons";
   <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
     {
       technologies.map((tech, index) => (
-        <Reveal client:visible delay={index * 100}>
+        <Reveal client:visible delay={index * 50}>
           <div class="p-6 bg-white border border-slate-200 rounded-xl flex flex-col items-center text-center transition-all hover:shadow-lg hover:bg-slate-50 hover:border-primary/50 group cursor-default h-full">
             <div
               class={`${
@@ -29,6 +34,27 @@ import { IconWrapper } from "../components/Icons";
           </div>
         </Reveal>
       ))
+    }
+    {
+      words.length > 0 && (
+        <Reveal client:visible delay={12 * 50} className="col-span-full">
+          <div class="p-6 bg-white border border-slate-200 rounded-xl transition-all hover:shadow-lg hover:bg-slate-50 hover:border-primary/50 group cursor-default h-full">
+            <h2 class="text-xl md:text-2xl font-bold text-slate-900 mb-4 text-center">Conhecimentos</h2>
+
+            <div class="relative flex overflow-x-hidden py-4">
+              <div class="flex animate-marquee whitespace-nowrap">
+                {words.map((word) => (
+                  <span class="mx-4 text-lg font-bold">{word}</span>
+                ))}
+
+                {words.map((word) => (
+                  <span class="mx-4 text-lg font-bold">{word}</span>
+                ))}
+              </div>
+            </div>
+          </div>
+        </Reveal>
+      )
     }
   </div>
 </section>

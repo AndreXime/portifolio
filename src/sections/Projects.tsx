@@ -1,5 +1,5 @@
-import { useMemo, useState } from "preact/compat";
-import { ExternalLink, Github } from "lucide-preact";
+import { useEffect, useMemo, useRef, useState } from "preact/compat";
+import { ExternalLink, Github, Link } from "lucide-preact";
 import { type Project } from "../content/projects";
 import { Reveal } from "../components/Reveal";
 
@@ -28,7 +28,11 @@ export default function ProjectsSection({ projects }: { projects: Project[] }) {
             <div className="inline-block px-3 py-1 mb-4 text-xs font-mono text-primary bg-white rounded-full border border-primary/20 shadow-sm">
               Portfólio
             </div>
-            <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-6">Meus Projetos Recentes</h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">Meus Projetos</h2>
+            <p className="text-slate-600 max-w-4xl mx-auto mb-6">
+              O resultado prático dos meus estudos, aplicações onde solidifico meus conhecimentos e testo novas
+              abordagens.
+            </p>
 
             <div className="flex flex-wrap justify-center gap-2">
               {filters.map((f) => (
@@ -83,13 +87,38 @@ export default function ProjectsSection({ projects }: { projects: Project[] }) {
 }
 
 function ProjectCard({ project }: { project: Project }) {
+  const [showOverlay, setShowOverlay] = useState<boolean>(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (containerRef.current && !containerRef.current.contains(event.target as Node)) {
+        setShowOverlay(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  const toggleOverlay = () => {
+    // Só alterna manualmente se for touch. No desktop, o CSS resolve com group-hover.
+    setShowOverlay(!showOverlay);
+  };
   return (
-    <div className="bg-surface rounded-xl overflow-hidden border border-border hover:border-primary/30 flex flex-col h-full shadow-sm hover:shadow-xl">
+    <div
+      ref={containerRef}
+      onClick={toggleOverlay}
+      className="bg-surface rounded-xl overflow-hidden border border-border hover:border-primary/30 flex flex-col h-full shadow-sm hover:shadow-xl"
+    >
       <div className="relative group cursor-pointer h-48 overflow-hidden bg-slate-50 border-b border-slate-100">
         <div className="absolute top-0 left-0 w-full h-6 bg-slate-100 border-b border-slate-200 z-20 flex items-center px-2 gap-1.5">
           <div className="w-2.5 h-2.5 rounded-full bg-red-400/80"></div>
           <div className="w-2.5 h-2.5 rounded-full bg-yellow-400/80"></div>
           <div className="w-2.5 h-2.5 rounded-full bg-green-400/80"></div>
+          <div className="ml-auto text-xs font-semibold">
+            <ExternalLink size={15} />
+          </div>
         </div>
 
         <img
@@ -99,18 +128,25 @@ function ProjectCard({ project }: { project: Project }) {
           alt={project.title}
           loading="lazy"
           decoding="async"
-          className="w-full h-full object-cover pt-6 transition-all duration-700 ease-in-out group-hover:scale-110"
+          className={`w-full h-full object-cover pt-6 transition-all duration-700 ease-in-out 
+          ${showOverlay ? "scale-110" : "scale-100"} 
+          lg:group-hover:scale-110`}
         />
 
-        <div className="absolute inset-0 bg-slate-900/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-3 z-10 pt-6">
+        <div
+          className={`absolute inset-0 bg-slate-900/60 transition-opacity duration-300 flex items-center justify-center gap-3 z-10 pt-6
+          ${showOverlay ? "opacity-100" : "opacity-0"} 
+          lg:group-hover:opacity-100`}
+        >
           {project.link && (
             <a
               href={project.link}
               target="_blank"
               rel="noreferrer"
-              className="p-2 bg-white text-slate-900 rounded-full hover:scale-110 transition-transform shadow-lg"
+              onClick={(e) => e.stopPropagation()}
+              className="p-2 bg-white text-slate-900 rounded-full hover:scale-110 transition-transform shadow-lg flex text-xs gap-1 items-center font-semibold"
             >
-              <ExternalLink className="w-5 h-5" />
+              <ExternalLink className="w-5 h-5" /> Visitar site
               <span className="sr-only">Link para o projeto {project.title}</span>
             </a>
           )}
@@ -119,9 +155,10 @@ function ProjectCard({ project }: { project: Project }) {
               href={project.github}
               target="_blank"
               rel="noreferrer"
-              className="p-2 bg-slate-800 text-white rounded-full hover:scale-110 transition-transform shadow-lg"
+              onClick={(e) => e.stopPropagation()}
+              className="p-2 bg-slate-800 text-white rounded-full hover:scale-110 transition-transform shadow-lg flex text-xs gap-1 items-center font-semibold"
             >
-              <Github className="w-5 h-5" />
+              <Github className="w-5 h-5" /> Ver no github
               <span className="sr-only">Github para o projeto {project.title}</span>
             </a>
           )}

@@ -1,4 +1,4 @@
-import { Mail, Linkedin, X, Check, Loader } from "lucide-preact";
+import { Mail, Linkedin, X, Check, Loader, Github } from "lucide-preact";
 import { Reveal } from "../components/Reveal";
 import { useState } from "preact/compat";
 import type { FormEvent } from "preact/compat";
@@ -98,6 +98,21 @@ export default function Contact() {
               <div>
                 <p className="text-sm text-slate-500">LinkedIn</p>
                 <p className="font-medium text-slate-800">{socialLinks.linkedin.substring(12)}</p>
+              </div>
+            </a>
+
+            <a
+              href={socialLinks.github}
+              target="_blank"
+              rel="noreferrer"
+              className="flex items-center gap-4 p-4 bg-white border border-slate-100 rounded-xl hover:border-primary/50 hover:shadow-md transition-all group"
+            >
+              <div className="w-10 h-10 bg-slate-100 rounded-full flex items-center justify-center text-slate-600 group-hover:bg-primary group-hover:text-white transition-colors">
+                <Github className="w-5 h-5" />
+              </div>
+              <div>
+                <p className="text-sm text-slate-500">GIthub</p>
+                <p className="font-medium text-slate-800">{socialLinks.github.substring(8)}</p>
               </div>
             </a>
           </div>
