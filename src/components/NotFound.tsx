@@ -1,5 +1,4 @@
-"use client";
-import { useEffect, useRef } from "preact/compat";
+import { useEffect, useRef } from "preact/hooks";
 
 export default function NotFound() {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);

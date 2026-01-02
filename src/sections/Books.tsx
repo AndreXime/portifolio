@@ -1,6 +1,7 @@
 import { Reveal } from "../components/Reveal";
 import type { Book } from "@/content/books";
-import { useState } from "preact/compat";
+import { useState } from "preact/hooks";
+
 import { Bookmark, CheckCircle2 } from "lucide-preact";
 
 const STYLE_MAP: Record<Book["state"], string> = {

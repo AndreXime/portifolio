@@ -1,5 +1,5 @@
-import { useEffect, useMemo, useRef, useState } from "preact/compat";
-import { ExternalLink, Github, Link } from "lucide-preact";
+import { useEffect, useMemo, useRef, useState } from "preact/hooks";
+import { ExternalLink, Github } from "lucide-preact";
 import { type Project } from "../content/projects";
 import { Reveal } from "../components/Reveal";
 

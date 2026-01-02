@@ -1,6 +1,6 @@
 import { Mail, Linkedin, X, Check, Loader, Github } from "lucide-preact";
 import { Reveal } from "../components/Reveal";
-import { useState } from "preact/compat";
+import { useState } from "preact/hooks";
 import type { FormEvent } from "preact/compat";
 
 import { socialLinks } from "@/content/social";

@@ -1,4 +1,5 @@
-import { useEffect, useRef, useState, type ReactNode } from "preact/compat";
+import { useEffect, useRef, useState } from "preact/hooks";
+import type { ReactNode } from "preact/compat";
 
 interface RevealProps {
   children: ReactNode;

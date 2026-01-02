@@ -1,5 +1,4 @@
-"use client";
-import { useState } from "preact/compat";
+import { useState } from "preact/hooks";
 import { Menu, X } from "lucide-preact";
 
 const navLinks = [
