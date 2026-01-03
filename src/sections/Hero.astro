@@ -1,5 +1,5 @@
 ---
-import { ArrowDown, Github } from "lucide-preact";
+import { ArrowDown, Github, MousePointerClick } from "lucide-preact";
 import { socialLinks } from "../content/social";
 import { tsCode, goCode } from "../content/snippet";
 import { Code } from "astro:components";
@@ -75,7 +75,12 @@ import Snippets from "../components/Snippet";
     <div class="relative lg:block group perspective-[1000px] h-full">
       <Snippets client:idle>
         <div class="backface-hidden bg-[#1a1b26] rounded-xl border border-slate-700 p-4">
-          <div class="text-xs text-slate-400 bg-[#1a1b26] pb-2 font-mono">developer.ts</div>
+          <div class="flex justify-between items-center">
+            <div class="text-xs text-slate-400 bg-[#1a1b26] pb-2 font-mono">developer.ts</div>
+            <MousePointerClick
+              class="text-slate-400 group-hover:text-blue-500 group-hover:-rotate-12 transition-all duration-800 animate-[float_2s_ease-in-out_infinite]"
+            />
+          </div>
           <Code lang={"ts"} code={tsCode} theme={"monokai"} />
         </div>
 

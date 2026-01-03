@@ -19,13 +19,13 @@ export default {
         border: "#e2e8f0",
       },
       animation: {
-        float: "float 6s ease-in-out infinite",
+        float: "float 3s linear infinite",
         marquee: "marquee 25s linear infinite",
       },
       keyframes: {
         float: {
           "0%, 100%": { transform: "translateY(0)" },
-          "50%": { transform: "translateY(-10px)" },
+          "50%": { transform: "translateY(-5px)" },
         },
         marquee: {
           "0%": { transform: "translateX(0%)" },
