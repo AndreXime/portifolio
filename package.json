@@ -17,12 +17,13 @@
 		"@tailwindcss/vite": "^4.1.18",
 		"astro": "^5.16.6",
 		"lucide-preact": "^0.562.0",
-		"nodemailer": "^7.0.11"
+		"nodemailer": "^7.0.12",
+		"shiki": "^3.20.0"
 	},
 	"devDependencies": {
 		"@tailwindcss/postcss": "^4",
 		"@tailwindcss/typography": "^0.5.19",
-		"@types/node": "^24",
+		"@types/node": "^25",
 		"@types/nodemailer": "^7.0.4",
 		"tailwindcss": "^4.1.18",
 		"typescript": "^5"
