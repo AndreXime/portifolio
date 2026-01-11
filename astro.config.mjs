@@ -23,6 +23,18 @@ export default defineConfig({
 	},
 	vite: {
 		plugins: [tailwindcss()],
+		build: {
+			rollupOptions: {
+				output: {
+					manualChunks(id) {
+						if (id.includes("node_modules") && id.includes("preact") && !id.includes("lucide")) {
+							console.log(id);
+							return "preact-core";
+						}
+					},
+				},
+			},
+		},
 	},
 	adapter: vercel(),
 });
