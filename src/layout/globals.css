@@ -1,8 +1,8 @@
-@import 'tailwindcss';
+@import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
 @config "../../tailwind.config.ts";
 
-@utility card{
+@utility card {
     @apply p-8 rounded-2xl border border-slate-300 shadow-xl transition-all hover:shadow-2xl hover:border-primary
 }
