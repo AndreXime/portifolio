@@ -6,7 +6,7 @@ import preact from "@astrojs/preact";
 
 import sitemap from "@astrojs/sitemap";
 
-import cloudflare from "@astrojs/cloudflare";
+import vercel from "@astrojs/vercel";
 
 // https://astro.build/config
 export default defineConfig({
@@ -24,5 +24,5 @@ export default defineConfig({
 	vite: {
 		plugins: [tailwindcss()],
 	},
-	adapter: cloudflare(),
+	adapter: vercel(),
 });
