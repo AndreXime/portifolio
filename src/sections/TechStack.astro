@@ -12,8 +12,12 @@ import { IconWrapper } from "../components/Icons";
       >
         Habilidades
       </div>
-      <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-4">Tecnologias & Ferramentas</h2>
-      <p class="text-slate-500 max-w-2xl mx-auto">Minha caixa de ferramentas para construir soluções robustas.</p>
+      <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
+        Tecnologias & Ferramentas
+      </h2>
+      <p class="text-slate-500 max-w-2xl mx-auto">
+        Minha caixa de ferramentas para construir soluções robustas.
+      </p>
     </Reveal>
   </div>
 
@@ -21,7 +25,7 @@ import { IconWrapper } from "../components/Icons";
     {
       technologies.map((tech, index) => (
         <Reveal client:visible delay={index * 50}>
-          <div class="p-6 bg-white border border-slate-200 rounded-xl flex flex-col items-center text-center transition-all hover:shadow-lg hover:bg-slate-50 hover:border-primary/50 group cursor-default h-full">
+          <div class="group p-6 bg-white border border-slate-200 rounded-xl flex flex-col items-center text-center transition-all hover:shadow-lg hover:bg-slate-50 hover:border-primary/50 group cursor-default h-full">
             <div
               class={`${
                 !!tech.secondIcon ? "w-24" : "w-12"
@@ -39,7 +43,9 @@ import { IconWrapper } from "../components/Icons";
       words.length > 0 && (
         <Reveal client:visible delay={12 * 50} className="col-span-full">
           <div class="p-6 bg-white border border-slate-200 rounded-xl transition-all hover:shadow-lg hover:bg-slate-50 hover:border-primary/50 group cursor-default h-full">
-            <h2 class="text-xl md:text-2xl font-bold text-slate-900 mb-4 text-center">Conhecimentos</h2>
+            <h2 class="text-xl md:text-2xl font-bold text-slate-900 mb-4 text-center">
+              Conhecimentos
+            </h2>
 
             <div class="relative flex overflow-x-hidden py-4">
               <div class="flex animate-marquee whitespace-nowrap">

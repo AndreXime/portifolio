@@ -10,11 +10,11 @@ import ProjectsSection from "../sections/Projects";
 import ContactSection from "../sections/Contact";
 import { Projects } from "../content/projects";
 import { Books } from "../content/books";
-import { optimizeProjectsImages, optimizeBooksImages } from "../lib/optimizeImages";
+import { optimizeImages } from "../lib/optimizeImages";
 
-const optimizedProjects = await optimizeProjectsImages(Projects);
+const optimizedProjects = await optimizeImages(Projects, "projetos");
 
-const optimizedBooks = await optimizeBooksImages(Books);
+const optimizedBooks = await optimizeImages(Books, "livros");
 ---
 
 <MainLayout
