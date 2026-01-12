@@ -1,0 +1,147 @@
+---
+import { Menu, X } from "lucide-preact";
+
+const navLinks = [
+  { name: "Sobre", href: "#sobre" },
+  { name: "Stack", href: "#stack" },
+  { name: "Projetos", href: "#projetos" },
+  { name: "Biblioteca", href: "#biblioteca" },
+];
+---
+
+<nav
+  class={`fixed w-full z-50 top-0 left-0 transition-all duration-300 bg-white/85 backdrop-blur-md border-b border-slate-200`}
+>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16">
+      {/* Logo */}
+      <button
+        type="button"
+        class="flex items-center gap-2 cursor-pointer"
+        data-nav-link="#home"
+      >
+        <div
+          class="w-8 h-8 bg-primary text-white rounded-lg flex items-center justify-center font-bold font-mono text-sm"
+        >
+          AX
+        </div>
+        <span class="font-bold text-xl tracking-tight text-slate-800">
+          André<span class="text-primary">.Portfolio</span>
+        </span>
+      </button>
+
+      <div class="hidden md:flex items-center gap-8">
+        {
+          navLinks.map((link) => (
+            <button
+              type="button"
+              data-nav-link={link.href}
+              class="text-sm font-medium text-slate-600 hover:text-primary transition-colors cursor-pointer"
+            >
+              {link.name}
+            </button>
+          ))
+        }
+        <button
+          type="button"
+          data-nav-link="#contato"
+          class="text-sm font-medium bg-slate-900 text-white hover:bg-primary px-5 py-2 rounded-full transition-colors cursor-pointer"
+        >
+          Vamos conversar
+        </button>
+      </div>
+
+      <button
+        aria-label="botão mobile menu"
+        type="button"
+        class="md:hidden p-2 text-slate-600"
+        id="menu-toggle"
+      >
+        <Menu class="w-6 h-6" id="icon-menu" />
+        <X class="w-6 h-6 hidden" id="icon-close" />
+      </button>
+    </div>
+  </div>
+
+  <div
+    id="mobile-menu"
+    class="hidden md:hidden bg-white border-b border-border px-4 py-4 space-y-4 shadow-lg animate-in slide-in-from-top-5"
+  >
+    {
+      navLinks.map((link) => (
+        <button
+          type="button"
+          data-nav-link={link.href}
+          class="block text-slate-600 hover:text-primary font-medium cursor-pointer"
+        >
+          {link.name}
+        </button>
+      ))
+    }
+    <button
+      type="button"
+      data-nav-link="#contato"
+      class="block text-primary font-bold cursor-pointer"
+    >
+      Contato
+    </button>
+  </div>
+
+  <script is:inline type="module">
+    function setupNavbar() {
+      const menuToggle = document.getElementById("menu-toggle");
+      const mobileMenu = document.getElementById("mobile-menu");
+      const iconMenu = document.getElementById("icon-menu");
+      const iconClose = document.getElementById("icon-close");
+      const navButtons = document.querySelectorAll("[data-nav-link]");
+
+      // Toggle Menu Mobile
+      menuToggle?.addEventListener("click", () => {
+        const isHidden = mobileMenu?.classList.contains("hidden");
+
+        if (isHidden) {
+          mobileMenu?.classList.remove("hidden");
+          iconMenu?.classList.add("hidden");
+          iconClose?.classList.remove("hidden");
+        } else {
+          closeMenu();
+        }
+      });
+
+      function closeMenu() {
+        mobileMenu?.classList.add("hidden");
+        iconMenu?.classList.remove("hidden");
+        iconClose?.classList.add("hidden");
+      }
+
+      // Smooth Scroll
+      navButtons.forEach((button) => {
+        button.addEventListener("click", (e) => {
+          const href = button.getAttribute("data-nav-link");
+          if (!href) return;
+
+          e.preventDefault();
+          closeMenu();
+
+          const id = href.startsWith("#") ? href.substring(1) : href;
+          const targetElement = document.getElementById(id);
+
+          if (targetElement) {
+            const navHeight = 64;
+            const targetPosition =
+              targetElement.getBoundingClientRect().top +
+              window.scrollY -
+              navHeight;
+
+            window.scrollTo({
+              top: targetPosition,
+              behavior: "smooth",
+            });
+          }
+        });
+      });
+    }
+
+    setupNavbar();
+  </script>
+</nav>

@@ -1,6 +1,6 @@
 ---
 import MainLayout from "../layout/layout.astro";
-import Navbar from "../sections/Navbar";
+import Navbar from "../sections/Navbar.astro";
 import HeroSection from "../sections/Hero.astro";
 import AboutSection from "../sections/About.astro";
 import TechStackSection from "../sections/TechStack.astro";
@@ -24,7 +24,7 @@ const optimizedBooks = await optimizeImages(Books, "livros");
   <div
     class="bg-background text-textMain font-sans antialiased selection:bg-primary selection:text-white overflow-x-hidden"
   >
-    <Navbar client:idle />
+    <Navbar />
     <main>
       <HeroSection />
       <AboutSection />

@@ -3,7 +3,6 @@ import { ArrowDown, Github, MousePointerClick } from "lucide-preact";
 import { socialLinks } from "../content/social";
 import { tsCode, goCode } from "../content/snippet";
 import { Code } from "astro:components";
-import Snippets from "../components/Snippet";
 ---
 
 <style>
@@ -30,28 +29,45 @@ import Snippets from "../components/Snippet";
   }
 </style>
 
-<section id="home" class="pt-25 pb-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto min-h-screen flex items-center">
+<section
+  id="home"
+  class="pt-25 pb-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto min-h-screen flex items-center"
+>
   <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
     <div>
       <div
         class="inline-flex items-center gap-2 px-3 py-1 mb-6 text-xs font-mono font-semibold text-primary bg-blue-50 rounded-full border border-blue-100"
       >
         <span class="relative flex h-2 w-2">
-          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
-          <span class="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+          <span
+            class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"
+          ></span>
+          <span class="relative inline-flex rounded-full h-2 w-2 bg-primary"
+          ></span>
         </span>
         Atualmente trabalhando
       </div>
 
       <p class="text-lg text-slate-500 mb-2 font-medium">Olá, Meu nome é</p>
-      <h1 class="text-5xl sm:text-7xl font-bold mb-4 leading-tight text-slate-900 tracking-tight">André Ximenes</h1>
-      <h2 class="text-2xl sm:text-3xl text-slate-600 mb-8 font-medium leading-snug">
-        Sou desenvolvedor de software especializado em <span class="text-primary font-bold">TypeScript e Go</span>.
+      <h1
+        class="text-5xl sm:text-7xl font-bold mb-4 leading-tight text-slate-900 tracking-tight"
+      >
+        André Ximenes
+      </h1>
+      <h2
+        class="text-2xl sm:text-3xl text-slate-600 mb-8 font-medium leading-snug"
+      >
+        Sou desenvolvedor de software especializado em <span
+          class="text-primary font-bold">TypeScript e Go</span
+        >.
       </h2>
 
-      <p class="text-lg text-textMuted mb-8 max-w-lg leading-relaxed border-l-4 border-primary/20 pl-4">
-        Desenvolvo sistemas focados em performance e manutenção, equilibrando rigor técnico e entrega. Aplico boas
-        práticas para evitar débitos, garantindo que o software gere valor real em produção.
+      <p
+        class="text-lg text-textMuted mb-8 max-w-lg leading-relaxed border-l-4 border-primary/20 pl-4"
+      >
+        Desenvolvo sistemas focados em performance e manutenção, equilibrando
+        rigor técnico e entrega. Aplico boas práticas para evitar débitos,
+        garantindo que o software gere valor real em produção.
       </p>
 
       <div class="flex flex-wrap gap-4">
@@ -73,24 +89,56 @@ import Snippets from "../components/Snippet";
     </div>
 
     <div class="relative lg:block group perspective-[1000px] h-full">
-      <Snippets client:idle>
-        <div class="backface-hidden bg-[#1a1b26] rounded-xl border border-slate-700 p-4">
-          <div class="flex justify-between items-center">
-            <div class="text-xs text-slate-400 bg-[#1a1b26] pb-2 font-mono">developer.ts</div>
-            <MousePointerClick
-              class="text-slate-400 group-hover:text-blue-500 group-hover:-rotate-12 transition-all duration-800 animate-[float_2s_ease-in-out_infinite]"
-            />
-          </div>
-          <Code lang={"ts"} code={tsCode} theme={"monokai"} />
-        </div>
-
+      <div
+        id="snippet-container"
+        class="relative group perspective-1000 h-full cursor-pointer touch-manipulation"
+      >
         <div
-          class="absolute inset-0 backface-hidden [transform:rotateY(180deg)] bg-[#1a1b26] rounded-xl border border-slate-700 p-4"
+          id="snippet-card"
+          class={`relative transition-all duration-700 [transform-style:preserve-3d] h-full`}
         >
-          <div class="text-xs text-slate-400 bg-[#1a1b26] pb-2 font-mono">developer.go</div>
-          <Code lang={"go"} code={goCode} theme={"monokai"} />
+          <div
+            class="backface-hidden bg-[#1a1b26] rounded-xl border border-slate-700 p-4"
+          >
+            <div class="flex justify-between items-center">
+              <div class="text-xs text-slate-400 bg-[#1a1b26] pb-2 font-mono">
+                developer.ts
+              </div>
+              <MousePointerClick
+                class="text-slate-400 group-hover:text-blue-500 group-hover:-rotate-12 transition-all duration-800 animate-[float_2s_ease-in-out_infinite]"
+              />
+            </div>
+            <Code lang={"ts"} code={tsCode} theme={"monokai"} />
+          </div>
+
+          <div
+            class="absolute inset-0 backface-hidden [transform:rotateY(180deg)] bg-[#1a1b26] rounded-xl border border-slate-700 p-4"
+          >
+            <div class="text-xs text-slate-400 bg-[#1a1b26] pb-2 font-mono">
+              developer.go
+            </div>
+            <Code lang={"go"} code={goCode} theme={"monokai"} />
+          </div>
         </div>
-      </Snippets>
+      </div>
     </div>
   </div>
+  <script is:inline type="module">
+    function SetupCard() {
+      const container = document.getElementById("snippet-container");
+      const card = document.getElementById("snippet-card");
+      let isFlipped = false;
+
+      container?.addEventListener("click", () => {
+        isFlipped = !isFlipped;
+
+        if (isFlipped) {
+          card?.classList.add("[transform:rotateY(180deg)]");
+        } else {
+          card?.classList.remove("[transform:rotateY(180deg)]");
+        }
+      });
+    }
+    SetupCard();
+  </script>
 </section>
