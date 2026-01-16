@@ -127,15 +127,17 @@ const navLinks = [
           const targetElement = document.getElementById(id);
 
           if (targetElement) {
-            const navHeight = 64;
-            const targetPosition =
-              targetElement.getBoundingClientRect().top +
-              window.scrollY -
-              navHeight;
+            requestAnimationFrame(() => {
+              const navHeight = 64;
+              const targetPosition =
+                targetElement.getBoundingClientRect().top +
+                window.scrollY -
+                navHeight;
 
-            window.scrollTo({
-              top: targetPosition,
-              behavior: "smooth",
+              window.scrollTo({
+                top: targetPosition,
+                behavior: "smooth",
+              });
             });
           }
         });
