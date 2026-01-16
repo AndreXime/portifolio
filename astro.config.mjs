@@ -1,25 +1,25 @@
 // @ts-check
-import { defineConfig } from 'astro/config';
+import { defineConfig } from "astro/config";
 
-import tailwindcss from '@tailwindcss/vite';
-import preact from '@astrojs/preact';
+import tailwindcss from "@tailwindcss/vite";
+import preact from "@astrojs/preact";
 
-import sitemap from '@astrojs/sitemap';
+import sitemap from "@astrojs/sitemap";
 
-import vercel from '@astrojs/vercel';
+import vercel from "@astrojs/vercel";
 
 // https://astro.build/config
 export default defineConfig({
-	output: 'static',
-	site: 'https://andreximenes.xyz',
+	output: "static",
+	site: "https://andreximenes.xyz",
 	integrations: [
 		preact(),
 		sitemap({
-			filter: (page) => page !== 'https://andreximenes.xyz/404',
+			filter: (page) => page !== "https://andreximenes.xyz/404",
 		}),
 	],
 	build: {
-		inlineStylesheets: 'always',
+		inlineStylesheets: "always",
 	},
 	vite: {
 		plugins: [tailwindcss()],
