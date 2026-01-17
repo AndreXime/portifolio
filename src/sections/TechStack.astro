@@ -1,5 +1,5 @@
 ---
-import { technologies, words } from "../content/tecnologies";
+import { technologies } from "../content/tecnologies";
 import { Reveal } from "../components/Reveal";
 import { IconWrapper } from "../components/Icons";
 ---
@@ -38,29 +38,6 @@ import { IconWrapper } from "../components/Icons";
           </div>
         </Reveal>
       ))
-    }
-    {
-      words.length > 0 && (
-        <Reveal client:visible delay={12 * 50} className="col-span-full">
-          <div class="p-6 bg-white border border-slate-200 rounded-xl transition-all hover:shadow-lg hover:bg-slate-50 hover:border-primary/50 group cursor-default h-full">
-            <h2 class="text-xl md:text-2xl font-bold text-slate-900 mb-4 text-center">
-              Conhecimentos
-            </h2>
-
-            <div class="relative flex overflow-x-hidden py-4">
-              <div class="flex animate-marquee whitespace-nowrap">
-                {words.map((word) => (
-                  <span class="mx-4 text-lg font-bold">{word}</span>
-                ))}
-
-                {words.map((word) => (
-                  <span class="mx-4 text-lg font-bold">{word}</span>
-                ))}
-              </div>
-            </div>
-          </div>
-        </Reveal>
-      )
     }
   </div>
 </section>
