@@ -1,0 +1,13 @@
+@import "tailwindcss" source(none);
+@import "./theme.css";
+
+@source "../**/*.{astro,ts,tsx}";
+
+@source "../layout/layout.astro";
+@source not "../sections/Navbar.astro";
+@source not "../sections/Hero.astro";
+@source not "../components/Snippet.astro";
+
+@utility card {
+  @apply p-8 rounded-2xl border border-slate-300 shadow-xl transition-all hover:shadow-2xl hover:border-primary
+}
