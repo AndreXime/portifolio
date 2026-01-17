@@ -1,12 +1,36 @@
-@import "tailwindcss" source(none);
+@import "tailwindcss";
 @import "./theme.css";
+@import "@wooorm/starry-night/style/dimmed-dark";
 
-@source "../**/*.{astro,ts,tsx}";
+.starry-night .pl-k {
+    /* Keywords: package, import, func */
+    color: #ff7b72 !important; /* Um tom de vermelho/coral claro */
+}
 
-@source "../layout/layout.astro";
-@source not "../sections/Navbar.astro";
-@source not "../sections/Hero.astro";
-@source not "../components/Snippet.astro";
+.starry-night .pl-s {
+    /* Strings: "fmt", "André Ximenes" */
+    color: #a5d6ff !important; /* Azul claro com alto contraste */
+}
+
+.starry-night .pl-v,
+.starry-night .pl-smi {
+    /* Variáveis e Types: Developer, Name */
+    color: #ffa657 !important; /* Laranja claro */
+}
+
+.starry-night .pl-en {
+    /* Funções: main, IsReady */
+    color: #d2a8ff !important; /* Roxo claro */
+}
+
+.backface-hidden {
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+}
 
 @utility card {
   @apply p-8 rounded-2xl border border-slate-300 shadow-xl transition-all hover:shadow-2xl hover:border-primary
