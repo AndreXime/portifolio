@@ -95,7 +95,7 @@ import { Code } from "astro:components";
       >
         <div
           id="snippet-card"
-          class={`relative transition-all duration-700 [transform-style:preserve-3d] h-full`}
+          class={`relative transition-all duration-700 transform-3d h-full`}
         >
           <div
             class="backface-hidden bg-[#1a1b26] rounded-xl border border-slate-700 p-4"
@@ -105,14 +105,14 @@ import { Code } from "astro:components";
                 developer.ts
               </div>
               <MousePointerClick
-                class="text-slate-400 group-hover:text-blue-500 group-hover:-rotate-12 transition-all duration-800 animate-[float_2s_ease-in-out_infinite]"
+                class="text-slate-400 group-hover:text-blue-500 transition-all duration-800 group-hover:animate-click"
               />
             </div>
             <Code lang={"ts"} code={tsCode} theme={"monokai"} />
           </div>
 
           <div
-            class="absolute inset-0 backface-hidden [transform:rotateY(180deg)] bg-[#1a1b26] rounded-xl border border-slate-700 p-4"
+            class="absolute inset-0 backface-hidden transform-[rotateY(180deg)] bg-[#1a1b26] rounded-xl border border-slate-700 p-4"
           >
             <div class="text-xs text-slate-400 bg-[#1a1b26] pb-2 font-mono">
               developer.go
