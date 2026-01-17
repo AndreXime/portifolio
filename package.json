@@ -14,10 +14,10 @@
 		"@astrojs/sitemap": "^3.6.1",
 		"@astrojs/vercel": "^8.0.4",
 		"@tailwindcss/vite": "^4.1.18",
+		"@wooorm/starry-night": "^3.8.0",
 		"astro": "^5.16.7",
 		"lucide-preact": "^0.562.0",
-		"nodemailer": "^7.0.12",
-		"shiki": "^3.21.0"
+		"nodemailer": "^7.0.12"
 	},
 	"devDependencies": {
 		"@tailwindcss/postcss": "^4",

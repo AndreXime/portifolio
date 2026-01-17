@@ -2,7 +2,7 @@
 import { ArrowDown, Github, MousePointerClick } from "lucide-preact";
 import { socialLinks } from "../content/social";
 import { tsCode, goCode } from "../content/snippet";
-import { Code } from "astro:components";
+import Snippets from "../components/Snippet.astro";
 ---
 
 <style>
@@ -13,19 +13,6 @@ import { Code } from "astro:components";
     flex-direction: column;
     height: 100%;
     width: 100%;
-  }
-
-  pre.astro-code {
-    background-color: transparent !important;
-
-    font-size: 0.8rem !important;
-    line-height: 1.5 !important;
-  }
-
-  @media (max-width: 640px) {
-    pre.astro-code {
-      font-size: 0.7rem !important;
-    }
   }
 </style>
 
@@ -108,7 +95,7 @@ import { Code } from "astro:components";
                 class="text-slate-400 group-hover:text-blue-500 transition-all duration-800 group-hover:animate-click"
               />
             </div>
-            <Code lang={"ts"} code={tsCode} theme={"monokai"} />
+            <Snippets lang={"ts"} code={tsCode} />
           </div>
 
           <div
@@ -117,7 +104,7 @@ import { Code } from "astro:components";
             <div class="text-xs text-slate-400 bg-[#1a1b26] pb-2 font-mono">
               developer.go
             </div>
-            <Code lang={"go"} code={goCode} theme={"monokai"} />
+            <Snippets lang={"go"} code={goCode} />
           </div>
         </div>
       </div>

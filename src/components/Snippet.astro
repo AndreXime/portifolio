@@ -1,0 +1,48 @@
+---
+import { createStarryNight, all } from "@wooorm/starry-night";
+import { toHtml } from "hast-util-to-html";
+import { h } from "hastscript";
+import "@wooorm/starry-night/style/dimmed-dark";
+
+interface Props {
+    code: string;
+    lang: string;
+}
+
+const { code, lang } = Astro.props;
+
+// Inicializa o engine (Isso roda apenas no servidor)
+const starryNight = await createStarryNight(all);
+const scope = starryNight.flagToScope(lang);
+
+// Se não encontrar a linguagem, renderiza texto puro
+const tree = scope ? starryNight.highlight(code, scope) : h(undefined, [code]);
+const highlightedHtml = toHtml(tree);
+---
+
+<style>
+    .starry-night .pl-k {
+        /* Keywords: package, import, func */
+        color: #ff7b72 !important; /* Um tom de vermelho/coral claro */
+    }
+
+    .starry-night .pl-s {
+        /* Strings: "fmt", "André Ximenes" */
+        color: #a5d6ff !important; /* Azul claro com alto contraste */
+    }
+
+    .starry-night .pl-v,
+    .starry-night .pl-smi {
+        /* Variáveis e Types: Developer, Name */
+        color: #ffa657 !important; /* Laranja claro */
+    }
+
+    .starry-night .pl-en {
+        /* Funções: main, IsReady */
+        color: #d2a8ff !important; /* Roxo claro */
+    }
+</style>
+<pre
+    class="text-slate-100 text-sm overflow-auto">
+        <code class={`language-${lang} starry-night`} set:html={highlightedHtml} />
+</pre>
