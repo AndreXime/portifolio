@@ -1,80 +1,44 @@
-import {
-	TypescriptIcon,
-	NextjsIcon,
-	TailwindIcon,
-	GitIcon,
-	NodeJSIcon,
-	BunIcon,
-	HonoIcon,
-	PostgreeICon,
-	DockerIcon,
-	LinuxIcon,
-	CICDIcon,
-	AWSIcon,
-	GoIcon,
-	GithubIcon,
-	AstroIcon,
-	GinIcon,
-	RedisIcon,
-} from "@/components/Icons";
-
 interface TechItem {
 	name: string;
 	role: string;
-	icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
-	secondIcon?: React.ComponentType<React.SVGProps<SVGSVGElement>>;
+	icons: string[];
 }
 
-export const words = [
-	/*
-  "CORS",
-  "API Restful",
-  "Engenharia de software",
-  "Modelagem de banco de dados",
-  "Arquitetura de software",
-  */
-];
-
 export const technologies: TechItem[] = [
-	{ name: "TypeScript", role: "Linguagem Principal", icon: TypescriptIcon },
+	{ name: "TypeScript", role: "Linguagem Principal", icons: ["typescript"] },
 	{
 		name: "Astro e Next.js",
 		role: "Frontend Framework",
-		icon: AstroIcon,
-		secondIcon: NextjsIcon,
+		icons: ["astro", "nextjs"],
 	},
-	{ name: "Tailwind CSS e ShadCN", role: "Estilização", icon: TailwindIcon },
+	{ name: "Tailwind CSS e ShadCN", role: "Estilização", icons: ["tailwind"] },
 	{
 		name: "Node.js & Bun",
 		role: "Javascript Runtime",
-		icon: NodeJSIcon,
-		secondIcon: BunIcon,
+		icons: ["node", "bun"],
 	},
 	{
 		name: "Git e GitHub",
 		role: "Versionamento",
-		icon: GitIcon,
-		secondIcon: GithubIcon,
+		icons: ["git", "github"],
 	},
 	{
 		name: "Hono & Gin",
 		role: "API Framework",
-		icon: HonoIcon,
-		secondIcon: GinIcon,
+		icons: ["hono", "gin"],
 	},
 	{
 		name: "PostgreSQL & Redis",
 		role: "Banco de Dados",
-		icon: PostgreeICon,
-		secondIcon: RedisIcon,
+		icons: ["postgree", "redis"],
 	},
-	{ name: "Docker", role: "Orquestrador de containers", icon: DockerIcon },
-	{ name: "Linux", role: "Sistema operacional", icon: LinuxIcon },
+	{ name: "Docker", role: "Orquestrador de containers", icons: ["docker"] },
+	{ name: "Linux", role: "Sistema operacional", icons: ["linux"] },
 	{
 		name: "Github Actions",
 		role: "Automação de Workflow (CI/CD)",
-		icon: CICDIcon,
+		icons: ["cicd"],
 	},
-	{ name: "AWS & Vercel", role: "Hospedagem", icon: AWSIcon },
-	{ name: "Golang", role: "Linguagem secundária", icon: GoIcon },
+	{ name: "AWS & Vercel", role: "Hospedagem", icons: ["aws"] },
+	{ name: "Golang", role: "Linguagem secundária", icons: ["go"] },
 ];
