@@ -11,19 +11,6 @@ import Snippets from "../components/Snippet.astro";
 >
   <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
     <div>
-      <div
-        class="inline-flex items-center gap-2 px-3 py-1 mb-6 text-xs font-mono font-semibold text-primary bg-blue-50 rounded-full border border-blue-100"
-      >
-        <span class="relative flex h-2 w-2">
-          <span
-            class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"
-          ></span>
-          <span class="relative inline-flex rounded-full h-2 w-2 bg-primary"
-          ></span>
-        </span>
-        Atualmente trabalhando
-      </div>
-
       <p class="text-lg text-slate-500 mb-2 font-medium">Olá, Meu nome é</p>
       <h1
         class="text-5xl sm:text-7xl font-bold mb-4 leading-tight text-slate-900 tracking-tight"
@@ -39,7 +26,7 @@ import Snippets from "../components/Snippet.astro";
       </h2>
 
       <p
-        class="text-lg text-textMuted mb-8 max-w-lg leading-relaxed border-l-4 border-primary/20 pl-4"
+        class="text-lg text-text-muted mb-8 max-w-lg leading-relaxed border-l-4 border-primary/20 pl-4"
       >
         Desenvolvo sistemas focados em performance e manutenção, equilibrando
         rigor técnico e entrega. Aplico boas práticas para evitar débitos,
@@ -81,7 +68,7 @@ import Snippets from "../components/Snippet.astro";
                 developer.ts
               </div>
               <MousePointerClick
-                class="text-slate-400 group-hover:text-blue-500 transition-all duration-800 group-hover:animate-click"
+                class="text-slate-400 group-hover:text-blue-500 transition-all duration-800 animate-click"
               />
             </div>
             <Snippets lang={"ts"} code={tsCode} />

@@ -26,7 +26,11 @@ import SectionHeader from "../components/ui/SectionHeader";
 
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <Reveal client:visible>
-      <SectionHeader bagde="Me conheça" title="Sobre mim" />
+      <SectionHeader
+        bagde="Me conheça"
+        title="Sobre mim"
+        subtitle="Minha trajetória: da base acadêmica à experiência prática e minha visão de desenvolvedor."
+      />
 
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-16">
         <div
@@ -39,22 +43,24 @@ import SectionHeader from "../components/ui/SectionHeader";
             <h3 class="text-2xl font-bold text-slate-800">Minha Trajetória</h3>
           </div>
 
-          <div class="space-y-6 text-lg text-slate-600 leading-relaxed">
+          <div class="space-y-6 text-slate-600 leading-relaxed">
             <p>
               No dia a dia, atuo em todo o stack. No backend, utilizo a
               eficiência de
-              <span
-                class="text-slate-900 font-semibold underline decoration-primary/30"
-                >Go e Node.js</span
-              >
+              <span class="font-semibold text-primary">Go e Node.js</span>
               para criar APIs seguras e rápidas. No frontend, foco na experiência
-              do usuário (UX/UI) para entregar interfaces intuitivas.
+              do usuário (UX/UI) para entregar interfaces refinadas e funcionais.
+              Meu trabalho é conectar essas duas pontas, garantindo que a alta performance
+              do servidor se traduza em uma experiência fluida para quem navega.
             </p>
             <p>
-              Estudo arquitetura de software e "Clean Code" de forma pragmática.
-              Sei a hora certa de aplicar um padrão complexo e a hora de optar
-              por uma solução simples e direta, garantindo que o código gere
-              resultado real em produção.
+              Estudo arquitetura de software e
+              <span class="italic">Clean Code</span>
+              não por dogmatismo, mas para facilitar quem vai manter o código. Sei
+              equilibrar padrões complexos com soluções simples, evitando
+              <span class="italic">over-engineering</span> que trava projetos. Afinal,
+              a boa engenharia se prova na capacidade de viabilizar o projeto, garantindo
+              entregas no prazo com uma arquitetura que suporte o crescimento
             </p>
           </div>
         </div>
@@ -63,7 +69,7 @@ import SectionHeader from "../components/ui/SectionHeader";
           <div
             class="bg-indigo-600 p-6 rounded-3xl text-white shadow-lg shadow-indigo-200"
           >
-            <Code2 class="w-8 h-8 mb-4 opacity-80" />
+            <Code2 class="w-8 h-8 mb-2" />
             <p class="text-indigo-100 text-sm font-medium">Stack Principal</p>
             <p class="text-xl font-bold">TypeScript & Go</p>
           </div>
@@ -121,7 +127,10 @@ import SectionHeader from "../components/ui/SectionHeader";
                   Univ. Estadual do Vale do Acaraú
                 </p>
                 <p class="text-slate-600 text-sm leading-relaxed">
-                  Foco em Engenharia de Software, Modelagem de Dados e POO.
+                  Base técnica em Engenharia de Software, com foco em
+                  levantamento de requisitos, modelagem de dados (DER), POO e
+                  estruturas de dados para o desenvolvimento de sistemas
+                  escaláveis e manuteníveis.
                 </p>
               </div>
             </div>
@@ -152,8 +161,13 @@ import SectionHeader from "../components/ui/SectionHeader";
                 </h4>
                 <p class="text-slate-500 font-medium mb-3">Stackup Software</p>
                 <p class="text-slate-600 text-sm leading-relaxed">
-                  Atuo com Next.js e Tailwind no front, e APIs em
-                  Hono/TypeScript com infraestrutura AWS no backend.
+                  Responsável pelo ciclo completo do desenvolvimento, desde o
+                  levantamento de requisitos e modelagem de dados. No frontend
+                  trabalhei com Next.js, Tailwind e Shadcn. No backend
+                  desenvolvi APIs com Hono e TypeScript, implementei funções AWS
+                  Lambda para processamento assíncrono em background e integrei
+                  S3 com URLs assinadas para otimizar o tráfego de arquivos,
+                  reduzindo a carga na API e garantindo escalabilidade.
                 </p>
               </div>
             </div>
