@@ -2,6 +2,7 @@ import { useEffect, useMemo, useRef, useState } from "preact/hooks";
 import { ExternalLink, Github } from "lucide-preact";
 import type { Project } from "../content/projects";
 import { Reveal } from "../components/Reveal";
+import SectionHeader from "../components/ui/SectionHeader";
 
 const filters: { id: Project["type"] | "all"; label: string }[] = [
 	{ id: "all", label: "Todos" },
@@ -24,16 +25,12 @@ export default function ProjectsSection({ projects }: { projects: Project[] }) {
 		<section id="projetos" className="py-20 bg-surfaceHighlight border-y border-slate-200">
 			<Reveal>
 				<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-					<div className="text-center mb-12">
-						<div className="inline-block px-3 py-1 mb-4 text-xs font-mono text-primary bg-white rounded-full border border-primary/20 shadow-sm">
-							Portfólio
-						</div>
-						<h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">Meus Projetos</h2>
-						<p className="text-slate-600 max-w-4xl mx-auto mb-6">
-							O resultado prático dos meus estudos, aplicações onde solidifico meus conhecimentos e testo novas
-							abordagens.
-						</p>
-
+					<SectionHeader
+						bagde="Portfólio"
+						title="Meus Projetos"
+						subtitle="O resultado prático dos meus estudos, aplicações onde solidifico meus conhecimentos e testo novas
+							abordagens."
+					>
 						<div className="flex flex-wrap justify-center gap-2">
 							{filters.map((f) => (
 								<button
@@ -50,7 +47,7 @@ export default function ProjectsSection({ projects }: { projects: Project[] }) {
 								</button>
 							))}
 						</div>
-					</div>
+					</SectionHeader>
 
 					<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 min-h-[400px]">
 						{filteredProjects.map((project, index) => {

@@ -1,45 +1,38 @@
 ---
 import { technologies } from "../content/tecnologies";
 import { Reveal } from "../components/Reveal";
+import SectionHeader from "../components/ui/SectionHeader";
 ---
 
 <section id="stack" class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-  <div class="text-center mb-16">
-    <Reveal client:visible>
-      <div
-        class="inline-block px-3 py-1 mb-4 text-xs font-mono text-primary bg-white rounded-full border border-primary/20 shadow-sm"
-      >
-        Habilidades
-      </div>
-      <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
-        Tecnologias & Ferramentas
-      </h2>
-      <p class="text-slate-500 max-w-2xl mx-auto">
-        Minha caixa de ferramentas para construir soluções robustas.
-      </p>
-    </Reveal>
-  </div>
+  <Reveal client:visible>
+    <SectionHeader
+      bagde="Habilidades"
+      title="Tecnologias & Ferramentas"
+      subtitle="Minha caixa de ferramentas para construir soluções robustas."
+    />
 
-  <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-    {
-      technologies.map(({ name, role, icons }, index) => (
-        <Reveal client:visible delay={index * 50}>
-          <div class="group p-6 bg-white border border-slate-200 rounded-xl flex flex-col items-center text-center transition-all hover:shadow-lg hover:bg-slate-50 hover:border-primary/50 group cursor-default h-full">
-            <div
-              class={`${icons.length > 1 ? "w-24" : "w-12"} h-12 rounded-lg flex items-center justify-center
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+      {
+        technologies.map(({ name, role, icons }, index) => (
+          <Reveal client:visible delay={index * 50}>
+            <div class="group p-6 bg-white border border-slate-200 rounded-xl flex flex-col items-center text-center transition-all hover:shadow-lg hover:bg-slate-50 hover:border-primary/50 group cursor-default h-full">
+              <div
+                class={`${icons.length > 1 ? "w-24" : "w-12"} h-12 rounded-lg flex items-center justify-center
               mb-4 group-hover:scale-110 transition-transform gap-3`}
-            >
-              {icons.map((iconName) => (
-                <svg aria-hidden="true" class="w-12 h-12">
-                  <use href={`/icons.svg#${iconName}`} />
-                </svg>
-              ))}
+              >
+                {icons.map((iconName) => (
+                  <svg aria-hidden="true" class="w-12 h-12">
+                    <use href={`/icons.svg#${iconName}`} />
+                  </svg>
+                ))}
+              </div>
+              <h3 class="font-bold text-slate-800 mt-auto">{name}</h3>
+              <p class="text-xs text-slate-500 mt-1">{role}</p>
             </div>
-            <h3 class="font-bold text-slate-800 mt-auto">{name}</h3>
-            <p class="text-xs text-slate-500 mt-1">{role}</p>
-          </div>
-        </Reveal>
-      ))
-    }
-  </div>
+          </Reveal>
+        ))
+      }
+    </div>
+  </Reveal>
 </section>

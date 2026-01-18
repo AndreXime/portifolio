@@ -1,136 +1,163 @@
 ---
-import { BookOpen, Code2, CodeXml, Coffee, Globe, User } from "lucide-preact";
+import {
+  Code2,
+  Coffee,
+  Globe,
+  User,
+  GraduationCap,
+  Briefcase,
+} from "lucide-preact";
 import { Reveal } from "../components/Reveal";
+import SectionHeader from "../components/ui/SectionHeader";
 ---
 
-<section id="sobre" class="py-20 bg-white border-y border-slate-100">
+<section
+  id="sobre"
+  class="py-24 bg-slate-50/50 border-y border-slate-200/60 relative overflow-hidden"
+>
+  <div
+    class="absolute top-0 left-1/4 w-64 h-64 bg-primary/5 rounded-full blur-3xl -z-10"
+  >
+  </div>
+  <div
+    class="absolute bottom-0 right-1/4 w-96 h-96 bg-indigo-500/5 rounded-full blur-3xl -z-10"
+  >
+  </div>
+
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <Reveal client:visible>
-      <div class="text-center">
+      <SectionHeader bagde="Me conheça" title="Sobre mim" />
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-16">
         <div
-          class="inline-block px-3 py-1 mb-4 text-xs font-mono text-primary bg-white rounded-full border border-primary/20 shadow-sm"
+          class="lg:col-span-8 bg-white p-8 md:p-10 rounded-3xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow"
         >
-          Me conheça
+          <div class="flex items-center gap-3 mb-6">
+            <div class="p-2.5 bg-primary/10 rounded-xl text-primary">
+              <User class="w-6 h-6" />
+            </div>
+            <h3 class="text-2xl font-bold text-slate-800">Minha Trajetória</h3>
+          </div>
+
+          <div class="space-y-6 text-lg text-slate-600 leading-relaxed">
+            <p>
+              No dia a dia, atuo em todo o stack. No backend, utilizo a
+              eficiência de
+              <span
+                class="text-slate-900 font-semibold underline decoration-primary/30"
+                >Go e Node.js</span
+              >
+              para criar APIs seguras e rápidas. No frontend, foco na experiência
+              do usuário (UX/UI) para entregar interfaces intuitivas.
+            </p>
+            <p>
+              Estudo arquitetura de software e "Clean Code" de forma pragmática.
+              Sei a hora certa de aplicar um padrão complexo e a hora de optar
+              por uma solução simples e direta, garantindo que o código gere
+              resultado real em produção.
+            </p>
+          </div>
+        </div>
+
+        <div class="lg:col-span-4 grid grid-cols-1 gap-4">
+          <div
+            class="bg-indigo-600 p-6 rounded-3xl text-white shadow-lg shadow-indigo-200"
+          >
+            <Code2 class="w-8 h-8 mb-4 opacity-80" />
+            <p class="text-indigo-100 text-sm font-medium">Stack Principal</p>
+            <p class="text-xl font-bold">TypeScript & Go</p>
+          </div>
+
+          <div
+            class="bg-white p-6 rounded-3xl border border-slate-200 flex items-center gap-4"
+          >
+            <div class="p-3 bg-pink-50 rounded-2xl text-pink-600">
+              <Coffee class="w-6 h-6" />
+            </div>
+            <div>
+              <p class="text-sm text-slate-500">Experiência</p>
+              <p class="font-bold text-slate-800 text-lg">6 meses</p>
+            </div>
+          </div>
+
+          <div
+            class="bg-white p-6 rounded-3xl border border-slate-200 flex items-center gap-4"
+          >
+            <div class="p-3 bg-emerald-50 rounded-2xl text-emerald-600">
+              <Globe class="w-6 h-6" />
+            </div>
+            <div>
+              <p class="text-sm text-slate-500">Localização</p>
+              <p class="font-bold text-slate-800 text-lg">Brasil (Remoto)</p>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="flex flex-col gap-12">
-        <Reveal client:visible>
-          <div class="flex items-center gap-4 mb-4">
-            <User class="w-6 h-6 text-primary" />
-            <h3 class="text-3xl font-bold text-slate-900">Sobre mim</h3>
-          </div>
-          <div class="grid grid-cols-1 lg:grid-cols-4 gap-4">
-            <div class="lg:col-span-3 card">
-              <div class="flex justify-center items-center flex-col">
-                {/* O QUE EU FAÇO: Versatilidade Tech + UX/UI */}
-                <p class="text-slate-600 mb-4 leading-relaxed">
-                  No dia a dia, atuo em todo o stack. No backend, uso a
-                  eficiência de Go e Node.js para criar APIs seguras e rápidas.
-                  No frontend, foco na experiência do usuário (UX/UI) para
-                  entregar interfaces intuitivas. Meu trabalho é conectar essas
-                  duas pontas, garantindo que a alta performance do servidor se
-                  traduza em uma experiência fluida e ágil para quem navega.
-                </p>
 
-                {/* MEU DIFERENCIAL: O Pragmatismo (A parte que você gostou) */}
-                <p class="text-slate-600 leading-relaxed">
-                  Estudo arquitetura de software e "Clean Code" não por
-                  dogmatismo, mas para facilitar a vida de quem vai manter o
-                  código no futuro. Sei a hora certa de aplicar um padrão
-                  complexo e a hora de optar por uma solução simples e direta,
-                  evitando o excesso de engenharia que trava projetos, pois o
-                  código mais valioso não é o mais complexo, mas sim aquele que
-                  está rodando em produção e gerando resultado.
+      <div class="grid md:grid-cols-2 gap-8">
+        <div class="space-y-6">
+          <div class="flex items-center gap-3 px-2">
+            <GraduationCap class="w-6 h-6 text-primary" />
+            <h3 class="text-2xl font-bold text-slate-900">Educação</h3>
+          </div>
+
+          <div class="relative pl-6 border-l-2 border-slate-200 space-y-8">
+            <div class="relative">
+              <div
+                class="absolute -left-[33px] top-1 w-4 h-4 rounded-full border-4 border-white bg-primary shadow-sm"
+              >
+              </div>
+              <div
+                class="bg-white p-6 rounded-2xl border border-slate-200 hover:border-primary/30 transition-colors"
+              >
+                <span
+                  class="text-primary font-mono text-xs font-bold uppercase tracking-wider"
+                  >2023 — Presente</span
+                >
+                <h4 class="text-xl font-bold text-slate-800 mt-1">
+                  Ciência da Computação
+                </h4>
+                <p class="text-slate-500 font-medium mb-3">
+                  Univ. Estadual do Vale do Acaraú
+                </p>
+                <p class="text-slate-600 text-sm leading-relaxed">
+                  Foco em Engenharia de Software, Modelagem de Dados e POO.
                 </p>
               </div>
             </div>
-            <div class="card flex flex-col gap-6 justify-center">
-              <div class="flex items-center gap-4">
-                <div class="p-2 bg-indigo-50 rounded-lg text-indigo-600">
-                  <Code2 class="w-6 h-6" />
-                </div>
-                <div>
-                  <p class="text-sm text-slate-500">Stack Principal</p>
-                  <p class="font-semibold text-slate-800">TypeScript & Go</p>
-                </div>
+          </div>
+        </div>
+
+        <div class="space-y-6">
+          <div class="flex items-center gap-3 px-2">
+            <Briefcase class="w-6 h-6 text-primary" />
+            <h3 class="text-2xl font-bold text-slate-900">Experiência</h3>
+          </div>
+
+          <div class="relative pl-6 border-l-2 border-slate-200 space-y-8">
+            <div class="relative">
+              <div
+                class="absolute -left-[33px] top-1 w-4 h-4 rounded-full border-4 border-white bg-primary shadow-sm"
+              >
               </div>
-              <div class="flex items-center gap-4">
-                <div class="p-2 bg-purple-50 rounded-lg text-purple-600">
-                  <Globe class="w-6 h-6" />
-                </div>
-                <div>
-                  <p class="text-sm text-slate-500">Localização</p>
-                  <p class="font-semibold text-slate-800">Brasil (Remoto)</p>
-                </div>
-              </div>
-              <div class="flex items-center gap-4">
-                <div class="p-2 bg-pink-50 rounded-lg text-pink-600">
-                  <Coffee class="w-6 h-6" />
-                </div>
-                <div>
-                  <p class="text-sm text-slate-500">Experiência</p>
-                  <p class="font-semibold text-slate-800">6 meses</p>
-                </div>
+              <div
+                class="bg-white p-6 rounded-2xl border border-slate-200 hover:border-primary/30 transition-colors shadow-sm"
+              >
+                <span
+                  class="text-primary font-mono text-xs font-bold uppercase tracking-wider"
+                  >2025 — Presente</span
+                >
+                <h4 class="text-xl font-bold text-slate-800 mt-1">
+                  Desenvolvedor Fullstack
+                </h4>
+                <p class="text-slate-500 font-medium mb-3">Stackup Software</p>
+                <p class="text-slate-600 text-sm leading-relaxed">
+                  Atuo com Next.js e Tailwind no front, e APIs em
+                  Hono/TypeScript com infraestrutura AWS no backend.
+                </p>
               </div>
             </div>
           </div>
-        </Reveal>
-        <div class="grid md:grid-cols-2 gap-8">
-          <Reveal client:visible delay={400}>
-            <div class="flex items-center gap-4 mb-4">
-              <BookOpen class="w-6 h-6 text-primary" />
-              <h3 class="text-3xl font-bold text-slate-900">Educação</h3>
-            </div>
-            <div class="card group">
-              <div
-                class="flex justify-between group-hover:text-primary group-hover:font-bold"
-              >
-                <h4>Ciência da Computação</h4>
-                <span class="text-sm">2023 - Presente</span>
-              </div>
-              <p class="text-slate-500 text-sm mb-4">
-                Universidade Estadual do Vale do Acaraú
-              </p>
-              <p class="text-slate-600 text-sm leading-relaxed">
-                Na graduação consolido minha base técnica, utilizando a <strong
-                  >Engenharia de Software</strong
-                > para levantamento de requisitos e <strong
-                  >Banco de Dados</strong
-                > para modelagem com diagramas DER, além de aplicar <strong
-                  >POO</strong
-                > e <strong>Estrutura de Dados</strong> para garantir que o código
-                seja escalável e fácil de manter.
-              </p>
-            </div>
-          </Reveal>
-          <Reveal client:visible delay={600}>
-            <div class="flex items-center gap-4 mb-4">
-              <CodeXml class="w-6 h-6 text-primary" />
-              <h3 class="text-3xl font-bold text-slate-900">Experiência</h3>
-            </div>
-            <div class="card group">
-              <div
-                class="flex justify-between group-hover:text-primary group-hover:font-bold"
-              >
-                <h4>Desenvolvedor Fullstack</h4>
-                <span class="text-sm">2025 - Presente</span>
-              </div>
-              <p class="text-slate-500 text-sm mb-4">Stackup Software</p>
-              <p class="text-slate-600 text-sm leading-relaxed">
-                Responsável pelo ciclo completo de aplicações, desde o <strong
-                  >levantamento de requisitos</strong
-                > e <strong>modelagem de dados</strong> até o frontend com <strong
-                  >Next.js, Tailwind e Shadcn/ui</strong
-                >. No backend, desenvolvi APIs com <strong
-                  >Hono e TypeScript</strong
-                >, implementei funções <strong>AWS Lambda</strong> para processamento
-                escalável e gerenciei infraestrutura incluindo
-                <strong>CORS, S3</strong> e sistemas de <strong
-                  >geração de documentos via código</strong
-                >.
-              </p>
-            </div>
-          </Reveal>
         </div>
       </div>
     </Reveal>
