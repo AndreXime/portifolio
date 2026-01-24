@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "preact/hooks";
 import { ExternalLink, Github } from "lucide-preact";
-import type { Project } from "../content/projects";
+import type { Project } from "../content/types";
 import { Reveal } from "../components/Reveal";
 import SectionHeader from "../components/ui/SectionHeader";
 

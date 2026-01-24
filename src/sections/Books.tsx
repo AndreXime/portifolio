@@ -1,5 +1,5 @@
 import { Reveal } from "../components/Reveal";
-import type { Book } from "@/content/books";
+import type { Book } from "@/content/types";
 import { useState } from "preact/hooks";
 import SectionHeader from "../components/ui/SectionHeader";
 
