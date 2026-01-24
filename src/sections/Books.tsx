@@ -139,13 +139,26 @@ function CompactBookItem(book: Book) {
 				<p className="text-xs text-slate-500 truncate">{book.author}</p>
 			</div>
 
-			{/* Status simplificado */}
 			<div className="flex-shrink-0 ml-2">
-				{book.state === "Lido" ? (
-					<CheckCircle2 className="w-6 h-6 text-emerald-500" />
-				) : (
-					<Bookmark className="w-6 h-6 text-slate-300" />
-				)}
+				<span
+					className={`inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-medium border ${
+						book.state === "Lido"
+							? "bg-emerald-50 text-emerald-700 border-emerald-200"
+							: "bg-slate-50 text-slate-600 border-slate-200"
+					}`}
+				>
+					{book.state === "Lido" ? (
+						<>
+							<CheckCircle2 className="w-3.5 h-3.5" />
+							Lido
+						</>
+					) : (
+						<>
+							<Bookmark className="w-3.5 h-3.5" />
+							Pendente
+						</>
+					)}
+				</span>
 			</div>
 		</div>
 	);
