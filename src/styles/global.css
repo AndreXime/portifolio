@@ -2,6 +2,11 @@
 @import "./theme.css";
 @import "@wooorm/starry-night/style/dimmed-dark";
 
+html {
+	scroll-padding-top: 20px;
+	scroll-behavior: smooth;
+}
+
 .starry-night .pl-k {
     /* Keywords: package, import, func */
     color: #ff7b72 !important; /* Um tom de vermelho/coral claro */
