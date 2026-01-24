@@ -100,7 +100,7 @@ function ProjectCard({ project }: { project: Project }) {
 					alt={project.title}
 					loading="lazy"
 					decoding="async"
-					className={"w-full h-full object-cover pt-6 transition-all duration-700 ease-in-out lg:group-hover:scale-120"}
+					className={"w-full h-full object-fill pt-6 transition-all duration-700 ease-in-out lg:group-hover:scale-110"}
 				/>
 			</div>
 			<div className="p-5 flex flex-col flex-grow">

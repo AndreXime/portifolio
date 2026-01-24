@@ -2,6 +2,36 @@ import type { Project } from "./types";
 
 export const Projects: Project[] = [
 	{
+		title: "andre_OS: Notas, recomendações e ferramentas",
+		description:
+			"Criei esse blog com a intenção de ter um hub digital próprio onde eu pudesse centralizar tudo o que é útil para o meu dia a dia. O foco principal foi reunir, em um só lugar, ferramentas web simples que desenvolvi, recomendações de sites que utilizo e meus artigos sobre desenvolvimento. Construído com Astro e TypeScript, o projeto reflete minha busca por performance e organização. É a minha maneira de documentar o que aprendo e compartilhar recursos práticos com a comunidade.",
+		type: "app",
+		tech: ["TypeScript", "Astro", "Preact", "Ferramentas", "Blog", "Content Collections"],
+		imageUrl: "blog.png",
+		link: "https://dev.andreximenes.xyz",
+		github: "https://github.com/AndreXime/andre_OS",
+	},
+	{
+		title: "Plataforma de Captação de Projetos B2B para Freelancers",
+		description:
+			"Desenvolvi esta landing page conceitual para demonstrar, na prática, minha habilidade em criar interfaces de alta conversão utilizando a performance do Astro. Embora o projeto leve meu nome e simule uma oferta de serviços, ele serve principalmente como uma prova técnica de que sei construir páginas de vendas rápidas e profissionais do zero. O objetivo é mostrar a potenciais clientes o padrão de qualidade e otimização que posso entregar para os seus negócios.",
+		type: "landing page",
+		tech: ["TypeScript", "Astro", "Preact", "TailwindCSS", "Performance & SEO"],
+		imageUrl: "contrate.png",
+		link: "https://contrate.andreximenes.xyz/",
+		github: "https://github.com/AndreXime/contrate",
+	},
+	{
+		title: "Gerenciador de Grade Curricular Inteligente",
+		description:
+			"Desenvolvi esta aplicação para preencher uma lacuna na minha universidade: a ausência de um planejador acadêmico visual e eficiente. A ferramenta substitui o uso de planilhas manuais, permitindo que o estudante gerencie sua grade de horários de forma interativa. Construído com Next.js e Tailwind CSS, o sistema vai além da organização básica; implementei uma lógica de pré-requisitos que calcula automaticamente quais matérias estarão disponíveis para cursar nos próximos semestres, evitando conflitos e simplificando a tomada de decisão acadêmica.",
+		type: "app",
+		tech: ["TypeScript", "Next.js", "Local Storage", "Zustand"],
+		imageUrl: "disciplinas.png",
+		link: "https://disciplina-uva.andreximenes.xyz/",
+		github: "https://github.com/AndreXime/organiza-cc-uva",
+	},
+	{
 		title: "PDV para Restaurantes (Offline-First)",
 		description:
 			"Sistema de Ponto de Venda (PDV) completo para restaurantes, 100% offline, usando IndexedDB para armazenamento local de dados.",
@@ -10,26 +40,6 @@ export const Projects: Project[] = [
 		imageUrl: "restaurante.png",
 		link: "https://restaurante.andreximenes.xyz/",
 		github: "https://github.com/AndreXime/restaurante",
-	},
-	{
-		title: "Plataforma de Captação B2B para Freelancers",
-		description:
-			"Desenvolvida para empresas descobrirem e contratarem serviços de desenvolvimento. Utiliza a performance do Astro e a confiabilidade do TypeScript. A arquitetura otimizada em UI/UX transforma a experiência do usuário em uma vantagem competitiva, facilitando a decisão de contratação.",
-		type: "landing page",
-		tech: ["TypeScript", "Astro", "Preact", "SSR", "UX / UI"],
-		imageUrl: "contrate.png",
-		link: "https://contrate.andreximenes.xyz/",
-		github: "",
-	},
-	{
-		title: "Planejador Acadêmico",
-		description:
-			"Ferramenta para alunos de Ciência da Computação planejarem semestres, calculando pré-requisitos e montando grade horária visualmente.",
-		type: "app",
-		tech: ["TypeScript", "React", "Local Storage", "Estruturas de Dados"],
-		imageUrl: "disciplinas.png",
-		link: "https://disciplina-uva.andreximenes.xyz/",
-		github: "https://github.com/AndreXime/organiza-cc-uva",
 	},
 	{
 		title: "E-commerce de Eletrônicos",
@@ -41,16 +51,7 @@ export const Projects: Project[] = [
 		link: "https://ecommerce.andreximenes.xyz/",
 		github: "",
 	},
-	{
-		title: "MiniHub: Utilitários para Produtividade",
-		description:
-			"Ferramentas para o dia a dia, como gerar senhas ou até mais complexas como gerar um resumo quanto gasta de gasolina com esse trajeto por mẽs",
-		type: "app",
-		tech: ["TypeScript", "React", "Ferramenta para dia a dia", "UX / UI"],
-		imageUrl: "minihub.png",
-		link: "https://ferramentas.andreximenes.xyz/",
-		github: "http://github.com/AndreXime/minihub",
-	},
+
 	{
 		title: "E-commerce RESTful API",
 		description:
