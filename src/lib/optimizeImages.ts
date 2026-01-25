@@ -19,7 +19,7 @@ export async function optimizeImages<T extends WithImage>(items: T[], assetFolde
 				src: imageModule.default,
 				width: 800,
 				format: "webp",
-				quality: 80,
+				quality: 70,
 			});
 
 			return { ...item, imageUrl: optimized.src };
