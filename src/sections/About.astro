@@ -7,7 +7,6 @@ import {
   GraduationCap,
   Briefcase,
 } from "lucide-preact";
-import { Reveal } from "../components/Reveal";
 import SectionHeader from "../components/ui/SectionHeader";
 ---
 
@@ -25,7 +24,7 @@ import SectionHeader from "../components/ui/SectionHeader";
   </div>
 
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <Reveal client:visible>
+    <div data-reveal-time={0} class="reveal reveal-hidden">
       <SectionHeader
         bagde="Me conheça"
         title="Sobre mim"
@@ -174,6 +173,6 @@ import SectionHeader from "../components/ui/SectionHeader";
           </div>
         </div>
       </div>
-    </Reveal>
+    </div>
   </div>
 </section>

@@ -11,6 +11,7 @@ import ContactSection from "../sections/Contact";
 import { Projects } from "../content/projects";
 import { Books } from "../content/books";
 import { optimizeImages } from "../lib/optimizeImages";
+import Reveal from "../components/Reveal.astro";
 
 const optimizedProjects = await optimizeImages(Projects, "projetos");
 
@@ -35,4 +36,5 @@ const optimizedBooks = await optimizeImages(Books, "livros");
     </main>
     <FooterSection />
   </div>
+  <Reveal />
 </MainLayout>

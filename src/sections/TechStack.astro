@@ -1,11 +1,10 @@
 ---
 import { technologies } from "../content/tecnologies";
-import { Reveal } from "../components/Reveal";
 import SectionHeader from "../components/ui/SectionHeader";
 ---
 
 <section id="stack" class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-  <Reveal client:visible>
+  <div data-reveal-time={0} class="reveal reveal-hidden">
     <SectionHeader
       bagde="Habilidades"
       title="Tecnologias & Ferramentas"
@@ -15,7 +14,7 @@ import SectionHeader from "../components/ui/SectionHeader";
     <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
       {
         technologies.map(({ name, role, icons }, index) => (
-          <Reveal client:visible delay={index * 50}>
+          <div data-reveal-time={index * 50} class="reveal reveal-hidden">
             <div class="group p-6 bg-white border border-slate-200 rounded-xl flex flex-col items-center text-center transition-all hover:shadow-lg hover:bg-slate-50 hover:border-primary/50 group cursor-default h-full">
               <div
                 class={`${icons.length > 1 ? "w-24" : "w-12"} h-12 rounded-lg flex items-center justify-center
@@ -30,9 +29,9 @@ import SectionHeader from "../components/ui/SectionHeader";
               <h3 class="font-bold text-slate-800 mt-auto">{name}</h3>
               <p class="text-xs text-slate-500 mt-1">{role}</p>
             </div>
-          </Reveal>
+          </div>
         ))
       }
     </div>
-  </Reveal>
+  </div>
 </section>

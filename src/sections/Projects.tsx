@@ -1,7 +1,6 @@
 import { useMemo, useState } from "preact/hooks";
 import { ExternalLink, Github } from "lucide-preact";
 import type { Project } from "../content/types";
-import { Reveal } from "../components/Reveal";
 import SectionHeader from "../components/ui/SectionHeader";
 
 const filters: { id: Project["type"] | "all"; label: string }[] = [
@@ -23,7 +22,7 @@ export default function ProjectsSection({ projects }: { projects: Project[] }) {
 
 	return (
 		<section id="projetos" className="py-20 bg-surfaceHighlight border-y border-slate-200">
-			<Reveal>
+			<div data-reveal-time={0} class="reveal reveal-hidden">
 				<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 					<SectionHeader
 						bagde="Portfólio"
@@ -78,7 +77,7 @@ export default function ProjectsSection({ projects }: { projects: Project[] }) {
 						)}
 					</div>
 				</div>
-			</Reveal>
+			</div>
 		</section>
 	);
 }

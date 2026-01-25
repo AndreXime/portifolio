@@ -1,4 +1,3 @@
-import { Reveal } from "../components/Reveal";
 import type { Book } from "@/content/types";
 import { useState } from "preact/hooks";
 import SectionHeader from "../components/ui/SectionHeader";
@@ -20,7 +19,7 @@ export default function BooksSection({ books }: { books: Book[] }) {
 
 	return (
 		<section id="biblioteca" className="py-20 bg-slate-50 border-y border-slate-200">
-			<Reveal>
+			<div data-reveal-time={0} class="reveal reveal-hidden">
 				<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 					<SectionHeader
 						bagde="Conhecimento"
@@ -62,7 +61,7 @@ export default function BooksSection({ books }: { books: Book[] }) {
 						</div>
 					</div>
 				</div>
-			</Reveal>
+			</div>
 		</section>
 	);
 }

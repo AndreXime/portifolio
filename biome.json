@@ -7,7 +7,7 @@
 	},
 	"files": {
 		"ignoreUnknown": true,
-		"includes": ["**", "!**/*.astro", "!**/*.css"]
+		"includes": ["**", "!**/*.astro"]
 	},
 	"formatter": {
 		"enabled": true,
@@ -35,6 +35,9 @@
 			"a11y": {
 				"noSvgWithoutTitle": "off",
 				"useButtonType": "off"
+			},
+			"complexity": {
+				"noImportantStyles": "off"
 			}
 		}
 	},
