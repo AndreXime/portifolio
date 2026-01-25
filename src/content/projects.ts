@@ -32,11 +32,11 @@ export const Projects: Project[] = [
 		github: "https://github.com/AndreXime/organiza-cc-uva",
 	},
 	{
-		title: "PDV para Restaurantes (Offline-First)",
+		title: "ERP Restaurante: Arquitetura Local-First",
 		description:
-			"Sistema de Ponto de Venda (PDV) completo para restaurantes, 100% offline, usando IndexedDB para armazenamento local de dados.",
+			"Desenvolvi este sistema de gestão (ERP) para restaurantes como um desafio pessoal de engenharia: criar uma aplicação web complexa que funcionasse inteiramente no navegador, sem backend. A arquitetura é local-first e utiliza IndexedDB para persistir e gerenciar gigabytes de dados desde o histórico financeiro até o fluxo de pedidos em tempo real. O projeto é totalmente modular, integrando frentes de caixa (PDV), monitores de cozinha, gestão de delivery e contabilidade.",
 		type: "app",
-		tech: ["TypeScript", "React", "IndexedDB", "Client-Side Architecture", "PDV"],
+		tech: ["TypeScript", "React", "IndexedDB", "Client-Side Architecture"],
 		imageUrl: "restaurante.png",
 		link: "https://restaurante.andreximenes.xyz/",
 		github: "https://github.com/AndreXime/restaurante",
@@ -53,11 +53,11 @@ export const Projects: Project[] = [
 	},
 
 	{
-		title: "E-commerce RESTful API",
+		title: "E-commerce RESTful API com Go",
 		description:
-			"API RESTful completa para e-commerce (carrinho, autenticação JWT, CRUD) construída em Go com o framework Gin e GORM.",
+			"Desenvolvi esta API RESTful para e-commerce com o objetivo de explorar a eficiência e a tipagem forte do ecossistema Go. O projeto foi estruturado seguindo uma arquitetura em camadas (Repository, Service, Handler), garantindo desacoplamento e facilidade de manutenção. Além das regras de negócio como carrinho de compras e autenticação JWT, foquei em boas práticas de engenharia de software: a aplicação é totalmente containerizada com Docker, documentada via Swagger e validada por uma suíte de testes End-to-End (E2E).",
 		type: "api",
-		tech: ["Go (Golang)", "Gin Framework", "GORM", "Swagger", "Testes E2E", "API REST"],
+		tech: ["Go", "Gin Framework", "GORM", "Swagger", "Testes E2E", "API REST"],
 		imageUrl: "lojagin.png",
 		link: "",
 		github: "https://github.com/AndreXime/lojagin-api",
@@ -65,19 +65,19 @@ export const Projects: Project[] = [
 	{
 		title: "PixelPress: Processador de Imagens via CLI",
 		description:
-			"Ferramenta CLI para edição em massa de imagens com interface interativa, focada em compressão inteligente e conversão de formato.",
+			"Uma ferramenta de linha de comando interativa para conversão e compressão de imagens em massa. Desenvolvida em Go, utiliza o framework Bubble Tea para a interface e orquestra o FFmpeg em segundo plano. Implementei uma lógica de compressão recursiva que ajusta a qualidade automaticamente até que o arquivo atinja o tamanho alvo definido pelo usuário.",
 		type: "cli",
-		tech: ["Go (Golang)", "CLI", "FFmpeg", "Otimização de Imagens"],
+		tech: ["Go", "CLI", "FFmpeg", "Otimização de Imagens"],
 		imageUrl: "pixelpress.png",
 		link: "",
 		github: "https://github.com/AndreXime/pixel-press",
 	},
 	{
-		title: "Media Downloader via Linha de Comando",
+		title: "YouTube Downloader via Linha de Comando",
 		description:
-			"Ferramenta CLI para baixar videos e musicas do youtube usando yt-dlp, tendo a possibilidade de baixar a playlist inteira.",
+			"Criei esse CLI para resolver a frustração de baixar músicas em massa, já que os conversores online geralmente impõem limites. Desenvolvido em Go, o projeto atua como uma interface para o yt-dlp, permitindo baixar playlists inteiras e converter para MP3 ou MP4 automaticamente. O diferencial está no UX no terminal, utilizei as bibliotecas huh e lipgloss para criar formulários elegantes e implementei concorrência com goroutines e channels para renderizar o progresso do download e o status dos arquivos na pasta simultaneamente, sem travar a interface.",
 		type: "cli",
-		tech: ["Go (Golang)", "CLI", "yt-dlp", "Downloader"],
+		tech: ["Go", "CLI", "yt-dlp", "Concurrency"],
 		imageUrl: "yt-downloader.png",
 		link: "",
 		github: "https://github.com/AndreXime/youtube-downloader",
