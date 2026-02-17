@@ -166,7 +166,7 @@ export default function Contact() {
 							<button
 								type="submit"
 								disabled={loading}
-								className="w-full disabled:bg-primary/50 py-3 bg-primary text-white font-bold rounded-lg hover:bg-primaryDark transition-colors shadow-lg shadow-primary/25"
+								className="w-full disabled:bg-primaryDark/50 py-3 bg-primaryDark text-white font-bold rounded-lg hover:bg-primary hover:shadow-xl transition-all shadow-lg shadow-primary/25"
 							>
 								{!loading ? (
 									"Enviar Mensagem"

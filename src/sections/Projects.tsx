@@ -41,7 +41,7 @@ export default function ProjectsSection({ projects }: { projects: Project[] }) {
 									aria-label={`Filtrar por ${f.label}`}
 									className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
 										filter === f.id
-											? "bg-primary text-white shadow-lg shadow-primary/30"
+											? "bg-primaryDark text-white shadow-lg shadow-primary/30"
 											: "bg-surface text-textMuted border border-border hover:border-primary hover:text-primary"
 									}`}
 								>
@@ -72,7 +72,7 @@ export default function ProjectsSection({ projects }: { projects: Project[] }) {
 									type="button"
 									onClick={() => setFilter(filter === "all" ? "minimal" : "all")}
 									aria-label={filter === "minimal" ? "Expandir para ver todos os projetos" : "Recolher e mostrar menos projetos"}
-									className={`px-4 py-2 rounded-lg font-medium transition-all bg-primary text-white shadow-lg shadow-primary/30`}
+									className={`px-4 py-2 rounded-lg font-medium transition-all bg-primaryDark text-white shadow-lg shadow-primary/30 hover:bg-primary hover:shadow-xl`}
 								>
 									{filter === "minimal" && "Ver todos projetos"}
 									{filter === "all" && "Esconder projetos"}

@@ -8,7 +8,7 @@ interface Props {
 export default function SectionHeader({ bagde, title, subtitle, children }: Props) {
 	return (
 		<div class="text-center mb-14">
-			<span class="inline-block px-4 py-1.5 mb-4 text-xs font-semibold tracking-widest uppercase text-primary bg-primary/10 rounded-full border border-primary/20">
+			<span class="inline-block px-4 py-1.5 mb-4 text-xs font-semibold tracking-widest uppercase text-primaryDark bg-primary/20 rounded-full border border-primary/30">
 				{bagde}
 			</span>
 			<h2 class="text-4xl font-extrabold text-textMain tracking-tight">{title}</h2>

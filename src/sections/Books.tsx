@@ -56,7 +56,7 @@ export default function BooksSection({ books }: { books: Book[] }) {
 								onClick={() => setExpand(!expand)}
 								aria-label={!expand ? "Expandir para ver todos os livros da biblioteca" : "Recolher e mostrar menos livros"}
 								aria-expanded={expand}
-								className={`px-4 py-2 rounded-lg font-medium transition-all bg-primary text-white shadow-lg shadow-primary/30`}
+								className={`px-4 py-2 rounded-lg font-medium transition-all bg-primaryDark text-white shadow-lg shadow-primary/30 hover:bg-primary hover:shadow-xl`}
 							>
 								{!expand ? "Ver biblioteca completa" : "Esconder livros"}
 							</button>
