@@ -1,24 +1,69 @@
-
 # Portfólio - André Ximenes
 
-O meu espaço pessoal na web para apresentar projetos, compartilhar a minha stack tecnológica e listar as minhas leituras atuais. Este projeto foi desenvolvido com foco absoluto em performance, SEO e uma experiência de navegação fluida.
+Portfólio pessoal desenvolvido com arquitetura híbrida (static + SSR) focado em performance máxima e conversão. Implementa otimizações agressivas de imagem, hidratação parcial de componentes e animações baseadas em Intersection Observer.
 
-## Tecnologias Utilizadas
+**Acesse:** [https://andreximenes.xyz](https://andreximenes.xyz)
 
-* **[Astro 5](https://astro.build/)**: Escolhido para gerar um site estático por padrão, entregando HTML puro e garantindo a máxima velocidade de carregamento e otimização para motores de busca.
-* **[Preact](https://preactjs.com/)**: Utilizado para adicionar interatividade pontual, como os filtros de projetos e formulários, mantendo o bundle JavaScript extremamente leve.
-* **[Tailwind CSS v4](https://tailwindcss.com/)**: Adotado para criar um design responsivo e moderno de forma ágil, utilizando a versão mais recente e performática do framework.
-* **[TypeScript](https://www.typescriptlang.org/)**: Implementado para garantir a integridade do código e segurança de tipos em todo o desenvolvimento do frontend e lógica de servidor.
-* **[Nodemailer](https://nodemailer.com/)**: Integrado para gerir o envio de formulários de contato diretamente através de serverless functions, sem depender de serviços de terceiros.
+## Stack
 
-## Funcionalidades
+* **[Astro 5](https://astro.build/)** - SSG com output estático e SSR pontual para API routes
+* **[Preact](https://preactjs.com/)** - Hidratação cliente com `client:visible` para reduzir bundle
+* **[Tailwind CSS v4](https://tailwindcss.com/)** - Sistema de design via Vite plugin
+* **[TypeScript](https://www.typescriptlang.org/)** - Tipagem estrita end-to-end
+* **[Nodemailer](https://nodemailer.com/)** - SMTP direto via Gmail em serverless function
 
-A aplicação estrutura-se nas seguintes secções e capacidades:
+## Features Técnicas
 
-* **Showcase de Projetos**: Sistema de filtragem dinâmico (Web Apps, APIs, CLI, Landing Pages) para navegação intuitiva pelo meu trabalho.
-* **Tech Stack**: Apresentação visual organizada das linguagens e ferramentas que domino, desde o Frontend até DevOps.
-* **Biblioteca Pessoal**: Secção dedicada aos livros e materiais de estudo que influenciam o meu desenvolvimento profissional.
-* **Formulário de Contato**: Comunicação funcional integrada diretamente na plataforma.
-* **SEO Automatizado**: Geração automática de sitemap e metadados otimizados para indexação.
-* **Design Responsivo**: Interface adaptável com suporte a animações de entrada suaves ("Reveal").
+### Otimizações de Performance
+- **Imagens**: Pipeline de conversão para WebP (70% qualidade) e resize para 800px na build
+- **Hidratação Parcial**: JS carregado apenas quando componentes ficam visíveis (`client:visible`) para melhorar TTI e TBT
+- **Reveal Animations**: Intersection Observer custom substituindo bibliotecas (AOS, Framer Motion) para reduzir bundle
+- **Inline Stylesheets**: CSS crítico injetado no HTML para eliminar FOUC
+- **Static Output**: Páginas estáticas servidas por CDN edge para performance extrema
 
+### API de Contato
+Endpoint SSR em `/api/contact.ts` com envio direto via SMTP do Gmail, sem dependência de serviços terceiros.
+
+## Performance Metrics
+
+- **Lighthouse Score**: 100/100/100/100 (Performance/Accessibility/Best Practices/SEO)
+- **First Contentful Paint**: 0.9s
+- **Largest Contentful Paint**: 0,9 s
+- **Speed Index**: 0,9 s
+- **Total Blocking Time**: 0 ms
+- **Cumulative Layout Shift**: 0
+
+## Arquitetura
+
+```
+src/
+├── content/        # Data sources (projects, books, tech stack, social)
+├── sections/       # Componentes de seção (Hero, Projects, Contact, etc.)
+├── components/     # Componentes reutilizáveis (Reveal, UI primitives)
+├── lib/            # Utilitários (otimização de imagens)
+├── pages/
+│   ├── index.astro    # SSG
+│   └── api/
+│       └── contact.ts # SSR
+└── layout/         # Layout base com metadados SEO
+```
+
+## Desenvolvimento
+
+```bash
+npm install
+npm run dev      # http://localhost:4321
+npm run build    # Gera output em dist/
+npm run preview  # Preview da build local
+```
+
+### Variáveis de Ambiente
+
+Crie `.env` na raiz para ativar o formulário de contato:
+
+```env
+EMAIL_USER=seu-email@gmail.com
+EMAIL_PASS=sua-app-password
+```
+
+> **Nota:** `EMAIL_PASS` deve ser uma App Password do Gmail, não a senha principal.
