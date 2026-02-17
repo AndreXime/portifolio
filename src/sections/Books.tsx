@@ -5,9 +5,9 @@ import SectionHeader from "../components/ui/SectionHeader";
 import { Bookmark, CheckCircle2 } from "lucide-preact";
 
 const STYLE_MAP: Record<Book["state"], string> = {
-	Lido: "bg-emerald-100 text-emerald-700 border-emerald-200",
-	"Lendo atualmente": "bg-blue-100 text-blue-700 border-blue-200",
-	"Na lista de desejos": "bg-slate-100 text-slate-600 border-slate-200",
+	Lido: "bg-successBg text-success border-successBorder",
+	"Lendo atualmente": "bg-infoBg text-info border-infoBorder",
+	"Na lista de desejos": "bg-surfaceHighlight text-textMuted border-border",
 };
 
 export default function BooksSection({ books }: { books: Book[] }) {
@@ -18,7 +18,7 @@ export default function BooksSection({ books }: { books: Book[] }) {
 	const booksView = expand ? mainBooks : mainBooks.slice(0, 3);
 
 	return (
-		<section id="biblioteca" className="py-20 bg-slate-50 border-y border-slate-200">
+		<section id="biblioteca" className="py-20 bg-section5 border-y border-border">
 			<div data-reveal-time={0} class="reveal reveal-hidden">
 				<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 					<SectionHeader
@@ -54,7 +54,7 @@ export default function BooksSection({ books }: { books: Book[] }) {
 							<button
 								type="button"
 								onClick={() => setExpand(!expand)}
-								className={`px-4 py-2 rounded-lg font-medium transition-all bg-primary text-white shadow-lg shadow-blue-500/30`}
+								className={`px-4 py-2 rounded-lg font-medium transition-all bg-primary text-white shadow-lg shadow-primary/30`}
 							>
 								{!expand ? "Ver biblioteca completa" : "Esconder livros"}
 							</button>
@@ -68,10 +68,9 @@ export default function BooksSection({ books }: { books: Book[] }) {
 
 function BookCard(book: Book) {
 	return (
-		<div className="bg-white rounded-2xl overflow-hidden border border-slate-200 hover:border-primary/40 flex flex-col h-full transition-all duration-300 hover:shadow-lg group">
-			{/* Container da Imagem */}
-			<div className="relative h-64 w-full bg-slate-100 overflow-hidden flex items-center justify-center border-b border-slate-100">
-				<div className="absolute inset-0 bg-gradient-to-t from-slate-900/20 to-transparent z-10" />
+		<div className="bg-surface rounded-2xl overflow-hidden border border-border/60 hover:border-primary/40 flex flex-col h-full transition-all duration-300 hover:shadow-lg group">
+			<div className="relative h-64 w-full bg-surfaceHighlight overflow-hidden flex items-center justify-center border-b border-borderLight/60">
+				<div className="absolute inset-0 bg-gradient-to-t from-textMain/20 to-transparent z-10" />
 				<img
 					src={book.imageUrl}
 					alt={book.title}
@@ -83,7 +82,6 @@ function BookCard(book: Book) {
 				/>
 			</div>
 
-			{/* Conteúdo */}
 			<div className="p-6 flex flex-col flex-grow">
 				<div className="flex justify-start items-start mb-3 gap-3">
 					<span
@@ -100,13 +98,13 @@ function BookCard(book: Book) {
 					</span>
 				</div>
 
-				<h3 className="text-xl font-bold text-slate-800 mb-1 group-hover:text-primary transition-colors">
+				<h3 className="text-xl font-bold text-textSecondary mb-1 group-hover:text-primary transition-colors">
 					{book.title}
 				</h3>
-				<p className="text-sm text-slate-400 mb-4">por {book.author}</p>
+				<p className="text-sm text-textSubtle mb-4">por {book.author}</p>
 
 				<div className="relative">
-					<p className="text-slate-600 text-sm leading-relaxed italic relative z-10">
+					<p className="text-textMuted text-sm leading-relaxed italic relative z-10">
 						{book.review || "Sem comentário disponível no momento."}
 					</p>
 				</div>
@@ -117,8 +115,7 @@ function BookCard(book: Book) {
 
 function CompactBookItem(book: Book) {
 	return (
-		<div className="flex items-center p-3 bg-white rounded-lg border border-slate-100 hover:border-slate-300 transition-colors">
-			{/* Opcional: Miniatura muito pequena ou apenas ícone */}
+		<div className="flex items-center p-3 bg-surface rounded-lg border border-border/50 hover:border-border transition-colors">
 			<div className="h-10 w-8 rounded overflow-hidden relative flex-shrink-0 mr-3">
 				<img
 					src={book.imageUrl}
@@ -132,18 +129,18 @@ function CompactBookItem(book: Book) {
 			</div>
 
 			<div className="flex-grow min-w-0">
-				<h3 className="text-sm font-medium text-slate-800 truncate" title={book.title}>
+				<h3 className="text-sm font-medium text-textSecondary truncate" title={book.title}>
 					{book.title}
 				</h3>
-				<p className="text-xs text-slate-500 truncate">{book.author}</p>
+				<p className="text-xs text-textMuted truncate">{book.author}</p>
 			</div>
 
 			<div className="flex-shrink-0 ml-2">
 				<span
 					className={`inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-medium border ${
 						book.state === "Lido"
-							? "bg-emerald-50 text-emerald-700 border-emerald-200"
-							: "bg-slate-50 text-slate-600 border-slate-200"
+							? "bg-successBg text-success border-successBorder"
+							: "bg-surfaceAlt text-textMuted border-border"
 					}`}
 				>
 					{book.state === "Lido" ? (

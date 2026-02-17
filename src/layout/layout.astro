@@ -104,6 +104,13 @@ const schema = JSON.stringify({
       name="google-site-verification"
       content="V6lQaAceqx1PlAlPl025VMbrP0UIHJvDdRxosI7FKSk"
     />
+    <script is:inline>
+      (function() {
+        const theme = localStorage.getItem("theme") || 
+          (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+        document.documentElement.setAttribute("data-theme", theme);
+      })();
+    </script>
     <script is:inline defer type="application/ld+json" set:html={schema} />
 
     {/* Ícones */}

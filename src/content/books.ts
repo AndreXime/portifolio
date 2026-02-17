@@ -20,6 +20,15 @@ export const Books: Book[] = [
 		imageUrl: "philosophy.jpg",
 	},
 	{
+		title: "Refactoring UI",
+		author: "Adam Wathan & Steve Schoger",
+		state: "Na lista de desejos",
+		tag: "Frontend",
+		review:
+			"Meus sistemas funcionam bem, mas sempre ficam com aquela cara de 'feito por programador'. Não quero teoria das cores, quero a prática: quanto de sombra usar, qual tamanho de fonte, como alinhar. É para deixar meu projeto com cara profissional sem eu precisar virar designer.",
+		imageUrl: "refactoring-ui.png",
+	},
+	{
 		title: "Start small, Stay small",
 		author: "Rob Walling",
 		state: "Na lista de desejos",
@@ -36,15 +45,6 @@ export const Books: Book[] = [
 		review:
 			"Todo mundo mente para ser educado quando mostro minhas ideias. Quero ler esse livro para aprender a fazer as perguntas certas e descobrir se o problema do cliente é real mesmo, antes de desperdiçar 3 meses codando um software que vai pro lixo.",
 		imageUrl: "teste-mae.jpg",
-	},
-	{
-		title: "Refactoring UI",
-		author: "Adam Wathan & Steve Schoger",
-		state: "Na lista de desejos",
-		tag: "Frontend",
-		review:
-			"Meus sistemas funcionam bem, mas sempre ficam com aquela cara de 'feito por programador'. Não quero teoria das cores, quero a prática: quanto de sombra usar, qual tamanho de fonte, como alinhar. É para deixar meu projeto com cara profissional sem eu precisar virar designer.",
-		imageUrl: "refactoring-ui.png",
 	},
 	{
 		title: "Leis da Psicologia Aplicadas a UX",

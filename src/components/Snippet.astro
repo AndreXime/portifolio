@@ -10,7 +10,7 @@ interface Props {
 
 const { code, lang } = Astro.props;
 
-// Inicializa o engine (Isso roda apenas no servidor)
+// Inicializa o engine
 const starryNight = await createStarryNight(all);
 const scope = starryNight.flagToScope(lang);
 
@@ -20,6 +20,6 @@ const highlightedHtml = toHtml(tree);
 ---
 
 <pre
-    class="text-slate-100 text-sm overflow-auto">
+    class="text-codeText text-sm overflow-auto">
         <code class={`language-${lang} starry-night`} set:html={highlightedHtml} />
 </pre>

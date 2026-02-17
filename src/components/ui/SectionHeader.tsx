@@ -11,8 +11,8 @@ export default function SectionHeader({ bagde, title, subtitle, children }: Prop
 			<span class="inline-block px-4 py-1.5 mb-4 text-xs font-semibold tracking-widest uppercase text-primary bg-primary/10 rounded-full border border-primary/20">
 				{bagde}
 			</span>
-			<h2 class="text-4xl font-extrabold text-slate-900 tracking-tight">{title}</h2>
-			<p class="text-slate-500 max-w-3xl mx-auto mt-4 mb-5">{subtitle}</p>
+			<h2 class="text-4xl font-extrabold text-textMain tracking-tight">{title}</h2>
+			<p class="text-textMuted max-w-3xl mx-auto mt-4 mb-5">{subtitle}</p>
 			{children}
 		</div>
 	);

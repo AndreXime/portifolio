@@ -60,11 +60,12 @@ export default function Contact() {
 	}
 
 	return (
-		<section id="contato" className="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+		<section id="contato" className="py-20 bg-section6">
+			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 			<div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-start">
 				<div data-reveal-time={0} class="reveal reveal-hidden">
-					<h2 className="text-3xl font-bold text-slate-900 mb-6">Vamos trabalhar juntos?</h2>
-					<p className="text-slate-600 mb-8 leading-relaxed">
+					<h2 className="text-3xl font-bold text-textMain mb-6">Vamos trabalhar juntos?</h2>
+					<p className="text-textMuted mb-8 leading-relaxed">
 						Estou sempre aberto a novas oportunidades, projetos freelance ou apenas um bate-papo sobre tecnologia.
 						Sinta-se à vontade para entrar em contato!
 					</p>
@@ -74,14 +75,14 @@ export default function Contact() {
 							href={`mailto:${socialLinks.email}`}
 							target="_blank"
 							rel="noreferrer"
-							className="flex items-center gap-4 p-4 bg-white border border-slate-100 rounded-xl hover:border-primary/50 hover:shadow-md transition-all group"
+							className="flex items-center gap-4 p-4 bg-surface border border-border/60 rounded-xl hover:border-primary/50 hover:shadow-md transition-all group"
 						>
-							<div className="w-10 h-10 bg-slate-100 rounded-full flex items-center justify-center text-slate-600 group-hover:bg-primary group-hover:text-white transition-colors">
+							<div className="w-10 h-10 bg-surfaceHighlight rounded-full flex items-center justify-center text-textMuted group-hover:bg-primary group-hover:text-white transition-colors">
 								<Mail className="w-5 h-5" />
 							</div>
 							<div>
-								<p className="text-sm text-slate-500">Email</p>
-								<p className="font-medium text-slate-800">{socialLinks.email}</p>
+								<p className="text-sm text-textMuted">Email</p>
+								<p className="font-medium text-textSecondary">{socialLinks.email}</p>
 							</div>
 						</a>
 
@@ -89,14 +90,14 @@ export default function Contact() {
 							href={socialLinks.linkedin}
 							target="_blank"
 							rel="noreferrer"
-							className="flex items-center gap-4 p-4 bg-white border border-slate-100 rounded-xl hover:border-primary/50 hover:shadow-md transition-all group"
+							className="flex items-center gap-4 p-4 bg-surface border border-border/60 rounded-xl hover:border-primary/50 hover:shadow-md transition-all group"
 						>
-							<div className="w-10 h-10 bg-slate-100 rounded-full flex items-center justify-center text-slate-600 group-hover:bg-primary group-hover:text-white transition-colors">
+							<div className="w-10 h-10 bg-surfaceHighlight rounded-full flex items-center justify-center text-textMuted group-hover:bg-primary group-hover:text-white transition-colors">
 								<Linkedin className="w-5 h-5" />
 							</div>
 							<div>
-								<p className="text-sm text-slate-500">LinkedIn</p>
-								<p className="font-medium text-slate-800">{socialLinks.linkedin.substring(12)}</p>
+								<p className="text-sm text-textMuted">LinkedIn</p>
+								<p className="font-medium text-textSecondary">{socialLinks.linkedin.substring(12)}</p>
 							</div>
 						</a>
 
@@ -104,54 +105,54 @@ export default function Contact() {
 							href={socialLinks.github}
 							target="_blank"
 							rel="noreferrer"
-							className="flex items-center gap-4 p-4 bg-white border border-slate-100 rounded-xl hover:border-primary/50 hover:shadow-md transition-all group"
+							className="flex items-center gap-4 p-4 bg-surface border border-border/60 rounded-xl hover:border-primary/50 hover:shadow-md transition-all group"
 						>
-							<div className="w-10 h-10 bg-slate-100 rounded-full flex items-center justify-center text-slate-600 group-hover:bg-primary group-hover:text-white transition-colors">
+							<div className="w-10 h-10 bg-surfaceHighlight rounded-full flex items-center justify-center text-textMuted group-hover:bg-primary group-hover:text-white transition-colors">
 								<Github className="w-5 h-5" />
 							</div>
 							<div>
-								<p className="text-sm text-slate-500">GIthub</p>
-								<p className="font-medium text-slate-800">{socialLinks.github.substring(8)}</p>
+								<p className="text-sm text-textMuted">GIthub</p>
+								<p className="font-medium text-textSecondary">{socialLinks.github.substring(8)}</p>
 							</div>
 						</a>
 					</div>
 				</div>
 
 				<div data-reveal-time={100} class="reveal reveal-hidden">
-					<div className="bg-white p-8 rounded-2xl border border-slate-200 shadow-lg flex flex-col">
+					<div className="bg-surface p-8 rounded-2xl border border-border/60 shadow-lg flex flex-col">
 						<form className="space-y-4" onSubmit={handleSubmit}>
 							<div>
-								<label htmlFor="name" className="block text-sm font-medium text-slate-700 mb-1">
+								<label htmlFor="name" className="block text-sm font-medium text-textSecondary mb-1">
 									Nome
 								</label>
 								<input
 									type="text"
 									name="name"
-									className="w-full px-4 py-2 bg-slate-50 border border-slate-200 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all"
+									className="w-full px-4 py-2 bg-surfaceAlt border border-border/60 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all"
 									placeholder="Seu nome"
 									required
 								/>
 							</div>
 							<div>
-								<label htmlFor="email" className="block text-sm font-medium text-slate-700 mb-1">
+								<label htmlFor="email" className="block text-sm font-medium text-textSecondary mb-1">
 									Email
 								</label>
 								<input
 									type="email"
 									name="email"
-									className="w-full px-4 py-2 bg-slate-50 border border-slate-200 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all"
+									className="w-full px-4 py-2 bg-surfaceAlt border border-border/60 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all"
 									placeholder="seu@email.com"
 									required
 								/>
 							</div>
 							<div>
-								<label htmlFor="message" className="block text-sm font-medium text-slate-700 mb-1">
+								<label htmlFor="message" className="block text-sm font-medium text-textSecondary mb-1">
 									Mensagem
 								</label>
 								<textarea
 									name="message"
 									rows={4}
-									className="w-full px-4 py-2 bg-slate-50 border border-slate-200 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all resize-none"
+									className="w-full px-4 py-2 bg-surfaceAlt border border-border/60 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all resize-none"
 									placeholder="Como posso ajudar?"
 									required
 								></textarea>
@@ -159,7 +160,7 @@ export default function Contact() {
 							<button
 								type="submit"
 								disabled={loading}
-								className="w-full disabled:bg-primary/50 py-3 bg-primary text-white font-bold rounded-lg hover:bg-primaryDark transition-colors shadow-lg shadow-blue-500/25"
+								className="w-full disabled:bg-primary/50 py-3 bg-primary text-white font-bold rounded-lg hover:bg-primaryDark transition-colors shadow-lg shadow-primary/25"
 							>
 								{!loading ? (
 									"Enviar Mensagem"
@@ -174,12 +175,12 @@ export default function Contact() {
 						{showToast.message && (
 							<div className="py-3 px-5 text-center flex justify-center items-center mt-5">
 								{showToast.status === "Error" && (
-									<span className="flex gap-2 font-bold text-red-500">
+									<span className="flex gap-2 font-bold text-error">
 										<X /> {showToast.message}
 									</span>
 								)}
 								{showToast.status === "Sucesso" && (
-									<span className="flex gap-2 font-bold text-green-500">
+									<span className="flex gap-2 font-bold text-success">
 										<Check /> {showToast.message}
 									</span>
 								)}
@@ -187,6 +188,7 @@ export default function Contact() {
 						)}
 					</div>
 				</div>
+			</div>
 			</div>
 		</section>
 	);

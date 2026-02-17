@@ -1,5 +1,5 @@
 ---
-import { Code, Code2, Menu, X } from "lucide-preact";
+import { Code, Code2, Menu, X, Sun, Moon } from "lucide-preact";
 
 const navLinks = [
   { name: "Sobre", href: "#sobre" },
@@ -11,7 +11,7 @@ const navLinks = [
 
 <nav
   id="sidebar"
-  class={`fixed w-full z-50 top-0 left-0 transition-all duration-300 bg-white/85 backdrop-blur-md border-b border-slate-200`}
+  class={`fixed w-full z-50 top-0 left-0 transition-all duration-300 bg-surface/60 backdrop-blur-xl backdrop-saturate-150 border-b border-border/40 shadow-sm`}
 >
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex items-center justify-between h-16">
@@ -21,7 +21,7 @@ const navLinks = [
         >
           <Code2 class="w-6 h-6" />
         </div>
-        <span class="font-bold text-xl tracking-tight text-slate-800">
+        <span class="font-bold text-xl tracking-tight text-textSecondary">
           André<span class="text-primary"> Desenvolvedor</span>
         </span>
       </a>
@@ -31,41 +31,61 @@ const navLinks = [
           navLinks.map((link) => (
             <a
               href={link.href}
-              class="text-sm font-medium text-slate-600 hover:text-primary transition-colors cursor-pointer"
+              class="text-sm font-medium text-textMuted hover:text-primary transition-colors cursor-pointer"
             >
               {link.name}
             </a>
           ))
         }
+        <button
+          aria-label="alternar tema"
+          type="button"
+          class="p-2 text-textMuted hover:text-primary transition-colors rounded-lg hover:bg-surfaceHighlight"
+          id="theme-toggle"
+        >
+          <Sun class="w-5 h-5" id="icon-sun" />
+          <Moon class="w-5 h-5 hidden" id="icon-moon" />
+        </button>
         <a
           href="#contato"
-          class="text-sm font-medium bg-slate-900 text-white hover:bg-primary px-5 py-2 rounded-full transition-colors cursor-pointer"
+          class="text-sm font-medium bg-btnSecondary text-btnSecondaryText hover:bg-primary hover:text-white px-5 py-2 rounded-full transition-colors cursor-pointer"
         >
           Vamos conversar
         </a>
       </div>
 
-      <button
-        aria-label="botão mobile menu"
-        type="button"
-        class="md:hidden p-2 text-slate-600"
-        id="menu-toggle"
-      >
-        <Menu class="w-6 h-6" id="icon-menu" />
-        <X class="w-6 h-6 hidden" id="icon-close" />
-      </button>
+      <div class="flex md:hidden items-center gap-2">
+        <button
+          aria-label="alternar tema"
+          type="button"
+          class="p-2 text-textMuted hover:text-primary transition-colors rounded-lg hover:bg-surfaceHighlight"
+          id="theme-toggle-mobile"
+        >
+          <Sun class="w-5 h-5" id="icon-sun-mobile" />
+          <Moon class="w-5 h-5 hidden" id="icon-moon-mobile" />
+        </button>
+        <button
+          aria-label="botão mobile menu"
+          type="button"
+          class="p-2 text-textMuted"
+          id="menu-toggle"
+        >
+          <Menu class="w-6 h-6" id="icon-menu" />
+          <X class="w-6 h-6 hidden" id="icon-close" />
+        </button>
+      </div>
     </div>
   </div>
 
   <div
     id="mobile-menu"
-    class="hidden md:hidden bg-white border-b border-border px-4 py-4 space-y-4 shadow-lg animate-in slide-in-from-top-5"
+    class="hidden md:hidden bg-surface border-b border-border/60 px-4 py-4 space-y-4 shadow-lg animate-in slide-in-from-top-5"
   >
     {
       navLinks.map((link) => (
         <a
           href={link.href}
-          class="block text-slate-600 hover:text-primary font-medium cursor-pointer"
+          class="block text-textMuted hover:text-primary font-medium cursor-pointer"
         >
           {link.name}
         </a>
@@ -77,6 +97,53 @@ const navLinks = [
   </div>
 
   <script is:inline type="module">
+    function setupTheme() {
+      const iconSun = document.getElementById("icon-sun");
+      const iconMoon = document.getElementById("icon-moon");
+      const iconSunMobile = document.getElementById("icon-sun-mobile");
+      const iconMoonMobile = document.getElementById("icon-moon-mobile");
+
+      function updateIcons(theme) {
+        if (theme === "dark") {
+          iconSun?.classList.remove("hidden");
+          iconMoon?.classList.add("hidden");
+          iconSunMobile?.classList.remove("hidden");
+          iconMoonMobile?.classList.add("hidden");
+        } else {
+          iconSun?.classList.add("hidden");
+          iconMoon?.classList.remove("hidden");
+          iconSunMobile?.classList.add("hidden");
+          iconMoonMobile?.classList.remove("hidden");
+        }
+      }
+
+      function getTheme() {
+        const savedTheme = localStorage.getItem("theme");
+        if (savedTheme) return savedTheme;
+        
+        return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      }
+
+      function setTheme(theme) {
+        const validTheme = theme === "dark" ? "dark" : "light";
+        document.documentElement.setAttribute("data-theme", validTheme);
+        localStorage.setItem("theme", validTheme);
+        updateIcons(validTheme);
+      }
+
+      function toggleTheme() {
+        const currentTheme = document.documentElement.getAttribute("data-theme");
+        const newTheme = currentTheme === "dark" ? "light" : "dark";
+        setTheme(newTheme);
+      }
+
+      const initialTheme = getTheme();
+      setTheme(initialTheme);
+
+      document.getElementById("theme-toggle")?.addEventListener("click", toggleTheme);
+      document.getElementById("theme-toggle-mobile")?.addEventListener("click", toggleTheme);
+    }
+
     function setupNavbar() {
       const menuToggle = document.getElementById("menu-toggle");
       const mobileMenu = document.getElementById("mobile-menu");
@@ -90,7 +157,6 @@ const navLinks = [
         iconClose?.classList.add("hidden");
       }
 
-      // Toggle Menu Mobile
       menuToggle?.addEventListener("click", () => {
         const isHidden = mobileMenu?.classList.contains("hidden");
 
@@ -103,7 +169,6 @@ const navLinks = [
         }
       });
 
-      // Clique nos links para fechar o menu
       sidebarLinks.forEach((link) => {
         link.addEventListener("click", () => {
           closeMenu();
@@ -111,6 +176,7 @@ const navLinks = [
       });
     }
 
+    setupTheme();
     setupNavbar();
   </script>
 </nav>

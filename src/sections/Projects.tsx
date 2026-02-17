@@ -21,7 +21,7 @@ export default function ProjectsSection({ projects }: { projects: Project[] }) {
 	}, [filter]);
 
 	return (
-		<section id="projetos" className="py-20 bg-surfaceHighlight border-y border-slate-200">
+		<section id="projetos" className="py-20 bg-section4 border-y border-border">
 			<div data-reveal-time={0} class="reveal reveal-hidden">
 				<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 					<SectionHeader
@@ -38,8 +38,8 @@ export default function ProjectsSection({ projects }: { projects: Project[] }) {
 									onClick={() => setFilter(f.id)}
 									className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
 										filter === f.id
-											? "bg-primary text-white shadow-lg shadow-blue-500/30"
-											: "bg-white text-slate-600 border border-slate-200 hover:border-primary hover:text-primary"
+											? "bg-primary text-white shadow-lg shadow-primary/30"
+											: "bg-surface text-textMuted border border-border hover:border-primary hover:text-primary"
 									}`}
 								>
 									{f.label}
@@ -68,7 +68,7 @@ export default function ProjectsSection({ projects }: { projects: Project[] }) {
 								<button
 									type="button"
 									onClick={() => setFilter(filter === "all" ? "minimal" : "all")}
-									className={`px-4 py-2 rounded-lg font-medium transition-all bg-primary text-white shadow-lg shadow-blue-500/30`}
+									className={`px-4 py-2 rounded-lg font-medium transition-all bg-primary text-white shadow-lg shadow-primary/30`}
 								>
 									{filter === "minimal" && "Ver todos projetos"}
 									{filter === "all" && "Esconder projetos"}
@@ -84,12 +84,12 @@ export default function ProjectsSection({ projects }: { projects: Project[] }) {
 
 function ProjectCard({ project }: { project: Project }) {
 	return (
-		<div className="group bg-surface rounded-xl overflow-hidden border border-border hover:border-primary/30 flex flex-col h-full shadow-sm hover:shadow-xl">
-			<div className="relative group cursor-pointer h-48 overflow-hidden bg-slate-50 border-b border-slate-100">
-				<div className="absolute top-0 left-0 w-full h-6 bg-slate-100 border-b border-slate-200 z-20 flex items-center px-2 gap-1.5">
-					<div className="w-2.5 h-2.5 rounded-full bg-red-400/80"></div>
-					<div className="w-2.5 h-2.5 rounded-full bg-yellow-400/80"></div>
-					<div className="w-2.5 h-2.5 rounded-full bg-green-400/80"></div>
+		<div className="group bg-surface rounded-xl overflow-hidden border border-border/60 hover:border-primary/30 flex flex-col h-full shadow-sm hover:shadow-xl transition-all">
+			<div className="relative group cursor-pointer h-48 overflow-hidden bg-surfaceAlt border-b border-borderLight">
+				<div className="absolute top-0 left-0 w-full h-6 bg-surfaceHighlight border-b border-border/60 z-20 flex items-center px-2 gap-1.5">
+					<div className="w-2.5 h-2.5 rounded-full bg-error/80"></div>
+					<div className="w-2.5 h-2.5 rounded-full bg-warning/80"></div>
+					<div className="w-2.5 h-2.5 rounded-full bg-success/80"></div>
 				</div>
 
 				<img
@@ -103,13 +103,13 @@ function ProjectCard({ project }: { project: Project }) {
 				/>
 			</div>
 			<div className="p-5 flex flex-col flex-grow">
-				<h3 className="text-lg font-bold text-slate-800 mb-2">{project.title}</h3>
-				<p className="text-slate-500 text-sm leading-relaxed mb-4 flex-grow">{project.description}</p>
-				<div className="flex flex-wrap gap-2 mt-auto pt-3 border-t border-slate-50">
+				<h3 className="text-lg font-bold text-textSecondary mb-2">{project.title}</h3>
+				<p className="text-textMuted text-sm leading-relaxed mb-4 flex-grow">{project.description}</p>
+				<div className="flex flex-wrap gap-2 mt-auto pt-3 border-t border-borderLight/60">
 					{project.tech.map((t) => (
 						<span
 							key={t}
-							className="text-xs font-mono px-2 py-1 bg-slate-100 rounded text-slate-600 border border-slate-200"
+							className="text-xs font-mono px-2 py-1 bg-surfaceHighlight rounded text-textMuted border border-border/60"
 						>
 							{t}
 						</span>
@@ -133,7 +133,7 @@ function ProjectCard({ project }: { project: Project }) {
 						href={project.github}
 						target="_blank"
 						rel="noreferrer"
-						className="flex flex-1 items-center justify-center gap-2 py-2 px-3 bg-slate-800 text-white hover:bg-slate-900 transition-colors text-sm font-bold"
+						className="flex flex-1 items-center justify-center gap-2 py-2 px-3 bg-btnSecondary text-btnSecondaryText hover:bg-btnSecondaryHover transition-colors text-sm font-bold"
 					>
 						<Github size={16} /> Ver no GitHub
 						<span className="sr-only">Github para o projeto {project.title}</span>

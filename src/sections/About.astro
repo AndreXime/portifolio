@@ -12,14 +12,14 @@ import SectionHeader from "../components/ui/SectionHeader";
 
 <section
   id="sobre"
-  class="py-24 bg-slate-50/50 border-y border-slate-200/60 relative overflow-hidden"
+  class="py-24 bg-section2 border-y border-border/60 relative overflow-hidden"
 >
   <div
     class="absolute top-0 left-1/4 w-64 h-64 bg-primary/5 rounded-full blur-3xl -z-10"
   >
   </div>
   <div
-    class="absolute bottom-0 right-1/4 w-96 h-96 bg-indigo-500/5 rounded-full blur-3xl -z-10"
+    class="absolute bottom-0 right-1/4 w-96 h-96 bg-secondary/5 rounded-full blur-3xl -z-10"
   >
   </div>
 
@@ -33,16 +33,16 @@ import SectionHeader from "../components/ui/SectionHeader";
 
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-16">
         <div
-          class="lg:col-span-8 bg-white p-8 md:p-10 rounded-3xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow"
+          class="lg:col-span-8 bg-surface p-8 md:p-10 rounded-3xl border border-border/60 shadow-sm hover:shadow-md transition-shadow"
         >
           <div class="flex items-center gap-3 mb-6">
             <div class="p-2.5 bg-primary/10 rounded-xl text-primary">
               <User class="w-6 h-6" />
             </div>
-            <h3 class="text-2xl font-bold text-slate-800">Minha Trajetória</h3>
+            <h3 class="text-2xl font-bold text-textSecondary">Minha Trajetória</h3>
           </div>
 
-          <div class="space-y-6 text-slate-600 leading-relaxed">
+          <div class="space-y-6 text-textMuted leading-relaxed">
             <p>
               No dia a dia, atuo em todo o stack. No backend, utilizo a
               eficiência de
@@ -66,34 +66,34 @@ import SectionHeader from "../components/ui/SectionHeader";
 
         <div class="lg:col-span-4 grid grid-cols-1 gap-4">
           <div
-            class="bg-indigo-600 p-6 rounded-3xl text-white shadow-lg shadow-indigo-200"
+            class="bg-secondary p-6 rounded-3xl text-white shadow-lg shadow-secondary/20"
           >
             <Code2 class="w-8 h-8 mb-2" />
-            <p class="text-indigo-100 text-sm font-medium">Stack Principal</p>
+            <p class="text-white/80 text-sm font-medium">Stack Principal</p>
             <p class="text-xl font-bold">TypeScript & Go</p>
           </div>
 
           <div
-            class="bg-white p-6 rounded-3xl border border-slate-200 flex items-center gap-4"
+            class="bg-surface p-6 rounded-3xl border border-border/60 flex items-center gap-4"
           >
-            <div class="p-3 bg-pink-50 rounded-2xl text-pink-600">
+            <div class="p-3 bg-error/10 rounded-2xl text-error">
               <Coffee class="w-6 h-6" />
             </div>
             <div>
-              <p class="text-sm text-slate-500">Experiência</p>
-              <p class="font-bold text-slate-800 text-lg">6 meses</p>
+              <p class="text-sm text-textMuted">Experiência</p>
+              <p class="font-bold text-textSecondary text-lg">6 meses</p>
             </div>
           </div>
 
           <div
-            class="bg-white p-6 rounded-3xl border border-slate-200 flex items-center gap-4"
+            class="bg-surface p-6 rounded-3xl border border-border/60 flex items-center gap-4"
           >
-            <div class="p-3 bg-emerald-50 rounded-2xl text-emerald-600">
+            <div class="p-3 bg-success/10 rounded-2xl text-success">
               <Globe class="w-6 h-6" />
             </div>
             <div>
-              <p class="text-sm text-slate-500">Localização</p>
-              <p class="font-bold text-slate-800 text-lg">Brasil (Remoto)</p>
+              <p class="text-sm text-textMuted">Localização</p>
+              <p class="font-bold text-textSecondary text-lg">Brasil (Remoto)</p>
             </div>
           </div>
         </div>
@@ -103,29 +103,29 @@ import SectionHeader from "../components/ui/SectionHeader";
         <div class="space-y-6">
           <div class="flex items-center gap-3 px-2">
             <GraduationCap class="w-6 h-6 text-primary" />
-            <h3 class="text-2xl font-bold text-slate-900">Educação</h3>
+            <h3 class="text-2xl font-bold text-textMain">Educação</h3>
           </div>
 
-          <div class="relative pl-6 border-l-2 border-slate-200 space-y-8">
+          <div class="relative pl-6 border-l-2 border-border/40 space-y-8">
             <div class="relative">
               <div
-                class="absolute -left-[33px] top-1 w-4 h-4 rounded-full border-4 border-white bg-primary shadow-sm"
+                class="absolute -left-[33px] top-1 w-4 h-4 rounded-full border-4 border-surface bg-primary shadow-sm"
               >
               </div>
               <div
-                class="bg-white p-6 rounded-2xl border border-slate-200 hover:border-primary/30 transition-colors"
+                class="bg-surface p-6 rounded-2xl border border-border/60 hover:border-primary/30 transition-colors"
               >
                 <span
                   class="text-primary font-mono text-xs font-bold uppercase tracking-wider"
                   >2023 — Presente</span
                 >
-                <h4 class="text-xl font-bold text-slate-800 mt-1">
+                <h4 class="text-xl font-bold text-textSecondary mt-1">
                   Ciência da Computação
                 </h4>
-                <p class="text-slate-500 font-medium mb-3">
+                <p class="text-textMuted font-medium mb-3">
                   Univ. Estadual do Vale do Acaraú
                 </p>
-                <p class="text-slate-600 text-sm leading-relaxed">
+                <p class="text-textMuted text-sm leading-relaxed">
                   Base técnica em Engenharia de Software, com foco em
                   levantamento de requisitos, modelagem de dados (DER), POO e
                   estruturas de dados para o desenvolvimento de sistemas
@@ -139,27 +139,27 @@ import SectionHeader from "../components/ui/SectionHeader";
         <div class="space-y-6">
           <div class="flex items-center gap-3 px-2">
             <Briefcase class="w-6 h-6 text-primary" />
-            <h3 class="text-2xl font-bold text-slate-900">Experiência</h3>
+            <h3 class="text-2xl font-bold text-textMain">Experiência</h3>
           </div>
 
-          <div class="relative pl-6 border-l-2 border-slate-200 space-y-8">
+          <div class="relative pl-6 border-l-2 border-border/40 space-y-8">
             <div class="relative">
               <div
-                class="absolute -left-[33px] top-1 w-4 h-4 rounded-full border-4 border-white bg-primary shadow-sm"
+                class="absolute -left-[33px] top-1 w-4 h-4 rounded-full border-4 border-surface bg-primary shadow-sm"
               >
               </div>
               <div
-                class="bg-white p-6 rounded-2xl border border-slate-200 hover:border-primary/30 transition-colors shadow-sm"
+                class="bg-surface p-6 rounded-2xl border border-border/60 hover:border-primary/30 transition-colors shadow-sm"
               >
                 <span
                   class="text-primary font-mono text-xs font-bold uppercase tracking-wider"
                   >2025 — Presente</span
                 >
-                <h4 class="text-xl font-bold text-slate-800 mt-1">
+                <h4 class="text-xl font-bold text-textSecondary mt-1">
                   Desenvolvedor Fullstack
                 </h4>
-                <p class="text-slate-500 font-medium mb-3">Stackup Software</p>
-                <p class="text-slate-600 text-sm leading-relaxed">
+                <p class="text-textMuted font-medium mb-3">Stackup Software</p>
+                <p class="text-textMuted text-sm leading-relaxed">
                   Responsável pelo ciclo completo do desenvolvimento, desde o
                   levantamento de requisitos e modelagem de dados. No frontend
                   trabalhei com Next.js, Tailwind e Shadcn. No backend
