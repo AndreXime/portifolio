@@ -120,8 +120,10 @@ const navLinks = [
       function getTheme() {
         const savedTheme = localStorage.getItem("theme");
         if (savedTheme) return savedTheme;
-        
-        return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+
+        return window.matchMedia("(prefers-color-scheme: dark)").matches
+          ? "dark"
+          : "light";
       }
 
       function setTheme(theme) {
@@ -132,7 +134,8 @@ const navLinks = [
       }
 
       function toggleTheme() {
-        const currentTheme = document.documentElement.getAttribute("data-theme");
+        const currentTheme =
+          document.documentElement.getAttribute("data-theme");
         const newTheme = currentTheme === "dark" ? "light" : "dark";
         setTheme(newTheme);
       }
@@ -140,8 +143,12 @@ const navLinks = [
       const initialTheme = getTheme();
       setTheme(initialTheme);
 
-      document.getElementById("theme-toggle")?.addEventListener("click", toggleTheme);
-      document.getElementById("theme-toggle-mobile")?.addEventListener("click", toggleTheme);
+      document
+        .getElementById("theme-toggle")
+        ?.addEventListener("click", toggleTheme);
+      document
+        .getElementById("theme-toggle-mobile")
+        ?.addEventListener("click", toggleTheme);
     }
 
     function setupNavbar() {

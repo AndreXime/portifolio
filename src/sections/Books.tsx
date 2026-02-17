@@ -54,6 +54,8 @@ export default function BooksSection({ books }: { books: Book[] }) {
 							<button
 								type="button"
 								onClick={() => setExpand(!expand)}
+								aria-label={!expand ? "Expandir para ver todos os livros da biblioteca" : "Recolher e mostrar menos livros"}
+								aria-expanded={expand}
 								className={`px-4 py-2 rounded-lg font-medium transition-all bg-primary text-white shadow-lg shadow-primary/30`}
 							>
 								{!expand ? "Ver biblioteca completa" : "Esconder livros"}
@@ -73,7 +75,7 @@ function BookCard(book: Book) {
 				<div className="absolute inset-0 bg-gradient-to-t from-textMain/20 to-transparent z-10" />
 				<img
 					src={book.imageUrl}
-					alt={book.title}
+					alt={`Capa do livro ${book.title} por ${book.author}`}
 					loading="lazy"
 					decoding="async"
 					className="w-auto h-4/5 object-contain transition-transform duration-500 group-hover:scale-105 z-20 shadow-2xl"
@@ -119,7 +121,7 @@ function CompactBookItem(book: Book) {
 			<div className="h-10 w-8 rounded overflow-hidden relative flex-shrink-0 mr-3">
 				<img
 					src={book.imageUrl}
-					alt={book.title}
+					alt={`Capa do livro ${book.title}`}
 					width={80}
 					height={80}
 					loading="lazy"
@@ -136,25 +138,26 @@ function CompactBookItem(book: Book) {
 			</div>
 
 			<div className="flex-shrink-0 ml-2">
-				<span
+				<output
 					className={`inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-medium border ${
 						book.state === "Lido"
 							? "bg-successBg text-success border-successBorder"
 							: "bg-surfaceAlt text-textMuted border-border"
 					}`}
+					aria-label={`Status do livro: ${book.state}`}
 				>
 					{book.state === "Lido" ? (
 						<>
-							<CheckCircle2 className="w-3.5 h-3.5" />
+							<CheckCircle2 className="w-3.5 h-3.5" aria-hidden="true" />
 							Lido
 						</>
 					) : (
 						<>
-							<Bookmark className="w-3.5 h-3.5" />
+							<Bookmark className="w-3.5 h-3.5" aria-hidden="true" />
 							Pendente
 						</>
 					)}
-				</span>
+				</output>
 			</div>
 		</div>
 	);

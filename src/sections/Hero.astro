@@ -39,25 +39,27 @@ import Snippets from "../components/Snippet.astro";
             href="#projetos"
             class="px-6 py-3 bg-primary text-white rounded-lg font-medium hover:bg-primaryDark transition-colors shadow-lg shadow-primary/25 flex items-center gap-2"
           >
-            Ver Projetos <ArrowDown class="w-4 h-4" />
+            Ver Projetos <ArrowDown class="w-4 h-4" aria-hidden="true" />
           </a>
 
           <a
             href={socialLinks.github}
             target="_blank"
             rel="noreferrer"
+            aria-label="Visitar meu perfil no GitHub"
             class="px-6 py-3 bg-github text-white rounded-lg font-medium hover:bg-githubHover transition-colors shadow-lg shadow-textMain/20 flex items-center gap-2"
           >
-            <Github class="w-4 h-4" /> GitHub
+            <Github class="w-4 h-4" aria-hidden="true" /> GitHub
           </a>
 
           <a
             href={socialLinks.linkedin}
             target="_blank"
             rel="noreferrer"
+            aria-label="Visitar meu perfil no LinkedIn"
             class="px-6 py-3 bg-linkedin text-white rounded-lg font-medium hover:bg-linkedinHover transition-colors shadow-lg shadow-info/20 flex items-center gap-2"
           >
-            <Linkedin class="w-4 h-4" /> LinkedIn
+            <Linkedin class="w-4 h-4" aria-hidden="true" /> LinkedIn
           </a>
         </div>
       </div>
@@ -66,6 +68,9 @@ import Snippets from "../components/Snippet.astro";
         <div
           id="snippet-container"
           class="relative group perspective-1000 h-full cursor-pointer touch-manipulation"
+          role="button"
+          tabindex="0"
+          aria-label="Alternar entre código TypeScript e Go"
         >
           <div
             id="snippet-card"
@@ -131,13 +136,21 @@ import Snippets from "../components/Snippet.astro";
       const card = document.getElementById("snippet-card");
       let isFlipped = false;
 
-      container?.addEventListener("click", () => {
+      function flipCard() {
         isFlipped = !isFlipped;
 
         if (isFlipped) {
           card?.classList.add("[transform:rotateY(180deg)]");
         } else {
           card?.classList.remove("[transform:rotateY(180deg)]");
+        }
+      }
+
+      container?.addEventListener("click", flipCard);
+      container?.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          flipCard();
         }
       });
     }

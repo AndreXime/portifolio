@@ -30,12 +30,15 @@ export default function ProjectsSection({ projects }: { projects: Project[] }) {
 						subtitle="O resultado prático dos meus estudos, aplicações onde solidifico meus conhecimentos e testo novas
 							abordagens."
 					>
-						<div className="flex flex-wrap justify-center gap-2">
+						<fieldset className="flex flex-wrap justify-center gap-2 border-0">
+							<legend className="sr-only">Filtrar projetos por categoria</legend>
 							{filters.map((f) => (
 								<button
 									type="button"
 									key={f.id}
 									onClick={() => setFilter(f.id)}
+									aria-pressed={filter === f.id}
+									aria-label={`Filtrar por ${f.label}`}
 									className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
 										filter === f.id
 											? "bg-primary text-white shadow-lg shadow-primary/30"
@@ -45,7 +48,7 @@ export default function ProjectsSection({ projects }: { projects: Project[] }) {
 									{f.label}
 								</button>
 							))}
-						</div>
+						</fieldset>
 					</SectionHeader>
 
 					<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 min-h-[400px]">
@@ -68,6 +71,7 @@ export default function ProjectsSection({ projects }: { projects: Project[] }) {
 								<button
 									type="button"
 									onClick={() => setFilter(filter === "all" ? "minimal" : "all")}
+									aria-label={filter === "minimal" ? "Expandir para ver todos os projetos" : "Recolher e mostrar menos projetos"}
 									className={`px-4 py-2 rounded-lg font-medium transition-all bg-primary text-white shadow-lg shadow-primary/30`}
 								>
 									{filter === "minimal" && "Ver todos projetos"}
@@ -96,7 +100,7 @@ function ProjectCard({ project }: { project: Project }) {
 					src={project.imageUrl}
 					width={800}
 					height={600}
-					alt={project.title}
+					alt={`Screenshot do projeto ${project.title}`}
 					loading="lazy"
 					decoding="async"
 					className={"w-full h-full object-fill pt-6 transition-all duration-700 ease-in-out lg:group-hover:scale-110"}
@@ -122,10 +126,10 @@ function ProjectCard({ project }: { project: Project }) {
 						href={project.link}
 						target="_blank"
 						rel="noreferrer"
+						aria-label={`Visitar site do projeto ${project.title}`}
 						className="flex flex-1 items-center justify-center gap-2 py-2 px-3 bg-primary/10 text-primary hover:bg-primary hover:text-white transition-colors  text-sm font-bold"
 					>
-						<ExternalLink size={16} /> Visitar site
-						<span className="sr-only">Link para o projeto {project.title}</span>
+						<ExternalLink size={16} aria-hidden="true" /> Visitar site
 					</a>
 				)}
 				{project.github && (
@@ -133,10 +137,10 @@ function ProjectCard({ project }: { project: Project }) {
 						href={project.github}
 						target="_blank"
 						rel="noreferrer"
+						aria-label={`Ver código-fonte do projeto ${project.title} no GitHub`}
 						className="flex flex-1 items-center justify-center gap-2 py-2 px-3 bg-btnSecondary text-btnSecondaryText hover:bg-btnSecondaryHover transition-colors text-sm font-bold"
 					>
-						<Github size={16} /> Ver no GitHub
-						<span className="sr-only">Github para o projeto {project.title}</span>
+						<Github size={16} aria-hidden="true" /> Ver no GitHub
 					</a>
 				)}
 			</div>

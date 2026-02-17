@@ -75,10 +75,11 @@ export default function Contact() {
 							href={`mailto:${socialLinks.email}`}
 							target="_blank"
 							rel="noreferrer"
+							aria-label={`Enviar email para ${socialLinks.email}`}
 							className="flex items-center gap-4 p-4 bg-surface border border-border/60 rounded-xl hover:border-primary/50 hover:shadow-md transition-all group"
 						>
 							<div className="w-10 h-10 bg-surfaceHighlight rounded-full flex items-center justify-center text-textMuted group-hover:bg-primary group-hover:text-white transition-colors">
-								<Mail className="w-5 h-5" />
+								<Mail className="w-5 h-5" aria-hidden="true" />
 							</div>
 							<div>
 								<p className="text-sm text-textMuted">Email</p>
@@ -90,10 +91,11 @@ export default function Contact() {
 							href={socialLinks.linkedin}
 							target="_blank"
 							rel="noreferrer"
+							aria-label="Visitar perfil no LinkedIn"
 							className="flex items-center gap-4 p-4 bg-surface border border-border/60 rounded-xl hover:border-primary/50 hover:shadow-md transition-all group"
 						>
 							<div className="w-10 h-10 bg-surfaceHighlight rounded-full flex items-center justify-center text-textMuted group-hover:bg-primary group-hover:text-white transition-colors">
-								<Linkedin className="w-5 h-5" />
+								<Linkedin className="w-5 h-5" aria-hidden="true" />
 							</div>
 							<div>
 								<p className="text-sm text-textMuted">LinkedIn</p>
@@ -105,10 +107,11 @@ export default function Contact() {
 							href={socialLinks.github}
 							target="_blank"
 							rel="noreferrer"
+							aria-label="Visitar perfil no GitHub"
 							className="flex items-center gap-4 p-4 bg-surface border border-border/60 rounded-xl hover:border-primary/50 hover:shadow-md transition-all group"
 						>
 							<div className="w-10 h-10 bg-surfaceHighlight rounded-full flex items-center justify-center text-textMuted group-hover:bg-primary group-hover:text-white transition-colors">
-								<Github className="w-5 h-5" />
+								<Github className="w-5 h-5" aria-hidden="true" />
 							</div>
 							<div>
 								<p className="text-sm text-textMuted">GIthub</p>
@@ -127,6 +130,7 @@ export default function Contact() {
 								</label>
 								<input
 									type="text"
+									id="name"
 									name="name"
 									className="w-full px-4 py-2 bg-surfaceAlt border border-border/60 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all"
 									placeholder="Seu nome"
@@ -139,6 +143,7 @@ export default function Contact() {
 								</label>
 								<input
 									type="email"
+									id="email"
 									name="email"
 									className="w-full px-4 py-2 bg-surfaceAlt border border-border/60 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all"
 									placeholder="seu@email.com"
@@ -150,6 +155,7 @@ export default function Contact() {
 									Mensagem
 								</label>
 								<textarea
+									id="message"
 									name="message"
 									rows={4}
 									className="w-full px-4 py-2 bg-surfaceAlt border border-border/60 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all resize-none"
@@ -167,21 +173,26 @@ export default function Contact() {
 								) : (
 									<span className="flex gap-2 justify-center items-center">
 										Enviando
-										<Loader className="animate-spin" />
+										<Loader className="animate-spin" aria-hidden="true" />
 									</span>
 								)}
 							</button>
 						</form>
 						{showToast.message && (
-							<div className="py-3 px-5 text-center flex justify-center items-center mt-5">
+							<div
+								className="py-3 px-5 text-center flex justify-center items-center mt-5"
+								role="alert"
+								aria-live="polite"
+								aria-atomic="true"
+							>
 								{showToast.status === "Error" && (
 									<span className="flex gap-2 font-bold text-error">
-										<X /> {showToast.message}
+										<X aria-hidden="true" /> {showToast.message}
 									</span>
 								)}
 								{showToast.status === "Sucesso" && (
 									<span className="flex gap-2 font-bold text-success">
-										<Check /> {showToast.message}
+										<Check aria-hidden="true" /> {showToast.message}
 									</span>
 								)}
 							</div>
