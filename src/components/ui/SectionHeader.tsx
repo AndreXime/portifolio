@@ -1,8 +1,10 @@
+import type { ComponentChildren } from "preact";
+
 interface Props {
 	bagde: string;
 	title: string;
 	subtitle?: string;
-	children?: React.ReactNode;
+	children?: ComponentChildren;
 }
 
 export default function SectionHeader({ bagde, title, subtitle, children }: Props) {
