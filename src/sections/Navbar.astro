@@ -27,6 +27,15 @@ const navLinks = [
       </a>
 
       <div class="hidden md:flex items-center gap-8">
+        <button
+          aria-label="alternar tema"
+          type="button"
+          class="p-2 text-textMuted hover:text-primary transition-colors rounded-lg hover:bg-surfaceHighlight"
+          id="theme-toggle"
+        >
+          <Sun class="w-5 h-5" id="icon-sun" />
+          <Moon class="w-5 h-5 hidden" id="icon-moon" />
+        </button>
         {
           navLinks.map((link) => (
             <a
@@ -37,15 +46,7 @@ const navLinks = [
             </a>
           ))
         }
-        <button
-          aria-label="alternar tema"
-          type="button"
-          class="p-2 text-textMuted hover:text-primary transition-colors rounded-lg hover:bg-surfaceHighlight"
-          id="theme-toggle"
-        >
-          <Sun class="w-5 h-5" id="icon-sun" />
-          <Moon class="w-5 h-5 hidden" id="icon-moon" />
-        </button>
+
         <a
           href="#contato"
           class="text-sm font-medium bg-btnSecondary text-btnSecondaryText hover:bg-primary hover:text-white px-5 py-2 rounded-full transition-colors cursor-pointer"
