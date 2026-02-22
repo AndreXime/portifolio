@@ -1,14 +1,15 @@
-import { Mail, Linkedin, X, Check, Loader, Github } from "lucide-preact";
+import { Mail, Linkedin, X, Check, Loader, Github, FileText } from "lucide-preact";
 import { useState } from "preact/hooks";
-import type { FormEvent } from "preact/compat";
 
 import { socialLinks } from "@/content/social";
+import SectionHeader from "@/components/ui/SectionHeader";
+import type { TargetedSubmitEvent } from "preact";
 
 export default function Contact() {
 	const [showToast, setShowToast] = useState({ status: "", message: "" });
 	const [loading, setLoading] = useState(false);
 
-	async function handleSubmit(e: FormEvent<HTMLFormElement>) {
+	async function handleSubmit(e: TargetedSubmitEvent<HTMLFormElement>) {
 		setLoading(true);
 		try {
 			e.preventDefault();
@@ -61,145 +62,161 @@ export default function Contact() {
 
 	return (
 		<section id="contato" className="py-20 bg-section6">
-			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-			<div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-start">
-				<div data-reveal-time={0} class="reveal reveal-hidden">
-					<h2 className="text-3xl font-bold text-textMain mb-6">Vamos trabalhar juntos?</h2>
-					<p className="text-textMuted mb-8 leading-relaxed">
-						Estou sempre aberto a novas oportunidades, projetos freelance ou apenas um bate-papo sobre tecnologia.
-						Sinta-se à vontade para entrar em contato!
-					</p>
+			<div data-reveal-time={0} className="reveal reveal-hidden">
+				<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+					<SectionHeader
+						bagde="Contato"
+						title="Vamos trabalhar juntos?"
+						subtitle="Estou sempre aberto a novas oportunidades, projetos freelance ou apenas um bate-papo sobre tecnologia. Sinta-se à vontade para entrar em contato!"
+					/>
 
-					<div className="space-y-4">
-						<a
-							href={`mailto:${socialLinks.email}`}
-							target="_blank"
-							rel="noreferrer"
-							aria-label={`Enviar email para ${socialLinks.email}`}
-							className="flex items-center gap-4 p-4 bg-surface border border-border/60 rounded-xl hover:border-primary/50 hover:shadow-md transition-all group"
-						>
-							<div className="w-10 h-10 bg-surfaceHighlight rounded-full flex items-center justify-center text-textMuted group-hover:bg-primary group-hover:text-white transition-colors">
-								<Mail className="w-5 h-5" aria-hidden="true" />
-							</div>
-							<div>
-								<p className="text-sm text-textMuted">Email</p>
-								<p className="font-medium text-textSecondary">{socialLinks.email}</p>
-							</div>
-						</a>
+					<div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+						<div className="space-y-4">
+							<a
+								href={`mailto:${socialLinks.email}`}
+								target="_blank"
+								rel="noreferrer"
+								aria-label={`Enviar email para ${socialLinks.email}`}
+								className="flex items-center gap-4 p-4 bg-surface border border-border/60 rounded-xl hover:border-primary/50 hover:shadow-md transition-all group"
+							>
+								<div className="w-10 h-10 bg-surfaceHighlight rounded-full flex items-center justify-center text-textMuted group-hover:bg-primary group-hover:text-white transition-colors">
+									<Mail className="w-5 h-5" aria-hidden="true" />
+								</div>
+								<div>
+									<p className="text-sm text-textMuted">Email</p>
+									<p className="font-medium text-textSecondary">{socialLinks.email}</p>
+								</div>
+							</a>
 
-						<a
-							href={socialLinks.linkedin}
-							target="_blank"
-							rel="noreferrer"
-							aria-label="Visitar perfil no LinkedIn"
-							className="flex items-center gap-4 p-4 bg-surface border border-border/60 rounded-xl hover:border-primary/50 hover:shadow-md transition-all group"
-						>
-							<div className="w-10 h-10 bg-surfaceHighlight rounded-full flex items-center justify-center text-textMuted group-hover:bg-primary group-hover:text-white transition-colors">
-								<Linkedin className="w-5 h-5" aria-hidden="true" />
-							</div>
-							<div>
-								<p className="text-sm text-textMuted">LinkedIn</p>
-								<p className="font-medium text-textSecondary">{socialLinks.linkedin.substring(12)}</p>
-							</div>
-						</a>
+							<a
+								href={socialLinks.linkedin}
+								target="_blank"
+								rel="noreferrer"
+								aria-label="Visitar perfil no LinkedIn"
+								className="flex items-center gap-4 p-4 bg-surface border border-border/60 rounded-xl hover:border-primary/50 hover:shadow-md transition-all group"
+							>
+								<div className="w-10 h-10 bg-surfaceHighlight rounded-full flex items-center justify-center text-textMuted group-hover:bg-primary group-hover:text-white transition-colors">
+									<Linkedin className="w-5 h-5" aria-hidden="true" />
+								</div>
+								<div>
+									<p className="text-sm text-textMuted">LinkedIn</p>
+									<p className="font-medium text-textSecondary">{socialLinks.linkedin.substring(12)}</p>
+								</div>
+							</a>
 
-						<a
-							href={socialLinks.github}
-							target="_blank"
-							rel="noreferrer"
-							aria-label="Visitar perfil no GitHub"
-							className="flex items-center gap-4 p-4 bg-surface border border-border/60 rounded-xl hover:border-primary/50 hover:shadow-md transition-all group"
-						>
-							<div className="w-10 h-10 bg-surfaceHighlight rounded-full flex items-center justify-center text-textMuted group-hover:bg-primary group-hover:text-white transition-colors">
-								<Github className="w-5 h-5" aria-hidden="true" />
+							<a
+								href={socialLinks.github}
+								target="_blank"
+								rel="noreferrer"
+								aria-label="Visitar perfil no GitHub"
+								className="flex items-center gap-4 p-4 bg-surface border border-border/60 rounded-xl hover:border-primary/50 hover:shadow-md transition-all group"
+							>
+								<div className="w-10 h-10 bg-surfaceHighlight rounded-full flex items-center justify-center text-textMuted group-hover:bg-primary group-hover:text-white transition-colors">
+									<Github className="w-5 h-5" aria-hidden="true" />
+								</div>
+								<div>
+									<p className="text-sm text-textMuted">Github</p>
+									<p className="font-medium text-textSecondary">{socialLinks.github.substring(8)}</p>
+								</div>
+							</a>
+
+							<a
+								href="/André-Curriculo.pdf"
+								target="_blank"
+								rel="noopener noreferrer"
+								aria-label="Abrir currículo em PDF"
+								className="flex items-center gap-4 p-4 bg-surface border border-border/60 rounded-xl hover:border-primary/50 hover:shadow-md transition-all group"
+							>
+								<div className="w-10 h-10 bg-surfaceHighlight rounded-full flex items-center justify-center text-textMuted group-hover:bg-primary group-hover:text-white transition-colors">
+									<FileText className="w-5 h-5" aria-hidden="true" />
+								</div>
+								<div>
+									<p className="text-sm text-textMuted">Currículo</p>
+									<p className="font-medium text-textSecondary">Abrir PDF</p>
+								</div>
+							</a>
+						</div>
+
+						<div>
+							<div className="bg-surface p-8 rounded-2xl border border-border/60 shadow-lg flex flex-col">
+								<form className="space-y-4" onSubmit={handleSubmit}>
+									<div>
+										<label htmlFor="name" className="block text-sm font-medium text-textSecondary mb-1">
+											Nome
+										</label>
+										<input
+											type="text"
+											id="name"
+											name="name"
+											className="w-full px-4 py-2 bg-surfaceAlt border border-border/60 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all"
+											placeholder="Seu nome"
+											required
+										/>
+									</div>
+									<div>
+										<label htmlFor="email" className="block text-sm font-medium text-textSecondary mb-1">
+											Email
+										</label>
+										<input
+											type="email"
+											id="email"
+											name="email"
+											className="w-full px-4 py-2 bg-surfaceAlt border border-border/60 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all"
+											placeholder="seu@email.com"
+											required
+										/>
+									</div>
+									<div>
+										<label htmlFor="message" className="block text-sm font-medium text-textSecondary mb-1">
+											Mensagem
+										</label>
+										<textarea
+											id="message"
+											name="message"
+											rows={4}
+											className="w-full px-4 py-2 bg-surfaceAlt border border-border/60 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all resize-none"
+											placeholder="Como posso ajudar?"
+											required
+										></textarea>
+									</div>
+									<button
+										type="submit"
+										disabled={loading}
+										className="w-full disabled:bg-primaryDark/50 py-3 bg-primaryDark text-white font-bold rounded-lg hover:bg-primary hover:shadow-xl transition-all shadow-lg shadow-primary/25"
+									>
+										{!loading ? (
+											"Enviar Mensagem"
+										) : (
+											<span className="flex gap-2 justify-center items-center">
+												Enviando
+												<Loader className="animate-spin" aria-hidden="true" />
+											</span>
+										)}
+									</button>
+								</form>
+								{showToast.message && (
+									<div
+										className="py-3 px-5 text-center flex justify-center items-center mt-5"
+										role="alert"
+										aria-live="polite"
+										aria-atomic="true"
+									>
+										{showToast.status === "Error" && (
+											<span className="flex gap-2 font-bold text-error">
+												<X aria-hidden="true" /> {showToast.message}
+											</span>
+										)}
+										{showToast.status === "Sucesso" && (
+											<span className="flex gap-2 font-bold text-success">
+												<Check aria-hidden="true" /> {showToast.message}
+											</span>
+										)}
+									</div>
+								)}
 							</div>
-							<div>
-								<p className="text-sm text-textMuted">GIthub</p>
-								<p className="font-medium text-textSecondary">{socialLinks.github.substring(8)}</p>
-							</div>
-						</a>
+						</div>
 					</div>
 				</div>
-
-				<div data-reveal-time={100} class="reveal reveal-hidden">
-					<div className="bg-surface p-8 rounded-2xl border border-border/60 shadow-lg flex flex-col">
-						<form className="space-y-4" onSubmit={handleSubmit}>
-							<div>
-								<label htmlFor="name" className="block text-sm font-medium text-textSecondary mb-1">
-									Nome
-								</label>
-								<input
-									type="text"
-									id="name"
-									name="name"
-									className="w-full px-4 py-2 bg-surfaceAlt border border-border/60 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all"
-									placeholder="Seu nome"
-									required
-								/>
-							</div>
-							<div>
-								<label htmlFor="email" className="block text-sm font-medium text-textSecondary mb-1">
-									Email
-								</label>
-								<input
-									type="email"
-									id="email"
-									name="email"
-									className="w-full px-4 py-2 bg-surfaceAlt border border-border/60 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all"
-									placeholder="seu@email.com"
-									required
-								/>
-							</div>
-							<div>
-								<label htmlFor="message" className="block text-sm font-medium text-textSecondary mb-1">
-									Mensagem
-								</label>
-								<textarea
-									id="message"
-									name="message"
-									rows={4}
-									className="w-full px-4 py-2 bg-surfaceAlt border border-border/60 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all resize-none"
-									placeholder="Como posso ajudar?"
-									required
-								></textarea>
-							</div>
-							<button
-								type="submit"
-								disabled={loading}
-								className="w-full disabled:bg-primaryDark/50 py-3 bg-primaryDark text-white font-bold rounded-lg hover:bg-primary hover:shadow-xl transition-all shadow-lg shadow-primary/25"
-							>
-								{!loading ? (
-									"Enviar Mensagem"
-								) : (
-									<span className="flex gap-2 justify-center items-center">
-										Enviando
-										<Loader className="animate-spin" aria-hidden="true" />
-									</span>
-								)}
-							</button>
-						</form>
-						{showToast.message && (
-							<div
-								className="py-3 px-5 text-center flex justify-center items-center mt-5"
-								role="alert"
-								aria-live="polite"
-								aria-atomic="true"
-							>
-								{showToast.status === "Error" && (
-									<span className="flex gap-2 font-bold text-error">
-										<X aria-hidden="true" /> {showToast.message}
-									</span>
-								)}
-								{showToast.status === "Sucesso" && (
-									<span className="flex gap-2 font-bold text-success">
-										<Check aria-hidden="true" /> {showToast.message}
-									</span>
-								)}
-							</div>
-						)}
-					</div>
-				</div>
-			</div>
 			</div>
 		</section>
 	);
