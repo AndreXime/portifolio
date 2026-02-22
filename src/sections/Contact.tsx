@@ -79,12 +79,12 @@ export default function Contact() {
 								aria-label={`Enviar email para ${socialLinks.email}`}
 								className="flex items-center gap-4 p-4 bg-surface border border-border/60 rounded-xl hover:border-primary/50 hover:shadow-md transition-all group"
 							>
-								<div className="w-10 h-10 bg-surfaceHighlight rounded-full flex items-center justify-center text-textMuted group-hover:bg-primary group-hover:text-white transition-colors">
+								<div className="w-10 h-10 bg-primary text-white rounded-full flex items-center justify-center group-hover:bg-white group-hover:text-primary transition-colors">
 									<Mail className="w-5 h-5" aria-hidden="true" />
 								</div>
 								<div>
-									<p className="text-sm text-textMuted">Email</p>
-									<p className="font-medium text-textSecondary">{socialLinks.email}</p>
+									<p className="text-sm text-textMuted group-hover:text-primary group-hover:font-bold transition-colors">Email</p>
+									<p className="font-medium text-textSecondary group-hover:text-primary transition-colors">{socialLinks.email}</p>
 								</div>
 							</a>
 
@@ -95,12 +95,12 @@ export default function Contact() {
 								aria-label="Visitar perfil no LinkedIn"
 								className="flex items-center gap-4 p-4 bg-surface border border-border/60 rounded-xl hover:border-primary/50 hover:shadow-md transition-all group"
 							>
-								<div className="w-10 h-10 bg-surfaceHighlight rounded-full flex items-center justify-center text-textMuted group-hover:bg-primary group-hover:text-white transition-colors">
+								<div className="w-10 h-10 bg-primary text-white rounded-full flex items-center justify-center group-hover:bg-white group-hover:text-primary transition-colors">
 									<Linkedin className="w-5 h-5" aria-hidden="true" />
 								</div>
 								<div>
-									<p className="text-sm text-textMuted">LinkedIn</p>
-									<p className="font-medium text-textSecondary">{socialLinks.linkedin.substring(12)}</p>
+									<p className="text-sm text-textMuted group-hover:text-primary group-hover:font-bold transition-colors">LinkedIn</p>
+									<p className="font-medium text-textSecondary group-hover:text-primary transition-colors">{socialLinks.linkedin.substring(12)}</p>
 								</div>
 							</a>
 
@@ -111,12 +111,12 @@ export default function Contact() {
 								aria-label="Visitar perfil no GitHub"
 								className="flex items-center gap-4 p-4 bg-surface border border-border/60 rounded-xl hover:border-primary/50 hover:shadow-md transition-all group"
 							>
-								<div className="w-10 h-10 bg-surfaceHighlight rounded-full flex items-center justify-center text-textMuted group-hover:bg-primary group-hover:text-white transition-colors">
+								<div className="w-10 h-10 bg-primary text-white rounded-full flex items-center justify-center group-hover:bg-white group-hover:text-primary transition-colors">
 									<Github className="w-5 h-5" aria-hidden="true" />
 								</div>
 								<div>
-									<p className="text-sm text-textMuted">Github</p>
-									<p className="font-medium text-textSecondary">{socialLinks.github.substring(8)}</p>
+									<p className="text-sm text-textMuted group-hover:text-primary group-hover:font-bold transition-colors">Github</p>
+									<p className="font-medium text-textSecondary group-hover:text-primary transition-colors">{socialLinks.github.substring(8)}</p>
 								</div>
 							</a>
 
@@ -127,12 +127,12 @@ export default function Contact() {
 								aria-label="Abrir currículo em PDF"
 								className="flex items-center gap-4 p-4 bg-surface border border-border/60 rounded-xl hover:border-primary/50 hover:shadow-md transition-all group"
 							>
-								<div className="w-10 h-10 bg-surfaceHighlight rounded-full flex items-center justify-center text-textMuted group-hover:bg-primary group-hover:text-white transition-colors">
+								<div className="w-10 h-10 bg-primary text-white rounded-full flex items-center justify-center group-hover:bg-white group-hover:text-primary transition-colors">
 									<FileText className="w-5 h-5" aria-hidden="true" />
 								</div>
 								<div>
-									<p className="text-sm text-textMuted">Currículo</p>
-									<p className="font-medium text-textSecondary">Abrir PDF</p>
+									<p className="text-sm text-textMuted group-hover:text-primary group-hover:font-bold transition-colors">Currículo</p>
+									<p className="font-medium text-textSecondary group-hover:text-primary transition-colors">Abrir PDF</p>
 								</div>
 							</a>
 						</div>
