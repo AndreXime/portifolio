@@ -10,6 +10,7 @@ import ProjectsSection from "../sections/Projects";
 import ContactSection from "../sections/Contact";
 import { Projects } from "../content/projects";
 import { Books } from "../content/books";
+import { socialLinks } from "../content/about";
 import { optimizeImages } from "../lib/optimizeImages";
 import Reveal from "../components/Reveal.astro";
 
@@ -32,7 +33,7 @@ const optimizedBooks = await optimizeImages(Books, "livros");
       <TechStackSection />
       <ProjectsSection client:visible projects={optimizedProjects} />
       <BooksSection client:visible books={optimizedBooks} />
-      <ContactSection client:visible />
+      <ContactSection client:visible socialLinks={socialLinks} />
     </main>
     <FooterSection />
   </div>

@@ -1,6 +1,6 @@
 ---
 import { ArrowDown, Github, Linkedin, Repeat } from "lucide-preact";
-import { socialLinks } from "../content/social";
+import { socialLinks, heroText } from "../content/about";
 import { tsCode, goCode } from "../content/snippet";
 import Snippets from "../components/Snippet.astro";
 ---
@@ -29,9 +29,7 @@ import Snippets from "../components/Snippet.astro";
         <p
           class="text-lg text-textMuted mb-8 max-w-lg leading-relaxed border-l-4 border-primary/20 pl-4"
         >
-          Desenvolvo sistemas focados em performance e manutenção, equilibrando
-          rigor técnico e entrega. Aplico boas práticas para evitar débitos,
-          garantindo que o software gere valor real em produção.
+          {heroText}
         </p>
 
         <div class="flex flex-wrap gap-4">

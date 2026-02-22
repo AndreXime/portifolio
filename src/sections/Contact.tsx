@@ -1,11 +1,15 @@
 import { Mail, Linkedin, X, Check, Loader, Github, FileText } from "lucide-preact";
 import { useState } from "preact/hooks";
 
-import { socialLinks } from "@/content/social";
 import SectionHeader from "@/components/ui/SectionHeader";
+import type { SocialLinks } from "@/content/types";
 import type { TargetedSubmitEvent } from "preact";
 
-export default function Contact() {
+interface ContactProps {
+	socialLinks: SocialLinks;
+}
+
+export default function Contact({ socialLinks }: ContactProps) {
 	const [showToast, setShowToast] = useState({ status: "", message: "" });
 	const [loading, setLoading] = useState(false);
 
@@ -83,8 +87,12 @@ export default function Contact() {
 									<Mail className="w-5 h-5" aria-hidden="true" />
 								</div>
 								<div>
-									<p className="text-sm text-textMuted group-hover:text-primary group-hover:font-bold transition-colors">Email</p>
-									<p className="font-medium text-textSecondary group-hover:text-primary transition-colors">{socialLinks.email}</p>
+									<p className="text-sm text-textMuted group-hover:text-primary group-hover:font-bold transition-colors">
+										Email
+									</p>
+									<p className="font-medium text-textSecondary group-hover:text-primary transition-colors">
+										{socialLinks.email}
+									</p>
 								</div>
 							</a>
 
@@ -99,8 +107,12 @@ export default function Contact() {
 									<Linkedin className="w-5 h-5" aria-hidden="true" />
 								</div>
 								<div>
-									<p className="text-sm text-textMuted group-hover:text-primary group-hover:font-bold transition-colors">LinkedIn</p>
-									<p className="font-medium text-textSecondary group-hover:text-primary transition-colors">{socialLinks.linkedin.substring(12)}</p>
+									<p className="text-sm text-textMuted group-hover:text-primary group-hover:font-bold transition-colors">
+										LinkedIn
+									</p>
+									<p className="font-medium text-textSecondary group-hover:text-primary transition-colors">
+										{socialLinks.linkedin.substring(12)}
+									</p>
 								</div>
 							</a>
 
@@ -115,8 +127,12 @@ export default function Contact() {
 									<Github className="w-5 h-5" aria-hidden="true" />
 								</div>
 								<div>
-									<p className="text-sm text-textMuted group-hover:text-primary group-hover:font-bold transition-colors">Github</p>
-									<p className="font-medium text-textSecondary group-hover:text-primary transition-colors">{socialLinks.github.substring(8)}</p>
+									<p className="text-sm text-textMuted group-hover:text-primary group-hover:font-bold transition-colors">
+										Github
+									</p>
+									<p className="font-medium text-textSecondary group-hover:text-primary transition-colors">
+										{socialLinks.github.substring(8)}
+									</p>
 								</div>
 							</a>
 
@@ -131,7 +147,9 @@ export default function Contact() {
 									<FileText className="w-5 h-5" aria-hidden="true" />
 								</div>
 								<div>
-									<p className="text-sm text-textMuted group-hover:text-primary group-hover:font-bold transition-colors">Currículo</p>
+									<p className="text-sm text-textMuted group-hover:text-primary group-hover:font-bold transition-colors">
+										Currículo
+									</p>
 									<p className="font-medium text-textSecondary group-hover:text-primary transition-colors">Abrir PDF</p>
 								</div>
 							</a>

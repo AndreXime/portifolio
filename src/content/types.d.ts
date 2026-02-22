@@ -22,3 +22,36 @@ export interface TechItem {
 	role: string;
 	icons: string[];
 }
+
+export interface SocialLinks {
+	email: string;
+	github: string;
+	linkedin: string;
+}
+
+export interface About {
+	trajetoria: string[];
+	highlights: {
+		stackPrincipal: string;
+		experience: string;
+		location: string;
+	};
+	experience: {
+		role: string;
+		company: string;
+		period: string;
+		description?: string;
+	}[];
+	education: {
+		degree: string;
+		institution: string;
+		period: string;
+		description: string;
+	}[];
+}
+
+export interface ParsedAbout {
+	socialLinks: SocialLinks;
+	heroText: string;
+	about: About;
+}
