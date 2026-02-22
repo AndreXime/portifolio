@@ -7,6 +7,11 @@ html {
 	scroll-behavior: smooth;
 }
 
+:root {
+	scrollbar-width: thin;
+	scrollbar-color: #a0a0a5 transparent;
+}
+
 *:focus-visible {
 	@apply outline-2 outline-offset-2 outline-primary;
 }
