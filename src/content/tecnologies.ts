@@ -3,38 +3,42 @@ import type { TechItem } from "./types";
 export const technologies: TechItem[] = [
 	{ name: "TypeScript", role: "Linguagem Principal", icons: ["typescript"] },
 	{
+		name: "Node.js e Bun",
+		role: "Javascript Runtimes",
+		icons: ["node", "bun"],
+	},
+	{
 		name: "Astro e Next.js",
 		role: "Frontend Framework",
 		icons: ["astro", "nextjs"],
 	},
 	{ name: "Tailwind CSS e ShadCN", role: "Estilização", icons: ["tailwind"] },
 	{
-		name: "Node.js & Bun",
-		role: "Javascript Runtime",
-		icons: ["node", "bun"],
-	},
-	{
-		name: "Git e GitHub",
-		role: "Versionamento",
-		icons: ["git", "github"],
-	},
-	{
-		name: "Hono & Gin",
-		role: "API Framework",
-		icons: ["hono", "gin"],
+		name: "Hono e Express",
+		role: "API Frameworks",
+		icons: ["hono", "express"],
 	},
 	{
 		name: "PostgreSQL & Redis",
 		role: "Banco de Dados",
 		icons: ["postgree", "redis"],
 	},
-	{ name: "Docker", role: "Orquestrador de containers", icons: ["docker"] },
-	{ name: "Linux", role: "Sistema operacional", icons: ["linux"] },
 	{
-		name: "Github Actions",
-		role: "Automação de Workflow (CI/CD)",
-		icons: ["cicd"],
+		name: "Git & GitHub",
+		role: "Versionamento",
+		icons: ["git", "github"],
 	},
-	{ name: "AWS & Vercel", role: "Hospedagem", icons: ["aws"] },
-	{ name: "Golang", role: "Linguagem secundária", icons: ["go"] },
+	{ name: "BullMQ", role: "Mensageria e Filas", icons: ["bullmq"] },
+	{ name: "Prometheus", role: "Observabilidade e Monitoramento", icons: ["prometheus"] },
+	{
+		name: "Jest",
+		role: "Testes Unitários e Integração",
+		icons: ["jest"],
+	},
+	{
+		name: "Docker & Linux",
+		role: "Infraestrutura e Containers",
+		icons: ["docker", "linux"],
+	},
+	{ name: "CI/CD & Cloud", role: "Deploy e Automação", icons: ["cicd", "aws"] },
 ];
