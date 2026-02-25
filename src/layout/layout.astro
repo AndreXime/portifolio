@@ -1,6 +1,6 @@
 ---
 import "../styles/global.css";
-import { socialLinks } from "../content/about";
+import { Links } from "../content/about";
 
 const { title, description } = Astro.props;
 
@@ -60,7 +60,7 @@ const schema = JSON.stringify({
         },
       },
 
-      sameAs: [socialLinks.github, socialLinks.linkedin],
+      sameAs: [Links.Github, Links.Linkedin],
 
       // Habilidades Técnicas
       knowsAbout: [
@@ -105,9 +105,12 @@ const schema = JSON.stringify({
       content="V6lQaAceqx1PlAlPl025VMbrP0UIHJvDdRxosI7FKSk"
     />
     <script is:inline>
-      (function() {
-        const theme = localStorage.getItem("theme") || 
-          (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+      (function () {
+        const theme =
+          localStorage.getItem("theme") ||
+          (window.matchMedia("(prefers-color-scheme: dark)").matches
+            ? "dark"
+            : "light");
         document.documentElement.setAttribute("data-theme", theme);
       })();
     </script>
@@ -125,8 +128,16 @@ const schema = JSON.stringify({
     <link rel="canonical" href={canonicalURL} />
     <meta name="robots" content="index, follow" />
     <meta name="author" content="André Ricardo Ximenes" />
-    <meta name="theme-color" content="#3b82f6" media="(prefers-color-scheme: light)" />
-    <meta name="theme-color" content="#1e40af" media="(prefers-color-scheme: dark)" />
+    <meta
+      name="theme-color"
+      content="#3b82f6"
+      media="(prefers-color-scheme: light)"
+    />
+    <meta
+      name="theme-color"
+      content="#1e40af"
+      media="(prefers-color-scheme: dark)"
+    />
 
     {/* Open Graph / Facebook / LinkedIn / WhatsApp */}
     <meta property="og:type" content="website" />
@@ -136,7 +147,10 @@ const schema = JSON.stringify({
     <meta property="og:image" content={socialImageURL} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="André Ximenes - Desenvolvedor Web Fullstack especializado em TypeScript e Go" />
+    <meta
+      property="og:image:alt"
+      content="André Ximenes - Desenvolvedor Web Fullstack especializado em TypeScript e Go"
+    />
     <meta property="og:site_name" content="André Ximenes | Desenvolvedor Web" />
     <meta property="og:locale" content="pt_BR" />
 
@@ -146,7 +160,10 @@ const schema = JSON.stringify({
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={socialImageURL} />
-    <meta name="twitter:image:alt" content="André Ximenes - Desenvolvedor Web Fullstack especializado em TypeScript e Go" />
+    <meta
+      name="twitter:image:alt"
+      content="André Ximenes - Desenvolvedor Web Fullstack especializado em TypeScript e Go"
+    />
   </head>
   <body class="antialiased">
     <a

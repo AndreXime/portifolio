@@ -2,14 +2,10 @@ import { Mail, Linkedin, X, Check, Loader, Github, FileText } from "lucide-preac
 import { useState } from "preact/hooks";
 
 import SectionHeader from "@/components/ui/SectionHeader";
-import type { SocialLinks } from "@/content/types";
 import type { TargetedSubmitEvent } from "preact";
+import type { personalData } from "@/content/about";
 
-interface ContactProps {
-	socialLinks: SocialLinks;
-}
-
-export default function Contact({ socialLinks }: ContactProps) {
+export default function Contact({ socialLinks }: { socialLinks: personalData["Links"] }) {
 	const [showToast, setShowToast] = useState({ status: "", message: "" });
 	const [loading, setLoading] = useState(false);
 
@@ -77,10 +73,10 @@ export default function Contact({ socialLinks }: ContactProps) {
 					<div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
 						<div className="space-y-4">
 							<a
-								href={`mailto:${socialLinks.email}`}
+								href={`mailto:${socialLinks.Email}`}
 								target="_blank"
 								rel="noreferrer"
-								aria-label={`Enviar email para ${socialLinks.email}`}
+								aria-label={`Enviar email para ${socialLinks.Email}`}
 								className="flex items-center gap-4 p-4 bg-surface border border-border/60 rounded-xl hover:border-primary/50 hover:shadow-md transition-all group"
 							>
 								<div className="w-10 h-10 bg-primary text-white rounded-full flex items-center justify-center group-hover:bg-white group-hover:text-primary transition-colors">
@@ -91,13 +87,13 @@ export default function Contact({ socialLinks }: ContactProps) {
 										Email
 									</p>
 									<p className="font-medium text-textSecondary group-hover:text-primary transition-colors">
-										{socialLinks.email}
+										{socialLinks.Email}
 									</p>
 								</div>
 							</a>
 
 							<a
-								href={socialLinks.linkedin}
+								href={socialLinks.Linkedin}
 								target="_blank"
 								rel="noreferrer"
 								aria-label="Visitar perfil no LinkedIn"
@@ -111,13 +107,13 @@ export default function Contact({ socialLinks }: ContactProps) {
 										LinkedIn
 									</p>
 									<p className="font-medium text-textSecondary group-hover:text-primary transition-colors">
-										{socialLinks.linkedin.substring(12)}
+										{socialLinks.Linkedin}
 									</p>
 								</div>
 							</a>
 
 							<a
-								href={socialLinks.github}
+								href={socialLinks.Github}
 								target="_blank"
 								rel="noreferrer"
 								aria-label="Visitar perfil no GitHub"
@@ -131,7 +127,7 @@ export default function Contact({ socialLinks }: ContactProps) {
 										Github
 									</p>
 									<p className="font-medium text-textSecondary group-hover:text-primary transition-colors">
-										{socialLinks.github.substring(8)}
+										{socialLinks.Github}
 									</p>
 								</div>
 							</a>

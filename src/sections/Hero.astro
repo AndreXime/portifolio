@@ -1,6 +1,6 @@
 ---
 import { ArrowDown, Github, Linkedin, Repeat } from "lucide-preact";
-import { socialLinks, heroText } from "../content/about";
+import { Links, Hero as HeroText } from "../content/about";
 import { tsCode, goCode } from "../content/snippet";
 import Snippets from "../components/Snippet.astro";
 ---
@@ -29,7 +29,7 @@ import Snippets from "../components/Snippet.astro";
         <p
           class="text-lg text-textMuted mb-8 max-w-lg leading-relaxed border-l-4 border-primary/20 pl-4"
         >
-          {heroText}
+          {HeroText}
         </p>
 
         <div class="flex flex-wrap gap-4">
@@ -41,7 +41,7 @@ import Snippets from "../components/Snippet.astro";
           </a>
 
           <a
-            href={socialLinks.github}
+            href={Links.Github}
             target="_blank"
             rel="noreferrer"
             aria-label="Visitar meu perfil no GitHub"
@@ -51,7 +51,7 @@ import Snippets from "../components/Snippet.astro";
           </a>
 
           <a
-            href={socialLinks.linkedin}
+            href={Links.Linkedin}
             target="_blank"
             rel="noreferrer"
             aria-label="Visitar meu perfil no LinkedIn"

@@ -8,8 +8,7 @@ import {
   Briefcase,
 } from "lucide-preact";
 import SectionHeader from "../components/ui/SectionHeader";
-import { richTextToHtml } from "../lib/markdownParser";
-import { about } from "../content/about";
+import { Sobre, Experiencias, Formação } from "../content/about";
 ---
 
 <section
@@ -47,7 +46,7 @@ import { about } from "../content/about";
           </div>
 
           <div class="space-y-6 text-textMuted leading-relaxed">
-            {about.trajetoria?.map((p) => <p set:html={richTextToHtml(p)} />)}
+            {Sobre.Trajetoria.split("\n").map((p) => <p set:html={p} />)}
           </div>
         </div>
 
@@ -57,7 +56,7 @@ import { about } from "../content/about";
           >
             <Code2 class="w-8 h-8 mb-2" aria-hidden="true" />
             <p class="text-white/80 text-sm font-medium">Stack Principal</p>
-            <p class="text-xl font-bold">{about.highlights?.stackPrincipal}</p>
+            <p class="text-xl font-bold">{Sobre.Destaques.Stack}</p>
           </div>
 
           <div
@@ -69,7 +68,7 @@ import { about } from "../content/about";
             <div>
               <p class="text-sm text-textMuted">Experiência</p>
               <p class="font-bold text-textSecondary text-lg">
-                {about.highlights?.experience}
+                {Sobre.Destaques.Experiência}
               </p>
             </div>
           </div>
@@ -83,7 +82,7 @@ import { about } from "../content/about";
             <div>
               <p class="text-sm text-textMuted">Localização</p>
               <p class="font-bold text-textSecondary text-lg">
-                {about.highlights?.location}
+                {Sobre.Destaques.Localização}
               </p>
             </div>
           </div>
@@ -99,20 +98,20 @@ import { about } from "../content/about";
 
           <div class="relative pl-6 border-l-2 border-border/40 space-y-8">
             {
-              about.experience?.map((exp) => (
+              [Experiencias].map((exp) => (
                 <div class="relative">
                   <div class="absolute -left-[33px] top-1 w-4 h-4 rounded-full border-4 border-surface bg-primary shadow-sm" />
                   <div class="bg-surface p-6 rounded-2xl border border-border/60 hover:border-primary/30 transition-colors shadow-sm">
                     <span class="text-primary font-mono text-xs font-bold uppercase tracking-wider">
-                      {exp.period}
+                      {exp.Periodo}
                     </span>
                     <h4 class="text-xl font-bold text-textSecondary mt-1">
-                      {exp.role}
+                      {exp.Cargo}
                     </h4>
-                    <p class="text-textMuted font-medium mb-3">{exp.company}</p>
+                    <p class="text-textMuted font-medium mb-3">{exp.Empresa}</p>
                     <p
                       class="text-textMuted text-sm leading-relaxed"
-                      set:html={richTextToHtml(exp.description ?? "")}
+                      set:html={exp.Descrição}
                     />
                   </div>
                 </div>
@@ -128,22 +127,22 @@ import { about } from "../content/about";
 
           <div class="relative pl-6 border-l-2 border-border/40 space-y-8">
             {
-              about.education?.map((edu) => (
+              [Formação].map((edu) => (
                 <div class="relative">
                   <div class="absolute -left-[33px] top-1 w-4 h-4 rounded-full border-4 border-surface bg-primary shadow-sm" />
                   <div class="bg-surface p-6 rounded-2xl border border-border/60 hover:border-primary/30 transition-colors">
                     <span class="text-primary font-mono text-xs font-bold uppercase tracking-wider">
-                      {edu.period}
+                      {edu.Periodo}
                     </span>
                     <h4 class="text-xl font-bold text-textSecondary mt-1">
-                      {edu.degree}
+                      {edu.Curso}
                     </h4>
                     <p class="text-textMuted font-medium mb-3">
-                      {edu.institution}
+                      {edu.Instituição}
                     </p>
                     <p
                       class="text-textMuted text-sm leading-relaxed"
-                      set:html={richTextToHtml(edu.description)}
+                      set:html={edu.Descrição}
                     />
                   </div>
                 </div>
