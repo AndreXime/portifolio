@@ -106,11 +106,13 @@ const schema = JSON.stringify({
     />
     <script is:inline>
       (function () {
-        const theme =
-          localStorage.getItem("theme") ||
-          (window.matchMedia("(prefers-color-scheme: dark)").matches
+        let theme = localStorage.getItem("theme");
+        if (!theme) {
+          theme = window.matchMedia("(prefers-color-scheme: dark)").matches
             ? "dark"
-            : "light");
+            : "light";
+          localStorage.setItem("theme", theme);
+        }
         document.documentElement.setAttribute("data-theme", theme);
       })();
     </script>

@@ -5,73 +5,6 @@
 		"Helvetica Neue", sans-serif;
 	--font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 
-	/* Light Theme (default) */
-	--color-primary: #3b82f6;
-	--color-primary-dark: #2563eb;
-	--color-secondary: #7c3aed;
-	--color-background: #ffffff;
-	--color-surface: #ffffff;
-	--color-surface-highlight: #f8fafc;
-	--color-surface-alt: #fafbfc;
-	--color-text-main: #0f172a;
-	--color-text-secondary: #1e293b;
-	--color-text-muted: #64748b;
-	--color-text-subtle: #94a3b8;
-	--color-border: #e5e7eb;
-	--color-border-light: #f3f4f6;
-	--color-border-strong: #d1d5db;
-
-	/* Code Editor Colors */
-	--color-code-bg: #1a1b26;
-	--color-code-header: #16161e;
-	--color-code-border: #334155;
-	--color-code-text: #f1f5f9;
-
-	/* Status Colors */
-	--color-success: #10b981;
-	--color-success-bg: #d1fae5;
-	--color-success-border: #a7f3d0;
-	--color-error: #ef4444;
-	--color-error-bg: #fee2e2;
-	--color-error-border: #fecaca;
-	--color-warning: #f59e0b;
-	--color-warning-bg: #fef3c7;
-	--color-warning-border: #fde68a;
-	--color-info: #3b82f6;
-	--color-info-bg: #dbeafe;
-	--color-info-border: #bfdbfe;
-
-	/* Social & Brand Colors */
-	--color-github: #24292e;
-	--color-github-hover: #1b1f23;
-	--color-linkedin: #0077b5;
-	--color-linkedin-hover: #005582;
-
-	/* Button Colors */
-	--color-btn-secondary: #1e293b;
-	--color-btn-secondary-hover: #0f172a;
-	--color-btn-secondary-text: #ffffff;
-
-	/* Section Backgrounds (gradient progression) */
-	--color-section-1: #ffffff;
-	--color-section-2: #f8fafc;
-	--color-section-3: #ffffff;
-	--color-section-4: #f8fafc;
-	--color-section-5: #ffffff;
-	--color-section-6: #f8fafc;
-
-	/* Neutral Shades */
-	--color-neutral-50: #f8fafc;
-	--color-neutral-100: #f1f5f9;
-	--color-neutral-200: #e2e8f0;
-	--color-neutral-300: #cbd5e1;
-	--color-neutral-400: #94a3b8;
-	--color-neutral-500: #64748b;
-	--color-neutral-600: #475569;
-	--color-neutral-700: #334155;
-	--color-neutral-800: #1e293b;
-	--color-neutral-900: #0f172a;
-
 	/* Animations */
 	--animate-click: mouse-click 2s ease-in-out infinite;
 
@@ -133,8 +66,8 @@
 	--color-section6: var(--color-section-6);
 }
 
-/* Light Theme (explicit) */
-[data-theme="light"] {
+/* Light Theme (default) */
+:root {
 	--color-primary: #3b82f6;
 	--color-primary-dark: #2563eb;
 	--color-secondary: #7c3aed;
@@ -246,12 +179,12 @@
 	--color-btn-secondary-text: #0f172a;
 
 	/* Section Backgrounds (gradient progression - dark to light) */
-	--color-section-1: #0f172a;
-	--color-section-2: #141b2b;
-	--color-section-3: #1a202e;
-	--color-section-4: #1e293b;
-	--color-section-5: #223041;
-	--color-section-6: #243447;
+	--color-section-1: #141b2b;
+	--color-section-2: #1a202e;
+	--color-section-3: #141b2b;
+	--color-section-4: #1a202e;
+	--color-section-5: #141b2b;
+	--color-section-6: #1a202e;
 
 	/* Neutral Shades (invertido) */
 	--color-neutral-50: #0f172a;
@@ -264,69 +197,4 @@
 	--color-neutral-700: #e2e8f0;
 	--color-neutral-800: #f1f5f9;
 	--color-neutral-900: #f8fafc;
-}
-
-@media (prefers-color-scheme: dark) {
-	:root:not([data-theme="light"]) {
-		--color-primary: #3b82f6;
-		--color-primary-dark: #2563eb;
-		--color-secondary: #8b5cf6;
-		--color-background: #0f172a;
-		--color-surface: #1e293b;
-		--color-surface-highlight: #334155;
-		--color-surface-alt: #1e293b;
-		--color-text-main: #f1f5f9;
-		--color-text-secondary: #e2e8f0;
-		--color-text-muted: #94a3b8;
-		--color-text-subtle: #64748b;
-		--color-border: #334155;
-		--color-border-light: #1e293b;
-		--color-border-strong: #475569;
-
-		--color-code-bg: #0a0b10;
-		--color-code-header: #0f111a;
-		--color-code-border: #1e293b;
-		--color-code-text: #e2e8f0;
-
-		--color-success: #10b981;
-		--color-success-bg: #064e3b;
-		--color-success-border: #065f46;
-		--color-error: #ef4444;
-		--color-error-bg: #7f1d1d;
-		--color-error-border: #991b1b;
-		--color-warning: #f59e0b;
-		--color-warning-bg: #78350f;
-		--color-warning-border: #92400e;
-		--color-info: #3b82f6;
-		--color-info-bg: #1e3a8a;
-		--color-info-border: #1e40af;
-
-		--color-github: #24292e;
-		--color-github-hover: #1b1f23;
-		--color-linkedin: #0077b5;
-		--color-linkedin-hover: #005582;
-
-		--color-btn-secondary: #e2e8f0;
-		--color-btn-secondary-hover: #f1f5f9;
-		--color-btn-secondary-text: #0f172a;
-
-		/* Section Backgrounds (gradient progression - dark to light) */
-		--color-section-1: #0f172a;
-		--color-section-2: #141b2b;
-		--color-section-3: #1a202e;
-		--color-section-4: #1e293b;
-		--color-section-5: #223041;
-		--color-section-6: #243447;
-
-		--color-neutral-50: #0f172a;
-		--color-neutral-100: #1e293b;
-		--color-neutral-200: #334155;
-		--color-neutral-300: #475569;
-		--color-neutral-400: #64748b;
-		--color-neutral-500: #94a3b8;
-		--color-neutral-600: #cbd5e1;
-		--color-neutral-700: #e2e8f0;
-		--color-neutral-800: #f1f5f9;
-		--color-neutral-900: #f8fafc;
-	}
 }
