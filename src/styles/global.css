@@ -1,23 +1,14 @@
 @import "tailwindcss";
 @import "./theme.css";
-@import "@wooorm/starry-night/style/dimmed-dark";
 
 html {
 	scroll-padding-top: 20px;
 	scroll-behavior: smooth;
-}
-
-:root {
 	scrollbar-width: auto;
 	scrollbar-color: #a0a0a5 transparent;
 }
 
 *:focus-visible {
-	@apply outline-2 outline-offset-2 outline-primary;
-}
-
-button:focus-visible,
-a:focus-visible {
 	@apply outline-2 outline-offset-2 outline-primary;
 }
 
@@ -27,13 +18,4 @@ a:focus-visible {
 
 .reveal-hidden {
 	@apply opacity-0 translate-y-[30px];
-}
-
-.backface-hidden {
-	backface-visibility: hidden;
-	-webkit-backface-visibility: hidden;
-	display: flex;
-	flex-direction: column;
-	height: 100%;
-	width: 100%;
 }

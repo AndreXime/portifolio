@@ -23,3 +23,6 @@ const highlightedHtml = toHtml(tree);
     class="text-codeText text-sm overflow-scroll max-h-[600px]">
 <code class={`language-${lang} starry-night`} set:html={highlightedHtml} />
 </pre>
+<style is:global>
+    @import "@wooorm/starry-night/style/dark";
+</style>
