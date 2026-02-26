@@ -8,7 +8,7 @@ html {
 }
 
 :root {
-	scrollbar-width: thin;
+	scrollbar-width: auto;
 	scrollbar-color: #a0a0a5 transparent;
 }
 

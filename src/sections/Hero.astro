@@ -1,7 +1,7 @@
 ---
-import { ArrowDown, Github, Linkedin, Repeat } from "lucide-preact";
+import { ArrowDown, Github, Linkedin } from "lucide-preact";
 import { Links, Hero as HeroText } from "../content/about";
-import { tsCode, goCode } from "../content/snippet";
+import { tsCode } from "../content/snippet";
 import Snippets from "../components/Snippet.astro";
 ---
 
@@ -22,7 +22,7 @@ import Snippets from "../components/Snippet.astro";
           class="text-2xl sm:text-3xl text-textSecondary mb-8 font-medium leading-snug"
         >
           Sou desenvolvedor de software especializado em <span
-            class="text-primary font-bold">TypeScript e Go</span
+            class="text-primary font-bold">TypeScript</span
           >.
         </h2>
 
@@ -63,95 +63,28 @@ import Snippets from "../components/Snippet.astro";
       </div>
 
       <div class="relative lg:block group perspective-[1000px] h-full">
-        <div
-          id="snippet-container"
-          class="relative group perspective-1000 h-full cursor-pointer touch-manipulation"
-          role="button"
-          tabindex="0"
-          aria-label="Alternar entre código TypeScript e Go"
-        >
-          <div
-            id="snippet-card"
-            class={`relative transition-all duration-700 transform-3d h-full`}
-          >
+        <div class="relative h-full">
+          <div class="bg-codeBg rounded-xl border border-codeBorder/80">
             <div
-              class="backface-hidden bg-codeBg rounded-xl border border-codeBorder/80"
+              class="relative flex items-center px-4 py-3 bg-codeHeader border-b border-codeBorder/80 rounded-t-xl"
             >
-              <div
-                class="flex justify-between items-center px-4 py-3 bg-codeHeader border-b border-codeBorder/80 rounded-xl"
-              >
-                <div class="flex gap-2">
-                  <div class="w-3 h-3 rounded-full bg-error/80"></div>
-                  <div class="w-3 h-3 rounded-full bg-warning/80"></div>
-                  <div class="w-3 h-3 rounded-full bg-success/80"></div>
-                </div>
-                <div class="text-xs text-codeText font-mono font-medium">
-                  developer.ts
-                </div>
-                <div
-                  class="flex items-center gap-1 text-xs text-white bg-primary/80 px-2 py-0.5 rounded border border-primary font-medium"
-                >
-                  <Repeat class="w-3 h-3" /> Flip
-                </div>
+              <div class="flex gap-2">
+                <div class="w-3 h-3 rounded-full bg-error/80"></div>
+                <div class="w-3 h-3 rounded-full bg-warning/80"></div>
+                <div class="w-3 h-3 rounded-full bg-success/80"></div>
               </div>
-              <div class="p-4 pt-0">
-                <Snippets lang={"ts"} code={tsCode} />
+              <div
+                class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-xs text-codeText font-mono font-medium"
+              >
+                developer.ts
               </div>
             </div>
-
-            <div
-              class="absolute inset-0 backface-hidden transform-[rotateY(180deg)] bg-codeBg rounded-xl border border-codeBorder/80"
-            >
-              <div
-                class="flex justify-between items-center px-4 py-3 bg-codeHeader border-b border-codeBorder/80 rounded-xl"
-              >
-                <div class="flex gap-2">
-                  <div class="w-3 h-3 rounded-full bg-error/80"></div>
-                  <div class="w-3 h-3 rounded-full bg-warning/80"></div>
-                  <div class="w-3 h-3 rounded-full bg-success/80"></div>
-                </div>
-                <div class="text-xs text-codeText font-mono font-medium">
-                  developer.go
-                </div>
-                <div
-                  class="flex items-center gap-1 text-xs text-white bg-primary/80 px-2 py-0.5 rounded border border-primary font-medium"
-                >
-                  <Repeat class="w-3 h-3" /> Flip
-                </div>
-              </div>
-              <div class="p-4 pt-0">
-                <Snippets lang={"go"} code={goCode} />
-              </div>
+            <div class="p-4 pt-0">
+              <Snippets lang={"ts"} code={tsCode} />
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <script is:inline type="module">
-    function SetupCard() {
-      const container = document.getElementById("snippet-container");
-      const card = document.getElementById("snippet-card");
-      let isFlipped = false;
-
-      function flipCard() {
-        isFlipped = !isFlipped;
-
-        if (isFlipped) {
-          card?.classList.add("[transform:rotateY(180deg)]");
-        } else {
-          card?.classList.remove("[transform:rotateY(180deg)]");
-        }
-      }
-
-      container?.addEventListener("click", flipCard);
-      container?.addEventListener("keydown", (e) => {
-        if (e.key === "Enter" || e.key === " ") {
-          e.preventDefault();
-          flipCard();
-        }
-      });
-    }
-    SetupCard();
-  </script>
 </section>

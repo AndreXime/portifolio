@@ -1,50 +1,44 @@
 export const tsCode = `
-interface Developer {
-  readonly name: string;
+interface IDeveloper {
+  name: string;
   role: "Frontend" | "Backend" | "Fullstack";
   skills: string[];
-  solutionOriented: boolean;
+  isProblemSolver: boolean;
 }
 
-const andre: Developer = {
+class Developer implements IDeveloper {
+  private readonly name: string;
+  private role: "Frontend" | "Backend" | "Fullstack";
+  private skills: string[];
+  private isProblemSolver: boolean;
+
+  constructor(config: IDeveloper) {
+    this.name = config.name;
+    this.role = config.role;
+    this.skills = config.skills;
+    this.isProblemSolver = config.isProblemSolver;
+  }
+
+  /**
+   * Valida se o desenvolvedor é qualificado para uma demanda.
+   */
+  public isQualifiedFor(techStack: string[]): boolean {
+    const hasRequiredTech = techStack.every(tech => this.skills.includes(tech));
+    return hasRequiredTech && this.isProblemSolver;
+  }
+}
+
+const andre = new Developer({
   name: "Andre Ximenes",
   role: "Fullstack",
-  skills: ["TypeScript", "React", "Go", "API"],
-  solutionOriented: true,
-};
+  isProblemSolver: true,
+  skills: ["TypeScript", "React", "Node.js", "Cloud", "PostgreSQL"],
+});
 
-function isReady(dev: Developer): boolean {
-  return dev.skills.length > 0 && dev.solutionOriented;
+const projectRequirements = ["TypeScript", "Cloud"];
+
+if (andre.isQualifiedFor(requiredTech)) {
+  console.log(\`\${andre.name} is ready to ship!\`);
 }
 
-if (isReady(andre)) {
-  console.log(\`\${andre.name} is ready to build!\`);
-}
-
-// Result: Andre Ximenes is ready to build!`;
-
-export const goCode = `
-package main
-import "fmt"
-
-type Developer struct {
-    Name             string
-    Skills           []string
-    SolutionOriented bool
-}
-
-func (d Developer) IsReady() bool {
-	return len(d.Skills) > 0 && d.SolutionOriented
-}
-
-func main() {
-	andre := Developer{
-       Name:             "André Ximenes",
-       Skills:           []string{"Go", "API", "TypeScript", "React"},
-       SolutionOriented: true,
-	}
-
-	if andre.IsReady() {
-		fmt.Printf("%s is ready to build!\\n", andre.Name)
-	}
-}`;
+// Output: Andre Ximenes is ready to ship!`;

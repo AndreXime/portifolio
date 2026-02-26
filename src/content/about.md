@@ -8,12 +8,12 @@ Desenvolvo sistemas focados em performance e manutenção, equilibrando rigor t�
 
 # Sobre
 ## Destaques
-Stack: TypeScript & Go
+Stack: TypeScript
 Experiência: 6 meses
 Localização: Brasil (Remoto)
 
 ## Trajetoria
-No dia a dia, atuo em todo o stack. No backend, utilizo a eficiência de **Node.js e Go** para criar APIs seguras e rápidas. No frontend, foco na experiência do usuário (UX/UI) para entregar interfaces refinadas e funcionais. Meu trabalho é conectar essas duas pontas, garantindo que a alta performance do servidor se traduza em uma experiência fluida para quem navega.
+No dia a dia, atuo em todo o stack. No backend, utilizo a eficiência de **Node.js ou Bun** para criar APIs seguras e rápidas. No frontend, foco na experiência do usuário (UX/UI) para entregar interfaces refinadas e funcionais. Meu trabalho é conectar essas duas pontas, garantindo que a alta performance do servidor se traduza em uma experiência fluida para quem navega.
 
 Aplico conceitos de arquitetura de software e *Clean Code* com o objetivo prático de garantir a manutenibilidade a longo prazo. Busco o equilíbrio entre qualidade técnica e pragmatismo, evitando *over-engineering*. A prioridade é viabilizar o projeto com uma base de código escalável que permita entregas consistentes e suporte o crescimento da aplicação.
 
