@@ -1,5 +1,5 @@
-import { useMemo, useState } from "preact/hooks";
-import { ExternalLink, Github } from "lucide-preact";
+import { useEffect, useMemo, useRef, useState } from "preact/hooks";
+import { ExternalLink, Github, Loader2 } from "lucide-preact";
 import type { Project } from "../content/projects";
 import SectionHeader from "../components/ui/SectionHeader";
 
@@ -89,6 +89,16 @@ export default function ProjectsSection({ projects }: { projects: Project[] }) {
 }
 
 function ProjectCard({ project }: { project: Project }) {
+	const [status, setStatus] = useState<"loading" | "loaded" | "error">("loading");
+	const imgRef = useRef<HTMLImageElement>(null);
+
+	// Tratamento para imagens em cache
+	useEffect(() => {
+		if (imgRef.current?.complete) {
+			setStatus("loaded");
+		}
+	}, []);
+
 	return (
 		<div className="group bg-surface rounded-xl overflow-hidden border border-border/60 hover:border-primary/30 flex flex-col h-full shadow-sm hover:shadow-xl transition-all">
 			<div className="relative group cursor-pointer h-48 overflow-hidden bg-surfaceAlt border-b border-borderLight">
@@ -98,14 +108,29 @@ function ProjectCard({ project }: { project: Project }) {
 					<div className="w-2.5 h-2.5 rounded-full bg-success/80"></div>
 				</div>
 
+				{status !== "loaded" && (
+					<div className="absolute inset-0 z-10 flex items-center justify-center bg-surfaceAlt">
+						{status === "loading" ? (
+							<Loader2 className="w-6 h-6 text-primary animate-spin" />
+						) : (
+							<span className="text-textMuted text-xs px-4 text-center">Falha ao carregar imagem.</span>
+						)}
+					</div>
+				)}
+
 				<img
+					ref={imgRef}
 					src={project.imageUrl}
 					width={800}
 					height={600}
 					alt={`Screenshot do projeto ${project.title}`}
 					loading="lazy"
 					decoding="async"
-					className={"w-full h-full object-fill pt-6 transition-all duration-700 ease-in-out lg:group-hover:scale-110"}
+					onLoad={() => setStatus("loaded")}
+					onError={() => setStatus("error")}
+					className={`object-cover mt-6 transition-all duration-700 ease-in-out lg:group-hover:scale-110 ${
+						status === "loaded" ? "opacity-100" : "opacity-0"
+					}`}
 				/>
 			</div>
 			<div className="p-5 flex flex-col flex-grow">
