@@ -1,8 +1,7 @@
 ---
 import { ArrowDown, Github, Linkedin } from "lucide-preact";
 import { Links, Hero as HeroText } from "../content/about";
-import { tsCode } from "../content/snippet";
-import Snippets from "../components/Snippet.astro";
+import Code from "../components/Code.astro";
 ---
 
 <section
@@ -64,25 +63,7 @@ import Snippets from "../components/Snippet.astro";
 
       <div class="relative lg:block group perspective-[1000px] h-full">
         <div class="relative h-full">
-          <div class="bg-codeBg rounded-xl border border-codeBorder/80">
-            <div
-              class="relative flex items-center px-4 py-3 bg-codeHeader border-b border-codeBorder/80 rounded-t-xl"
-            >
-              <div class="flex gap-2">
-                <div class="w-3 h-3 rounded-full bg-error/80"></div>
-                <div class="w-3 h-3 rounded-full bg-warning/80"></div>
-                <div class="w-3 h-3 rounded-full bg-success/80"></div>
-              </div>
-              <div
-                class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-xs text-codeText font-mono font-medium"
-              >
-                developer.ts
-              </div>
-            </div>
-            <div class="p-4 pt-0">
-              <Snippets lang={"ts"} code={tsCode} />
-            </div>
-          </div>
+          <Code />
         </div>
       </div>
     </div>

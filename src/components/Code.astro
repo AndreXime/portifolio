@@ -1,0 +1,129 @@
+---
+import { snippets } from "@/content/snippet";
+import { createStarryNight, all } from "@wooorm/starry-night";
+import { toHtml } from "hast-util-to-html";
+import { h } from "hastscript";
+
+const starryNight = await createStarryNight(all);
+const scope = starryNight.flagToScope("ts");
+
+const snippetsWithHtml = snippets.map((s) => ({
+  filename: s.filename,
+  highlightedHtml: scope
+    ? toHtml(starryNight.highlight(s.code.trim(), scope))
+    : toHtml(h(undefined, [s.code.trim()])),
+}));
+---
+
+<div class="bg-codeBg rounded-xl border border-codeBorder/80">
+  <div
+    class="flex flex-col rounded-t-xl bg-codeHeader border-b border-codeBorder/80"
+    role="tablist"
+    aria-label="Arquivos do snippet"
+  >
+    <div class="flex items-center px-4 pt-3 pb-2">
+      <div class="flex gap-2">
+        <div class="w-3 h-3 rounded-full bg-error/80"></div>
+        <div class="w-3 h-3 rounded-full bg-warning/80"></div>
+        <div class="w-3 h-3 rounded-full bg-success/80"></div>
+      </div>
+    </div>
+    <div class="flex w-full border-t border-codeBorder/50">
+      {
+        snippetsWithHtml.map((snippet, i) => (
+          <button
+            type="button"
+            role="tab"
+            aria-selected={i === 0}
+            aria-controls={`snippet-${i}`}
+            id={`tab-${i}`}
+            data-snippet-tab={String(i)}
+            class:list={["snippet-tab", i === 0 && "snippet-tab-active"]}
+          >
+            {snippet.filename}
+          </button>
+        ))
+      }
+    </div>
+  </div>
+  <div class="p-4">
+    {
+      snippetsWithHtml.map((snippet, i) => (
+        <div
+          id={`snippet-${i}`}
+          role="tabpanel"
+          aria-labelledby={`tab-${i}`}
+          data-snippet-panel={String(i)}
+          class:list={["snippet-panel", i > 0 && "hidden"]}
+        >
+          <pre
+            class="text-codeText text-sm overflow-scroll max-h-[600px] language-ts starry-night"
+            set:html={snippet.highlightedHtml}
+          />
+        </div>
+      ))
+    }
+  </div>
+</div>
+
+<style is:global>
+  @import "@wooorm/starry-night/style/dark";
+</style>
+
+<style>
+  .snippet-tab {
+    flex: 1;
+    min-width: 0;
+    padding: 0.5rem 0.75rem;
+    font-size: 0.75rem;
+    font-family: ui-monospace, monospace;
+    font-weight: 500;
+    border: none;
+    border-bottom: 2px solid transparent;
+    border-radius: 0;
+    background: transparent;
+    color: color-mix(in srgb, var(--color-codeText) 70%, transparent);
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    transition:
+      color 0.15s,
+      background-color 0.15s,
+      border-color 0.15s;
+  }
+  .snippet-tab:hover {
+    color: var(--color-codeText);
+  }
+  .snippet-tab-active {
+    color: var(--color-codeText);
+    background-color: var(--color-codeBg);
+    border-bottom-color: var(--color-codeBg);
+    margin-bottom: -1px;
+  }
+</style>
+
+<script>
+  const tabs =
+    document.querySelectorAll<HTMLButtonElement>("[data-snippet-tab]");
+  const panels = document.querySelectorAll("[data-snippet-panel]");
+
+  function setActiveTab(activeKey: string) {
+    tabs.forEach((tab) => {
+      const isActive = tab.dataset.snippetTab === activeKey;
+      tab.setAttribute("aria-selected", String(isActive));
+      tab.classList.toggle("snippet-tab-active", isActive);
+    });
+    panels.forEach((panel) => {
+      const panelKey = panel.getAttribute("data-snippet-panel");
+      (panel as HTMLElement).classList.toggle("hidden", panelKey !== activeKey);
+    });
+  }
+
+  tabs.forEach((tab) => {
+    tab.addEventListener("click", () => {
+      const key = tab.getAttribute("data-snippet-tab");
+      if (key) setActiveTab(key);
+    });
+  });
+</script>

@@ -1,32 +1,8 @@
-export const tsCode = `
-interface IDeveloper {
-  name: string;
-  role: "Frontend" | "Backend" | "Fullstack";
-  skills: string[];
-  isProblemSolver: boolean;
-}
-
-class Developer implements IDeveloper {
-  private readonly name: string;
-  private role: "Frontend" | "Backend" | "Fullstack";
-  private skills: string[];
-  private isProblemSolver: boolean;
-
-  constructor(config: IDeveloper) {
-    this.name = config.name;
-    this.role = config.role;
-    this.skills = config.skills;
-    this.isProblemSolver = config.isProblemSolver;
-  }
-
-  /**
-   * Valida se o desenvolvedor é qualificado para uma demanda.
-   */
-  public isQualifiedFor(techStack: string[]): boolean {
-    const hasRequiredTech = techStack.every(tech => this.skills.includes(tech));
-    return hasRequiredTech && this.isProblemSolver;
-  }
-}
+export const snippets = [
+	{
+		filename: "main.ts",
+		code: `
+import { Developer } from "./developer";
 
 const andre = new Developer({
   name: "Andre Ximenes",
@@ -37,8 +13,46 @@ const andre = new Developer({
 
 const projectRequirements = ["TypeScript", "Cloud"];
 
-if (andre.isQualifiedFor(requiredTech)) {
+if (andre.isQualifiedFor(projectRequirements)) {
   console.log(\`\${andre.name} is ready to ship!\`);
 }
 
-// Output: Andre Ximenes is ready to ship!`;
+// Output: Andre Ximenes is ready to ship!
+`,
+	},
+	{
+		filename: "developer.ts",
+		code: `
+type Role = "Frontend" | "Backend" | "Fullstack";
+
+interface DeveloperProps {
+	readonly name: string;
+	role: Role;
+	skills: string[];
+	isProblemSolver: boolean;
+}
+
+interface IDeveloper extends DeveloperProps {
+	isQualifiedFor(techStack: string[]): boolean;
+}
+
+export class Developer implements IDeveloper {
+	readonly name: string;
+	role: Role;
+	skills: string[];
+	isProblemSolver: boolean;
+
+	constructor(props: DeveloperProps) {
+		this.name = props.name;
+		this.role = props.role;
+		this.skills = props.skills;
+		this.isProblemSolver = props.isProblemSolver;
+	}
+
+	isQualifiedFor(techStack: string[]): boolean {
+		return techStack.every((tech) => this.skills.includes(tech)) && this.isProblemSolver;
+	}
+}
+`,
+	},
+];
