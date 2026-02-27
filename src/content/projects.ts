@@ -1,4 +1,12 @@
-import type { Project } from "./types";
+export interface Project {
+	title: string;
+	description: string;
+	type: "app" | "api" | "cli" | "landing page";
+	tech: string[];
+	imageUrl: string;
+	link: string;
+	github: string;
+}
 
 export const Projects: Project[] = [
 	{

@@ -1,4 +1,11 @@
-import type { Book } from "./types";
+export interface Book {
+	title: string;
+	author: string;
+	imageUrl: string;
+	state: "Lido" | "Lendo atualmente" | "Na lista de desejos";
+	tag: string;
+	review?: string;
+}
 
 export const Books: Book[] = [
 	{

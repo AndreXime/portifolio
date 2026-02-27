@@ -1,6 +1,6 @@
 import { useMemo, useState } from "preact/hooks";
 import { ExternalLink, Github } from "lucide-preact";
-import type { Project } from "../content/types";
+import type { Project } from "../content/projects";
 import SectionHeader from "../components/ui/SectionHeader";
 
 const filters: { id: Project["type"] | "all"; label: string }[] = [
@@ -71,7 +71,9 @@ export default function ProjectsSection({ projects }: { projects: Project[] }) {
 								<button
 									type="button"
 									onClick={() => setFilter(filter === "all" ? "minimal" : "all")}
-									aria-label={filter === "minimal" ? "Expandir para ver todos os projetos" : "Recolher e mostrar menos projetos"}
+									aria-label={
+										filter === "minimal" ? "Expandir para ver todos os projetos" : "Recolher e mostrar menos projetos"
+									}
 									className={`px-4 py-2 rounded-lg font-medium transition-all bg-primaryDark text-white shadow-lg shadow-primary/30 hover:bg-primary hover:shadow-xl`}
 								>
 									{filter === "minimal" && "Ver todos projetos"}

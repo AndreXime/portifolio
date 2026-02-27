@@ -1,4 +1,8 @@
-import type { TechItem } from "./types";
+interface TechItem {
+	name: string;
+	role: string;
+	icons: string[];
+}
 
 export const technologies: TechItem[] = [
 	{ name: "TypeScript", role: "Linguagem Principal", icons: ["typescript"] },

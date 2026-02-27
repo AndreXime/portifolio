@@ -1,4 +1,4 @@
-import type { Book } from "@/content/types";
+import type { Book } from "@/content/books";
 import { useState } from "preact/hooks";
 import SectionHeader from "../components/ui/SectionHeader";
 
@@ -54,7 +54,9 @@ export default function BooksSection({ books }: { books: Book[] }) {
 							<button
 								type="button"
 								onClick={() => setExpand(!expand)}
-								aria-label={!expand ? "Expandir para ver todos os livros da biblioteca" : "Recolher e mostrar menos livros"}
+								aria-label={
+									!expand ? "Expandir para ver todos os livros da biblioteca" : "Recolher e mostrar menos livros"
+								}
 								aria-expanded={expand}
 								className={`px-4 py-2 rounded-lg font-medium transition-all bg-primaryDark text-white shadow-lg shadow-primary/30 hover:bg-primary hover:shadow-xl`}
 							>
