@@ -1,0 +1,71 @@
+---
+import Code from "@/components/Code.astro";
+import "@/styles/global.css";
+
+// Layout fixo para OG
+const width = 1200;
+const height = 630;
+---
+
+<html lang="pt-BR" class="scroll-smooth">
+    <head>
+        <meta charset="utf-8" />
+        <meta charset="utf-8" />
+        <meta name="robots" content="noindex" />
+        <style is:inline>
+            /* Garante que não haja scrollbar e o tamanho seja exato */
+            body,
+            html {
+                margin: 0;
+                padding: 0;
+                width: 1200px;
+                height: 630px;
+                overflow: hidden;
+                background-color: #0f172a; /* Fallback para bg-section1 */
+            }
+        </style>
+    </head>
+    <body class="antialiased">
+        <div
+            style={`width: ${width}px; height: ${height}px;`}
+            class="bg-section1 text-textMain font-sans flex items-center relative border-[12px] border-primary/10"
+        >
+            <div class="grid grid-cols-12 gap-8 w-full px-16 items-center">
+                <div class="col-span-7 flex flex-col justify-center w-[90%]">
+                    <p class="text-3xl text-textMuted mb-2 font-medium">
+                        Olá, Meu nome é
+                    </p>
+                    <h1
+                        class="text-7xl font-bold mb-4 leading-tight tracking-tighter text-textMain"
+                    >
+                        André Ximenes
+                    </h1>
+                    <h2
+                        class="text-3xl text-textSecondary mb-6 font-medium leading-tight"
+                    >
+                        Desenvolvedor de software especializado em
+                        <span class="text-primary font-bold">TypeScript</span>.
+                    </h2>
+
+                    <div
+                        class="p-6 border-l-4 border-primary bg-primary/5 rounded-r-xl"
+                    >
+                        <p class="text-2xl text-textMain leading-relaxed">
+                            Visite meu site em <br />
+                            <span
+                                class="text-primary font-bold text-4xl tracking-tight"
+                                >andreximenes.xyz</span
+                            >
+                        </p>
+                    </div>
+                </div>
+
+                <div class="col-span-5 scale-110">
+                    <div class="shadow-2xl rotate-2">
+                        <Code />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
