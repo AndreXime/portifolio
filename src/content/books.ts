@@ -14,7 +14,7 @@ export const Books: Book[] = [
 		state: "Lendo atualmente",
 		tag: "Arquitetura",
 		review:
-			"Estou lendo para dominar os fundamentos de desacoplamento, mas com foco total em pragmatismo. O objetivo é absorver os conceitos para escrever código organizado, mas sabendo filtrar o que é excesso de engenharia (overengineering) para manter a agilidade da entrega.",
+			"Estou lendo para dominar os fundamentos de desacoplamento, mas com foco total em pragmatismo. O objetivo é absorver os conceitos para escrever código organizado, mas sabendo filtrar o que é excesso de engenharia para manter a agilidade da entrega.",
 		imageUrl: "arquitetura-limpa.jpg",
 	},
 	{
@@ -36,13 +36,13 @@ export const Books: Book[] = [
 		imageUrl: "refactoring-ui.png",
 	},
 	{
-		title: "Start small, Stay small",
-		author: "Rob Walling",
+		title: "Soft Skills: The Software Developer's Life Manual",
+		author: "John Sonmez",
 		state: "Na lista de desejos",
-		tag: "Business",
+		tag: "Carreira",
 		review:
-			"Muitas vezes caio na armadilha de focar só na tecnologia e esquecer o 'porquê'. Quero ler este livro para desenvolver meu senso de produto: aprender a priorizar features que trazem retorno real, evitar o desperdício de tempo em funcionalidades que ninguém usa e ter visão estratégica das soluções que construo.",
-		imageUrl: "start-small.jpg",
+			"Vou ler este livro para aprender a me posicionar como um produto e atrair as melhores oportunidades através do marketing pessoal. O foco é construir uma autoridade técnica que me destaque em processos seletivos. Quero aplicar as estratégias de branding e produtividade para acelerar minha evolução profissional.",
+		imageUrl: "softskills.jpg",
 	},
 	{
 		title: "O Teste Da Mãe",
@@ -50,7 +50,7 @@ export const Books: Book[] = [
 		state: "Na lista de desejos",
 		tag: "Business",
 		review:
-			"Todo mundo mente para ser educado quando mostro minhas ideias. Quero ler esse livro para aprender a fazer as perguntas certas e descobrir se o problema do cliente é real mesmo, antes de desperdiçar 3 meses codando um software que vai pro lixo.",
+			"Leitura para aprimorar a extração de requisitos e regras de negócio. O foco é aprender a conduzir entrevistas que superem a dificuldade dos clientes em expressar necessidades reais, permitindo identificar edge cases e definir o escopo funcional correto antes de iniciar o desenvolvimento.",
 		imageUrl: "teste-mae.jpg",
 	},
 	{
@@ -59,10 +59,9 @@ export const Books: Book[] = [
 		state: "Na lista de desejos",
 		tag: "Frontend",
 		review:
-			"Às vezes faço uma tela e o usuário fica perdido sem saber onde clicar. Quero entender como o cérebro das pessoas funciona para parar de 'chutar' o design e criar interfaces óbvias, onde o usuário navega sem precisar pensar duas vezes.",
+			"Leitura para complementar o Refactoring UI com base teórica em psicologia cognitiva. O objetivo é aplicar heurísticas de UX para reduzir a carga cognitiva do usuário, eliminando decisões baseadas em 'achismo' e criando interfaces com fluxos de navegação óbvios.",
 		imageUrl: "psicologia-ux.jpg",
 	},
-
 	/* Livros secondarios */
 	{
 		title: "Não me Faça Pensar",

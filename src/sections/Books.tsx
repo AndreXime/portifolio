@@ -12,8 +12,20 @@ const STYLE_MAP: Record<Book["state"], string> = {
 
 export default function BooksSection({ books }: { books: Book[] }) {
 	const [expand, setExpand] = useState(false);
-	const mainBooks = books.slice(0, 6);
-	const secondaryBooks = books.slice(6);
+	const mainBooks = books.filter((book, index) => {
+		const hasTag = !!book.tag?.trim();
+		const hasReview = !!book.review?.trim();
+
+		if (!hasTag && !hasReview) return false;
+
+		return index <= 5;
+	});
+	const secondaryBooks = books.filter((book, index) => {
+		const hasTag = !!book.tag?.trim();
+		const hasReview = !!book.review?.trim();
+
+		return (!hasTag && !hasReview) || index > 5;
+	});
 
 	const booksView = expand ? mainBooks : mainBooks.slice(0, 3);
 
@@ -36,9 +48,13 @@ export default function BooksSection({ books }: { books: Book[] }) {
 								if (index === 2) responsiveClass = "hidden lg:block";
 							}
 
+							const hasTag = !!book.tag?.trim();
+							const hasReview = !!book.review?.trim();
+							const shouldUseCompact = !hasTag && !hasReview;
+
 							return (
 								<div key={book.title} className={responsiveClass}>
-									<BookCard {...book} key={book.title} />{" "}
+									{shouldUseCompact ? <CompactBookItem {...book} /> : <BookCard {...book} />}
 								</div>
 							);
 						})}
@@ -105,7 +121,7 @@ function BookCard(book: Book) {
 				<h3 className="text-xl font-bold text-textSecondary mb-1 group-hover:text-primary transition-colors">
 					{book.title}
 				</h3>
-				<p className="text-sm text-textSubtle mb-4">por {book.author}</p>
+				<p className="text-sm text-textSubtle mb-2">por {book.author}</p>
 
 				<div className="relative">
 					<p className="text-textMuted text-sm leading-relaxed italic relative z-10">

@@ -20,16 +20,6 @@ export const Projects: Project[] = [
 		github: "https://github.com/AndreXime/andre_OS",
 	},
 	{
-		title: "Plataforma de Captação de Projetos B2B para Freelancers",
-		description:
-			"Desenvolvi esta landing page conceitual para demonstrar, na prática, minha habilidade em criar interfaces de alta conversão utilizando a performance do Astro. Embora o projeto leve meu nome e simule uma oferta de serviços, ele serve principalmente como uma prova técnica de que sei construir páginas de vendas rápidas e profissionais do zero. O objetivo é mostrar a potenciais clientes o padrão de qualidade e otimização que posso entregar para os seus negócios.",
-		type: "landing page",
-		tech: ["TypeScript", "Astro", "Preact", "TailwindCSS", "Performance & SEO"],
-		imageUrl: "contrate.png",
-		link: "https://contrate.andreximenes.xyz/",
-		github: "https://github.com/AndreXime/contrate",
-	},
-	{
 		title: "Gerenciador de Grade Curricular Inteligente",
 		description:
 			"Desenvolvi esta aplicação para preencher uma lacuna na minha universidade: a ausência de um planejador acadêmico visual e eficiente. A ferramenta substitui o uso de planilhas manuais, permitindo que o estudante gerencie sua grade de horários de forma interativa. Construído com Next.js e Tailwind CSS, o sistema vai além da organização básica; implementei uma lógica de pré-requisitos que calcula automaticamente quais matérias estarão disponíveis para cursar nos próximos semestres, evitando conflitos e simplificando a tomada de decisão acadêmica.",
@@ -38,6 +28,16 @@ export const Projects: Project[] = [
 		imageUrl: "disciplinas.png",
 		link: "https://disciplina-uva.andreximenes.xyz/",
 		github: "https://github.com/AndreXime/organiza-cc-uva",
+	},
+	{
+		title: "API para E-commerce",
+		description:
+			"Construí a API REST de um e-commerce utilizando Bun, Hono e Prisma com PostgreSQL, abrangendo desde o catálogo com filtros até o fluxo completo de pedidos e carrinho persistido. Implementei a autenticação JWT com refresh tokens em cookies HttpOnly, reforçando a segurança com controle de acesso por cargos e revogação imediata no logout via blocklist de JTI no Redis. Assegurei a resiliência da aplicação através de rate limiting dinâmico e implementei processamento assíncrono de tarefas com BullMQ, além de integrar o AWS S3 para gestão de uploads. Estruturei o código em uma arquitetura modular validada com Zod, garantindo tipagem de ponta a ponta no TypeScript e geração automatizada dos contratos na documentação OpenAPI.",
+		type: "api",
+		tech: ["TypeScript", "Hono", "AWS SDK", "PostgreSQL", "Open API"],
+		imageUrl: "api-ecommerce.png",
+		link: "",
+		github: "https://github.com/AndreXime/ecommerce-backend",
 	},
 	{
 		title: "ERP Restaurante: Arquitetura Local-First",
@@ -52,12 +52,12 @@ export const Projects: Project[] = [
 	{
 		title: "E-commerce de Eletrônicos",
 		description:
-			"Plataforma desenvolvida para ecommerce com visual polido e focado na experiencia de usuario, com todas as funcionalidades essenciais como: Autenticação, Filtragem de produtos, Carrinho e Pagamento.",
+			"Desenvolvi o front-end de um e-commerce consumindo uma API REST externa, utilizando Astro para SSR, TypeScript, Preact e Tailwind CSS. Priorizei a otimização de bundle e os Core Web Vitals ao gerenciar o estado global com Nanostores e entregar ao cliente apenas o JavaScript necessário por rota. Construí a camada de integração repassando cookies durante a renderização no servidor em prol do SEO e implementei um fluxo robusto de refresh token com deduplicação de interceptadores para erros 401. Estruturei toda a jornada funcional da aplicação, abrangendo carrinho reativo, checkout em três etapas, área do cliente e um painel administrativo com paginação e busca sob demanda.",
 		type: "landing page",
 		tech: ["TypeScript", "Next.js", "React", "UX/UI", "TailwindCSS"],
 		imageUrl: "ecommerce.png",
-		link: "https://ecommerce.andreximenes.xyz/",
-		github: "",
+		link: "",
+		github: "https://github.com/AndreXime/ecommerce",
 	},
 
 	{
