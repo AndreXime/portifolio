@@ -9,6 +9,8 @@ import {
 } from "lucide-preact";
 import SectionHeader from "../components/ui/SectionHeader";
 import { Sobre, Experiencias, Formação } from "../content/about";
+import stackupLogo from "../assets/stackup_logo.jpg";
+import uvaLogo from "../assets/uva-logo.jpg";
 ---
 
 <section
@@ -102,15 +104,30 @@ import { Sobre, Experiencias, Formação } from "../content/about";
                 <div class="relative">
                   <div class="absolute -left-[33px] top-1 w-4 h-4 rounded-full border-4 border-surface bg-primary shadow-sm" />
                   <div class="bg-surface p-6 rounded-2xl border border-border/60 hover:border-primary/30 transition-colors shadow-sm">
-                    <span class="text-primary font-mono text-xs font-bold uppercase tracking-wider">
-                      {exp.Periodo}
-                    </span>
-                    <h4 class="text-xl font-bold text-textSecondary mt-1">
-                      {exp.Cargo}
-                    </h4>
-                    <p class="text-textMuted font-medium mb-3">{exp.Empresa}</p>
+                    <div class="flex gap-6 items-center">
+                      <div class="size-12 flex-shrink-0 rounded-full overflow-hidden bg-white flex items-center justify-center p-1">
+                        <img
+                          src={stackupLogo.src}
+                          alt=""
+                          width={48}
+                          height={48}
+                          class="w-full h-full object-contain"
+                        />
+                      </div>
+                      <div>
+                        <span class="text-primary font-mono text-xs font-bold uppercase tracking-wider">
+                          {exp.Periodo}
+                        </span>
+                        <h4 class="text-xl font-bold text-textSecondary">
+                          {exp.Cargo}
+                        </h4>
+                        <p class="text-textMuted font-medium flex items-center gap-2">
+                          {exp.Empresa}
+                        </p>
+                      </div>
+                    </div>
                     <p
-                      class="text-textMuted text-sm leading-relaxed"
+                      class="text-textMuted text-sm leading-relaxed mt-3"
                       set:html={exp.Descrição}
                     />
                   </div>
@@ -131,17 +148,30 @@ import { Sobre, Experiencias, Formação } from "../content/about";
                 <div class="relative">
                   <div class="absolute -left-[33px] top-1 w-4 h-4 rounded-full border-4 border-surface bg-primary shadow-sm" />
                   <div class="bg-surface p-6 rounded-2xl border border-border/60 hover:border-primary/30 transition-colors">
-                    <span class="text-primary font-mono text-xs font-bold uppercase tracking-wider">
-                      {edu.Periodo}
-                    </span>
-                    <h4 class="text-xl font-bold text-textSecondary mt-1">
-                      {edu.Curso}
-                    </h4>
-                    <p class="text-textMuted font-medium mb-3">
-                      {edu.Instituição}
-                    </p>
+                    <div class="flex gap-6 items-center">
+                      <div class="size-12 flex-shrink-0 rounded-full overflow-hidden bg-white flex items-center justify-center p-1">
+                        <img
+                          src={uvaLogo.src}
+                          alt=""
+                          width={48}
+                          height={48}
+                          class="w-full h-full object-contain"
+                        />
+                      </div>
+                      <div>
+                        <span class="text-primary font-mono text-xs font-bold uppercase tracking-wider">
+                          {edu.Periodo}
+                        </span>
+                        <h4 class="text-xl font-bold text-textSecondary">
+                          {edu.Curso}
+                        </h4>
+                        <p class="text-textMuted font-medium">
+                          {edu.Instituição}
+                        </p>
+                      </div>
+                    </div>
                     <p
-                      class="text-textMuted text-sm leading-relaxed"
+                      class="text-textMuted text-sm leading-relaxed mt-3"
                       set:html={edu.Descrição}
                     />
                   </div>
