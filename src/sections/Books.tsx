@@ -10,6 +10,13 @@ const STYLE_MAP: Record<Book["state"], string> = {
 	"Na lista de desejos": "bg-surfaceHighlight text-textMuted border-border",
 };
 
+const TAG_STYLE_MAP: Record<string, string> = {
+	Arquitetura: "bg-primary/10 text-primary border-primary/30",
+	Frontend: "bg-secondary/20 text-secondary border-secondary/40",
+	Carreira: "bg-successBg text-success border-successBorder",
+	Business: "bg-warningBg text-warning border-warningBorder",
+};
+
 export default function BooksSection({ books }: { books: Book[] }) {
 	const [expand, setExpand] = useState(false);
 	const mainBooks = books.filter((book, index) => {
@@ -112,7 +119,7 @@ function BookCard(book: Book) {
 						{book.state}
 					</span>
 					<span
-						className={`text-[10px] uppercase tracking-wider font-bold px-2 py-1 rounded-md border ${STYLE_MAP["Lendo atualmente"]}`}
+						className={`text-[10px] uppercase tracking-wider font-bold px-2 py-1 rounded-md border ${TAG_STYLE_MAP[book.tag] ?? STYLE_MAP["Na lista de desejos"]}`}
 					>
 						{book.tag}
 					</span>
