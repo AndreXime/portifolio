@@ -9,8 +9,9 @@ import {
 } from "lucide-preact";
 import SectionHeader from "../components/ui/SectionHeader";
 import { Sobre, Experiencias, Formação } from "../content/about";
-import stackupLogo from "../assets/stackup_logo.jpg";
-import uvaLogo from "../assets/uva-logo.jpg";
+import stackupLogo from "../assets/logos/stackup_logo.jpg";
+import uvaLogo from "../assets/logos/uva-logo.jpg";
+import { Image } from "astro:assets";
 ---
 
 <section
@@ -103,12 +104,13 @@ import uvaLogo from "../assets/uva-logo.jpg";
               [Experiencias].map((exp) => (
                 <div class="relative">
                   <div class="absolute -left-[33px] top-1 w-4 h-4 rounded-full border-4 border-surface bg-primary shadow-sm" />
-                  <div class="bg-surface p-6 rounded-2xl border border-border/60 hover:border-primary/30 transition-colors shadow-sm">
+                  <div class="bg-surface px-6 py-5 rounded-2xl border border-border/60 hover:border-primary/30 transition-colors shadow-sm">
                     <div class="flex gap-6 items-center">
                       <div class="size-12 flex-shrink-0 rounded-full overflow-hidden bg-white flex items-center justify-center p-1">
-                        <img
-                          src={stackupLogo.src}
-                          alt=""
+                        <Image
+                          src={stackupLogo}
+                          format="webp"
+                          alt="Logo da stackup"
                           width={48}
                           height={48}
                           class="w-full h-full object-contain"
@@ -147,12 +149,12 @@ import uvaLogo from "../assets/uva-logo.jpg";
               [Formação].map((edu) => (
                 <div class="relative">
                   <div class="absolute -left-[33px] top-1 w-4 h-4 rounded-full border-4 border-surface bg-primary shadow-sm" />
-                  <div class="bg-surface p-6 rounded-2xl border border-border/60 hover:border-primary/30 transition-colors">
+                  <div class="bg-surface px-6 py-5 rounded-2xl border border-border/60 hover:border-primary/30 transition-colors">
                     <div class="flex gap-6 items-center">
                       <div class="size-12 flex-shrink-0 rounded-full overflow-hidden bg-white flex items-center justify-center p-1">
-                        <img
-                          src={uvaLogo.src}
-                          alt=""
+                        <Image
+                          src={uvaLogo}
+                          alt="Logo da universidade  "
                           width={48}
                           height={48}
                           class="w-full h-full object-contain"
