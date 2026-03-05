@@ -79,7 +79,7 @@ export default function Contact({ socialLinks }: { socialLinks: personalData["Li
 								aria-label={`Enviar email para ${socialLinks.Email}`}
 								className="flex items-center gap-4 p-4 bg-surface border border-border/60 rounded-xl hover:border-primary/50 hover:shadow-md transition-all group"
 							>
-								<div className="w-10 h-10 bg-primary text-white rounded-full flex items-center justify-center group-hover:bg-white group-hover:text-primary transition-colors">
+								<div className="w-10 h-10 bg-primary text-white rounded-full flex items-center justify-center group-hover:scale-110 group-hover:shadow-lg transition-transform">
 									<Mail className="w-5 h-5" aria-hidden="true" />
 								</div>
 								<div>
@@ -97,9 +97,9 @@ export default function Contact({ socialLinks }: { socialLinks: personalData["Li
 								target="_blank"
 								rel="noreferrer"
 								aria-label="Visitar perfil no LinkedIn"
-								className="flex items-center gap-4 p-4 bg-surface border border-border/60 rounded-xl hover:border-primary/50 hover:shadow-md transition-all group"
+								className="flex items-center gap-4 p-4 bg-surface border border-border/60 rounded-xl hover:border-linkedin/50 hover:shadow-md transition-all group"
 							>
-								<div className="w-10 h-10 bg-primary text-white rounded-full flex items-center justify-center group-hover:bg-white group-hover:text-primary transition-colors">
+								<div className="w-10 h-10 bg-linkedin text-white rounded-full flex items-center justify-center group-hover:scale-110 group-hover:shadow-lg transition-transform">
 									<Linkedin className="w-5 h-5" aria-hidden="true" />
 								</div>
 								<div>
@@ -117,9 +117,9 @@ export default function Contact({ socialLinks }: { socialLinks: personalData["Li
 								target="_blank"
 								rel="noreferrer"
 								aria-label="Visitar perfil no GitHub"
-								className="flex items-center gap-4 p-4 bg-surface border border-border/60 rounded-xl hover:border-primary/50 hover:shadow-md transition-all group"
+								className="flex items-center gap-4 p-4 bg-surface border border-border/60 rounded-xl hover:border-github/50 hover:shadow-md transition-all group"
 							>
-								<div className="w-10 h-10 bg-primary text-white rounded-full flex items-center justify-center group-hover:bg-white group-hover:text-primary transition-colors">
+								<div className="w-10 h-10 bg-github text-white rounded-full flex items-center justify-center group-hover:scale-110 group-hover:shadow-lg transition-transform">
 									<Github className="w-5 h-5" aria-hidden="true" />
 								</div>
 								<div>
@@ -139,7 +139,7 @@ export default function Contact({ socialLinks }: { socialLinks: personalData["Li
 								aria-label="Abrir currículo em PDF"
 								className="flex items-center gap-4 p-4 bg-surface border border-border/60 rounded-xl hover:border-primary/50 hover:shadow-md transition-all group"
 							>
-								<div className="w-10 h-10 bg-primary text-white rounded-full flex items-center justify-center group-hover:bg-white group-hover:text-primary transition-colors">
+								<div className="w-10 h-10 bg-primary text-white rounded-full flex items-center justify-center group-hover:scale-110 group-hover:shadow-lg transition-transform">
 									<FileText className="w-5 h-5" aria-hidden="true" />
 								</div>
 								<div>
