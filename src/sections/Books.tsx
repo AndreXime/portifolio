@@ -1,8 +1,7 @@
-import type { Book } from "@/content/books";
-import { useState } from "preact/hooks";
-import SectionHeader from "../components/ui/SectionHeader";
-
 import { Bookmark, CheckCircle2 } from "lucide-preact";
+import { useState } from "preact/hooks";
+import type { Book } from "@/content/books";
+import SectionHeader from "../components/ui/SectionHeader";
 
 const STYLE_MAP: Record<Book["state"], string> = {
 	Lido: "bg-successBg text-success border-successBorder",

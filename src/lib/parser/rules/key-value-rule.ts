@@ -1,5 +1,5 @@
-import type { ParseRule } from "./rule";
 import type { ParserState } from "../parser-state";
+import type { ParseRule } from "./rule";
 
 /**
  * Processa metadados no formato chave-valor.

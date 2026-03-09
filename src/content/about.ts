@@ -1,5 +1,5 @@
-import { MarkdownParser } from "@/lib/parser/markdownParser";
 import { z } from "zod";
+import { MarkdownParser } from "@/lib/parser/markdownParser";
 import aboutMd from "./about.md?raw";
 
 const personalData = z.object({

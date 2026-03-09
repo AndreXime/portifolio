@@ -1,8 +1,7 @@
-import { Mail, Linkedin, X, Check, Loader, Github, FileText } from "lucide-preact";
-import { useState } from "preact/hooks";
-
-import SectionHeader from "@/components/ui/SectionHeader";
+import { Check, FileText, Github, Linkedin, Loader, Mail, X } from "lucide-preact";
 import type { TargetedSubmitEvent } from "preact";
+import { useState } from "preact/hooks";
+import SectionHeader from "@/components/ui/SectionHeader";
 import type { personalData } from "@/content/about";
 
 export default function Contact({ socialLinks }: { socialLinks: personalData["Links"] }) {

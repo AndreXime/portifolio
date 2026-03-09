@@ -1,7 +1,7 @@
-import { useEffect, useMemo, useRef, useState } from "preact/hooks";
 import { ExternalLink, Github, Loader2 } from "lucide-preact";
-import type { Project } from "../content/projects";
+import { useEffect, useMemo, useRef, useState } from "preact/hooks";
 import SectionHeader from "../components/ui/SectionHeader";
+import type { Project } from "../content/projects";
 
 const filters: { id: Project["type"] | "all"; label: string }[] = [
 	{ id: "all", label: "Todos" },

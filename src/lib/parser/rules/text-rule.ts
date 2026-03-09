@@ -1,5 +1,5 @@
-import type { ParseRule } from "./rule";
 import type { ParserState } from "../parser-state";
+import type { ParseRule } from "./rule";
 
 /**
  * Regra de fallback (Catch-all) do padrão Chain of Responsibility.

@@ -1,6 +1,6 @@
-import type { ParseRule } from "./rule";
 import type { ParserState } from "../parser-state";
 import type { ASTNode } from "../types";
+import type { ParseRule } from "./rule";
 
 /**
  * Processa títulos baseados na sintaxe ATX do Markdown.

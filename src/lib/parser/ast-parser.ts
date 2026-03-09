@@ -1,5 +1,5 @@
-import type { ASTNode, MarkdownNode, ParserTransformers } from "./types";
 import { applyTransformers } from "./text-transformers";
+import type { ASTNode, MarkdownNode, ParserTransformers } from "./types";
 
 export function transformNode(node: ASTNode, transformers?: ParserTransformers): MarkdownNode {
 	const result: Record<string, MarkdownNode> = {};

@@ -1,11 +1,11 @@
-import type { MarkdownRecord, ParserOptions } from "./types";
 import { transformNode } from "./ast-parser";
-import { applyTransformers } from "./text-transformers";
-import type { ParseRule } from "./rules/rule";
 import { ParserState } from "./parser-state";
 import { HeadingRule } from "./rules/heading-rule";
 import { KeyValueRule } from "./rules/key-value-rule";
+import type { ParseRule } from "./rules/rule";
 import { TextRule } from "./rules/text-rule";
+import { applyTransformers } from "./text-transformers";
+import type { MarkdownRecord, ParserOptions } from "./types";
 
 export class MarkdownParser<T = MarkdownRecord> {
 	private options: ParserOptions<T>;
