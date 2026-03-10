@@ -4,6 +4,10 @@ import { useState } from "preact/hooks";
 import SectionHeader from "@/components/ui/SectionHeader";
 import type { personalData } from "@/content/about";
 
+function getCleanUrlLabel(url: string) {
+	return url.replace(/^https?:\/\/(www\.)?/, "");
+}
+
 export default function Contact({ socialLinks }: { socialLinks: personalData["Links"] }) {
 	const [showToast, setShowToast] = useState({ status: "", message: "" });
 	const [loading, setLoading] = useState(false);
@@ -106,7 +110,7 @@ export default function Contact({ socialLinks }: { socialLinks: personalData["Li
 										LinkedIn
 									</p>
 									<p className="font-medium text-textSecondary group-hover:text-primary transition-colors">
-										{socialLinks.Linkedin}
+										{getCleanUrlLabel(socialLinks.Linkedin)}
 									</p>
 								</div>
 							</a>
@@ -126,7 +130,7 @@ export default function Contact({ socialLinks }: { socialLinks: personalData["Li
 										Github
 									</p>
 									<p className="font-medium text-textSecondary group-hover:text-primary transition-colors">
-										{socialLinks.Github}
+										{getCleanUrlLabel(socialLinks.Github)}
 									</p>
 								</div>
 							</a>
