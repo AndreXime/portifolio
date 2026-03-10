@@ -3,19 +3,14 @@ const observer = new IntersectionObserver(
 		entries.forEach((entry) => {
 			if (entry.isIntersecting && entry.target instanceof HTMLElement) {
 				const el = entry.target;
-
-				el.style.transitionDelay = `${el.dataset.revealTime}ms`;
-
+				const delay = el.dataset.revealTime ? `${el.dataset.revealTime}ms` : "0ms";
+				el.style.transitionDelay = delay;
 				el.classList.remove("reveal-hidden");
-
-				// Para de observar
 				observer.unobserve(el);
 			}
 		});
 	},
-	{
-		threshold: 0.1, // Dispara quando 10% do elemento estiver visível
-	},
+	{ threshold: 0.1 },
 );
 
 document.querySelectorAll("[data-reveal-time]").forEach((el) => {

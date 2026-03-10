@@ -11,73 +11,84 @@ const navLinks = [
 
 <nav
   id="sidebar"
-  class={`fixed w-full z-50 top-0 left-0 transition-all duration-300 bg-surface/60 backdrop-blur-xl backdrop-saturate-150 border-b border-border/40 shadow-sm`}
+  class="fixed w-full z-50 top-0 left-0 transition-all duration-300"
+  aria-label="Navegação principal"
 >
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="flex items-center justify-between h-16">
-      <a class="flex items-center gap-2 cursor-pointer" href="#home">
-        <div
-          class="w-8 h-8 bg-primaryDark text-white rounded-lg flex items-center justify-center font-bold font-mono text-sm"
-        >
-          <Code2 class="w-6 h-6" />
-        </div>
-        <span class="font-bold text-xl tracking-tight text-textSecondary">
-          André<span class="text-primary"> Desenvolvedor</span>
-        </span>
-      </a>
-
-      <div class="hidden md:flex items-center gap-8">
-        <button
-          aria-label="alternar tema"
-          type="button"
-          class="p-2 text-textMuted hover:text-primary transition-colors rounded-lg hover:bg-surfaceHighlight"
-          id="theme-toggle"
-        >
-          <Sun class="w-5 h-5" id="icon-sun" />
-          <Moon class="w-5 h-5 hidden" id="icon-moon" />
-        </button>
-        {
-          navLinks.map((link) => (
-            <a
-              href={link.href}
-              class="text-sm font-medium text-textMuted hover:text-primary transition-colors cursor-pointer"
-            >
-              {link.name}
-            </a>
-          ))
-        }
-
+  <div class="w-full px-4 pt-3 sm:px-6 lg:px-6 lg:pt-4">
+    <div
+      class="mx-auto flex flex-col rounded-xl border border-border/50 bg-surface/70 backdrop-blur-2xl backdrop-saturate-150 shadow-[var(--shadow-soft)] overflow-hidden lg:max-w-4xl lg:rounded-2xl lg:border-border/40 lg:bg-surface/80"
+    >
+      <div class="flex items-center justify-between h-14 px-4 lg:h-15 lg:px-6">
         <a
-          href="#contato"
-          class="text-sm font-medium bg-btnSecondary text-btnSecondaryText hover:bg-primary hover:text-white px-5 py-2 rounded-full transition-colors cursor-pointer"
+          class="flex items-center gap-2 cursor-pointer transition-[transform,opacity] duration-200 ease-[var(--ease-out-expo)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary rounded-lg active:scale-[0.98] hover:opacity-90"
+          href="#home"
         >
-          Vamos conversar
+          <div
+            class="w-8 h-8 bg-primaryDark text-white rounded-lg flex items-center justify-center font-bold font-mono text-sm"
+          >
+            <Code2 class="w-6 h-6" />
+          </div>
+          <span class="font-bold text-xl tracking-tight text-textSecondary">
+            André<span class="text-primary"> Desenvolvedor</span>
+          </span>
         </a>
-      </div>
 
-      <div class="flex md:hidden items-center gap-2">
-        <button
-          aria-label="alternar tema"
-          type="button"
-          class="p-2 text-textMuted hover:text-primary transition-colors rounded-lg hover:bg-surfaceHighlight"
-          id="theme-toggle-mobile"
-        >
-          <Sun class="w-5 h-5" id="icon-sun-mobile" />
-          <Moon class="w-5 h-5 hidden" id="icon-moon-mobile" />
-        </button>
-        <button
-          aria-label="botão mobile menu"
-          type="button"
-          class="p-2 text-textMuted"
-          id="menu-toggle"
-        >
-          <Menu class="w-6 h-6" id="icon-menu" />
-          <X class="w-6 h-6 hidden" id="icon-close" />
-        </button>
+        <div class="hidden md:flex items-center gap-8">
+          <button
+            aria-label="alternar tema"
+            type="button"
+            class="p-2 text-textMuted hover:text-primary transition-[color,background-color,transform] duration-200 ease-[var(--ease-out-expo)] rounded-lg hover:bg-surfaceHighlight focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary active:scale-[0.98]"
+            id="theme-toggle"
+          >
+            <Sun class="w-5 h-5" id="icon-sun" />
+            <Moon class="w-5 h-5 hidden" id="icon-moon" />
+          </button>
+          {
+            navLinks.map((link) => (
+              <a
+                href={link.href}
+                class="text-sm font-medium text-textMuted hover:text-primary transition-colors duration-200 ease-[var(--ease-out-expo)] cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary rounded px-1 py-0.5"
+              >
+                {link.name}
+              </a>
+            ))
+          }
+
+          <a
+            href="#contato"
+            class="text-sm font-medium bg-btnSecondary text-btnSecondaryText hover:bg-primary hover:text-white px-5 py-2 rounded-full transition-[color,background-color,transform,box-shadow] duration-200 ease-[var(--ease-out-expo)] cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary active:scale-[0.98] hover:shadow-[var(--shadow-card)]"
+          >
+            Vamos conversar
+          </a>
+        </div>
+
+        <div class="flex md:hidden items-center gap-2">
+          <button
+            aria-label="alternar tema"
+            type="button"
+            class="p-2 text-textMuted hover:text-primary transition-[color,background-color,transform] duration-200 ease-[var(--ease-out-expo)] rounded-lg hover:bg-surfaceHighlight focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary active:scale-[0.98]"
+            id="theme-toggle-mobile"
+          >
+            <Sun class="w-5 h-5" id="icon-sun-mobile" />
+            <Moon class="w-5 h-5 hidden" id="icon-moon-mobile" />
+          </button>
+          <button
+            aria-label="botão mobile menu"
+            type="button"
+            class="p-2 text-textMuted transition-[color,transform] duration-200 ease-[var(--ease-out-expo)] rounded-lg hover:text-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary active:scale-[0.98]"
+            id="menu-toggle"
+          >
+            <Menu class="w-6 h-6" id="icon-menu" />
+            <X class="w-6 h-6 hidden" id="icon-close" />
+          </button>
+        </div>
       </div>
-    </div>
-    <div class="w-full h-[2px] overflow-hidden">
-      <div id="progressBar" class="h-full w-0 bg-blue-600 will-change-[width]">
+      <div class="h-[2px] w-full overflow-hidden bg-border/30">
+        <div
+          id="progressBar"
+          class="h-full w-0 bg-primary transition-[width] duration-150 ease-[var(--ease-out-expo)] will-change-[width]"
+        >
+        </div>
       </div>
     </div>
   </div>
@@ -90,13 +101,16 @@ const navLinks = [
       navLinks.map((link) => (
         <a
           href={link.href}
-          class="block text-textMuted hover:text-primary font-medium cursor-pointer"
+          class="block text-textMuted hover:text-primary font-medium cursor-pointer py-2 transition-colors duration-200 ease-[var(--ease-out-expo)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary rounded-lg"
         >
           {link.name}
         </a>
       ))
     }
-    <a href="#contato" class="block text-primary font-bold cursor-pointer">
+    <a
+      href="#contato"
+      class="block text-primary font-bold cursor-pointer py-2 transition-opacity duration-200 ease-[var(--ease-out-expo)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary rounded-lg active:scale-[0.98]"
+    >
       Contato
     </a>
   </div>

@@ -10,11 +10,11 @@ interface Props {
 export default function SectionHeader({ bagde, title, subtitle, children }: Props) {
 	return (
 		<div class="text-center mb-14">
-			<span class="inline-block px-4 py-1.5 mb-4 text-xs font-semibold tracking-widest uppercase text-primaryDark bg-primary/20 rounded-full border border-primary/30">
+			<span class="inline-block px-4 py-2 mb-4 text-xs font-semibold tracking-[0.2em] uppercase text-primaryDark bg-primary/15 rounded-full border border-primary/25">
 				{bagde}
 			</span>
-			<h2 class="text-4xl font-extrabold text-textMain tracking-tight">{title}</h2>
-			<p class="text-textMuted max-w-3xl mx-auto mt-4 mb-5">{subtitle}</p>
+			<h2 class="text-4xl sm:text-5xl font-extrabold text-textMain tracking-tight leading-tight">{title}</h2>
+			{subtitle && <p class="text-textMuted max-w-2xl mx-auto mt-4 mb-5 text-lg leading-relaxed">{subtitle}</p>}
 			{children}
 		</div>
 	);
