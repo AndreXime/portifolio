@@ -9,6 +9,18 @@ html {
 	scrollbar-color: #a0a0a5 transparent;
 }
 
+@media (max-width: 400px) {
+	.navbar-logo-icon {
+		display: none;
+	}
+}
+
+@media (min-width: 770px) and (max-width: 900px) {
+	.navbar-logo-icon {
+		display: none;
+	}
+}
+
 *:focus-visible {
 	@apply outline-2 outline-offset-2 outline-primary;
 }
