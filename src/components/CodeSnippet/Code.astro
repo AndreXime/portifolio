@@ -126,13 +126,27 @@ const snippetsWithHtml = [
   </div>
 </div>
 
-<script define:vars={{ firstSnippetCode, firstSnippetHtml, firstSnippetOutput }}
->
-  import { initCodeSnippet } from "./code";
-
-  initCodeSnippet({
+<script
+  is:inline
+  id="code-snippet-data"
+  type="application/json"
+  set:html={JSON.stringify({
     firstSnippetCode,
     firstSnippetHtml,
     firstSnippetOutput,
+  })}
+/>
+
+<script>
+  import initCodeSnippet from "./code";
+
+  const data = document.getElementById("code-snippet-data")?.textContent || "";
+
+  const payload = JSON.parse(data);
+
+  initCodeSnippet({
+    firstSnippetCode: payload.firstSnippetCode,
+    firstSnippetHtml: payload.firstSnippetHtml,
+    firstSnippetOutput: payload.firstSnippetOutput,
   });
 </script>

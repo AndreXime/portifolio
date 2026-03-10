@@ -4,7 +4,7 @@ type InitOptions = {
 	firstSnippetOutput: string;
 };
 
-export function initCodeSnippet(options: InitOptions) {
+export default function initCodeSnippet(options: InitOptions) {
 	const { firstSnippetCode, firstSnippetHtml, firstSnippetOutput } = options;
 
 	const tabs = document.querySelectorAll<HTMLElement>("[data-snippet-tab]");
@@ -48,7 +48,7 @@ export function initCodeSnippet(options: InitOptions) {
 
 		const safeTerminalOutput = terminalOutput;
 
-		const command = `<span class="terminal-keyword">npx</span> tsx main.ts`;
+		const command = `npx tsx main.ts`;
 		const output =
 			typeof firstSnippetOutput === "string" && firstSnippetOutput.length > 0
 				? firstSnippetOutput
