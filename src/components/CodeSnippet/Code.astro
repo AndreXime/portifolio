@@ -2,17 +2,40 @@
 import { snippets } from "@/content/snippet";
 import { createStarryNight, all } from "@wooorm/starry-night";
 import { toHtml } from "hast-util-to-html";
-import { h } from "hastscript";
 
 const starryNight = await createStarryNight(all);
-const scope = starryNight.flagToScope("ts");
+const scope = starryNight.flagToScope("ts") || "";
 
-const snippetsWithHtml = snippets.map((s) => ({
-  filename: s.filename,
-  highlightedHtml: scope
-    ? toHtml(starryNight.highlight(s.code.trim(), scope))
-    : toHtml(h(undefined, [s.code.trim()])),
-}));
+const [firstSnippet, ...otherSnippets] = snippets;
+
+const firstSnippetLines = firstSnippet.code.trim().split("\n");
+const outputLineIndex = firstSnippetLines.findIndex((line) =>
+  line.trim().startsWith("// Output:"),
+);
+
+let firstSnippetOutput = "";
+
+if (outputLineIndex !== -1) {
+  const line = firstSnippetLines[outputLineIndex];
+  const [, outputText = ""] = line.split("// Output:");
+  firstSnippetOutput = outputText.trim();
+  firstSnippetLines.splice(outputLineIndex, 1);
+}
+
+const firstSnippetCode = firstSnippetLines.join("\n").trim();
+
+const firstSnippetHtml = toHtml(starryNight.highlight(firstSnippetCode, scope));
+
+const snippetsWithHtml = [
+  {
+    filename: firstSnippet.filename,
+    highlightedHtml: firstSnippetHtml,
+  },
+  ...otherSnippets.map((s) => ({
+    filename: s.filename,
+    highlightedHtml: toHtml(starryNight.highlight(s.code.trim(), scope)),
+  })),
+];
 ---
 
 <div class="bg-codeBg rounded-xl border border-codeBorder/80">
@@ -70,74 +93,46 @@ const snippetsWithHtml = snippets.map((s) => ({
           data-snippet-panel={String(i)}
           class:list={["snippet-panel", i > 0 && "hidden"]}
         >
-          <pre
-            class="text-codeText text-sm overflow-scroll max-h-[600px] language-ts starry-night"
-            set:html={snippet.highlightedHtml}
-          />
+          {i === 0 ? (
+            <div class="flex flex-col gap-3">
+              <pre
+                class="text-codeText text-sm overflow-scroll max-h-[600px] language-ts starry-night typewriter-pre"
+                data-typewriter
+                aria-label="Código main.ts com animação de digitação"
+              />
+              <div
+                class="terminal-shell"
+                data-terminal
+                aria-label="Saída do comando npx tsx main.ts"
+              >
+                <div class="terminal-header">
+                  <span class="terminal-title">Terminal</span>
+                </div>
+                <div class="terminal-body">
+                  <div class="terminal-line" data-terminal-line="command" />
+                  <div class="terminal-line" data-terminal-line="output" />
+                </div>
+              </div>
+            </div>
+          ) : (
+            <pre
+              class="text-codeText text-sm overflow-scroll max-h-[600px] language-ts starry-night"
+              set:html={snippet.highlightedHtml}
+            />
+          )}
         </div>
       ))
     }
   </div>
 </div>
 
-<style is:global>
-  @import "@wooorm/starry-night/style/dark";
-</style>
+<script define:vars={{ firstSnippetCode, firstSnippetHtml, firstSnippetOutput }}
+>
+  import { initCodeSnippet } from "./code";
 
-<style>
-  .snippet-tab {
-    flex: 1;
-    min-width: 0;
-    padding: 0.5rem 0.75rem;
-    font-size: 0.75rem;
-    font-family: ui-monospace, monospace;
-    font-weight: 500;
-    border: none;
-    border-bottom: 2px solid transparent;
-    border-radius: 0;
-    background: transparent;
-    color: color-mix(in srgb, var(--color-codeText) 70%, transparent);
-    text-align: center;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    transition:
-      color 0.15s,
-      background-color 0.15s,
-      border-color 0.15s;
-  }
-  .snippet-tab:hover {
-    color: var(--color-codeText);
-  }
-  .snippet-tab-active {
-    color: var(--color-codeText);
-    background-color: var(--color-codeBg);
-    border-bottom-color: var(--color-codeBg);
-    margin-bottom: -1px;
-  }
-</style>
-
-<script>
-  const tabs =
-    document.querySelectorAll<HTMLButtonElement>("[data-snippet-tab]");
-  const panels = document.querySelectorAll("[data-snippet-panel]");
-
-  function setActiveTab(activeKey: string) {
-    tabs.forEach((tab) => {
-      const isActive = tab.dataset.snippetTab === activeKey;
-      tab.setAttribute("aria-selected", String(isActive));
-      tab.classList.toggle("snippet-tab-active", isActive);
-    });
-    panels.forEach((panel) => {
-      const panelKey = panel.getAttribute("data-snippet-panel");
-      (panel as HTMLElement).classList.toggle("hidden", panelKey !== activeKey);
-    });
-  }
-
-  tabs.forEach((tab) => {
-    tab.addEventListener("click", () => {
-      const key = tab.getAttribute("data-snippet-tab");
-      if (key) setActiveTab(key);
-    });
+  initCodeSnippet({
+    firstSnippetCode,
+    firstSnippetHtml,
+    firstSnippetOutput,
   });
 </script>

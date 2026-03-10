@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @import "./theme.css";
+@import "../components/CodeSnippet/code.css";
 
 html {
 	scroll-padding-top: 20px;
