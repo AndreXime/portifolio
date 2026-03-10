@@ -21,7 +21,7 @@ export default function ProjectsSection({ projects }: { projects: Project[] }) {
 	}, [filter]);
 
 	return (
-		<section id="projetos" className="py-20 bg-section4 border-y border-border">
+		<section id="projetos" className="py-20 bg-bgSectionAlt border-y border-border">
 			<div data-reveal-time={0} class="reveal reveal-hidden">
 				<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 					<SectionHeader

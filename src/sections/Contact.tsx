@@ -64,7 +64,7 @@ export default function Contact({ socialLinks }: { socialLinks: personalData["Li
 	}
 
 	return (
-		<section id="contato" className="py-20 bg-section6">
+		<section id="contato" className="py-20 bg-bgSectionAlt">
 			<div data-reveal-time={0} className="reveal reveal-hidden">
 				<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 					<SectionHeader
