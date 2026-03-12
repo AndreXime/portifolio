@@ -3,9 +3,9 @@ import type { ZodType, ZodTypeDef } from "zod";
 export type MarkdownNode =
 	| string
 	| {
-			_content?: string;
 			[heading: string]: MarkdownNode | string | undefined;
-	  };
+	  }
+	| MarkdownNode[];
 
 export type MarkdownRecord = Record<string, MarkdownNode>;
 

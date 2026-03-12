@@ -24,5 +24,43 @@ export function applyTransformers(text: string, transformers?: ParserTransformer
 		);
 	}
 
+	result = transformMarkdownLists(result);
+
 	return result;
+}
+
+function transformMarkdownLists(text: string): string {
+	const lines = text.split(/\r?\n/);
+	let html = "";
+	let inList = false;
+
+	for (const line of lines) {
+		const listMatch = line.match(/^\s*[-*]\s+(.*)$/);
+
+		if (listMatch) {
+			if (!inList) {
+				inList = true;
+				html += '<ul class="list-disc pl-4 mt-2">';
+			}
+
+			html += `<li>${listMatch[1]}</li>`;
+		} else {
+			if (inList) {
+				html += "</ul>";
+				inList = false;
+			}
+
+			if (html) {
+				html += "\n";
+			}
+
+			html += line;
+		}
+	}
+
+	if (inList) {
+		html += "</ul>";
+	}
+
+	return html;
 }

@@ -1,6 +1,22 @@
 import { applyTransformers } from "./text-transformers";
 import type { ASTNode, MarkdownNode, ParserTransformers } from "./types";
 
+function appendNode(record: Record<string, MarkdownNode>, key: string, value: MarkdownNode) {
+	const existing = record[key];
+
+	if (existing === undefined) {
+		record[key] = value;
+		return;
+	}
+
+	if (Array.isArray(existing)) {
+		existing.push(value);
+		return;
+	}
+
+	record[key] = [existing, value];
+}
+
 export function transformNode(node: ASTNode, transformers?: ParserTransformers): MarkdownNode {
 	const result: Record<string, MarkdownNode> = {};
 
@@ -17,12 +33,9 @@ export function transformNode(node: ASTNode, transformers?: ParserTransformers):
 		return textContent;
 	}
 
-	if (textContent) {
-		result._content = textContent;
-	}
-
 	for (const child of node.children) {
-		result[child.title] = transformNode(child, transformers);
+		const value = transformNode(child, transformers);
+		appendNode(result, child.title, value);
 	}
 
 	return result;

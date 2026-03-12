@@ -92,7 +92,7 @@ import { Image } from "astro:assets";
         </div>
       </div>
 
-      <div class="grid md:grid-cols-2 gap-8">
+      <div class="grid lg:grid-cols-2 gap-8">
         <div class="space-y-6">
           <div class="flex items-center gap-3 px-2">
             <Briefcase class="w-6 h-6 text-primary" aria-hidden="true" />
@@ -128,7 +128,7 @@ import { Image } from "astro:assets";
                         </p>
                       </div>
                     </div>
-                    <p
+                    <div
                       class="text-textMuted text-sm leading-relaxed mt-3"
                       set:html={exp.Descrição}
                     />
@@ -146,7 +146,7 @@ import { Image } from "astro:assets";
 
           <div class="relative pl-6 border-l-2 border-border/40 space-y-8">
             {
-              [Formação].map((edu) => (
+              Formação.map((edu) => (
                 <div class="relative">
                   <div class="absolute -left-[33px] top-1 w-4 h-4 rounded-full border-4 border-surface bg-primary shadow-sm" />
                   <div class="bg-surface px-6 py-5 rounded-2xl border border-border/60 hover:border-primary/30 transition-colors">
@@ -154,7 +154,7 @@ import { Image } from "astro:assets";
                       <div class="size-12 flex-shrink-0 rounded-full overflow-hidden bg-white flex items-center justify-center p-1">
                         <Image
                           src={uvaLogo}
-                          alt="Logo da universidade  "
+                          alt="Logo da universidades"
                           width={48}
                           height={48}
                           class="w-full h-full object-contain"

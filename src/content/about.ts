@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { ZodError, z } from "zod";
 import { MarkdownParser } from "@/lib/parser/markdownParser";
 import aboutMd from "./about.md?raw";
 
@@ -17,16 +17,20 @@ const personalData = z.object({
 		}),
 		Trajetoria: z.string(),
 	}),
-	Formação: z.object({
-		Curso: z.string(),
-		Instituição: z.string(),
-		Periodo: z.string(),
-		Descrição: z.string(),
-	}),
+	Formação: z.array(
+		z.object({
+			Curso: z.string(),
+			Instituição: z.string(),
+			Periodo: z.string(),
+			ImageUrl: z.string(),
+			Descrição: z.string(),
+		}),
+	),
 	Experiencias: z.object({
 		Cargo: z.string(),
 		Empresa: z.string(),
 		Periodo: z.string(),
+		ImageUrl: z.string(),
 		Descrição: z.string(),
 	}),
 });
@@ -41,4 +45,10 @@ const parser = new MarkdownParser({
 	},
 });
 
-export const { Links, Hero, Sobre, Formação, Experiencias } = parser.parse(aboutMd);
+const parsed = parser.parse(aboutMd);
+
+if (parsed instanceof ZodError) {
+	throw parsed;
+}
+
+export const { Links, Hero, Sobre, Formação, Experiencias } = parsed;

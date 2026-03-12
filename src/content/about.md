@@ -21,12 +21,21 @@ Aplico conceitos de arquitetura de software e *Clean Code* com o objetivo práti
 Curso: Ciência da Computação
 Instituição: Univ. Estadual do Vale do Acaraú
 Periodo: 2023 — Presente
+ImageUrl: uva_logo.jpg
 ## Descrição
-Graduação voltada aos fundamentos de computação com especial interesse em *Engenharia de Software*. Experiência teórica e prática em modelagem de dados (DER), requisitos de software e algoritmos, visando o desenvolvimento de sistemas de alto valor de negócio e código de alta manutenibilidade.
+Graduação voltada aos fundamentos de computação com especial interesse em Engenharia de Software. Experiência em modelagem de dados (DER), requisitos de software, algoritmos e estrutura de dados.
+
 
 # Experiencias
 Cargo: Desenvolvedor Fullstack 
-Empresa: Stackup Software 
-Periodo: 2025 — Presente
+Empresa: Stackup Software
+Periodo: 10/2025 — 02/2026
+ImageUrl: stackup_logo.jpg
 ## Descrição
-Atuo como Desenvolvedor Fullstack na Stackup Software, onde lidero o ciclo completo de desenvolvimento de software, desde a arquitetura inicial até o deploy final em projetos de alta complexidade. No ecossistema TypeScript, especializei-me em Next.js e Hono, implementando estratégias de autorização com JWT em Middlewares para eliminar latências e arquitetando fluxos serverless com AWS Lambda e S3 para processamento escalável de arquivos. Minha experiência abrange desde a construção de interfaces robustas com TailwindCSS e TanStack Query até a modelagem ágil com Prisma e PostgreSQL, sempre focando em performance e automação de processos críticos.
+Atuei no ciclo completo de desenvolvimento em uma software house de ritmo dinâmico, integrando um projeto de alta complexidade desde o estágio inicial. Minha contribuição focou na definição da arquitetura e na implementação de soluções escaláveis, transitando entre o frontend com Next.js e o backend com Hono, sempre priorizando a performance e a eficiência de custos em infraestrutura AWS.
+
+- **Backend & Cloud**: Desenvolvi APIs com Hono e TypeScript, implementando uploads via S3 Signed URLs para reduzir tráfego na API e arquitetura orientada a eventos com AWS Lambda para OCR e conversão de documentos.
+
+- **Frontend & State**: Construí dashboards internos utilizando TailwindCSS, Shadcn UI, Zustand e TanStack Query para gerenciamento de estado e cache eficiente de requisições.
+
+- **Automação de Documentos**: Implementei a geração dinâmica de contratos com docxtemplater, integrando campos flexíveis via JSON para suportar estruturas de dados não fixas.
