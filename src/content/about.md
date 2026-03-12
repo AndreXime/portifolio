@@ -21,7 +21,7 @@ Aplico conceitos de arquitetura de software e *Clean Code* com o objetivo práti
 Curso: Ciência da Computação
 Instituição: Univ. Estadual do Vale do Acaraú
 Periodo: 2023 — Presente
-ImageUrl: uva_logo.jpg
+ImageUrl: logos/uva-logo.jpg
 ## Descrição
 Graduação voltada aos fundamentos de computação com especial interesse em Engenharia de Software. Experiência em modelagem de dados (DER), requisitos de software, algoritmos e estrutura de dados.
 
@@ -30,7 +30,7 @@ Graduação voltada aos fundamentos de computação com especial interesse em En
 Cargo: Desenvolvedor Fullstack 
 Empresa: Stackup Software
 Periodo: 10/2025 — 02/2026
-ImageUrl: stackup_logo.jpg
+ImageUrl: logos/stackup_logo.jpg
 ## Descrição
 Atuei no ciclo completo de desenvolvimento em uma software house de ritmo dinâmico, integrando um projeto de alta complexidade desde o estágio inicial. Minha contribuição focou na definição da arquitetura e na implementação de soluções escaláveis, transitando entre o frontend com Next.js e o backend com Hono, sempre priorizando a performance e a eficiência de custos em infraestrutura AWS.
 

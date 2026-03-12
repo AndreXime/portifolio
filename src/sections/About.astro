@@ -9,9 +9,7 @@ import {
 } from "lucide-preact";
 import SectionHeader from "../components/ui/SectionHeader";
 import { Sobre, Experiencias, Formação } from "../content/about";
-import stackupLogo from "../assets/logos/stackup_logo.jpg";
-import uvaLogo from "../assets/logos/uva-logo.jpg";
-import { Image } from "astro:assets";
+import { optimizeImage } from "@/lib/optimizeImages";
 ---
 
 <section
@@ -101,40 +99,42 @@ import { Image } from "astro:assets";
 
           <div class="relative pl-6 border-l-2 border-border/40 space-y-8">
             {
-              [Experiencias].map((exp) => (
-                <div class="relative">
-                  <div class="absolute -left-[33px] top-1 w-4 h-4 rounded-full border-4 border-surface bg-primary shadow-sm" />
-                  <div class="bg-surface px-6 py-5 rounded-2xl border border-border/60 hover:border-primary/30 transition-colors shadow-sm">
-                    <div class="flex gap-6 items-center">
-                      <div class="size-12 flex-shrink-0 rounded-full overflow-hidden bg-white flex items-center justify-center p-1">
-                        <Image
-                          src={stackupLogo}
-                          format="webp"
-                          alt="Logo da stackup"
-                          width={48}
-                          height={48}
-                          class="w-full h-full object-contain"
-                        />
+              [Experiencias].map(async (exp) => {
+                const optimizeImageUrl = await optimizeImage(exp.ImageUrl);
+                return (
+                  <div class="relative">
+                    <div class="absolute -left-[33px] top-1 w-4 h-4 rounded-full border-4 border-surface bg-primary shadow-sm" />
+                    <div class="bg-surface px-6 py-5 rounded-2xl border border-border/60 hover:border-primary/30 transition-colors shadow-sm">
+                      <div class="flex gap-6 items-center">
+                        <div class="size-12 flex-shrink-0 rounded-full overflow-hidden bg-white flex items-center justify-center p-1">
+                          <img
+                            src={optimizeImageUrl.compactImage}
+                            alt="Logo da stackup"
+                            width={48}
+                            height={48}
+                            class="w-full h-full object-contain"
+                          />
+                        </div>
+                        <div>
+                          <span class="text-primary font-mono text-xs font-bold uppercase tracking-wider">
+                            {exp.Periodo}
+                          </span>
+                          <h4 class="text-xl font-bold text-textSecondary">
+                            {exp.Cargo}
+                          </h4>
+                          <p class="text-textMuted font-medium flex items-center gap-2">
+                            {exp.Empresa}
+                          </p>
+                        </div>
                       </div>
-                      <div>
-                        <span class="text-primary font-mono text-xs font-bold uppercase tracking-wider">
-                          {exp.Periodo}
-                        </span>
-                        <h4 class="text-xl font-bold text-textSecondary">
-                          {exp.Cargo}
-                        </h4>
-                        <p class="text-textMuted font-medium flex items-center gap-2">
-                          {exp.Empresa}
-                        </p>
-                      </div>
+                      <div
+                        class="text-textMuted text-sm leading-relaxed mt-3"
+                        set:html={exp.Descrição}
+                      />
                     </div>
-                    <div
-                      class="text-textMuted text-sm leading-relaxed mt-3"
-                      set:html={exp.Descrição}
-                    />
                   </div>
-                </div>
-              ))
+                );
+              })
             }
           </div>
         </div>
@@ -146,39 +146,42 @@ import { Image } from "astro:assets";
 
           <div class="relative pl-6 border-l-2 border-border/40 space-y-8">
             {
-              Formação.map((edu) => (
-                <div class="relative">
-                  <div class="absolute -left-[33px] top-1 w-4 h-4 rounded-full border-4 border-surface bg-primary shadow-sm" />
-                  <div class="bg-surface px-6 py-5 rounded-2xl border border-border/60 hover:border-primary/30 transition-colors">
-                    <div class="flex gap-6 items-center">
-                      <div class="size-12 flex-shrink-0 rounded-full overflow-hidden bg-white flex items-center justify-center p-1">
-                        <Image
-                          src={uvaLogo}
-                          alt="Logo da universidades"
-                          width={48}
-                          height={48}
-                          class="w-full h-full object-contain"
-                        />
+              [Formação].map(async (edu) => {
+                const optimizeImageUrl = await optimizeImage(edu.ImageUrl);
+                return (
+                  <div class="relative">
+                    <div class="absolute -left-[33px] top-1 w-4 h-4 rounded-full border-4 border-surface bg-primary shadow-sm" />
+                    <div class="bg-surface px-6 py-5 rounded-2xl border border-border/60 hover:border-primary/30 transition-colors">
+                      <div class="flex gap-6 items-center">
+                        <div class="size-12 flex-shrink-0 rounded-full overflow-hidden bg-white flex items-center justify-center p-1">
+                          <img
+                            src={optimizeImageUrl.compactImage}
+                            alt="Logo da universidades"
+                            width={50}
+                            height={50}
+                            class="w-full h-full object-contain"
+                          />
+                        </div>
+                        <div>
+                          <span class="text-primary font-mono text-xs font-bold uppercase tracking-wider">
+                            {edu.Periodo}
+                          </span>
+                          <h4 class="text-xl font-bold text-textSecondary">
+                            {edu.Curso}
+                          </h4>
+                          <p class="text-textMuted font-medium">
+                            {edu.Instituição}
+                          </p>
+                        </div>
                       </div>
-                      <div>
-                        <span class="text-primary font-mono text-xs font-bold uppercase tracking-wider">
-                          {edu.Periodo}
-                        </span>
-                        <h4 class="text-xl font-bold text-textSecondary">
-                          {edu.Curso}
-                        </h4>
-                        <p class="text-textMuted font-medium">
-                          {edu.Instituição}
-                        </p>
-                      </div>
+                      <p
+                        class="text-textMuted text-sm leading-relaxed mt-3"
+                        set:html={edu.Descrição}
+                      />
                     </div>
-                    <p
-                      class="text-textMuted text-sm leading-relaxed mt-3"
-                      set:html={edu.Descrição}
-                    />
                   </div>
-                </div>
-              ))
+                );
+              })
             }
           </div>
         </div>

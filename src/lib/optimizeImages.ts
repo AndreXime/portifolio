@@ -1,31 +1,44 @@
 import { getImage } from "astro:assets";
 
-interface WithImage {
-	imageUrl: string;
-}
-/**
- * Aceita qualquer array de objetos com propriedade imageUrl
- * Aplica otimização das imagens na build
- */
-export async function optimizeImages<T extends WithImage>(items: T[], assetFolder: string): Promise<T[]> {
-	const allImages = import.meta.glob<{ default: ImageMetadata }>([
-		"../assets/**/*.{jpeg,jpg,png,gif}",
-		"!../assets/logos/**", // Já está sendo usado pelo About.astro
-	]);
+const allImages = import.meta.glob<{ default: ImageMetadata }>(["../assets/**/*.{jpeg,jpg,png,gif}"]);
 
+interface WithImage {
+	imageUrl: string; // caminho relativo dentro de assets, ex: "about/avatar.png"
+}
+
+export async function optimizeImage(relativePath: string) {
+	const imagePath = `../assets/${relativePath}`;
+	const loadModule = allImages[imagePath];
+
+	if (!loadModule) {
+		throw new Error(`Image not found for path: ${imagePath}`);
+	}
+
+	const imageModule = await loadModule();
+
+	const fullImage = await getImage({
+		src: imageModule.default,
+		width: 800,
+		format: "webp",
+		quality: 70,
+	});
+
+	const compactImage = await getImage({
+		src: imageModule.default,
+		width: 200,
+		format: "webp",
+		quality: 100,
+	});
+
+	return { fullImage: fullImage.src, compactImage: compactImage.src };
+}
+
+export async function optimizeImageBulk<T extends WithImage>(items: T[]): Promise<T[]> {
 	return await Promise.all(
 		items.map(async (item) => {
-			const imagePath = `../assets/${assetFolder}/${item.imageUrl}`;
-			const imageModule = await allImages[imagePath]();
+			const optimizedUrl = await optimizeImage(item.imageUrl);
 
-			const optimized = await getImage({
-				src: imageModule.default,
-				width: 800,
-				format: "webp",
-				quality: 70,
-			});
-
-			return { ...item, imageUrl: optimized.src };
+			return { ...item, imageUrl: optimizedUrl.fullImage };
 		}),
 	);
 }

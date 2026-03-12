@@ -17,15 +17,14 @@ const personalData = z.object({
 		}),
 		Trajetoria: z.string(),
 	}),
-	Formação: z.array(
-		z.object({
-			Curso: z.string(),
-			Instituição: z.string(),
-			Periodo: z.string(),
-			ImageUrl: z.string(),
-			Descrição: z.string(),
-		}),
-	),
+	Formação: z.object({
+		Curso: z.string(),
+		Instituição: z.string(),
+		Periodo: z.string(),
+		ImageUrl: z.string(),
+		Descrição: z.string(),
+	}),
+
 	Experiencias: z.object({
 		Cargo: z.string(),
 		Empresa: z.string(),
