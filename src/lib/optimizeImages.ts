@@ -6,6 +6,26 @@ interface WithImage {
 	imageUrl: string; // caminho relativo dentro de assets, ex: "about/avatar.png"
 }
 
+export async function optimizeCompactImage(relativePath: string) {
+	const imagePath = `../assets/${relativePath}`;
+	const loadModule = allImages[imagePath];
+
+	if (!loadModule) {
+		throw new Error(`Image not found for path: ${imagePath}`);
+	}
+
+	const imageModule = await loadModule();
+
+	const compactImage = await getImage({
+		src: imageModule.default,
+		width: 200,
+		format: "webp",
+		quality: 100,
+	});
+
+	return compactImage.src;
+}
+
 export async function optimizeImage(relativePath: string) {
 	const imagePath = `../assets/${relativePath}`;
 	const loadModule = allImages[imagePath];
@@ -23,14 +43,7 @@ export async function optimizeImage(relativePath: string) {
 		quality: 70,
 	});
 
-	const compactImage = await getImage({
-		src: imageModule.default,
-		width: 200,
-		format: "webp",
-		quality: 100,
-	});
-
-	return { fullImage: fullImage.src, compactImage: compactImage.src };
+	return fullImage.src;
 }
 
 export async function optimizeImageBulk<T extends WithImage>(items: T[]): Promise<T[]> {
@@ -38,7 +51,7 @@ export async function optimizeImageBulk<T extends WithImage>(items: T[]): Promis
 		items.map(async (item) => {
 			const optimizedUrl = await optimizeImage(item.imageUrl);
 
-			return { ...item, imageUrl: optimizedUrl.fullImage };
+			return { ...item, imageUrl: optimizedUrl };
 		}),
 	);
 }

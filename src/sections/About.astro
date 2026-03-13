@@ -10,7 +10,7 @@ import {
 } from "lucide-preact";
 import SectionHeader from "../components/ui/SectionHeader";
 import { Sobre, Experiencias, Formação, Certificados } from "../content/about";
-import { optimizeImage } from "@/lib/optimizeImages";
+import { optimizeCompactImage } from "@/lib/optimizeImages";
 ---
 
 <section
@@ -101,7 +101,8 @@ import { optimizeImage } from "@/lib/optimizeImages";
           <div class="relative pl-6 border-l-2 border-border/40 space-y-8">
             {
               Experiencias.map(async (exp) => {
-                const optimizeImageUrl = await optimizeImage(exp.ImageUrl);
+                const imageUrl = await optimizeCompactImage(exp.ImageUrl);
+
                 return (
                   <div class="relative">
                     <div class="absolute -left-[33px] top-1 w-4 h-4 rounded-full border-4 border-surface bg-primary shadow-sm" />
@@ -109,7 +110,7 @@ import { optimizeImage } from "@/lib/optimizeImages";
                       <div class="flex gap-6 items-center">
                         <div class="size-12 flex-shrink-0 rounded-full overflow-hidden bg-white flex items-center justify-center p-1">
                           <img
-                            src={optimizeImageUrl.compactImage}
+                            src={imageUrl}
                             alt="Logo da stackup"
                             width={48}
                             height={48}
@@ -149,14 +150,15 @@ import { optimizeImage } from "@/lib/optimizeImages";
             <div class="relative pl-6 border-l-2 border-border/40 space-y-8">
               {
                 Formação.map(async (edu) => {
-                  const optimizeImageUrl = await optimizeImage(edu.ImageUrl);
+                  const imageUrl = await optimizeCompactImage(edu.ImageUrl);
+
                   return (
                     <div>
                       <div class="bg-surface px-6 py-5 rounded-2xl border border-border/60 hover:border-primary/30 transition-colors">
                         <div class="flex gap-6 items-center">
                           <div class="size-12 flex-shrink-0 rounded-full overflow-hidden bg-white flex items-center justify-center p-1">
                             <img
-                              src={optimizeImageUrl.compactImage}
+                              src={imageUrl}
                               alt="Logo da universidades"
                               width={50}
                               height={50}
@@ -195,7 +197,7 @@ import { optimizeImage } from "@/lib/optimizeImages";
             <div class="relative pl-6 border-l-2 border-border/40 space-y-8">
               {
                 Certificados.map(async (cert) => {
-                  const optimizeImageUrl = await optimizeImage(cert.Logo);
+                  const imageUrl = await optimizeCompactImage(cert.Logo);
 
                   return (
                     <div>
@@ -203,7 +205,7 @@ import { optimizeImage } from "@/lib/optimizeImages";
                         <div class="flex gap-6 items-center">
                           <div class="size-12 flex-shrink-0 rounded-full overflow-hidden bg-white flex items-center justify-center p-1">
                             <img
-                              src={optimizeImageUrl.compactImage}
+                              src={imageUrl}
                               alt="Logo da universidades"
                               width={50}
                               height={50}
