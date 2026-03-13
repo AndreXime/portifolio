@@ -14,7 +14,7 @@ export const Books: Book[] = [
 		state: "Lendo atualmente",
 		tag: "Arquitetura",
 		review:
-			"Estou lendo para dominar os fundamentos de desacoplamento, mas com foco total em pragmatismo. O objetivo é absorver os conceitos para escrever código organizado, mas sabendo filtrar o que é excesso de engenharia para manter a agilidade da entrega.",
+			"Considerado a bíblia dos programadores, estou lendo para dominar os fundamentos de desacoplamento com foco em viabilidade técnica e entrega. O objetivo é absorver os conceitos para escrever código organizado, mas sabendo filtrar o que é excesso de engenharia para manter a agilidade no dia a dia.",
 		imageUrl: "livros/arquitetura-limpa.jpg",
 	},
 	{
@@ -54,27 +54,12 @@ export const Books: Book[] = [
 		imageUrl: "livros/teste-mae.jpg",
 	},
 	{
-		title: "Leis da Psicologia Aplicadas a UX",
-		author: "Jon Yablonski",
-		state: "Na lista de desejos",
-		tag: "Frontend",
-		review:
-			"Leitura para complementar o Refactoring UI com base teórica em psicologia cognitiva. O objetivo é aplicar heurísticas de UX para reduzir a carga cognitiva do usuário, eliminando decisões baseadas em 'achismo' e criando interfaces com fluxos de navegação óbvios.",
-		imageUrl: "livros/psicologia-ux.jpg",
-	},
-	/* Livros secondarios */
-	{
-		title: "Não me Faça Pensar",
-		author: "Steve Krug",
-		state: "Lido",
-		tag: "",
-		imageUrl: "livros/nao-faca-pensar.jpg",
-	},
-	{
 		title: "Entendendo Algoritmos",
 		author: "Aditya Bhargava",
 		state: "Lido",
-		tag: "",
+		tag: "Didático",
+		review:
+			"Utilizei como base teórica para a disciplina de Construção e Análise de Algoritmos. O livro simplifica conceitos fundamentais como Big O e algoritmos de ordenação, servindo como uma revisão rápida e eficiente para qualquer nível de senioridade. Considero esta obra um pré-requisito prático para quem busca transitar de implementações básicas para o estudo acadêmico da computação.",
 		imageUrl: "livros/entendo-algoritmos.jpg",
 	},
 ];

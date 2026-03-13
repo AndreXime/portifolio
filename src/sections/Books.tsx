@@ -14,26 +14,13 @@ const TAG_STYLE_MAP: Record<string, string> = {
 	Frontend: "bg-secondary/20 text-secondary border-secondary/40",
 	Carreira: "bg-successBg text-success border-successBorder",
 	Business: "bg-warningBg text-warning border-warningBorder",
+	Didático: "bg-infoBg text-info border-infoBorder",
 };
 
 export default function BooksSection({ books }: { books: Book[] }) {
 	const [expand, setExpand] = useState(false);
-	const mainBooks = books.filter((book, index) => {
-		const hasTag = !!book.tag?.trim();
-		const hasReview = !!book.review?.trim();
 
-		if (!hasTag && !hasReview) return false;
-
-		return index <= 5;
-	});
-	const secondaryBooks = books.filter((book, index) => {
-		const hasTag = !!book.tag?.trim();
-		const hasReview = !!book.review?.trim();
-
-		return (!hasTag && !hasReview) || index > 5;
-	});
-
-	const booksView = expand ? mainBooks : mainBooks.slice(0, 3);
+	const booksView = expand ? books : books.slice(0, 3);
 
 	return (
 		<section id="biblioteca" className="py-20 bg-bgSectionAlt border-y border-border">
@@ -46,7 +33,7 @@ export default function BooksSection({ books }: { books: Book[] }) {
 					/>
 
 					<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-						{booksView.slice(0, 6).map((book, index) => {
+						{booksView.map((book, index) => {
 							let responsiveClass = "";
 
 							if (!expand) {
@@ -54,9 +41,7 @@ export default function BooksSection({ books }: { books: Book[] }) {
 								if (index === 2) responsiveClass = "hidden lg:block";
 							}
 
-							const hasTag = !!book.tag?.trim();
-							const hasReview = !!book.review?.trim();
-							const shouldUseCompact = !hasTag && !hasReview;
+							const shouldUseCompact = index > 5;
 
 							return (
 								<div key={book.title} className={responsiveClass}>
@@ -65,13 +50,6 @@ export default function BooksSection({ books }: { books: Book[] }) {
 							);
 						})}
 
-						{expand && secondaryBooks.length > 0 && (
-							<div className="col-span-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-								{secondaryBooks.map((book) => (
-									<CompactBookItem key={book.title} {...book} />
-								))}
-							</div>
-						)}
 						<div className="flex justify-center items-center col-span-full">
 							<button
 								type="button"
