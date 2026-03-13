@@ -25,6 +25,22 @@ ImageUrl: logos/uva-logo.jpg
 ## Descrição
 Graduação voltada aos fundamentos de computação com especial interesse em Engenharia de Software. Experiência em modelagem de dados (DER), requisitos de software, algoritmos e estrutura de dados.
 
+# Certificados
+Nome: Developing Back-End Apps with Node.js and Express
+Instituição: IBM
+Plataforma: Coursera
+Data: 03/2026
+Logo: logos/ibm.png
+Link: https://coursera.org/verify/M3N9VZSLZ55K
+
+# Certificados
+Nome: Get Started with Cloud Native, DevOps, Agile, and NoSQL
+Instituição: IBM
+Plataforma: Coursera
+Data: 03/2026
+Logo: logos/ibm.png
+Link: https://coursera.org/verify/W0EQJWJ10E04
+
 
 # Experiencias
 Cargo: Desenvolvedor Fullstack 

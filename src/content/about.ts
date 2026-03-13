@@ -43,6 +43,16 @@ const personalData = z.object({
 			Descrição: z.string(),
 		}),
 	),
+	Certificados: normalizeToArray(
+		z.object({
+			Nome: z.string(),
+			Instituição: z.string(),
+			Plataforma: z.string(),
+			Data: z.string(),
+			Logo: z.string(),
+			Link: z.string(),
+		}),
+	),
 });
 
 export type personalData = z.infer<typeof personalData>;
@@ -61,4 +71,4 @@ if (parsed instanceof ZodError) {
 	throw parsed;
 }
 
-export const { Links, Hero, Sobre, Formação, Experiencias } = parsed;
+export const { Links, Hero, Sobre, Formação, Experiencias, Certificados } = parsed;
