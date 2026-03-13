@@ -1,6 +1,14 @@
-import { ZodError, z } from "zod";
+import { ZodError, type ZodType, type ZodTypeDef, z } from "zod";
 import { MarkdownParser } from "@/lib/parser/markdownParser";
 import aboutMd from "./about.md?raw";
+
+function normalizeToArray<T extends z.ZodTypeAny>(element: T): ZodType<z.infer<T>[], ZodTypeDef, unknown> {
+	return z.preprocess((val: unknown) => {
+		if (val === undefined || val === null) return val;
+		if (Array.isArray(val)) return val;
+		return [val];
+	}, z.array(element)) as ZodType<z.infer<T>[], ZodTypeDef, unknown>;
+}
 
 const personalData = z.object({
 	Links: z.object({
@@ -17,21 +25,24 @@ const personalData = z.object({
 		}),
 		Trajetoria: z.string(),
 	}),
-	Formação: z.object({
-		Curso: z.string(),
-		Instituição: z.string(),
-		Periodo: z.string(),
-		ImageUrl: z.string(),
-		Descrição: z.string(),
-	}),
-
-	Experiencias: z.object({
-		Cargo: z.string(),
-		Empresa: z.string(),
-		Periodo: z.string(),
-		ImageUrl: z.string(),
-		Descrição: z.string(),
-	}),
+	Formação: normalizeToArray(
+		z.object({
+			Curso: z.string(),
+			Instituição: z.string(),
+			Periodo: z.string(),
+			ImageUrl: z.string(),
+			Descrição: z.string(),
+		}),
+	),
+	Experiencias: normalizeToArray(
+		z.object({
+			Cargo: z.string(),
+			Empresa: z.string(),
+			Periodo: z.string(),
+			ImageUrl: z.string(),
+			Descrição: z.string(),
+		}),
+	),
 });
 
 export type personalData = z.infer<typeof personalData>;

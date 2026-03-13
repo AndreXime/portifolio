@@ -99,7 +99,7 @@ import { optimizeImage } from "@/lib/optimizeImages";
 
           <div class="relative pl-6 border-l-2 border-border/40 space-y-8">
             {
-              [Experiencias].map(async (exp) => {
+              Experiencias.map(async (exp) => {
                 const optimizeImageUrl = await optimizeImage(exp.ImageUrl);
                 return (
                   <div class="relative">
@@ -146,7 +146,7 @@ import { optimizeImage } from "@/lib/optimizeImages";
 
           <div class="relative pl-6 border-l-2 border-border/40 space-y-8">
             {
-              [Formação].map(async (edu) => {
+              Formação.map(async (edu) => {
                 const optimizeImageUrl = await optimizeImage(edu.ImageUrl);
                 return (
                   <div class="relative">
