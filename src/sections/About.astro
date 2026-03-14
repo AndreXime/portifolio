@@ -91,14 +91,25 @@ import { optimizeCompactImage } from "@/lib/optimizeImages";
         </div>
       </div>
 
-      <div class="grid gap-8">
-        <div class="space-y-6">
-          <div class="flex items-center gap-3 px-2">
-            <Briefcase class="w-6 h-6 text-primary" aria-hidden="true" />
-            <h3 class="text-2xl font-bold text-textMain">Experiência</h3>
-          </div>
+      <div class="grid gap-12">
+        <div class="grid grid-cols-1 gap-8 lg:grid-cols-7 lg:items-start">
+          <header
+            class="space-y-2 px-2 lg:px-0 max-w-xs lg:max-w-none col-span-2"
+          >
+            <div class="flex items-center gap-2 text-primary">
+              <Briefcase class="w-5 h-5 shrink-0" aria-hidden="true" />
+              <span class="font-bold uppercase tracking-[0.2em]">
+                Experiência
+              </span>
+            </div>
+            <p class="text-textMuted leading-relaxed">
+              Trajetória profissional e papéis em que atuei.
+            </p>
+          </header>
 
-          <div class="relative pl-6 border-l-2 border-border/40 space-y-8">
+          <div
+            class="min-w-0 relative pl-6 border-l-2 border-border/40 space-y-8 col-span-5"
+          >
             {
               Experiencias.map(async (exp) => {
                 const imageUrl = await optimizeCompactImage(exp.ImageUrl);
@@ -140,98 +151,100 @@ import { optimizeCompactImage } from "@/lib/optimizeImages";
             }
           </div>
         </div>
-        <div class="grid lg:grid-cols-2 gap-8">
-          <div class="space-y-6">
-            <div class="flex items-center gap-3 px-2">
-              <GraduationCap class="w-6 h-6 text-primary" aria-hidden="true" />
-              <h3 class="text-2xl font-bold text-textMain">Formação</h3>
+        <div class="grid grid-cols-1 gap-8 lg:grid-cols-7 lg:items-start">
+          <header
+            class="space-y-2 px-2 lg:px-0 max-w-xs lg:max-w-none lg:col-span-2"
+          >
+            <div class="flex items-center gap-2 text-primary">
+              <GraduationCap class="w-5 h-5 shrink-0" aria-hidden="true" />
+              <span class="font-bold uppercase tracking-[0.2em]">
+                Formação e Certificados
+              </span>
             </div>
+            <p class="text-textMuted leading-relaxed">
+              Formação academicas e cursos complementares.
+            </p>
+          </header>
 
-            <div class="relative pl-6 border-l-2 border-border/40 space-y-8">
-              {
-                Formação.map(async (edu) => {
-                  const imageUrl = await optimizeCompactImage(edu.ImageUrl);
+          <div
+            class="min-w-0 relative pl-6 border-l-2 border-border/40 space-y-8 lg:col-span-5"
+          >
+            {
+              Formação.map(async (edu) => {
+                const imageUrl = await optimizeCompactImage(edu.ImageUrl);
 
-                  return (
-                    <div>
-                      <div class="bg-surface px-6 py-5 rounded-2xl border border-border/60 hover:border-primary/30 transition-colors">
-                        <div class="flex gap-6 items-center">
-                          <div class="size-12 flex-shrink-0 rounded-full overflow-hidden bg-white flex items-center justify-center p-1">
-                            <img
-                              src={imageUrl}
-                              alt="Logo da universidades"
-                              width={50}
-                              height={50}
-                              class="w-full h-full object-contain"
-                            />
-                          </div>
-                          <div>
-                            <span class="text-primary font-mono text-xs font-bold uppercase tracking-wider">
-                              {edu.Periodo}
-                            </span>
-                            <h4 class="text-xl font-bold text-textSecondary">
-                              {edu.Curso}
+                return (
+                  <div class="relative">
+                    <div class="absolute -left-[33px] top-1 w-4 h-4 rounded-full border-4 border-surface bg-primary shadow-sm" />
+                    <div class="bg-surface px-6 py-5 rounded-2xl border border-border/60 hover:border-primary/30 transition-colors shadow-sm">
+                      <div class="flex gap-6 items-center">
+                        <div class="size-12 flex-shrink-0 rounded-full overflow-hidden bg-white flex items-center justify-center p-1">
+                          <img
+                            src={imageUrl}
+                            alt="Logo da universidades"
+                            width={50}
+                            height={50}
+                            class="w-full h-full object-contain"
+                          />
+                        </div>
+                        <div>
+                          <span class="text-primary font-mono text-xs font-bold uppercase tracking-wider">
+                            {edu.Periodo}
+                          </span>
+                          <h4 class="text-xl font-bold text-textSecondary">
+                            {edu.Curso}
+                          </h4>
+                          <p class="text-textMuted font-medium">
+                            {edu.Instituição}
+                          </p>
+                        </div>
+                      </div>
+                      <p
+                        class="text-textMuted text-sm leading-relaxed mt-3"
+                        set:html={edu.Descrição}
+                      />
+                    </div>
+                  </div>
+                );
+              })
+            }
+            {
+              Certificados.map(async (cert) => {
+                const imageUrl = await optimizeCompactImage(cert.Logo);
+
+                return (
+                  <div class="relative">
+                    <div class="absolute -left-[33px] top-1 w-4 h-4 rounded-full border-4 border-surface bg-primary shadow-sm" />
+                    <div class="bg-surface px-6 py-5 rounded-2xl border border-border/60 hover:border-primary/30 transition-colors shadow-sm">
+                      <div class="flex gap-6 items-center">
+                        <div class="size-12 flex-shrink-0 rounded-full overflow-hidden bg-white flex items-center justify-center p-1">
+                          <img
+                            src={imageUrl}
+                            alt="Logo da universidades"
+                            width={50}
+                            height={50}
+                            class="w-full h-full object-contain"
+                          />
+                        </div>
+                        <div>
+                          <span class="text-primary font-mono text-xs font-bold uppercase tracking-wider">
+                            {cert.Data}
+                          </span>
+                          <a href={cert.Link}>
+                            <h4 class="text-md font-bold text-textSecondary underline">
+                              {cert.Nome}
                             </h4>
-                            <p class="text-textMuted font-medium">
-                              {edu.Instituição}
-                            </p>
-                          </div>
-                        </div>
-                        <p
-                          class="text-textMuted text-sm leading-relaxed mt-3"
-                          set:html={edu.Descrição}
-                        />
-                      </div>
-                    </div>
-                  );
-                })
-              }
-            </div>
-          </div>
-          <div class="space-y-6">
-            <div class="flex items-center gap-3 px-2">
-              <BookOpenText class="w-6 h-6 text-primary" aria-hidden="true" />
-              <h3 class="text-2xl font-bold text-textMain">Certificados</h3>
-            </div>
-
-            <div class="relative pl-6 border-l-2 border-border/40 space-y-8">
-              {
-                Certificados.map(async (cert) => {
-                  const imageUrl = await optimizeCompactImage(cert.Logo);
-
-                  return (
-                    <div>
-                      <div class="bg-surface px-6 py-5 rounded-2xl border border-border/60 hover:border-primary/30 transition-colors">
-                        <div class="flex gap-6 items-center">
-                          <div class="size-12 flex-shrink-0 rounded-full overflow-hidden bg-white flex items-center justify-center p-1">
-                            <img
-                              src={imageUrl}
-                              alt="Logo da universidades"
-                              width={50}
-                              height={50}
-                              class="w-full h-full object-contain"
-                            />
-                          </div>
-                          <div>
-                            <span class="text-primary font-mono text-xs font-bold uppercase tracking-wider">
-                              {cert.Data}
-                            </span>
-                            <a href={cert.Link}>
-                              <h4 class="text-md font-bold text-textSecondary underline">
-                                {cert.Nome}
-                              </h4>
-                            </a>
-                            <p class="text-textMuted font-medium">
-                              {cert.Instituição} - {cert.Plataforma}
-                            </p>
-                          </div>
+                          </a>
+                          <p class="text-textMuted font-medium">
+                            {cert.Instituição} - {cert.Plataforma}
+                          </p>
                         </div>
                       </div>
                     </div>
-                  );
-                })
-              }
-            </div>
+                  </div>
+                );
+              })
+            }
           </div>
         </div>
       </div>
