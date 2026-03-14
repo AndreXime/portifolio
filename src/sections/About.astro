@@ -181,9 +181,11 @@ import { optimizeCompactImage } from "@/lib/optimizeImages";
                         <div class="size-12 flex-shrink-0 rounded-full overflow-hidden bg-white flex items-center justify-center p-1">
                           <img
                             src={imageUrl}
-                            alt="Logo da universidades"
+                            alt={"Logo da " + edu.Instituição}
                             width={50}
                             height={50}
+                            loading="lazy"
+                            decoding="async"
                             class="w-full h-full object-contain"
                           />
                         </div>
