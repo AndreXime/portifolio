@@ -20,7 +20,7 @@ export async function optimizeCompactImage(relativePath: string) {
 		src: imageModule.default,
 		width: 200,
 		format: "webp",
-		quality: 100,
+		quality: 90,
 	});
 
 	return compactImage.src;
@@ -39,6 +39,7 @@ export async function optimizeImage(relativePath: string) {
 	const fullImage = await getImage({
 		src: imageModule.default,
 		width: 800,
+		height: 600,
 		format: "webp",
 		quality: 70,
 	});

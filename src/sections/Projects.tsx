@@ -125,9 +125,9 @@ function ProjectCard({ project }: { project: Project }) {
 		<div className="flex h-full min-h-0 flex-col overflow-hidden rounded-xl border border-border/60 bg-surface shadow-sm transition-all hover:border-primary/30 hover:shadow-xl lg:flex-row lg:[&:has([data-project-preview]:hover)]:z-20 lg:[&:has([data-project-preview]:hover)]:overflow-visible">
 			<div
 				data-project-preview
-				className="group/project relative flex h-56 w-full shrink-0 flex-col overflow-hidden border-b-2 border-primary bg-surfaceAlt lg:h-[260px] lg:w-[min(50%,28rem)] lg:max-w-md lg:overflow-visible lg:border-b-0 lg:border-r-2 lg:border-r-primary lg:group-hover/project:overflow-visible"
+				className="group/project relative flex h-56 w-full shrink-0 flex-col overflow-hidden border-b-2 border-primary bg-surfaceAlt lg:h-auto lg:min-h-[260px] lg:w-[min(50%,28rem)] lg:max-w-md lg:overflow-visible lg:border-b-0 lg:border-r-2 lg:border-r-primary lg:group-hover/project:overflow-visible"
 			>
-				<div className="relative h-full min-h-0 overflow-hidden lg:overflow-visible lg:group-hover/project:overflow-visible">
+				<div className="relative min-h-0 flex-1 overflow-hidden lg:overflow-visible lg:group-hover/project:overflow-visible">
 					{status !== "loaded" && (
 						<div className="absolute inset-0 z-10 flex items-center justify-center bg-surfaceAlt">
 							{status === "loading" ? (
