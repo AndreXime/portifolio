@@ -94,11 +94,13 @@ import { optimizeCompactImage } from "@/lib/optimizeImages";
       <div class="grid gap-12">
         <div class="grid grid-cols-1 gap-8 lg:grid-cols-7 lg:items-start">
           <header
-            class="space-y-2 px-2 lg:px-0 max-w-xs lg:max-w-none col-span-2"
+            class="space-y-2 px-2 lg:px-0 w-full lg:max-w-none lg:col-span-2 text-center lg:text-left flex flex-col items-center lg:items-start"
           >
             <div class="flex items-center gap-2 text-primary">
-              <Briefcase class="w-5 h-5 shrink-0" aria-hidden="true" />
-              <span class="font-bold uppercase tracking-[0.2em]">
+              <Briefcase class="w-6 h-6 shrink-0" aria-hidden="true" />
+              <span
+                class="font-bold uppercase tracking-[0.2em] text-lg leading-none"
+              >
                 Experiência
               </span>
             </div>
@@ -108,7 +110,7 @@ import { optimizeCompactImage } from "@/lib/optimizeImages";
           </header>
 
           <div
-            class="min-w-0 relative pl-6 border-l-2 border-border/40 space-y-8 col-span-5"
+            class="min-w-0 relative pl-6 border-l-2 border-border/40 space-y-8 lg:col-span-5"
           >
             {
               Experiencias.map(async (exp) => {
@@ -153,11 +155,13 @@ import { optimizeCompactImage } from "@/lib/optimizeImages";
         </div>
         <div class="grid grid-cols-1 gap-8 lg:grid-cols-7 lg:items-start">
           <header
-            class="space-y-2 px-2 lg:px-0 max-w-xs lg:max-w-none lg:col-span-2"
+            class="space-y-2 px-2 lg:px-0 w-full lg:max-w-none lg:col-span-2 text-center lg:text-left flex flex-col items-center lg:items-start"
           >
             <div class="flex items-center gap-2 text-primary">
-              <GraduationCap class="w-5 h-5 shrink-0" aria-hidden="true" />
-              <span class="font-bold uppercase tracking-[0.2em]">
+              <GraduationCap class="w-7 h-7 shrink-0" aria-hidden="true" />
+              <span
+                class="font-bold uppercase tracking-[0.2em] text-lg leading-snug"
+              >
                 Formação e Certificados
               </span>
             </div>
