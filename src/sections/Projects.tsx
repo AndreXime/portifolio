@@ -110,8 +110,8 @@ function ProjectCard({ project }: { project: Project }) {
 		<img
 			ref={imgRef}
 			src={project.imageUrl}
-			width={800}
-			height={600}
+			width={700}
+			height={500}
 			alt={`Screenshot do projeto ${project.title}`}
 			loading="lazy"
 			decoding="async"
@@ -122,12 +122,12 @@ function ProjectCard({ project }: { project: Project }) {
 	);
 
 	return (
-		<div className="flex h-full min-h-0 flex-col overflow-hidden rounded-xl border border-border/60 bg-surface shadow-sm transition-all hover:border-primary/30 hover:shadow-xl lg:flex-row lg:[&:has([data-project-preview]:hover)]:z-20 lg:[&:has([data-project-preview]:hover)]:overflow-visible">
+		<div className="flex h-full min-h-0 flex-col overflow-hidden rounded-xl border border-border/60 bg-surface shadow-sm transition-all hover:border-primary/30 hover:shadow-xl lg:flex-row">
 			<div
 				data-project-preview
-				className="group/project relative flex h-56 w-full shrink-0 flex-col overflow-hidden border-b-2 border-primary bg-surfaceAlt lg:h-auto lg:min-h-[260px] lg:w-[min(50%,28rem)] lg:max-w-md lg:overflow-visible lg:border-b-0 lg:border-r-2 lg:border-r-primary lg:group-hover/project:overflow-visible"
+				className="relative aspect-[7/5] w-full shrink-0 overflow-hidden border-b-2 border-primary bg-surfaceAlt lg:aspect-auto lg:h-auto lg:w-[min(50%,28rem)] lg:max-w-md lg:border-b-0 lg:border-r-2 lg:border-r-primary"
 			>
-				<div className="relative min-h-0 flex-1 overflow-hidden lg:overflow-visible lg:group-hover/project:overflow-visible">
+				<div className="absolute inset-0 h-full overflow-hidden">
 					{status !== "loaded" && (
 						<div className="absolute inset-0 z-10 flex items-center justify-center bg-surfaceAlt">
 							{status === "loading" ? (
@@ -143,22 +143,13 @@ function ProjectCard({ project }: { project: Project }) {
 							target="_blank"
 							rel="noreferrer"
 							aria-label={imageLinkLabel}
-							className="absolute inset-0 z-[5] block focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary lg:group-hover/project:pointer-events-none"
+							className="absolute inset-0 z-[5] block focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary"
 						>
 							{img}
 						</a>
 					) : (
 						img
 					)}
-					<img
-						src={project.imageUrl}
-						width={1600}
-						height={1000}
-						alt=""
-						aria-hidden
-						decoding="async"
-						className="pointer-events-none absolute left-1/2 top-1/2 z-[9999] hidden min-h-full min-w-full max-h-[min(72vh,420px)] max-w-[min(92vw,640px)] origin-center -translate-x-1/2 -translate-y-1/2 rounded-lg object-contain opacity-0 shadow-2xl ring-1 ring-border/80 transition-all duration-300 ease-out scale-[0.98] lg:block lg:group-hover/project:opacity-100 lg:group-hover/project:scale-100"
-					/>
 				</div>
 			</div>
 			<div className="flex min-w-0 flex-1 flex-col">

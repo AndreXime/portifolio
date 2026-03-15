@@ -38,8 +38,8 @@ export async function optimizeImage(relativePath: string) {
 
 	const fullImage = await getImage({
 		src: imageModule.default,
-		width: 800,
-		height: 600,
+		width: 700,
+		height: 500,
 		format: "webp",
 		quality: 70,
 	});
