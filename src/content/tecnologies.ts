@@ -18,9 +18,9 @@ export const technologies: TechItem[] = [
 	},
 	{ name: "Tailwind CSS e ShadCN", role: "Estilização", icons: ["tailwind"] },
 	{
-		name: "Hono e Express",
+		name: "Hono e Nestjs",
 		role: "API Frameworks",
-		icons: ["hono", "express"],
+		icons: ["hono", "nestjs"],
 	},
 	{
 		name: "PostgreSQL & Redis",
