@@ -1,13 +1,13 @@
-import { ZodError, type ZodType, type ZodTypeDef, z } from "zod";
+import { ZodError, z } from "zod";
 import { MarkdownParser } from "@/lib/parser/markdownParser";
 import aboutMd from "./about.md?raw";
 
-function normalizeToArray<T extends z.ZodTypeAny>(element: T): ZodType<z.infer<T>[], ZodTypeDef, unknown> {
+function normalizeToArray<T extends z.ZodTypeAny>(element: T) {
 	return z.preprocess((val: unknown) => {
 		if (val === undefined || val === null) return val;
 		if (Array.isArray(val)) return val;
 		return [val];
-	}, z.array(element)) as ZodType<z.infer<T>[], ZodTypeDef, unknown>;
+	}, z.array(element));
 }
 
 const personalData = z.object({

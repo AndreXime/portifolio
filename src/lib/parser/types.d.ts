@@ -1,4 +1,4 @@
-import type { ZodType, ZodTypeDef } from "zod";
+import type { z } from "zod";
 
 export type MarkdownNode =
 	| string
@@ -21,7 +21,7 @@ export interface ParserTransformers {
 
 export interface ParserOptions<T = MarkdownRecord> {
 	transformers?: ParserTransformers;
-	schema: ZodType<T, ZodTypeDef, unknown>;
+	schema: z.ZodType<T>;
 }
 
 export interface ASTNode {
