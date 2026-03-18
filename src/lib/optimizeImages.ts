@@ -26,7 +26,7 @@ export async function optimizeCompactImage(relativePath: string) {
 	return compactImage.src;
 }
 
-export async function optimizeImage(relativePath: string) {
+export async function optimizeImage(relativePath: string, width?: number, height?: number) {
 	const imagePath = `../assets/${relativePath}`;
 	const loadModule = allImages[imagePath];
 
@@ -38,8 +38,8 @@ export async function optimizeImage(relativePath: string) {
 
 	const fullImage = await getImage({
 		src: imageModule.default,
-		width: 700,
-		height: 500,
+		width: width,
+		height: height,
 		format: "webp",
 		quality: 70,
 	});
@@ -47,10 +47,14 @@ export async function optimizeImage(relativePath: string) {
 	return fullImage.src;
 }
 
-export async function optimizeImageBulk<T extends WithImage>(items: T[]): Promise<T[]> {
+export async function optimizeImageBulk<T extends WithImage>(
+	items: T[],
+	width?: number,
+	height?: number,
+): Promise<T[]> {
 	return await Promise.all(
 		items.map(async (item) => {
-			const optimizedUrl = await optimizeImage(item.imageUrl);
+			const optimizedUrl = await optimizeImage(item.imageUrl, width, height);
 
 			return { ...item, imageUrl: optimizedUrl };
 		}),

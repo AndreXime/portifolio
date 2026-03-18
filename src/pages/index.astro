@@ -13,9 +13,9 @@ import { Books } from "../content/books";
 import { Links } from "../content/about";
 import { optimizeImageBulk } from "../lib/optimizeImages";
 
-const optimizedProjects = await optimizeImageBulk(Projects);
+const optimizedProjects = await optimizeImageBulk(Projects, 700, 500);
 
-const optimizedBooks = await optimizeImageBulk(Books);
+const optimizedBooks = await optimizeImageBulk(Books, 650);
 ---
 
 <MainLayout

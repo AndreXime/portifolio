@@ -6,7 +6,6 @@ import {
   User,
   GraduationCap,
   Briefcase,
-  BookOpenText,
 } from "lucide-preact";
 import SectionHeader from "../components/ui/SectionHeader";
 import { Sobre, Experiencias, Formação, Certificados } from "../content/about";
@@ -124,9 +123,11 @@ import { optimizeCompactImage } from "@/lib/optimizeImages";
                         <div class="size-12 flex-shrink-0 rounded-full overflow-hidden bg-white flex items-center justify-center p-1">
                           <img
                             src={imageUrl}
-                            alt="Logo da stackup"
+                            alt={`Logo da empresa ${exp.Empresa}`}
                             width={48}
                             height={48}
+                            loading="lazy"
+                            decoding="async"
                             class="w-full h-full object-contain"
                           />
                         </div>
@@ -229,6 +230,8 @@ import { optimizeCompactImage } from "@/lib/optimizeImages";
                             alt="Logo da universidades"
                             width={50}
                             height={50}
+                            loading="lazy"
+                            decoding="async"
                             class="w-full h-full object-contain"
                           />
                         </div>

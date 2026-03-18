@@ -1,6 +1,7 @@
 import { Bookmark, CheckCircle2 } from "lucide-preact";
 import { useState } from "preact/hooks";
 import type { Book } from "@/content/books";
+import ImageLoader from "../components/ImageLoader";
 import SectionHeader from "../components/ui/SectionHeader";
 
 const STYLE_MAP: Record<Book["state"], string> = {
@@ -74,15 +75,12 @@ function BookCard(book: Book) {
 	return (
 		<div className="bg-surface rounded-2xl overflow-hidden border border-border/60 hover:border-primary/40 flex flex-col h-full transition-all duration-300 hover:shadow-lg group">
 			<div className="relative h-64 w-full bg-surfaceHighlight overflow-hidden flex items-center justify-center border-b border-borderLight/60">
-				<div className="absolute inset-0 bg-gradient-to-t from-textMain/20 to-transparent z-10" />
-				<img
+				<ImageLoader
 					src={book.imageUrl}
 					alt={`Capa do livro ${book.title} por ${book.author}`}
-					loading="lazy"
-					decoding="async"
-					className="w-auto h-4/5 object-contain transition-transform duration-500 group-hover:scale-105 z-20 shadow-2xl"
 					width={180}
 					height={240}
+					className="w-auto h-4/5 object-contain transition-transform duration-500 group-hover:scale-105 z-20 shadow-2xl"
 				/>
 			</div>
 

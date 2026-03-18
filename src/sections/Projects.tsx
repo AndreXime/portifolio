@@ -1,5 +1,6 @@
-import { ExternalLink, Github, Loader2 } from "lucide-preact";
-import { useEffect, useMemo, useRef, useState } from "preact/hooks";
+import { ExternalLink, Github } from "lucide-preact";
+import { useMemo, useState } from "preact/hooks";
+import ImageLoader from "@/components/ImageLoader";
 import SectionHeader from "../components/ui/SectionHeader";
 import type { Project } from "../content/projects";
 
@@ -88,38 +89,10 @@ export default function ProjectsSection({ projects }: { projects: Project[] }) {
 }
 
 function ProjectCard({ project }: { project: Project }) {
-	const [status, setStatus] = useState<"loading" | "loaded" | "error">("loading");
-	const imgRef = useRef<HTMLImageElement>(null);
-
-	useEffect(() => {
-		if (imgRef.current?.complete) {
-			setStatus("loaded");
-		}
-	}, []);
-
 	const imageHref = project.link?.trim() || project.github?.trim() || null;
 	const imageLinkLabel = project.link?.trim()
 		? `Abrir site do projeto ${project.title}`
 		: `Ver repositório do projeto ${project.title} no GitHub`;
-
-	const imgClassName = `h-full w-full object-cover transition-opacity duration-300 ${
-		status === "loaded" ? "opacity-100" : "opacity-0"
-	}`;
-
-	const img = (
-		<img
-			ref={imgRef}
-			src={project.imageUrl}
-			width={700}
-			height={500}
-			alt={`Screenshot do projeto ${project.title}`}
-			loading="lazy"
-			decoding="async"
-			onLoad={() => setStatus("loaded")}
-			onError={() => setStatus("error")}
-			className={imgClassName}
-		/>
-	);
 
 	return (
 		<div className="flex h-full min-h-0 flex-col overflow-hidden rounded-xl border border-border/60 bg-surface shadow-sm transition-all hover:border-primary/30 hover:shadow-xl lg:flex-row">
@@ -127,30 +100,15 @@ function ProjectCard({ project }: { project: Project }) {
 				data-project-preview
 				className="relative aspect-[7/5] w-full shrink-0 overflow-hidden border-b-2 border-primary bg-surfaceAlt lg:aspect-auto lg:h-auto lg:w-[min(50%,28rem)] lg:max-w-md lg:border-b-0 lg:border-r-2 lg:border-r-primary"
 			>
-				<div className="absolute inset-0 h-full overflow-hidden">
-					{status !== "loaded" && (
-						<div className="absolute inset-0 z-10 flex items-center justify-center bg-surfaceAlt">
-							{status === "loading" ? (
-								<Loader2 className="h-6 w-6 animate-spin text-primary" />
-							) : (
-								<span className="px-4 text-center text-xs text-textMuted">Falha ao carregar imagem.</span>
-							)}
-						</div>
-					)}
-					{imageHref ? (
-						<a
-							href={imageHref}
-							target="_blank"
-							rel="noreferrer"
-							aria-label={imageLinkLabel}
-							className="absolute inset-0 z-[5] block focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary"
-						>
-							{img}
-						</a>
-					) : (
-						img
-					)}
-				</div>
+				<ImageLoader
+					src={project.imageUrl}
+					alt={`Screenshot do projeto ${project.title}`}
+					width={700}
+					height={500}
+					href={imageHref}
+					className="h-full w-full object-cover"
+					linkLabel={imageLinkLabel}
+				/>
 			</div>
 			<div className="flex min-w-0 flex-1 flex-col">
 				<div className="flex flex-1 flex-col p-5">

@@ -21,7 +21,7 @@ Aplico conceitos de arquitetura de software e *Clean Code* com o objetivo práti
 Curso: Ciência da Computação
 Instituição: Univ. Estadual do Vale do Acaraú
 Periodo: 2023 — Presente
-ImageUrl: logos/uva-logo.jpg
+ImageUrl: logos/uva.jpg
 ## Descrição
 Graduação voltada aos fundamentos de computação com especial interesse em Engenharia de Software. Experiência em modelagem de dados (DER), requisitos de software, algoritmos e estrutura de dados.
 
@@ -33,12 +33,19 @@ Data: 03/2026
 Logo: logos/ibm.png
 Link: https://coursera.org/verify/W0EQJWJ10E04
 
+# Certificados
+Nome: React Specialization
+Instituição: Meta
+Plataforma: Coursera
+Data: 03/2026
+Logo: logos/meta.png
+Link: https://coursera.org/verify/specialization/0W73AEGGJLAY
 
 # Experiencias
 Cargo: Desenvolvedor Fullstack 
 Empresa: Stackup Software
 Periodo: 10/2025 — 02/2026
-ImageUrl: logos/stackup_logo.jpg
+ImageUrl: logos/stackup.jpg
 ## Descrição
 Atuei no ciclo completo de desenvolvimento em uma software house de ritmo dinâmico, integrando um projeto de alta complexidade desde o estágio inicial. Minha contribuição focou na definição da arquitetura e na implementação de soluções escaláveis, transitando entre o frontend com Next.js e o backend com Hono, sempre priorizando a performance e a eficiência de custos em infraestrutura AWS.
 
