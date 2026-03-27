@@ -34,12 +34,13 @@ Logo: logos/ibm.png
 Link: https://coursera.org/verify/W0EQJWJ10E04
 
 # Certificados
-Nome: React Specialization
+Nome: Frontend Developer Certificate
 Instituição: Meta
 Plataforma: Coursera
 Data: 03/2026
 Logo: logos/meta.png
-Link: https://coursera.org/verify/specialization/0W73AEGGJLAY
+Link: https://coursera.org/verify/professional-cert/PLCI5UKSC5CS
+
 
 # Experiencias
 Cargo: Desenvolvedor Fullstack 
