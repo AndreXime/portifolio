@@ -4,21 +4,12 @@ import ImageLoader from "@/components/ImageLoader";
 import SectionHeader from "../components/ui/SectionHeader";
 import type { Project } from "../content/projects";
 
-const filters: { id: Project["type"] | "all"; label: string }[] = [
-	{ id: "all", label: "Todos" },
-	{ id: "app", label: "Web Apps" },
-	{ id: "api", label: "APIs" },
-	{ id: "cli", label: "CLI" },
-	{ id: "landing page", label: "Landing Page" },
-] as const;
-
 export default function ProjectsSection({ projects }: { projects: Project[] }) {
-	const [filter, setFilter] = useState<"all" | "minimal" | Project["type"]>("minimal");
+	const [filter, setFilter] = useState<"all" | "minimal">("minimal");
 
 	const filteredProjects = useMemo(() => {
-		if (filter === "all") return projects;
 		if (filter === "minimal") return projects.slice(0, 3);
-		return projects.filter((p) => p.type === filter);
+		return projects;
 	}, [filter]);
 
 	return (
@@ -30,27 +21,7 @@ export default function ProjectsSection({ projects }: { projects: Project[] }) {
 						title="Meus Projetos"
 						subtitle="O resultado prático dos meus estudos, aplicações onde solidifico meus conhecimentos e testo novas
 							abordagens."
-					>
-						<fieldset className="flex flex-wrap justify-center gap-2 border-0">
-							<legend className="sr-only">Filtrar projetos por categoria</legend>
-							{filters.map((f) => (
-								<button
-									type="button"
-									key={f.id}
-									onClick={() => setFilter(f.id)}
-									aria-pressed={filter === f.id}
-									aria-label={`Filtrar por ${f.label}`}
-									className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
-										filter === f.id
-											? "bg-primaryDark text-white shadow-lg shadow-primary/30"
-											: "bg-surface text-textMuted border border-border hover:border-primary hover:text-primary"
-									}`}
-								>
-									{f.label}
-								</button>
-							))}
-						</fieldset>
-					</SectionHeader>
+					/>
 
 					<div className="grid grid-cols-1 gap-8 min-h-[400px] max-w-4xl mx-auto lg:max-w-none">
 						{filteredProjects.map((project, index) => {
