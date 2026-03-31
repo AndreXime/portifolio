@@ -5,7 +5,6 @@ import HeroSection from "../sections/Hero.astro";
 import AboutSection from "../sections/About.astro";
 import TechStackSection from "../sections/TechStack.astro";
 import FooterSection from "../sections/Footer.astro";
-import BooksSection from "../sections/Books";
 import ProjectsSection from "../sections/Projects";
 import ContactSection from "../sections/Contact";
 import { Projects } from "../content/projects";
@@ -14,8 +13,6 @@ import { Links } from "../content/about";
 import { optimizeImageBulk } from "../lib/optimizeImages";
 
 const optimizedProjects = await optimizeImageBulk(Projects, 700, 500);
-
-const optimizedBooks = await optimizeImageBulk(Books, 650);
 ---
 
 <MainLayout
@@ -31,7 +28,6 @@ const optimizedBooks = await optimizeImageBulk(Books, 650);
       <AboutSection />
       <TechStackSection />
       <ProjectsSection client:visible projects={optimizedProjects} />
-      <BooksSection client:visible books={optimizedBooks} />
       <ContactSection client:visible socialLinks={Links} />
     </main>
     <FooterSection />
