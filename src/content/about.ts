@@ -27,11 +27,13 @@ const personalData = z.object({
 	}),
 	Formação: normalizeToArray(
 		z.object({
-			Curso: z.string(),
+			Nome: z.string(),
 			Instituição: z.string(),
-			Periodo: z.string(),
-			ImageUrl: z.string(),
-			Descrição: z.string(),
+			Data: z.string(),
+			Logo: z.string(),
+			Link: z.string().optional(),
+			Descrição: z.string().optional(),
+			isSecondary: z.coerce.boolean().default(false),
 		}),
 	),
 	Experiencias: normalizeToArray(
@@ -41,16 +43,6 @@ const personalData = z.object({
 			Periodo: z.string(),
 			ImageUrl: z.string(),
 			Descrição: z.string(),
-		}),
-	),
-	Certificados: normalizeToArray(
-		z.object({
-			Nome: z.string(),
-			Instituição: z.string(),
-			Plataforma: z.string(),
-			Data: z.string(),
-			Logo: z.string(),
-			Link: z.string(),
 		}),
 	),
 });
@@ -71,4 +63,4 @@ if (parsed instanceof ZodError) {
 	throw parsed;
 }
 
-export const { Links, Hero, Sobre, Formação, Experiencias, Certificados } = parsed;
+export const { Links, Hero, Sobre, Formação, Experiencias } = parsed;

@@ -18,28 +18,30 @@ No dia a dia, atuo em todo o stack. No backend, utilizo a eficiência de **Node.
 Aplico conceitos de arquitetura de software e *Clean Code* com o objetivo prático de garantir a manutenibilidade a longo prazo. Busco o equilíbrio entre qualidade técnica e pragmatismo, evitando *over-engineering*. A prioridade é viabilizar o projeto com uma base de código escalável que permita entregas consistentes e suporte o crescimento da aplicação.
 
 # Formação
-Curso: Ciência da Computação
+Nome: Ciência da Computação
 Instituição: Univ. Estadual do Vale do Acaraú
-Periodo: 2023 — Presente
-ImageUrl: logos/uva.jpg
+Data: 2023 — Presente
+Logo: logos/uva.jpg
 ## Descrição
-Graduação voltada aos fundamentos de computação com especial interesse em Engenharia de Software. Experiência em modelagem de dados (DER), requisitos de software, algoritmos e estrutura de dados.
+Graduação voltada aos fundamentos de computação com especial interesse em Engenharia de Software, Modelagem de dados, Algoritmos e Estrutura de dados.
 
-# Certificados
-Nome: Get Started with Cloud Native, DevOps, Agile, and NoSQL
-Instituição: IBM
-Plataforma: Coursera
-Data: 03/2026
-Logo: logos/ibm.png
-Link: https://coursera.org/verify/W0EQJWJ10E04
-
-# Certificados
+# Formação
 Nome: Frontend Developer Certificate
-Instituição: Meta
-Plataforma: Coursera
+Instituição: Meta - Coursera
 Data: 03/2026
 Logo: logos/meta.png
 Link: https://coursera.org/verify/professional-cert/PLCI5UKSC5CS
+## Descrição
+Certicação em desenvolvimento com React e JavaScript, cobrindo desde a criação de interfaces responsivas até o consumo de APIs REST. Inclui práticas com Git, testes unitários com Jest e fundamentos de UX/UI.
+
+# Formação
+Nome: Get Started with Cloud Native, DevOps, Agile, and NoSQL
+Instituição: IBM - Coursera
+Data: 03/2026
+Logo: logos/ibm.png
+Link: https://coursera.org/verify/W0EQJWJ10E04
+isSecondary: True
+
 
 
 # Experiencias

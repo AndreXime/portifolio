@@ -8,7 +8,7 @@ import {
   Briefcase,
 } from "lucide-preact";
 import SectionHeader from "../components/ui/SectionHeader";
-import { Sobre, Experiencias, Formação, Certificados } from "../content/about";
+import { Sobre, Experiencias, Formação } from "../content/about";
 import { optimizeCompactImage } from "@/lib/optimizeImages";
 ---
 
@@ -176,7 +176,7 @@ import { optimizeCompactImage } from "@/lib/optimizeImages";
           >
             {
               Formação.map(async (edu) => {
-                const imageUrl = await optimizeCompactImage(edu.ImageUrl);
+                const imageUrl = await optimizeCompactImage(edu.Logo);
 
                 return (
                   <div class="relative">
@@ -196,59 +196,33 @@ import { optimizeCompactImage } from "@/lib/optimizeImages";
                         </div>
                         <div>
                           <span class="text-primary font-mono text-xs font-bold uppercase tracking-wider">
-                            {edu.Periodo}
+                            {edu.Data}
                           </span>
-                          <h4 class="text-xl font-bold text-textSecondary">
-                            {edu.Curso}
-                          </h4>
-                          <p class="text-textMuted font-medium">
+                          <a
+                            href={edu.Link}
+                            target="_blank"
+                            rel="noreferrer"
+                            class={edu.Link && "underline"}
+                          >
+                            <h4
+                              class={`${!edu.isSecondary && "text-xl"} font-bold text-textSecondary`}
+                            >
+                              {edu.Nome}
+                            </h4>
+                          </a>
+                          <p
+                            class={`${edu.isSecondary && "text-sm"} text-textMuted font-medium`}
+                          >
                             {edu.Instituição}
                           </p>
                         </div>
                       </div>
-                      <p
-                        class="text-textMuted text-sm leading-relaxed mt-3"
-                        set:html={edu.Descrição}
-                      />
-                    </div>
-                  </div>
-                );
-              })
-            }
-            {
-              Certificados.map(async (cert) => {
-                const imageUrl = await optimizeCompactImage(cert.Logo);
-
-                return (
-                  <div class="relative">
-                    <div class="absolute -left-[33px] top-1 w-4 h-4 rounded-full border-4 border-surface bg-primary shadow-sm" />
-                    <div class="bg-surface px-6 py-5 rounded-2xl border border-border/60 hover:border-primary/30 transition-colors shadow-sm">
-                      <div class="flex gap-6 items-center">
-                        <div class="size-12 flex-shrink-0 rounded-full overflow-hidden bg-white flex items-center justify-center p-1">
-                          <img
-                            src={imageUrl}
-                            alt="Logo da universidades"
-                            width={50}
-                            height={50}
-                            loading="lazy"
-                            decoding="async"
-                            class="w-full h-full object-contain"
-                          />
-                        </div>
-                        <div>
-                          <span class="text-primary font-mono text-xs font-bold uppercase tracking-wider">
-                            {cert.Data}
-                          </span>
-                          <a href={cert.Link} target="_blank" rel="noreferrer">
-                            <h4 class="text-md font-bold text-textSecondary underline">
-                              {cert.Nome}
-                            </h4>
-                          </a>
-                          <p class="text-textMuted font-medium">
-                            {cert.Instituição} - {cert.Plataforma}
-                          </p>
-                        </div>
-                      </div>
+                      {edu.Descrição && (
+                        <p
+                          class="text-textMuted text-sm leading-relaxed mt-3"
+                          set:html={edu.Descrição}
+                        />
+                      )}
                     </div>
                   </div>
                 );
