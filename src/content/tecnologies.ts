@@ -33,7 +33,7 @@ export const technologies: TechItem[] = [
 		icons: ["git", "github"],
 	},
 	{ name: "BullMQ", role: "Mensageria e Filas", icons: ["bullmq"] },
-	{ name: "Prometheus", role: "Observabilidade e Monitoramento", icons: ["prometheus"] },
+	{ name: "Prometheus e Grafana", role: "Observabilidade e Monitoramento", icons: ["prometheus", "grafana"] },
 	{
 		name: "Jest",
 		role: "Testes Unitários e Integração",
