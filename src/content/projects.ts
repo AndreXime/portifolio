@@ -32,7 +32,7 @@ export const Projects: Project[] = [
 			"Construí a API REST de um e-commerce utilizando Bun, Hono e Prisma com PostgreSQL, abrangendo desde o catálogo com filtros até o fluxo completo de pedidos e carrinho persistido. Implementei a autenticação JWT com refresh tokens em cookies HttpOnly, reforçando a segurança com controle de acesso por cargos e revogação imediata no logout via blocklist de JTI no Redis. Assegurei a resiliência da aplicação através de rate limiting dinâmico e implementei processamento assíncrono de tarefas com BullMQ, além de integrar o AWS S3 para gestão de uploads. Estruturei o código em uma arquitetura modular validada com Zod, garantindo tipagem de ponta a ponta no TypeScript e geração automatizada dos contratos na documentação OpenAPI.",
 		tech: ["TypeScript", "Hono", "AWS SDK", "PostgreSQL", "Open API"],
 		imageUrl: "projetos/api-ecommerce.png",
-		link: "",
+		link: "https://ecommerce-api.andreximenes.xyz",
 		github: "https://github.com/AndreXime/ecommerce-backend",
 	},
 	{
@@ -41,7 +41,7 @@ export const Projects: Project[] = [
 			"Desenvolvi o front-end de um e-commerce consumindo uma API REST externa, utilizando Astro para SSR, TypeScript, Preact e Tailwind CSS. Priorizei a otimização de bundle e os Core Web Vitals ao gerenciar o estado global com Nanostores e entregar ao cliente apenas o JavaScript necessário por rota. Construí a camada de integração repassando cookies durante a renderização no servidor em prol do SEO e implementei um fluxo robusto de refresh token com deduplicação de interceptadores para erros 401. Estruturei toda a jornada funcional da aplicação, abrangendo carrinho reativo, checkout em três etapas, área do cliente e um painel administrativo com paginação e busca sob demanda.",
 		tech: ["TypeScript", "Next.js", "React", "UX/UI", "TailwindCSS"],
 		imageUrl: "projetos/ecommerce.png",
-		link: "",
+		link: "https://ecommerce.andreximenes.xyz/",
 		github: "https://github.com/AndreXime/ecommerce",
 	},
 	{
