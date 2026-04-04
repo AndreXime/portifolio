@@ -1,0 +1,111 @@
+---
+import { Icon } from "astro-icon/components";
+import Container from "../ui/Container.astro";
+import AccentBar from "../ui/AccentBar.astro";
+import Reveal from "../ui/Reveal.astro";
+import { technologies } from "../../data/technologies";
+
+const LOCAL_ICONS = new Set(["bullmq", "shadcn"]);
+
+function resolveIconName(slug: string) {
+  return LOCAL_ICONS.has(slug) ? slug : `simple-icons:${slug}`;
+}
+---
+
+<section
+  id="tecnologias"
+  class="scroll-mt-20 border-b border-border bg-background py-20 md:py-28 lg:py-32"
+  aria-labelledby="tech-heading"
+>
+  <Container>
+    <div
+      class="flex flex-col gap-10 lg:flex-row lg:items-end lg:justify-between lg:gap-16"
+    >
+      <div class="max-w-2xl lg:max-w-none lg:flex-1">
+        <Reveal staggerMs={0}>
+          <AccentBar class="mb-8" />
+          <h2
+            id="tech-heading"
+            class="font-display text-3xl font-semibold leading-tight tracking-[-0.04em] text-foreground sm:text-4xl md:text-5xl lg:text-6xl"
+          >
+            Tecnologias
+          </h2>
+          <p
+            class="mt-4 font-mono text-xs uppercase tracking-[0.12em] text-muted-foreground md:text-sm md:tracking-[0.15em]"
+          >
+            Stack que uso no dia a dia
+          </p>
+        </Reveal>
+      </div>
+      <Reveal staggerMs={120} class="shrink-0 lg:max-w-md">
+        <p
+          class="text-base leading-[1.6] text-muted-foreground md:text-lg md:leading-relaxed"
+        >
+          Ferramentas escolhidas por maturidade e ecossistema TypeScript e não
+          por hype.
+        </p>
+      </Reveal>
+    </div>
+
+    <ul
+      class="mt-16 grid list-none grid-cols-1 gap-6 sm:grid-cols-2 lg:mt-20 lg:grid-cols-3 lg:gap-8"
+    >
+      {
+        technologies.map((item, index) => (
+          <li>
+            <Reveal staggerMs={Math.min(index * 40, 320)}>
+              <article
+                class="group flex h-full flex-col border border-border bg-transparent p-6 transition-colors duration-200 ease-[cubic-bezier(0.25,0,0,1)] hover:border-border-hover md:p-8"
+                aria-label={item.name}
+              >
+                <div class="relative">
+                  <span
+                    class="absolute -top-px left-0 h-1 w-16 bg-accent"
+                    aria-hidden="true"
+                  />
+                  <p class="pt-4 font-mono text-[11px] font-medium uppercase tracking-[0.15em] text-muted-foreground md:text-xs">
+                    {item.role}
+                  </p>
+                  <h3 class="font-display mt-3 text-lg font-semibold leading-snug tracking-[-0.03em] text-foreground md:text-xl">
+                    {item.name}
+                  </h3>
+                </div>
+                <ul
+                  class="mt-6 flex list-none flex-wrap gap-3 border-t border-border pt-6"
+                  aria-label={`Ícones de ${item.name}`}
+                >
+                  {item.icons.map((slug) => (
+                    <li>
+                      <span
+                        class="tech-logo inline-flex size-9 items-center justify-center text-foreground md:size-10"
+                        aria-hidden="true"
+                      >
+                        <Icon name={resolveIconName(slug)} class="size-full" />
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </article>
+            </Reveal>
+          </li>
+        ))
+      }
+    </ul>
+  </Container>
+</section>
+
+<style is:global>
+  .tech-logo svg {
+    max-height: 100%;
+    max-width: 100%;
+  }
+
+  .tech-logo svg,
+  .tech-logo svg :where(path, circle, rect, polygon) {
+    fill: currentColor;
+  }
+
+  .tech-logo svg :where(line, polyline) {
+    stroke: currentColor;
+  }
+</style>

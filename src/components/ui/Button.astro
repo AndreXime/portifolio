@@ -1,0 +1,79 @@
+---
+import IconArrow from "./icons/IconArrow.astro";
+
+interface Props {
+  variant?: "primary" | "secondary" | "ghost";
+  href?: string;
+  type?: "button" | "submit";
+  disabled?: boolean;
+  class?: string;
+  showArrow?: boolean;
+  /** Para fundos claros (ex.: faixa CTA invertida) */
+  onLight?: boolean;
+}
+
+const {
+  variant = "primary",
+  href,
+  type = "button",
+  disabled = false,
+  class: className = "",
+  showArrow = false,
+  onLight = false,
+} = Astro.props;
+
+const Tag = href ? "a" : "button";
+
+const shared =
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-none font-semibold uppercase tracking-[0.1em] transition-all duration-150 ease-[cubic-bezier(0.25,0,0,1)] focus-ring active:translate-y-px disabled:pointer-events-none disabled:opacity-50";
+
+function secondaryClass(light: boolean) {
+  return light
+    ? "border border-background px-6 py-3 text-background hover:bg-background hover:text-foreground"
+    : "border border-foreground px-6 py-3 text-foreground hover:bg-foreground hover:text-background";
+}
+
+function ghostClass(light: boolean) {
+  return light
+    ? "group relative px-4 py-3 text-background/65 hover:text-background"
+    : "group relative px-4 py-3 text-muted-foreground hover:text-foreground";
+}
+
+const variantClass: Record<NonNullable<typeof variant>, string> = {
+  primary:
+    "group relative py-3 text-accent [&:disabled]:text-muted-foreground",
+  secondary: secondaryClass(onLight),
+  ghost: ghostClass(onLight),
+};
+---
+
+<Tag
+  class:list={[shared, variantClass[variant], className]}
+  href={href}
+  type={href ? undefined : type}
+  disabled={href ? undefined : disabled}
+>
+  <span class="relative z-10 inline-flex items-center gap-2">
+    <slot />
+    {showArrow && <IconArrow class="size-4 shrink-0" />}
+  </span>
+  {
+    variant === "primary" && (
+      <span
+        class="pointer-events-none absolute bottom-0 left-0 h-0.5 w-full origin-left scale-x-100 bg-accent transition-transform duration-150 ease-[cubic-bezier(0.25,0,0,1)] group-hover:scale-x-110"
+        aria-hidden="true"
+      />
+    )
+  }
+  {
+    variant === "ghost" && (
+      <span
+        class:list={[
+          "pointer-events-none absolute bottom-0 left-0 h-px w-full origin-left scale-x-0 transition-transform duration-150 ease-[cubic-bezier(0.25,0,0,1)] group-hover:scale-x-100",
+          onLight ? "bg-background" : "bg-foreground",
+        ]}
+        aria-hidden="true"
+      />
+    )
+  }
+</Tag>

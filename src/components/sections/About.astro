@@ -1,0 +1,70 @@
+---
+import Container from "../ui/Container.astro";
+import AccentBar from "../ui/AccentBar.astro";
+import Reveal from "../ui/Reveal.astro";
+---
+
+<section
+  id="sobre"
+  class="scroll-mt-20 border-b border-border bg-muted py-20 md:py-28 lg:py-32"
+  aria-labelledby="about-heading"
+>
+  <Container>
+    <div class="grid grid-cols-1 gap-16 lg:grid-cols-12 lg:gap-12">
+      <div class="lg:col-span-5">
+        <Reveal staggerMs={0}>
+          <AccentBar class="mb-8" />
+          <h2
+            id="about-heading"
+            class="font-display text-3xl font-semibold leading-tight tracking-[-0.04em] text-foreground sm:text-4xl md:text-5xl"
+          >
+            Sobre
+          </h2>
+          <p
+            class="mt-4 font-mono text-xs uppercase tracking-[0.15em] text-muted-foreground"
+          >
+            Manifesto breve
+          </p>
+        </Reveal>
+
+        <Reveal staggerMs={100} class="mt-12 hidden lg:block">
+          <p
+            class="font-serif text-2xl italic leading-snug tracking-tight text-foreground md:text-3xl"
+          >
+            “Bom código é o que o próximo dev entende numa sexta à tarde.”
+          </p>
+        </Reveal>
+      </div>
+
+      <div class="lg:col-span-7">
+        <Reveal staggerMs={80}>
+          <div class="space-y-6 text-base leading-[1.6] text-muted-foreground md:text-lg md:leading-relaxed">
+            <p class="text-foreground">
+              No dia a dia, atuo em todo o stack. No backend, utilizo a eficiência
+              de <strong>Node.js ou Bun</strong> para criar APIs seguras e rápidas.
+              No frontend, foco na experiência do usuário (UX/UI) para entregar
+              interfaces refinadas e funcionais. Meu trabalho é conectar essas duas
+              pontas, garantindo que a alta performance do servidor se traduza em uma
+              experiência fluida para quem navega.
+            </p>
+            <p>
+              Aplico conceitos de arquitetura de software e <em>Clean Code</em> com o
+              objetivo prático de garantir a manutenibilidade a longo prazo. Busco o
+              equilíbrio entre qualidade técnica e pragmatismo, evitando <em>over-engineering</em>. A prioridade é viabilizar o projeto com uma
+              base de código escalável que permita entregas consistentes e suporte o
+              crescimento da aplicação.
+            </p>
+          </div>
+        </Reveal>
+      </div>
+    </div>
+
+    <Reveal staggerMs={0} class="mt-12 border-t border-border pt-10 lg:hidden">
+      <p
+        class="font-serif text-xl italic leading-snug text-foreground"
+      >
+        “Bom código é o que o próximo dev entende numa sexta à tarde.”
+      </p>
+    </Reveal>
+  </Container>
+</section>

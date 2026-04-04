@@ -1,0 +1,206 @@
+---
+import Container from "../ui/Container.astro";
+import AccentBar from "../ui/AccentBar.astro";
+import Reveal from "../ui/Reveal.astro";
+import Button from "../ui/Button.astro";
+import Input from "../ui/Input.astro";
+import IconGithub from "../ui/icons/IconGithub.astro";
+import IconLinkedin from "../ui/icons/IconLinkedin.astro";
+import { site } from "../../data/site";
+
+const mailto = `mailto:${site.email}?subject=Contato%20pelo%20portf%C3%B3lio`;
+---
+
+<section
+  id="contato"
+  class="scroll-mt-20 bg-background py-20 md:py-28 lg:py-32"
+  aria-labelledby="contact-heading"
+>
+  <Container>
+    <Reveal staggerMs={0}>
+      <AccentBar class="mb-8" />
+      <h2
+        id="contact-heading"
+        class="font-display max-w-2xl text-3xl font-semibold leading-tight tracking-[-0.04em] text-foreground sm:text-4xl md:text-5xl"
+      >
+        Contato
+      </h2>
+      <p
+        class="mt-4 max-w-xl font-mono text-xs uppercase tracking-[0.12em] text-muted-foreground"
+      >
+        Propostas, parcerias ou conversa técnica
+      </p>
+    </Reveal>
+
+    <div
+      class="mt-16 grid grid-cols-1 gap-16 border-t border-border pt-16 lg:grid-cols-12 lg:gap-12"
+    >
+      <div class="lg:col-span-7">
+        <Reveal staggerMs={80}>
+          <form
+            id="contact-form"
+            class="space-y-8 border border-border bg-card p-6 md:p-8"
+          >
+            <Input
+              id="c-name"
+              name="name"
+              label="Nome"
+              placeholder="Como posso te chamar"
+              required
+            />
+            <Input
+              id="c-email"
+              name="email"
+              type="email"
+              label="E-mail"
+              placeholder="voce@email.com"
+              required
+            />
+            <Input
+              id="c-message"
+              name="message"
+              label="Mensagem"
+              placeholder="Diga como posso ajudar seu time ou empresa..."
+              rows={5}
+              required
+            />
+            <Button type="submit" variant="secondary" class="min-h-12 w-full">
+              <span data-contact-submit-label>Enviar mensagem</span>
+            </Button>
+            <span
+              id="contact-form-status"
+              class="hidden font-mono"
+              role="status"
+              aria-live="polite"
+            >
+            </span>
+          </form>
+          <script src="../../scripts/contact-form.ts"></script>
+        </Reveal>
+      </div>
+
+      <aside class="lg:col-span-5">
+        <Reveal staggerMs={160}>
+          <div class="border border-border bg-card p-6 md:p-8">
+            <h3
+              class="font-mono text-xs font-medium uppercase tracking-[0.15em] text-muted-foreground"
+            >
+              Direto
+            </h3>
+            <a
+              href={mailto}
+              class="mt-4 block font-display text-xl font-semibold tracking-[-0.03em] text-accent underline decoration-2 underline-offset-[6px] transition-colors duration-150 hover:text-foreground focus-ring"
+            >
+              {site.email}
+            </a>
+            <p class="mt-8 text-sm leading-relaxed text-muted-foreground">
+              Resposta em até um dia útil.Para propostas de contratação,
+              sinta-se à vontade para anexar a descrição da vaga ou o link do
+              LinkedIn.
+            </p>
+            <div class="mt-8 border-t border-border pt-8">
+              <p
+                class="font-mono text-xs font-medium uppercase tracking-[0.15em] text-muted-foreground"
+              >
+                Currículo
+              </p>
+              <a
+                href={site.resumePdfUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="mt-4 inline-flex min-h-14 w-full items-center justify-center gap-3 border border-foreground px-6 py-4 font-semibold uppercase tracking-[0.1em] text-foreground transition-all duration-150 ease-[cubic-bezier(0.25,0,0,1)] hover:bg-foreground hover:text-background focus-ring active:translate-y-px md:min-h-16"
+              >
+                <svg
+                  class="size-6 shrink-0 md:size-7"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.75"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"
+                  ></path>
+                  <path d="M14 2v6h6"></path>
+                  <path d="M10 13h4"></path>
+                  <path d="M10 17h4"></path>
+                </svg>
+                Ver currículo
+              </a>
+            </div>
+            <nav
+              class="mt-8 border-t border-border pt-8"
+              aria-label="Redes sociais"
+            >
+              <p
+                class="font-mono text-xs font-medium uppercase tracking-[0.15em] text-muted-foreground"
+              >
+                Redes
+              </p>
+              <div class="mt-4 flex flex-col gap-3">
+                <a
+                  href={site.githubUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="inline-flex min-h-14 w-full items-center justify-center gap-3 border border-foreground px-6 py-4 font-semibold uppercase tracking-[0.1em] text-foreground transition-all duration-150 ease-[cubic-bezier(0.25,0,0,1)] hover:bg-foreground hover:text-background focus-ring active:translate-y-px md:min-h-16"
+                >
+                  <IconGithub class="size-6 shrink-0 md:size-7" />
+                  GitHub
+                </a>
+                <a
+                  href={site.linkedinUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="inline-flex min-h-14 w-full items-center justify-center gap-3 border border-foreground px-6 py-4 font-semibold uppercase tracking-[0.1em] text-foreground transition-all duration-150 ease-[cubic-bezier(0.25,0,0,1)] hover:bg-foreground hover:text-background focus-ring active:translate-y-px md:min-h-16"
+                >
+                  <IconLinkedin class="size-6 shrink-0 md:size-7" />
+                  LinkedIn
+                </a>
+              </div>
+            </nav>
+          </div>
+        </Reveal>
+      </aside>
+    </div>
+  </Container>
+</section>
+
+<section
+  class="border-t border-border bg-foreground py-24 text-background md:py-32 lg:py-40"
+  aria-labelledby="cta-heading"
+>
+  <Container>
+    <Reveal staggerMs={0}>
+      <AccentBar class="mb-8" />
+      <h2
+        id="cta-heading"
+        class="font-display max-w-3xl text-3xl font-semibold leading-[1.1] tracking-[-0.04em] sm:text-4xl md:text-5xl lg:text-6xl"
+      >
+        Buscando um desenvolvedor focado em qualidade?
+      </h2>
+      <p
+        class="mt-6 max-w-xl text-base leading-relaxed text-background/70 md:text-lg"
+      >
+        Estou disponível para novos desafios e colaborações em tempo integral.
+        Vamos conversar sobre como minha experiência pode somar ao seu time.
+      </p>
+      <div
+        class="mt-10 flex flex-col gap-4 sm:flex-row sm:items-center sm:gap-8"
+      >
+        <Button href={site.linkedinUrl} variant="primary" showArrow>
+          Conectar no LinkedIn
+        </Button>
+        <Button
+          href={site.resumePdfUrl}
+          variant="ghost"
+          onLight
+          class="justify-center"
+        >
+          Baixar Currículo (PDF)
+        </Button>
+      </div>
+    </Reveal>
+  </Container>
+</section>

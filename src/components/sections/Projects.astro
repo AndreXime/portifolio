@@ -1,0 +1,167 @@
+---
+import Container from "../ui/Container.astro";
+import AccentBar from "../ui/AccentBar.astro";
+import Reveal from "../ui/Reveal.astro";
+import Button from "../ui/Button.astro";
+import { projects } from "../../data/projects";
+import { site } from "../../data/site";
+
+const PROJECTS_INITIAL = 2;
+---
+
+<section
+  id="projetos"
+  class="scroll-mt-20 border-b border-border bg-muted py-20 md:py-28 lg:py-32"
+  aria-labelledby="projects-heading"
+>
+  <Container>
+    <div
+      class="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between"
+    >
+      <Reveal staggerMs={0}>
+        <AccentBar class="mb-8" />
+        <h2
+          id="projects-heading"
+          class="font-display max-w-xl text-3xl font-semibold leading-tight tracking-[-0.04em] text-foreground sm:text-4xl md:text-5xl"
+        >
+          Projetos
+        </h2>
+        <p
+          class="mt-4 max-w-lg font-mono text-xs uppercase tracking-[0.12em] text-muted-foreground"
+        >
+          Aplicações, APIs e experimentos em produção
+        </p>
+      </Reveal>
+
+      <Reveal staggerMs={120} class="shrink-0">
+        <Button href={site.githubUrl} variant="ghost" showArrow>
+          Ver GitHub
+        </Button>
+      </Reveal>
+    </div>
+
+    <ul
+      id="projetos-list"
+      class="mt-16 grid list-none grid-cols-1 items-stretch gap-6 sm:grid-cols-2 lg:gap-8"
+    >
+      {
+        projects.map((project, index) => {
+          const imageSrc = `/${project.imageUrl.replace(/^\//, "")}`;
+          const hasLive = project.link.trim().length > 0;
+          const isExtra = index >= PROJECTS_INITIAL;
+          return (
+            <li
+              class:list={["min-h-0 h-full", isExtra && "hidden"]}
+              data-project-extra={isExtra ? "" : undefined}
+            >
+              <Reveal staggerMs={index * 80} class="h-full min-h-0">
+                <article class="group flex h-full flex-col overflow-hidden rounded-xl border border-border bg-background transition-colors duration-200 ease-[cubic-bezier(0.25,0,0,1)] hover:border-border-hover">
+                  <a
+                    href={hasLive ? project.link : project.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="relative block h-44 overflow-hidden border-b border-border focus-ring outline-offset-4 sm:h-48"
+                    aria-label={
+                      hasLive
+                        ? `Abrir site: ${project.title}`
+                        : `Abrir repositório: ${project.title}`
+                    }
+                  >
+                    <img
+                      src={imageSrc}
+                      alt=""
+                      width="800"
+                      height="450"
+                      class="h-full w-full object-cover object-top transition-transform duration-500 ease-[cubic-bezier(0.25,0,0,1)] group-hover:scale-105"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </a>
+                  <div class="flex flex-1 flex-col p-6 md:p-8">
+                    <h3 class="font-display text-xl font-semibold tracking-[-0.03em] text-foreground">
+                      {project.title}
+                    </h3>
+                    <p class="mt-4 flex-1 text-sm leading-relaxed text-muted-foreground md:text-base">
+                      {project.description}
+                    </p>
+                    <ul
+                      class="mt-6 flex flex-wrap gap-3 border-t border-border pt-6 font-mono text-xs uppercase tracking-[0.08em] text-muted-foreground"
+                      aria-label="Stack do projeto"
+                    >
+                      {project.tech.map((t) => (
+                        <li>{t}</li>
+                      ))}
+                    </ul>
+                    <div
+                      class:list={[
+                        "mt-6 grid w-full gap-3",
+                        hasLive ? "grid-cols-2" : "grid-cols-1",
+                      ]}
+                    >
+                      {hasLive && (
+                        <Button
+                          href={project.link}
+                          variant="primary"
+                          showArrow
+                          class="w-full justify-center"
+                        >
+                          Ver online
+                        </Button>
+                      )}
+                      <Button
+                        href={project.github}
+                        variant={hasLive ? "secondary" : "primary"}
+                        showArrow={!hasLive}
+                        class="w-full justify-center"
+                      >
+                        Ver código
+                      </Button>
+                    </div>
+                  </div>
+                </article>
+              </Reveal>
+            </li>
+          );
+        })
+      }
+    </ul>
+
+    {
+      projects.length > PROJECTS_INITIAL && (
+        <div class="mt-10 flex justify-center border-t border-border pt-10">
+          <button
+            type="button"
+            id="projects-show-more"
+            class="inline-flex items-center justify-center border border-foreground px-6 py-3 font-semibold uppercase tracking-[0.1em] text-foreground transition-colors duration-150 ease-[cubic-bezier(0.25,0,0,1)] hover:bg-foreground hover:text-background focus-ring active:translate-y-px"
+          >
+            Ver mais
+          </button>
+        </div>
+      )
+    }
+  </Container>
+</section>
+
+<script>
+  function setupProjectsShowMore() {
+    const btn = document.getElementById("projects-show-more");
+    const list = document.getElementById("projetos-list");
+    if (!btn || !list) return;
+    if (btn.dataset.ready === "1") return;
+    btn.dataset.ready = "1";
+
+    btn.addEventListener("click", () => {
+      const extras = list.querySelectorAll("li[data-project-extra]");
+      extras.forEach((li) => {
+        li.classList.remove("hidden");
+        li.querySelectorAll("[data-reveal-root]").forEach((node) => {
+          node.classList.add("is-visible");
+        });
+      });
+      btn.closest("div")?.remove();
+    });
+  }
+
+  setupProjectsShowMore();
+  document.addEventListener("astro:page-load", setupProjectsShowMore);
+</script>

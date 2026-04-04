@@ -1,0 +1,73 @@
+---
+import Container from "../ui/Container.astro";
+import Button from "../ui/Button.astro";
+import IconMenu from "../ui/icons/IconMenu.astro";
+import IconClose from "../ui/icons/IconClose.astro";
+import { site } from "../../data/site";
+
+const links = [
+  { href: "#inicio", label: "Início" },
+  { href: "#sobre", label: "Sobre" },
+  { href: "#experiencias", label: "Experiências" },
+  { href: "#formacoes", label: "Formações" },
+  { href: "#tecnologias", label: "Tecnologias" },
+  { href: "#livros", label: "Livros" },
+  { href: "#projetos", label: "Projetos" },
+  { href: "#contato", label: "Contato" },
+] as const;
+---
+
+<header
+  class="fixed top-0 z-50 w-full border-b border-border bg-background"
+>
+  <Container as="div" class="flex items-center justify-between py-4 md:py-5">
+    <a
+      href="#inicio"
+      class="font-display text-lg font-semibold tracking-[-0.04em] text-foreground transition-colors duration-150 hover:text-accent focus-ring"
+    >
+      {site.authorName}
+    </a>
+
+    <nav
+      class="hidden items-center gap-0.5 lg:flex xl:gap-1"
+      aria-label="Principal"
+    >
+      {
+        links.map(({ href, label }) => (
+          <Button
+            variant="ghost"
+            href={href}
+            class="px-2.5 py-1.5 font-mono text-[11px] !font-medium uppercase !tracking-[0.1em] xl:px-3 xl:text-xs"
+          >
+            {label}
+          </Button>
+        ))
+      }
+    </nav>
+
+    <details class="group relative lg:hidden" id="nav-drawer">
+      <summary
+        class="flex size-11 cursor-pointer list-none items-center justify-center rounded-none border border-border text-foreground transition-colors duration-150 hover:border-border-hover [&::-webkit-details-marker]:hidden"
+        aria-label="Menu"
+      >
+        <IconMenu class="size-5 group-open:hidden" />
+        <IconClose class="hidden size-5 group-open:block" />
+      </summary>
+      <div
+        class="absolute right-0 top-full z-50 mt-2 w-56 border border-border bg-card"
+      >
+        {
+          links.map(({ href, label }) => (
+            <a
+              href={href}
+              class="block border-b border-border px-4 py-3 font-mono text-xs uppercase tracking-[0.1em] text-muted-foreground transition-colors duration-150 last:border-b-0 hover:bg-muted hover:text-foreground focus-ring"
+              onclick="document.getElementById('nav-drawer')?.removeAttribute('open')"
+            >
+              {label}
+            </a>
+          ))
+        }
+      </div>
+    </details>
+  </Container>
+</header>

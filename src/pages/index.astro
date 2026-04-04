@@ -1,39 +1,31 @@
 ---
-import MainLayout from "../layout/layout.astro";
-import Navbar from "../sections/Navbar.astro";
-import HeroSection from "../sections/Hero.astro";
-import AboutSection from "../sections/About.astro";
-import TechStackSection from "../sections/TechStack.astro";
-import FooterSection from "../sections/Footer.astro";
-import ProjectsSection from "../sections/Projects";
-import ContactSection from "../sections/Contact";
-import { Projects } from "../content/projects";
-import { Books } from "../content/books";
-import { Links } from "../content/about";
-import { optimizeImageBulk } from "../lib/optimizeImages";
-
-const optimizedProjects = await optimizeImageBulk(Projects, 700, 500);
+import Layout from "../layouts/Layout.astro";
+import "../styles/global.css";
+import RevealObserver from "../components/effects/RevealObserver.astro";
+import Header from "../components/layout/Header.astro";
+import Footer from "../components/layout/Footer.astro";
+import Hero from "../components/sections/Hero.astro";
+import About from "../components/sections/About.astro";
+import Experiences from "../components/sections/Experiences.astro";
+import Formations from "../components/sections/Formations.astro";
+import Technologies from "../components/sections/Technologies.astro";
+import Books from "../components/sections/Books.astro";
+import Projects from "../components/sections/Projects.astro";
+import Contact from "../components/sections/Contact.astro";
 ---
 
-<MainLayout
-  title="André Ximenes | Desenvolvedor Web"
-  description="Portfólio de André Ximenes, Desenvolvedor Web Fullstack especializado em TypeScript, React, Next.js e APIs Rest. Confira meus projetos e me conheça."
->
-  <div
-    class="min-h-screen text-textMain font-sans antialiased selection:bg-primary selection:text-white overflow-x-hidden bg-background"
-  >
-    <Navbar />
-    <main id="main-content">
-      <HeroSection />
-      <AboutSection />
-      <TechStackSection />
-      <ProjectsSection client:visible projects={optimizedProjects} />
-      <ContactSection client:visible socialLinks={Links} />
-    </main>
-    <FooterSection />
-  </div>
-  <script>
-    import "../components/Reveal";
-    import "../components/Progress";
-  </script>
-</MainLayout>
+<Layout>
+  <Header />
+  <main>
+    <Hero />
+    <About />
+    <Experiences />
+    <Formations />
+    <Technologies />
+    <Books />
+    <Projects />
+    <Contact />
+  </main>
+  <Footer />
+  <RevealObserver />
+</Layout>

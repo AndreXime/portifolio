@@ -1,0 +1,16 @@
+---
+interface Props {
+  class?: string;
+  staggerMs?: number;
+}
+
+const { class: className = "", staggerMs = 0 } = Astro.props;
+---
+
+<div
+  class:list={["reveal", className]}
+  style={staggerMs ? `transition-delay: ${staggerMs}ms` : undefined}
+  data-reveal-root
+>
+  <slot />
+</div>

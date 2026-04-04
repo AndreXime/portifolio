@@ -1,0 +1,97 @@
+---
+import Container from "../ui/Container.astro";
+import AccentBar from "../ui/AccentBar.astro";
+import Reveal from "../ui/Reveal.astro";
+import { experiences } from "../../data/experiences";
+---
+
+<section
+  id="experiencias"
+  class="scroll-mt-20 border-b border-border bg-background py-20 md:py-28 lg:py-32"
+  aria-labelledby="exp-heading"
+>
+  <Container>
+    <Reveal staggerMs={0}>
+      <AccentBar class="mb-8" />
+      <h2
+        id="exp-heading"
+        class="font-display text-3xl font-semibold leading-tight tracking-[-0.04em] text-foreground sm:text-4xl md:text-5xl"
+      >
+        Experiências
+      </h2>
+      <p
+        class="mt-4 max-w-xl font-mono text-xs uppercase tracking-[0.12em] text-muted-foreground"
+      >
+        Trajetória profissional
+      </p>
+    </Reveal>
+
+    <ul class="mt-16 list-none space-y-6 lg:mt-20">
+      {
+        experiences.map((exp, index) => (
+          <li>
+            <Reveal staggerMs={index * 80}>
+              <article
+                class="rounded-xl border border-border bg-muted p-6 md:p-8"
+              >
+                <header class="flex flex-wrap items-start gap-4 border-b border-border pb-5 sm:items-center sm:gap-5">
+                  {exp.logo && (
+                    <div class="flex size-14 shrink-0 items-center justify-center rounded-md border border-neutral-200 bg-white sm:size-16">
+                      <img
+                        src={exp.logo}
+                        alt={`Logo ${exp.company}`}
+                        width="64"
+                        height="64"
+                        class="max-h-11 max-w-11 object-contain p-1.5 sm:max-h-12 sm:max-w-12"
+                        loading="lazy"
+                        decoding="async"
+                      />
+                    </div>
+                  )}
+                  <div class="flex min-w-0 flex-1 flex-col gap-2 sm:flex-row sm:items-center sm:justify-between sm:gap-6">
+                    <div class="min-w-0">
+                      <h3 class="font-display text-xl font-semibold leading-tight tracking-[-0.03em] text-foreground md:text-2xl">
+                        {exp.role}
+                      </h3>
+                      <p class="mt-0.5 font-mono text-sm text-accent md:text-base">
+                        {exp.company}
+                      </p>
+                    </div>
+                    <p class="shrink-0 font-mono text-[11px] uppercase tracking-[0.12em] text-muted-foreground sm:text-right">
+                      {exp.period}
+                    </p>
+                  </div>
+                </header>
+
+                <div class="mt-6 min-w-0">
+                  <p class="text-base leading-[1.6] text-muted-foreground md:text-lg md:leading-relaxed">
+                    {exp.summary}
+                  </p>
+                  {exp.highlights && exp.highlights.length > 0 && (
+                    <ul
+                      class="mt-6 space-y-4 border-t border-border pt-6 text-sm text-foreground md:text-base"
+                      aria-label={`Destaques em ${exp.company}`}
+                    >
+                      {exp.highlights.map((h) => (
+                        <li class="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:gap-x-3">
+                          <span
+                            class="shrink-0 font-mono text-xs font-semibold uppercase tracking-[0.08em] leading-normal text-accent sm:min-w-[11rem]"
+                          >
+                            {h.label}
+                          </span>
+                          <span class="min-w-0 font-sans text-sm font-normal leading-normal tracking-normal text-muted-foreground md:text-base">
+                            {h.detail}
+                          </span>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
+              </article>
+            </Reveal>
+          </li>
+        ))
+      }
+    </ul>
+  </Container>
+</section>

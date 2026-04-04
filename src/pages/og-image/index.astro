@@ -1,0 +1,104 @@
+---
+import "../../styles/global.css";
+import { site } from "../../data/site";
+import AccentBar from "../../components/ui/AccentBar.astro";
+import Container from "../../components/ui/Container.astro";
+---
+
+<!doctype html>
+<html lang="pt-BR">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="robots" content="noindex" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:ital,opsz,wght@0,14..32,400;0,14..32,500;0,14..32,600;1,14..32,400&display=swap"
+            rel="stylesheet"
+        />
+        <style is:inline>
+            html,
+            body {
+                margin: 0;
+                padding: 0;
+                width: 1200px;
+                height: 630px;
+                overflow: hidden;
+                box-sizing: border-box;
+            }
+        </style>
+    </head>
+    <body class="bg-background antialiased">
+        <section class="py-2">
+            <Container class="relative">
+                <div>
+                    <AccentBar class="mb-8" />
+                    <h1
+                        id="hero-heading"
+                        class="font-display max-w-[18ch] text-8xl font-semibold leading-[1.05] tracking-[-0.06em] text-foreground"
+                    >
+                        Construindo sistemas com
+                        <span class="text-accent">clareza</span>
+                        e escala.
+                    </h1>
+
+                    <p
+                        class="mt-8 max-w-2xl text-xl leading-relaxed text-muted-foreground"
+                    >
+                        Olá, meu nome é <span class="font-bold text-accent"
+                            >{site.authorName}</span
+                        >. Sou desenvolvedor de software especializado em
+                        ecossistema TypeScript. Meu foco é traduzir regras de
+                        negócio em código auto-documentado, criando APIs
+                        estáveis e interfaces que evoluem sem medo de
+                        refatoração. <span class="font-bold text-accent"
+                            >Atualmente buscando novos desafios em times de
+                            engenharia.</span
+                        >
+                    </p>
+                </div>
+
+                <dl
+                    class="mt-10 grid grid-cols-1 gap-10 border-t border-border pt-12 sm:grid-cols-2 md:grid-cols-3 md:gap-8"
+                >
+                    <div>
+                        <div>
+                            <dt
+                                class="font-mono uppercase tracking-[0.15em] text-muted-foreground"
+                            >
+                                Stack
+                            </dt>
+                            <dd class="mt-2 font-mono text-foreground">
+                                TS · React · Node.js
+                            </dd>
+                        </div>
+                    </div>
+                    <div>
+                        <div>
+                            <dt
+                                class="font-mono uppercase tracking-[0.15em] text-muted-foreground"
+                            >
+                                Experiência
+                            </dt>
+                            <dd class="mt-2 font-mono text-foreground">
+                                6 meses
+                            </dd>
+                        </div>
+                    </div>
+                    <div>
+                        <div>
+                            <dt
+                                class="font-mono uppercase tracking-[0.15em] text-muted-foreground"
+                            >
+                                Localização
+                            </dt>
+                            <dd class="mt-2 font-mono text-foreground">
+                                Remoto · BR
+                            </dd>
+                        </div>
+                    </div>
+                </dl>
+            </Container>
+        </section>
+    </body>
+</html>
