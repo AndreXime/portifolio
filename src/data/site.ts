@@ -3,5 +3,5 @@ export const site = {
 	email: "andreximenesa20@gmail.com",
 	githubUrl: "https://github.com/AndreXime",
 	linkedinUrl: "https://www.linkedin.com/in/andreximenesdev",
-	resumePdfUrl: "/curriculo.pdf",
+	resumePdfUrl: "/André-Curriculo.pdf",
 };
