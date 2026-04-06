@@ -3,6 +3,7 @@ import Container from "../ui/Container.astro";
 import AccentBar from "../ui/AccentBar.astro";
 import Reveal from "../ui/Reveal.astro";
 import { experiences } from "../../data/experiences";
+import { Image } from "astro:assets";
 ---
 
 <section
@@ -31,17 +32,16 @@ import { experiences } from "../../data/experiences";
         experiences.map((exp, index) => (
           <li>
             <Reveal staggerMs={index * 80}>
-              <article
-                class="rounded-xl border border-border bg-muted p-6 md:p-8"
-              >
+              <article class="rounded-xl border border-border bg-muted p-6 md:p-8">
                 <header class="flex flex-wrap items-start gap-4 border-b border-border pb-5 sm:items-center sm:gap-5">
                   {exp.logo && (
                     <div class="flex size-14 shrink-0 items-center justify-center rounded-md border border-neutral-200 bg-white sm:size-16">
-                      <img
+                      <Image
                         src={exp.logo}
                         alt={`Logo ${exp.company}`}
-                        width="64"
-                        height="64"
+                        width={64}
+                        height={64}
+                        sizes="64px"
                         class="max-h-11 max-w-11 object-contain p-1.5 sm:max-h-12 sm:max-w-12"
                         loading="lazy"
                         decoding="async"
@@ -74,9 +74,7 @@ import { experiences } from "../../data/experiences";
                     >
                       {exp.highlights.map((h) => (
                         <li class="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:gap-x-3">
-                          <span
-                            class="shrink-0 font-mono text-xs font-semibold uppercase tracking-[0.08em] leading-normal text-accent sm:min-w-[11rem]"
-                          >
+                          <span class="shrink-0 font-mono text-xs font-semibold uppercase tracking-[0.08em] leading-normal text-accent sm:min-w-[11rem]">
                             {h.label}
                           </span>
                           <span class="min-w-0 font-sans text-sm font-normal leading-normal tracking-normal text-muted-foreground md:text-base">

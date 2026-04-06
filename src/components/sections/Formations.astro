@@ -3,6 +3,7 @@ import Container from "../ui/Container.astro";
 import AccentBar from "../ui/AccentBar.astro";
 import Reveal from "../ui/Reveal.astro";
 import { formations } from "../../data/formations";
+import { Image } from "astro:assets";
 ---
 
 <section
@@ -26,9 +27,7 @@ import { formations } from "../../data/formations";
       </p>
     </Reveal>
 
-    <ul
-      class="mt-16 list-none space-y-0 border-t border-border lg:mt-20"
-    >
+    <ul class="mt-16 list-none space-y-0 border-t border-border lg:mt-20">
       {
         formations.map((f, index) => (
           <li>
@@ -40,11 +39,12 @@ import { formations } from "../../data/formations";
               >
                 <div class="flex flex-col gap-6 sm:flex-row sm:gap-8 lg:gap-10">
                   <div class="flex size-20 shrink-0 items-center justify-center rounded-md border border-neutral-200 bg-white sm:size-24">
-                    <img
+                    <Image
                       src={f.logo}
                       alt={`Logo ${f.institution}`}
-                      width="80"
-                      height="80"
+                      width={80}
+                      height={80}
+                      sizes="80px"
                       class="max-h-[4.5rem] max-w-[4.5rem] object-contain p-2 sm:max-h-[5rem] sm:max-w-[5rem]"
                       loading="lazy"
                       decoding="async"
@@ -62,7 +62,9 @@ import { formations } from "../../data/formations";
                       {f.title}
                     </h3>
                     <div class="mt-2 flex items-start justify-between gap-x-4 gap-y-1 font-mono text-sm">
-                      <span class="min-w-0 flex-1 pr-2 text-accent">{f.institution}</span>
+                      <span class="min-w-0 flex-1 pr-2 text-accent">
+                        {f.institution}
+                      </span>
                       <span class="shrink-0 pt-px text-right text-xs uppercase tracking-[0.12em] text-muted-foreground">
                         {f.period}
                       </span>

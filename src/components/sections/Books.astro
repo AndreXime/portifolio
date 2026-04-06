@@ -3,6 +3,7 @@ import Container from "../ui/Container.astro";
 import AccentBar from "../ui/AccentBar.astro";
 import Reveal from "../ui/Reveal.astro";
 import { books } from "../../data/books";
+import { Image } from "astro:assets";
 
 const BOOKS_INITIAL = 2;
 
@@ -42,9 +43,6 @@ function stateClass(state: (typeof books)[number]["state"]): string {
     <ul id="livros-list" class="mt-16 list-none space-y-6 lg:mt-20">
       {
         books.map((book, index) => {
-          const src = book.imageUrl.startsWith("/")
-            ? book.imageUrl
-            : `/${book.imageUrl.replace(/^\//, "")}`;
           const isExtra = index >= BOOKS_INITIAL;
           return (
             <li
@@ -56,11 +54,12 @@ function stateClass(state: (typeof books)[number]["state"]): string {
                   <div class="flex flex-col gap-6 sm:flex-row sm:gap-8 lg:gap-10">
                     <div class="mx-auto shrink-0 sm:mx-0">
                       <div class="w-36 overflow-hidden rounded-md border border-neutral-200 bg-white shadow-sm sm:w-40">
-                        <img
-                          src={src}
+                        <Image
+                          src={book.imageUrl}
                           alt={`Capa: ${book.title}`}
-                          width="160"
-                          height="240"
+                          width={160}
+                          height={240}
+                          sizes="(max-width: 640px) 144px, 160px"
                           class="aspect-[2/3] w-full object-cover object-top"
                           loading="lazy"
                           decoding="async"

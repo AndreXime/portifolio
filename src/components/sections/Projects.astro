@@ -5,6 +5,7 @@ import Reveal from "../ui/Reveal.astro";
 import Button from "../ui/Button.astro";
 import { projects } from "../../data/projects";
 import { site } from "../../data/site";
+import { Image } from "astro:assets";
 
 const PROJECTS_INITIAL = 2;
 ---
@@ -46,7 +47,6 @@ const PROJECTS_INITIAL = 2;
     >
       {
         projects.map((project, index) => {
-          const imageSrc = `/${project.imageUrl.replace(/^\//, "")}`;
           const hasLive = project.link.trim().length > 0;
           const isExtra = index >= PROJECTS_INITIAL;
           return (
@@ -67,11 +67,12 @@ const PROJECTS_INITIAL = 2;
                         : `Abrir repositório: ${project.title}`
                     }
                   >
-                    <img
-                      src={imageSrc}
+                    <Image
+                      src={project.imageUrl}
                       alt=""
-                      width="800"
-                      height="450"
+                      width={800}
+                      height={450}
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 40vw"
                       class="h-full w-full object-cover object-top transition-transform duration-500 ease-[cubic-bezier(0.25,0,0,1)] group-hover:scale-105"
                       loading="lazy"
                       decoding="async"
