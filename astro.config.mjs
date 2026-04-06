@@ -16,6 +16,9 @@ export default defineConfig({
 			filter: (page) => page !== "https://andreximenes.xyz/404",
 		}),
 	],
+	build: {
+		inlineStylesheets: "always",
+	},
 	vite: {
 		plugins: [tailwindcss()],
 	},
