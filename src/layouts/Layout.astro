@@ -1,5 +1,5 @@
 ---
-import "../styles/fonts";
+import { aboveTheFoldFontPreloads } from "../styles/fonts";
 import { site } from "../data/site";
 
 interface Props {
@@ -107,6 +107,17 @@ const schema = JSON.stringify({
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    {
+      aboveTheFoldFontPreloads.map((href) => (
+        <link
+          rel="preload"
+          href={href}
+          as="font"
+          type="font/woff2"
+          crossorigin="anonymous"
+        />
+      ))
+    }
     <script is:inline defer type="application/ld+json" set:html={schema} />
 
     {/* Ícones */}
