@@ -1,16 +1,4 @@
-function isRecord(value: unknown): value is Record<string, unknown> {
-	return typeof value === "object" && value !== null;
-}
-
-function parseErrorMessage(data: unknown): string {
-	const fallback = "Não foi possível enviar. Tente de novo em instantes.";
-	if (!isRecord(data) || typeof data.error !== "string") {
-		return fallback;
-	}
-	return data.error;
-}
-
-function initContactForm(): void {
+function initContactForm() {
 	const form = document.getElementById("contact-form");
 	const statusEl = document.getElementById("contact-form-status");
 	if (!(form instanceof HTMLFormElement) || !statusEl) {
@@ -58,10 +46,16 @@ function initContactForm(): void {
 				headers: { "Content-Type": "application/json" },
 				body: JSON.stringify({ name, email, message }),
 			});
-			const data: unknown = await res.json().catch(() => ({}));
+			const data = await res.json().catch(() => ({}));
 
 			if (!res.ok) {
-				setStatus(parseErrorMessage(data), "error");
+				let errorMessage = "Não foi possível enviar. Tente de novo em instantes.";
+
+				if (typeof data?.error === "string") {
+					errorMessage = data.error;
+				}
+
+				setStatus(errorMessage, "error");
 				return;
 			}
 
@@ -80,4 +74,4 @@ function initContactForm(): void {
 	});
 }
 
-initContactForm();
+document.addEventListener("DOMContentLoaded", initContactForm);
