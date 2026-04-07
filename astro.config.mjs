@@ -10,12 +10,7 @@ import icon from "astro-icon";
 export default defineConfig({
 	output: "static",
 	site: "https://andreximenes.xyz",
-	integrations: [
-		icon(),
-		sitemap({
-			filter: (page) => page !== "https://andreximenes.xyz/404",
-		}),
-	],
+	integrations: [icon(), sitemap({})],
 	build: {
 		inlineStylesheets: "always",
 	},
