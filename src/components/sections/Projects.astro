@@ -161,13 +161,17 @@ const PROJECTS_INITIAL = 2;
         requestAnimationFrame(() => {
           document.dispatchEvent(
             new CustomEvent("customScroll", {
-              detail: { id: "projetos" },
+              detail: {
+                id: "projetos",
+                onComplete() {
+                  extras.forEach((li) => li.classList.add("hidden"));
+                  btn.setAttribute("aria-expanded", "false");
+                  btn.textContent = "Ver mais";
+                },
+              },
             }),
           );
         });
-        extras.forEach((li) => li.classList.add("hidden"));
-        btn.setAttribute("aria-expanded", "false");
-        btn.textContent = "Ver mais";
       } else {
         extras.forEach((li) => {
           li.classList.remove("hidden");
