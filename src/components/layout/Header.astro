@@ -6,27 +6,23 @@ import IconClose from "../ui/icons/IconClose.astro";
 import { site } from "../../data/site";
 
 const links = [
-  { href: "#inicio", label: "Início" },
   { href: "#sobre", label: "Sobre" },
   { href: "#experiencias", label: "Experiências" },
   { href: "#formacoes", label: "Formações" },
   { href: "#tecnologias", label: "Tecnologias" },
-  { href: "#livros", label: "Livros" },
   { href: "#projetos", label: "Projetos" },
   { href: "#contato", label: "Contato" },
 ] as const;
 ---
 
-<header
-  class="fixed top-0 z-50 w-full border-b border-border bg-background"
->
+<header class="fixed top-0 z-50 w-full border-b border-border bg-background">
   <Container as="div" class="flex items-center justify-between py-4 md:py-5">
-    <a
-      href="#inicio"
-      class="font-display text-lg font-semibold tracking-[-0.04em] text-foreground transition-colors duration-150 hover:text-accent focus-ring"
+    <button
+      data-scroll-to="inicio"
+      class="font-display cursor-pointer text-lg font-semibold tracking-[-0.04em] text-foreground transition-colors duration-150 hover:text-accent focus-ring"
     >
       {site.authorName}
-    </a>
+    </button>
 
     <nav
       class="hidden items-center gap-0.5 lg:flex xl:gap-1"

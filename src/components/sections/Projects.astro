@@ -134,6 +134,8 @@ const PROJECTS_INITIAL = 2;
             type="button"
             id="projects-show-more"
             class="inline-flex items-center justify-center border border-foreground px-6 py-3 font-semibold uppercase tracking-[0.1em] text-foreground transition-colors duration-150 ease-[cubic-bezier(0.25,0,0,1)] hover:bg-foreground hover:text-background focus-ring active:translate-y-px"
+            aria-expanded="false"
+            aria-controls="projetos-list"
           >
             Ver mais
           </button>
@@ -152,14 +154,30 @@ const PROJECTS_INITIAL = 2;
     btn.dataset.ready = "1";
 
     btn.addEventListener("click", () => {
+      const expanded = btn.getAttribute("aria-expanded") === "true";
       const extras = list.querySelectorAll("li[data-project-extra]");
-      extras.forEach((li) => {
-        li.classList.remove("hidden");
-        li.querySelectorAll("[data-reveal-root]").forEach((node) => {
-          node.classList.add("is-visible");
+
+      if (expanded) {
+        requestAnimationFrame(() => {
+          document.dispatchEvent(
+            new CustomEvent("customScroll", {
+              detail: { id: "projetos" },
+            }),
+          );
         });
-      });
-      btn.closest("div")?.remove();
+        extras.forEach((li) => li.classList.add("hidden"));
+        btn.setAttribute("aria-expanded", "false");
+        btn.textContent = "Ver mais";
+      } else {
+        extras.forEach((li) => {
+          li.classList.remove("hidden");
+          li.querySelectorAll("[data-reveal-root]").forEach((node) => {
+            node.classList.add("is-visible");
+          });
+        });
+        btn.setAttribute("aria-expanded", "true");
+        btn.textContent = "Ver menos";
+      }
     });
   }
 

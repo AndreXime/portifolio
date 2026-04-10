@@ -16,7 +16,7 @@ const year = new Date().getFullYear();
         <p
           class="font-mono text-xs uppercase tracking-[0.15em] text-muted-foreground"
         >
-          Portfólio de {site.authorName}
+          Portfólio de {site.authorName} © {year}
         </p>
         <p class="mt-2 max-w-md text-sm leading-relaxed text-muted-foreground">
           Tipografia como linguagem — código como estrutura.
@@ -42,19 +42,13 @@ const year = new Date().getFullYear();
         >
           <IconLinkedin class="size-[18px]" />
         </a>
-        <a
-          href="#inicio"
-          class="font-mono text-xs uppercase tracking-[0.1em] text-muted-foreground underline decoration-border decoration-2 underline-offset-4 transition-colors duration-150 hover:text-foreground hover:decoration-accent focus-ring"
+        <button
+          data-scroll-to="inicio"
+          class="font-mono text-xs cursor-pointer uppercase tracking-[0.1em] text-muted-foreground underline decoration-border decoration-2 underline-offset-4 transition-colors duration-150 hover:text-foreground hover:decoration-accent focus-ring"
         >
           Topo
-        </a>
+        </button>
       </div>
     </div>
-
-    <p
-      class="mt-12 border-t border-border pt-8 font-mono text-xs text-muted-foreground"
-    >
-      © {year}
-    </p>
   </Container>
 </footer>
