@@ -4,7 +4,7 @@ import apiEcommerce from "./images/projects/api-ecommerce.webp";
 import blog from "./images/projects/blog.webp";
 import disciplinas from "./images/projects/disciplinas.webp";
 import ecommerce from "./images/projects/ecommerce.webp";
-import lojagin from "./images/projects/lojagin.webp";
+import ollama from "./images/projects/ollama-oracle.webp";
 import restaurante from "./images/projects/restaurante.webp";
 
 export interface Project {
@@ -55,6 +55,15 @@ export const projects: readonly Project[] = [
 		github: "https://github.com/AndreXime/ecommerce",
 	},
 	{
+		title: "Ollama Oracle: chat corporativo com RAG local",
+		description:
+			"Desenvolvi esse projeto para experimentar um assistente orientado a documentos internos, com pipeline completo de RAG rodando de ponta a ponta na minha máquina: ingestão de arquivos, embeddings e busca vetorial no ChromaDB, respostas em streaming via Ollama. O objetivo foi dominar o fluxo ingestão → vetor → recuperação → LLM sem depender de serviços externos para os dados sensíveis.",
+		tech: ["TypeScript", "Bun", "Ollama", "ChromaDB", "RAG", "LangChain"],
+		imageUrl: ollama,
+		link: "",
+		github: "https://github.com/AndreXime/ollama-oracle",
+	},
+	{
 		title: "ERP Restaurante: Arquitetura Local-First",
 		description:
 			"Desenvolvi este sistema de gestão (ERP) para restaurantes como um desafio pessoal de engenharia: criar uma aplicação web complexa que funcionasse inteiramente no navegador, sem backend. A arquitetura é local-first e utiliza IndexedDB para persistir e gerenciar gigabytes de dados desde o histórico financeiro até o fluxo de pedidos em tempo real. O projeto é totalmente modular, integrando frentes de caixa (PDV), monitores de cozinha, gestão de delivery e contabilidade.",
@@ -62,14 +71,5 @@ export const projects: readonly Project[] = [
 		imageUrl: restaurante,
 		link: "https://restaurante.andreximenes.xyz/",
 		github: "https://github.com/AndreXime/restaurante",
-	},
-	{
-		title: "E-commerce RESTful API com Go",
-		description:
-			"Desenvolvi esta API RESTful para e-commerce com o objetivo de explorar a eficiência e a tipagem forte do ecossistema Go. O projeto foi estruturado seguindo uma arquitetura em camadas (Repository, Service, Handler), garantindo desacoplamento e facilidade de manutenção. Além das regras de negócio como carrinho de compras e autenticação JWT, foquei em boas práticas de engenharia de software: a aplicação é totalmente containerizada com Docker, documentada via Swagger e validada por uma suíte de testes End-to-End (E2E).",
-		tech: ["Go", "Gin Framework", "GORM", "Swagger", "Testes E2E", "API REST"],
-		imageUrl: lojagin,
-		link: "",
-		github: "https://github.com/AndreXime/lojagin-api",
 	},
 ];
