@@ -20,6 +20,7 @@ const {
   class: className = "",
   showArrow = false,
   onLight = false,
+  ...rest
 } = Astro.props;
 
 const isHashLink =
@@ -53,6 +54,7 @@ const variantClass: Record<NonNullable<typeof variant>, string> = {
 ---
 
 <Tag
+  {...rest}
   class:list={[shared, variantClass[variant], className]}
   href={Tag === "a" ? href : undefined}
   type={Tag === "button" ? (isHashLink ? "button" : type) : undefined}

@@ -3,7 +3,8 @@ import Container from "../ui/Container.astro";
 import AccentBar from "../ui/AccentBar.astro";
 import Reveal from "../ui/Reveal.astro";
 import Button from "../ui/Button.astro";
-import { getCollection } from "astro:content";
+import IconClose from "../ui/icons/IconClose.astro";
+import { getCollection, render } from "astro:content";
 import { site } from "../../content/site";
 import { Image } from "astro:assets";
 
@@ -11,6 +12,8 @@ const PROJECTS_INITIAL = 2;
 const projectEntries = (await getCollection("projects")).sort(
 	(a, b) => a.data.order - b.data.order,
 );
+const renderedProjects = await Promise.all(projectEntries.map((p) => render(p)));
+const showProjectsFooter = projectEntries.length > PROJECTS_INITIAL;
 ---
 
 <section
@@ -50,26 +53,16 @@ const projectEntries = (await getCollection("projects")).sort(
     >
       {
         projectEntries.map((project, index) => {
-          const hasLive = project.data.link.trim().length > 0;
           const isExtra = index >= PROJECTS_INITIAL;
           return (
             <li
               class:list={["min-h-0 h-full", isExtra && "hidden"]}
               data-project-extra={isExtra ? "" : undefined}
+              data-project-id={project.id}
             >
               <Reveal staggerMs={index * 80} class="h-full min-h-0">
                 <article class="group flex h-full flex-col overflow-hidden rounded-xl border border-border bg-background transition-colors duration-200 ease-[cubic-bezier(0.25,0,0,1)] hover:border-border-hover">
-                  <a
-                    href={hasLive ? project.data.link : project.data.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="relative block h-44 overflow-hidden border-b border-border focus-ring outline-offset-4 sm:h-48"
-                    aria-label={
-                      hasLive
-                        ? `Abrir site: ${project.data.title}`
-                        : `Abrir repositório: ${project.data.title}`
-                    }
-                  >
+                  <div class="relative block h-44 overflow-hidden border-b border-border sm:h-48">
                     <Image
                       src={project.data.imageUrl}
                       alt=""
@@ -80,7 +73,7 @@ const projectEntries = (await getCollection("projects")).sort(
                       loading="lazy"
                       decoding="async"
                     />
-                  </a>
+                  </div>
                   <div class="flex flex-1 flex-col p-6 md:p-8">
                     <h3 class="font-display text-xl font-semibold tracking-[-0.03em] text-foreground">
                       {project.data.title}
@@ -96,29 +89,16 @@ const projectEntries = (await getCollection("projects")).sort(
                         <li>{t}</li>
                       ))}
                     </ul>
-                    <div
-                      class:list={[
-                        "mt-6 grid w-full gap-3",
-                        hasLive ? "grid-cols-2" : "grid-cols-1",
-                      ]}
-                    >
-                      {hasLive && (
-                        <Button
-                          href={project.data.link}
-                          variant="primary"
-                          showArrow
-                          class="w-full justify-center"
-                        >
-                          Ver online
-                        </Button>
-                      )}
+                    <div class="mt-6">
                       <Button
-                        href={project.data.github}
-                        variant={hasLive ? "secondary" : "primary"}
-                        showArrow={!hasLive}
+                        type="button"
+                        variant="secondary"
                         class="w-full justify-center"
+                        data-project-expand
+                        aria-expanded="false"
+                        aria-controls="project-modal-root"
                       >
-                        Ver código
+                        Ver detalhes
                       </Button>
                     </div>
                   </div>
@@ -130,63 +110,155 @@ const projectEntries = (await getCollection("projects")).sort(
       }
     </ul>
 
-    {
-      projectEntries.length > PROJECTS_INITIAL && (
-        <div class="mt-10 flex justify-center border-t border-border pt-10">
-          <button
-            type="button"
-            id="projects-show-more"
-            class="inline-flex items-center justify-center border border-foreground px-6 py-3 font-semibold uppercase tracking-[0.1em] text-foreground transition-colors duration-150 ease-[cubic-bezier(0.25,0,0,1)] hover:bg-foreground hover:text-background focus-ring active:translate-y-px"
-            aria-expanded="false"
-            aria-controls="projetos-list"
-          >
-            Ver mais
-          </button>
-        </div>
-      )
-    }
+    <div
+      id="projects-footer"
+      class:list={[
+        "mt-10 flex flex-col items-center justify-center gap-4 border-t border-border pt-10 sm:flex-row",
+        !showProjectsFooter && "hidden",
+      ]}
+      data-projects-footer
+    >
+      {
+        showProjectsFooter && (
+          <div id="projects-show-more-wrap" class="flex justify-center">
+            <button
+              type="button"
+              id="projects-show-more"
+              class="inline-flex items-center justify-center border border-foreground px-6 py-3 font-semibold uppercase tracking-[0.1em] text-foreground transition-colors duration-150 ease-[cubic-bezier(0.25,0,0,1)] hover:bg-foreground hover:text-background focus-ring active:translate-y-px"
+              aria-expanded="false"
+              aria-controls="projetos-list"
+            >
+              Ver mais
+            </button>
+          </div>
+        )
+      }
+    </div>
   </Container>
 </section>
 
+<div
+  id="project-modal-root"
+  class="fixed inset-0 z-50 hidden"
+  aria-hidden="true"
+>
+  <div
+    data-project-modal-overlay
+    class="absolute inset-0 bg-background/50 backdrop-blur-[2px]"
+    aria-hidden="true"
+  />
+  <div
+    class="pointer-events-none relative flex min-h-full items-end justify-center px-4 pb-6 pt-16 sm:items-center sm:px-6 sm:pb-8 sm:pt-20"
+  >
+    <div
+      role="dialog"
+      aria-modal="true"
+      tabindex="-1"
+      class="pointer-events-auto flex max-h-[min(90dvh,56rem)] w-full max-w-2xl flex-col overflow-hidden rounded-xl border border-border bg-background shadow-lg"
+    >
+      <div
+        class="flex shrink-0 items-center justify-between gap-4 border-b border-border bg-background px-4 py-3"
+      >
+        <p
+          data-project-modal-title
+          class="truncate font-display font-semibold text-foreground uppercase tracking-[0.12em]"
+        >
+          &nbsp;
+        </p>
+        <button
+          type="button"
+          data-project-modal-close
+          class="inline-flex items-center justify-center border border-foreground p-2 text-foreground transition-colors duration-150 ease-[cubic-bezier(0.25,0,0,1)] hover:bg-foreground hover:text-background focus-ring active:translate-y-px"
+          aria-label="Fechar modal"
+        >
+          <IconClose class="size-5" />
+        </button>
+      </div>
+      <div class="min-h-0 flex-1 overflow-y-auto">
+        {
+          projectEntries.map((project, index) => {
+            const hasLive = project.data.link.trim().length > 0;
+            const headingId = `project-modal-heading-${project.id}`;
+            const { Content } = renderedProjects[index];
+            return (
+              <div
+                hidden
+                data-project-modal-panel={project.id}
+                class="p-4 md:p-8"
+              >
+                <div class="relative block h-44 overflow-hidden rounded-lg border border-border sm:h-52">
+                  <Image
+                    src={project.data.imageUrl}
+                    alt=""
+                    width={800}
+                    height={450}
+                    sizes="(max-width: 640px) 100vw, 42rem"
+                    class="h-full w-full object-cover object-top"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
+                <h2 id={headingId} data-project-modal-heading class="sr-only">
+                  {project.data.title}
+                </h2>
+                <div
+                  class:list={[
+                    "project-modal-md mt-4 max-w-none text-sm leading-relaxed text-muted-foreground md:text-base",
+                    "[&_h2]:font-display [&_h2]:mt-8 [&_h2]:text-lg [&_h2]:font-semibold [&_h2]:tracking-[-0.03em] [&_h2]:text-foreground",
+                    "[&_h2:first-child]:mt-0",
+                    "[&_p]:mt-4 [&_p:first-child]:mt-0",
+                    "[&_ul]:mt-4 [&_ul]:list-disc [&_ul]:space-y-1 [&_ul]:pl-5 [&_ul]:text-muted-foreground",
+                    "[&_strong]:font-semibold [&_strong]:text-foreground",
+                    "[&_a]:text-accent [&_a]:underline [&_a]:decoration-accent/40 hover:[&_a]:decoration-accent",
+                    "[&_code]:rounded [&_code]:border [&_code]:border-border [&_code]:bg-muted [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:font-mono [&_code]:text-xs [&_code]:text-foreground",
+                  ]}
+                >
+                  <Content />
+                </div>
+                <ul
+                  class="mt-6 flex flex-wrap gap-3 border-t border-border pt-6 font-mono text-xs uppercase tracking-[0.08em] text-muted-foreground"
+                  aria-label="Stack do projeto"
+                >
+                  {project.data.tech.map((t) => (
+                    <li>{t}</li>
+                  ))}
+                </ul>
+                <div
+                  class:list={[
+                    "mt-8 grid w-full gap-3",
+                    hasLive ? "grid-cols-1 sm:grid-cols-2" : "grid-cols-1",
+                  ]}
+                >
+                  {hasLive && (
+                    <Button
+                      href={project.data.link}
+                      variant="primary"
+                      showArrow
+                      class="w-full justify-center"
+                    >
+                      Ver online
+                    </Button>
+                  )}
+                  <Button
+                    href={project.data.github}
+                    variant={hasLive ? "secondary" : "primary"}
+                    showArrow={!hasLive}
+                    class="w-full justify-center"
+                  >
+                    Ver código
+                  </Button>
+                </div>
+              </div>
+            );
+          })
+        }
+      </div>
+    </div>
+  </div>
+</div>
+
 <script>
-  function setupProjectsShowMore() {
-    const btn = document.getElementById("projects-show-more");
-    const list = document.getElementById("projetos-list");
-    if (!btn || !list) return;
-    if (btn.dataset.ready === "1") return;
-    btn.dataset.ready = "1";
+  import { setupProjectsSection } from "../../scripts/projects-section";
 
-    btn.addEventListener("click", () => {
-      const expanded = btn.getAttribute("aria-expanded") === "true";
-      const extras = list.querySelectorAll("li[data-project-extra]");
-
-      if (expanded) {
-        requestAnimationFrame(() => {
-          document.dispatchEvent(
-            new CustomEvent("customScroll", {
-              detail: {
-                id: "projetos",
-                onComplete() {
-                  extras.forEach((li) => li.classList.add("hidden"));
-                  btn.setAttribute("aria-expanded", "false");
-                  btn.textContent = "Ver mais";
-                },
-              },
-            }),
-          );
-        });
-      } else {
-        extras.forEach((li) => {
-          li.classList.remove("hidden");
-          li.querySelectorAll("[data-reveal-root]").forEach((node) => {
-            node.classList.add("is-visible");
-          });
-        });
-        btn.setAttribute("aria-expanded", "true");
-        btn.textContent = "Ver menos";
-      }
-    });
-  }
-
-  document.addEventListener("DOMContentLoaded", setupProjectsShowMore);
+  document.addEventListener("DOMContentLoaded", setupProjectsSection);
 </script>
