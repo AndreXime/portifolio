@@ -3,11 +3,14 @@ import Container from "../ui/Container.astro";
 import AccentBar from "../ui/AccentBar.astro";
 import Reveal from "../ui/Reveal.astro";
 import Button from "../ui/Button.astro";
-import { projects } from "../../data/projects";
-import { site } from "../../data/site";
+import { getCollection } from "astro:content";
+import { site } from "../../content/site";
 import { Image } from "astro:assets";
 
 const PROJECTS_INITIAL = 2;
+const projectEntries = (await getCollection("projects")).sort(
+	(a, b) => a.data.order - b.data.order,
+);
 ---
 
 <section
@@ -46,8 +49,8 @@ const PROJECTS_INITIAL = 2;
       class="mt-16 grid list-none grid-cols-1 items-stretch gap-6 sm:grid-cols-2 lg:gap-8"
     >
       {
-        projects.map((project, index) => {
-          const hasLive = project.link.trim().length > 0;
+        projectEntries.map((project, index) => {
+          const hasLive = project.data.link.trim().length > 0;
           const isExtra = index >= PROJECTS_INITIAL;
           return (
             <li
@@ -57,18 +60,18 @@ const PROJECTS_INITIAL = 2;
               <Reveal staggerMs={index * 80} class="h-full min-h-0">
                 <article class="group flex h-full flex-col overflow-hidden rounded-xl border border-border bg-background transition-colors duration-200 ease-[cubic-bezier(0.25,0,0,1)] hover:border-border-hover">
                   <a
-                    href={hasLive ? project.link : project.github}
+                    href={hasLive ? project.data.link : project.data.github}
                     target="_blank"
                     rel="noopener noreferrer"
                     class="relative block h-44 overflow-hidden border-b border-border focus-ring outline-offset-4 sm:h-48"
                     aria-label={
                       hasLive
-                        ? `Abrir site: ${project.title}`
-                        : `Abrir repositório: ${project.title}`
+                        ? `Abrir site: ${project.data.title}`
+                        : `Abrir repositório: ${project.data.title}`
                     }
                   >
                     <Image
-                      src={project.imageUrl}
+                      src={project.data.imageUrl}
                       alt=""
                       width={800}
                       height={450}
@@ -80,16 +83,16 @@ const PROJECTS_INITIAL = 2;
                   </a>
                   <div class="flex flex-1 flex-col p-6 md:p-8">
                     <h3 class="font-display text-xl font-semibold tracking-[-0.03em] text-foreground">
-                      {project.title}
+                      {project.data.title}
                     </h3>
                     <p class="mt-4 flex-1 text-sm leading-relaxed text-muted-foreground md:text-base">
-                      {project.description}
+                      {project.data.shortDescription}
                     </p>
                     <ul
                       class="mt-6 flex flex-wrap gap-3 border-t border-border pt-6 font-mono text-xs uppercase tracking-[0.08em] text-muted-foreground"
                       aria-label="Stack do projeto"
                     >
-                      {project.tech.map((t) => (
+                      {project.data.tech.map((t) => (
                         <li>{t}</li>
                       ))}
                     </ul>
@@ -101,7 +104,7 @@ const PROJECTS_INITIAL = 2;
                     >
                       {hasLive && (
                         <Button
-                          href={project.link}
+                          href={project.data.link}
                           variant="primary"
                           showArrow
                           class="w-full justify-center"
@@ -110,7 +113,7 @@ const PROJECTS_INITIAL = 2;
                         </Button>
                       )}
                       <Button
-                        href={project.github}
+                        href={project.data.github}
                         variant={hasLive ? "secondary" : "primary"}
                         showArrow={!hasLive}
                         class="w-full justify-center"
@@ -128,7 +131,7 @@ const PROJECTS_INITIAL = 2;
     </ul>
 
     {
-      projects.length > PROJECTS_INITIAL && (
+      projectEntries.length > PROJECTS_INITIAL && (
         <div class="mt-10 flex justify-center border-t border-border pt-10">
           <button
             type="button"
@@ -185,6 +188,5 @@ const PROJECTS_INITIAL = 2;
     });
   }
 
-  setupProjectsShowMore();
-  document.addEventListener("astro:page-load", setupProjectsShowMore);
+  document.addEventListener("DOMContentLoaded", setupProjectsShowMore);
 </script>

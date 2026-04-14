@@ -2,20 +2,27 @@
 import Container from "../ui/Container.astro";
 import AccentBar from "../ui/AccentBar.astro";
 import Reveal from "../ui/Reveal.astro";
-import { books } from "../../data/books";
+import { getCollection, render } from "astro:content";
 import { Image } from "astro:assets";
 
 const BOOKS_INITIAL = 2;
 
-function stateClass(state: (typeof books)[number]["state"]): string {
-  switch (state) {
-    case "Lido":
-      return "border-accent/50 text-accent";
-    case "Lendo atualmente":
-      return "border-foreground/30 text-foreground";
-    case "Na lista de desejos":
-      return "border-border text-muted-foreground";
-  }
+const bookEntries = (await getCollection("books")).sort(
+	(a, b) => a.data.order - b.data.order,
+);
+const renderedBooks = await Promise.all(bookEntries.map((b) => render(b)));
+
+function stateClass(
+	state: (typeof bookEntries)[number]["data"]["state"],
+): string {
+	switch (state) {
+		case "Lido":
+			return "border-accent/50 text-accent";
+		case "Lendo atualmente":
+			return "border-foreground/30 text-foreground";
+		case "Na lista de desejos":
+			return "border-border text-muted-foreground";
+	}
 }
 ---
 
@@ -42,8 +49,10 @@ function stateClass(state: (typeof books)[number]["state"]): string {
 
     <ul id="livros-list" class="mt-16 list-none space-y-6 lg:mt-20">
       {
-        books.map((book, index) => {
+        bookEntries.map((book, index) => {
           const isExtra = index >= BOOKS_INITIAL;
+          const { Content } = renderedBooks[index];
+          const hasReview = (book.body ?? "").trim().length > 0;
           return (
             <li
               class:list={[isExtra && "hidden"]}
@@ -55,8 +64,8 @@ function stateClass(state: (typeof books)[number]["state"]): string {
                     <div class="mx-auto shrink-0 sm:mx-0">
                       <div class="w-36 overflow-hidden rounded-md border border-neutral-200 bg-white shadow-sm sm:w-40">
                         <Image
-                          src={book.imageUrl}
-                          alt={`Capa: ${book.title}`}
+                          src={book.data.imageUrl}
+                          alt={`Capa: ${book.data.title}`}
                           width={160}
                           height={240}
                           sizes="(max-width: 640px) 144px, 160px"
@@ -71,25 +80,33 @@ function stateClass(state: (typeof books)[number]["state"]): string {
                         <span
                           class:list={[
                             "inline-flex border px-2 py-0.5 font-mono text-[10px] font-semibold uppercase tracking-[0.1em]",
-                            stateClass(book.state),
+                            stateClass(book.data.state),
                           ]}
                         >
-                          {book.state}
+                          {book.data.state}
                         </span>
                         <span class="inline-flex border border-border bg-background px-2 py-0.5 font-mono text-[10px] font-medium uppercase tracking-[0.1em] text-muted-foreground">
-                          {book.tag}
+                          {book.data.tag}
                         </span>
                       </div>
                       <h3 class="font-display mt-4 text-xl font-semibold leading-tight tracking-[-0.03em] text-foreground md:text-2xl">
-                        {book.title}
+                        {book.data.title}
                       </h3>
                       <p class="mt-1 font-mono text-sm text-accent md:text-base">
-                        {book.author}
+                        {book.data.author}
                       </p>
-                      {book.review && (
-                        <p class="mt-4 text-base leading-[1.6] text-muted-foreground md:text-lg md:leading-relaxed">
-                          {book.review}
-                        </p>
+                      {hasReview && (
+                        <div
+                          class:list={[
+                            "book-md mt-4 max-w-none text-base leading-[1.6] text-muted-foreground md:text-lg md:leading-relaxed",
+                            "[&_p]:mt-4 [&_p:first-child]:mt-0",
+                            "[&_ul]:mt-4 [&_ul]:list-disc [&_ul]:space-y-1 [&_ul]:pl-5",
+                            "[&_strong]:font-semibold [&_strong]:text-foreground",
+                            "[&_a]:text-accent [&_a]:underline",
+                          ]}
+                        >
+                          <Content />
+                        </div>
                       )}
                     </div>
                   </div>
@@ -102,7 +119,7 @@ function stateClass(state: (typeof books)[number]["state"]): string {
     </ul>
 
     {
-      books.length > BOOKS_INITIAL && (
+      bookEntries.length > BOOKS_INITIAL && (
         <div class="mt-10 flex justify-center border-t border-border pt-10">
           <button
             type="button"

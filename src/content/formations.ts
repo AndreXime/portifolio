@@ -9,7 +9,7 @@ export interface Formation {
 	readonly institution: string;
 	readonly period: string;
 	readonly description?: string;
-	/** Import em `src/data/images/logos/` — Astro redimensiona no build */
+	/** Import em `src/content/images/logos/` — Astro redimensiona no build */
 	readonly logo: ImageMetadata;
 	readonly link?: string;
 	readonly isSecondary?: boolean;

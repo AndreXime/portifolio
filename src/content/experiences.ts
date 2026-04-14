@@ -13,7 +13,7 @@ export interface Experience {
 	readonly period: string;
 	readonly summary: string;
 	readonly highlights?: readonly ExperienceHighlight[];
-	/** Import em `src/data/images/logos/` — Astro redimensiona no build */
+	/** Import em `src/content/images/logos/` — Astro redimensiona no build */
 	readonly logo?: ImageMetadata;
 }
 
