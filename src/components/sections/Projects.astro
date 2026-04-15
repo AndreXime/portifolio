@@ -10,9 +10,11 @@ import { Image } from "astro:assets";
 
 const PROJECTS_INITIAL = 2;
 const projectEntries = (await getCollection("projects")).sort(
-	(a, b) => a.data.order - b.data.order,
+  (a, b) => a.data.order - b.data.order,
 );
-const renderedProjects = await Promise.all(projectEntries.map((p) => render(p)));
+const renderedProjects = await Promise.all(
+  projectEntries.map((p) => render(p)),
+);
 const showProjectsFooter = projectEntries.length > PROJECTS_INITIAL;
 ---
 
@@ -146,7 +148,8 @@ const showProjectsFooter = projectEntries.length > PROJECTS_INITIAL;
     data-project-modal-overlay
     class="absolute inset-0 bg-background/50 backdrop-blur-[2px]"
     aria-hidden="true"
-  />
+  >
+  </div>
   <div
     class="pointer-events-none relative flex min-h-full items-end justify-center px-4 pb-6 pt-16 sm:items-center sm:px-6 sm:pb-8 sm:pt-20"
   >
@@ -177,7 +180,7 @@ const showProjectsFooter = projectEntries.length > PROJECTS_INITIAL;
       <div class="min-h-0 flex-1 overflow-y-auto">
         {
           projectEntries.map((project, index) => {
-            const hasLive = project.data.link.trim().length > 0;
+            const hasLive = (project.data.link || "").trim().length > 0;
             const headingId = `project-modal-heading-${project.id}`;
             const { Content } = renderedProjects[index];
             return (
@@ -204,9 +207,11 @@ const showProjectsFooter = projectEntries.length > PROJECTS_INITIAL;
                 <div
                   class:list={[
                     "project-modal-md mt-4 max-w-none text-sm leading-relaxed text-muted-foreground md:text-base",
-                    "[&_h2]:font-display [&_h2]:mt-8 [&_h2]:text-lg [&_h2]:font-semibold [&_h2]:tracking-[-0.03em] [&_h2]:text-foreground",
+                    "[&_h1]:font-display [&_h1]:mt-8 [&_h1]:text-xl [&_h1]:font-semibold [&_h1]:tracking-[-0.03em] [&_h1]:text-foreground md:[&_h1]:text-2xl",
+                    "[&_h1:first-child]:mt-0",
+                    "[&_h2]:font-display [&_h2]:mt-8 [&_h2]:text-lg [&_h2]:font-semibold [&_h2]:tracking-[-0.03em] [&_h2]:text-foreground md:[&_h2]:text-xl",
                     "[&_h2:first-child]:mt-0",
-                    "[&_p]:mt-4 [&_p:first-child]:mt-0",
+                    "[&_p]:mt-2 [&_p:first-child]:mt-0",
                     "[&_ul]:mt-4 [&_ul]:list-disc [&_ul]:space-y-1 [&_ul]:pl-5 [&_ul]:text-muted-foreground",
                     "[&_strong]:font-semibold [&_strong]:text-foreground",
                     "[&_a]:text-accent [&_a]:underline [&_a]:decoration-accent/40 hover:[&_a]:decoration-accent",
