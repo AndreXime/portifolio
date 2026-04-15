@@ -1,23 +1,23 @@
 # Portfólio - André Ximenes
 
-Portfólio pessoal desenvolvido com arquitetura híbrida (static + SSR) focado em performance máxima e conversão. Implementa otimizações agressivas de imagem, hidratação parcial de componentes e animações baseadas em Intersection Observer.
+Portfólio pessoal construído com Astro e foco em performance, legibilidade e conversão. O visual segue uma direção de **Bold Typography** (tipografia forte, hierarquia clara, contraste) e as interações são feitas com **JavaScript nativo**, sem frameworks de UI e sem “ilhas”.
 
 **Acesse:** [https://andreximenes.xyz](https://andreximenes.xyz)
 
 ## Stack
 
-* **[Astro 5](https://astro.build/)** - SSG com output estático e SSR pontual para API routes
-* **[Preact](https://preactjs.com/)** - Hidratação cliente com `client:visible` para reduzir bundle
-* **[Tailwind CSS v4](https://tailwindcss.com/)** - Sistema de design via Vite plugin
+* **[Astro](https://astro.build/)** - Site estático com rota de API para contato
+* **[Tailwind CSS](https://tailwindcss.com/)** - Sistema de design via Vite plugin
 * **[TypeScript](https://www.typescriptlang.org/)** - Tipagem estrita end-to-end
 * **[Nodemailer](https://nodemailer.com/)** - SMTP direto via Gmail em serverless function
+* **Astro Content Collections** - Conteúdo tipado/validado
 
 ## Features Técnicas
 
 ### Otimizações de Performance
-- **Imagens**: Pipeline de conversão para WebP (70% qualidade) e resize para 800px na build
-- **Hidratação Parcial**: JS carregado apenas quando componentes ficam visíveis (`client:visible`) para melhorar TTI e TBT
-- **Reveal Animations**: Intersection Observer custom substituindo bibliotecas (AOS, Framer Motion) para reduzir bundle
+- **Imagens**: `astro:assets` para otimização e loading lazy por padrão
+- **JS mínimo**: interações pontuais (modal, “ver mais”, scroll helpers) com JS nativo
+- **Reveal Animations**: `IntersectionObserver` próprio (sem libs) para reduzir bundle
 - **Inline Stylesheets**: CSS crítico injetado no HTML para eliminar FOUC
 - **Static Output**: Páginas estáticas servidas por CDN edge para performance extrema
 
@@ -26,10 +26,10 @@ Endpoint SSR em `/api/contact.ts` com envio direto via SMTP do Gmail, sem depend
 
 ## Performance Metrics
 
-- **Lighthouse Score**: 100/100/100/100 (Performance/Accessibility/Best Practices/SEO)
-- **First Contentful Paint**: 0.9s
-- **Largest Contentful Paint**: 0,9 s
-- **Speed Index**: 0,9 s
+- **Lighthouse Score**: Performance ~95–100 / Accessibility 100 / Best Practices 100 / SEO 100
+- **First Contentful Paint**: ~1,4 s
+- **Largest Contentful Paint**: ~2,1 s
+- **Speed Index**: ~1,4 s
 - **Total Blocking Time**: 0 ms
 - **Cumulative Layout Shift**: 0
 
@@ -37,15 +37,16 @@ Endpoint SSR em `/api/contact.ts` com envio direto via SMTP do Gmail, sem depend
 
 ```
 src/
-├── content/        # Data sources (projects, books, tech stack, social)
-├── sections/       # Componentes de seção (Hero, Projects, Contact, etc.)
-├── components/     # Componentes reutilizáveis (Reveal, UI primitives)
-├── lib/            # Utilitários (otimização de imagens)
+├── content/        # Collections
+├── components/
+│   ├── sections/   # Seções (Hero, Contact, etc.)
+│   └── ui/         # UI primitives (Button, Reveal, etc.)
+├── scripts/        # Interações em JS nativo (modal, “ver mais”, reveal)
 ├── pages/
 │   ├── index.astro    # SSG
 │   └── api/
 │       └── contact.ts # SSR
-└── layout/         # Layout base com metadados SEO
+└── layout/         # Layout base + SEO
 ```
 
 ## Desenvolvimento
