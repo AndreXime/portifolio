@@ -1,5 +1,5 @@
 ---
-order: 1
+order: 5
 title: "Gerenciador de Grade Curricular Inteligente"
 shortDescription: "Construí um site para acompanhar a graduação em Ciência da Computação na UVA, com progresso em disciplinas e montagem de grade semanal com detecção de conflitos. O foco foi centralizar o planejamento do curso e eliminar checagens manuais de pré-requisitos e choques de horário. A base é uma SPA com estado global por domínio, persistência no navegador e pipeline de dados validado no build."
 tech: ["TypeScript", "Vite", "React", "Zustand", "Local Storage", "Pre-rendering"]

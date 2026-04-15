@@ -1,5 +1,5 @@
 ---
-order: 3
+order: 1
 title: "E-commerce de Eletrônicos"
 shortDescription: "Construí um e-commerce com catálogo, carrinho, checkout, autenticação e área administrativa. O foco foi otimizar carregamento inicial e SEO sem abrir mão de interatividade e sessão. A base combina páginas renderizadas com ilhas de UI, estado global e uma camada de serviço unificada (inclui modo demo)."
 tech: ["TypeScript", "Astro", "Preact", "TailwindCSS", "Islands Architecture", "SSR"]

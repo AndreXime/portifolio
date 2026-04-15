@@ -1,5 +1,5 @@
 ---
-order: 5
+order: 3
 title: "ERP Restaurante: Arquitetura Local-First"
 shortDescription: "Construí um PDV para restaurantes totalmente client-side com módulos de cardápio, mesas, entregas, cozinha e caixa. O foco foi operar offline e manter dados localmente no navegador, sem depender de backend. A base segue uma arquitetura offline-first com IndexedDB e estado global para coordenar os módulos."
 tech: ["TypeScript", "React", "IndexedDB", "Offline-first", "Client-side"]

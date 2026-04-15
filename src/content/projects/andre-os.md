@@ -1,5 +1,5 @@
 ---
-order: 0
+order: 4
 title: "andre_OS: Notas, recomendações e ferramentas"
 shortDescription: "Construí um hub pessoal que reúne blog, links curados e pequenas ferramentas sob uma interface inspirada em sistema operacional. O foco foi centralizar conteúdo e utilitários sem fragmentar a experiência em vários microsites. A base usa renderização híbrida com ilhas interativas e um painel interno para publicar e organizar o catálogo."
 tech: ["TypeScript", "Astro", "React", "Islands Architecture", "SQLite", "SSR"]
