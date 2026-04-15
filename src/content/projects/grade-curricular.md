@@ -8,15 +8,21 @@ link: "https://disciplina-uva.andreximenes.xyz/"
 github: "https://github.com/AndreXime/organiza-cc-uva"
 ---
 
-## Problema
+# Problema
 O cenário exigia acompanhar evolução curricular, descobrir automaticamente quais disciplinas ficam liberadas por pré-requisitos e montar uma grade semanal sem colisões de horário. Na prática, isso costuma virar controle paralelo em planilhas e checagens manuais, o que aumenta erro e tempo gasto a cada semestre. Além disso, os dados oficiais mudam com o tempo e precisam de uma forma confiável de atualização sem quebrar o sistema. Eu também precisava manter o uso simples e offline-friendly, preservando as marcações do usuário entre sessões.
 
-## Solução
+# Solução
 Eu modelei o frontend como uma SPA modular, separando as áreas do produto por responsabilidade e concentrando o estado de domínio em stores independentes com uma camada de persistência.
 
 Para os dados base (disciplinas, equivalências e eventos), eu implementei uma etapa de build que faz parsing e validação rigorosa, falhando o build quando encontra inconsistências para impedir regressões silenciosas. A lógica de disponibilidade de disciplinas foi derivada diretamente do grafo de pré-requisitos, com regras de integridade para evitar estados inválidos quando o usuário altera o progresso.
 
 Para melhorar a experiência de carregamento e indexabilidade, eu gerei HTML estático no pós-build via renderização no servidor e injetei o markup no bundle final sem inflar o código entregue ao navegador.
 
-## Impacto
+## Destaques
+- SPA modular com **estado por domínio** e persistência no navegador
+- Pipeline de dados no build com **validação rígida** e falha explícita em inconsistências
+- Regras derivadas do **grafo de pré-requisitos** com integridade para evitar estados inválidos
+- **Pré-renderização** no pós-build para melhorar carregamento e indexabilidade
+
+# Impacto
 Com essa arquitetura, eu reduzi o acoplamento entre telas e domínios, o que deixa a evolução de cada área mais previsível e fácil de testar. A persistência no navegador mantém o estado do usuário sem backend, enquanto o controle de integridade evita que o progresso fique incoerente. O pipeline de build torna a atualização dos dados um processo auditável e com falha explícita, aumentando a confiabilidade quando o currículo ou calendário mudam. A pré-renderização melhora o tempo de primeira pintura e entrega conteúdo inicial mesmo antes da hidratação completa do cliente, mantendo a aplicação leve no runtime.
