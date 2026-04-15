@@ -146,12 +146,12 @@ const showProjectsFooter = projectEntries.length > PROJECTS_INITIAL;
 >
   <div
     data-project-modal-overlay
-    class="absolute inset-0 bg-background/50 backdrop-blur-[2px]"
+    class="absolute inset-0 bg-background/60 backdrop-blur-[5px]"
     aria-hidden="true"
   >
   </div>
   <div
-    class="pointer-events-none relative flex min-h-full items-end justify-center px-4 pb-6 pt-16 sm:items-center sm:px-6 sm:pb-8 sm:pt-20"
+    class="pointer-events-none relative flex min-h-full items-end justify-center px-4 py-6 sm:items-center sm:px-6 sm:py-8"
   >
     <div
       role="dialog"
@@ -177,7 +177,11 @@ const showProjectsFooter = projectEntries.length > PROJECTS_INITIAL;
           <IconClose class="size-5" />
         </button>
       </div>
-      <div class="min-h-0 flex-1 overflow-y-auto">
+      <div
+        data-project-modal-scroll
+        class="min-h-0 flex-1 overflow-y-auto focus:outline-none"
+        tabindex="0"
+      >
         {
           projectEntries.map((project, index) => {
             const hasLive = (project.data.link || "").trim().length > 0;

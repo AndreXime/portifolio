@@ -91,6 +91,7 @@ function bindProjectsSection(
 		const heading = panel.querySelector<HTMLElement>("[data-project-modal-heading]");
 		const dialog = modalRoot.querySelector<HTMLElement>("[role='dialog']");
 		const modalTitle = modalRoot.querySelector<HTMLElement>("[data-project-modal-title]");
+		const scrollRegion = modalRoot.querySelector<HTMLElement>("[data-project-modal-scroll]");
 
 		getModalPanels().forEach((p) => {
 			p.hidden = p !== panel;
@@ -113,8 +114,13 @@ function bindProjectsSection(
 		modalRoot.setAttribute("aria-hidden", "false");
 		document.body.style.overflow = "hidden";
 
-		const closeBtn = modalRoot.querySelector<HTMLButtonElement>("[data-project-modal-close]");
-		closeBtn?.focus();
+		if (scrollRegion) {
+			scrollRegion.scrollTop = 0;
+			scrollRegion.focus();
+		} else {
+			const closeBtn = modalRoot.querySelector<HTMLButtonElement>("[data-project-modal-close]");
+			closeBtn?.focus();
+		}
 	}
 
 	showMore?.addEventListener("click", () => {
