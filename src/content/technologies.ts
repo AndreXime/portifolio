@@ -17,19 +17,19 @@ export const technologies: readonly TechItem[] = [
 		icons: ["nodedotjs", "bun"],
 	},
 	{
-		name: "Astro, Next.js e Vite",
+		name: "Next.js, Astro e Vite",
 		role: "Frontend framework",
-		icons: ["astro", "nextdotjs", "vite"],
+		icons: ["nextdotjs", "astro", "vite"],
 	},
 	{
-		name: "Tailwind CSS e ShadCN",
+		name: "TailwindCSS e ShadCN",
 		role: "Estilização",
 		icons: ["tailwindcss", "shadcn"],
 	},
 	{
-		name: "Hono, NestJS e Express",
+		name: "NestJS, Express e Hono",
 		role: "Backend frameworks",
-		icons: ["hono", "nestjs", "express"],
+		icons: ["nestjs", "express", "hono"],
 	},
 	{
 		name: "PostgreSQL e Redis",
@@ -47,24 +47,23 @@ export const technologies: readonly TechItem[] = [
 		icons: ["docker", "linux"],
 	},
 	{
-		name: "BullMQ e Zod",
-		role: "Mensageria e Validação",
-		icons: ["bullmq", "zod"],
+		name: "BullMQ",
+		role: "Mensageria e Filas",
+		icons: ["bullmq"],
 	},
 	{
-		name: "Jest, Supertest e React Testing Library",
-		role: "Testes unitários e integração",
+		name: "Jest e React Testing Library",
+		role: "Testes",
 		icons: ["jest", "testinglibrary"],
 	},
-
 	{
 		name: "CI/CD e Cloud",
-		role: "Automação e Deploy",
+		role: "Automação e deploy",
 		icons: ["githubactions", "amazonaws"],
 	},
 	{
-		name: "Prometheus e Grafana",
-		role: "Observabilidade e monitoramento",
-		icons: ["prometheus", "grafana"],
+		name: "Go, Wails e Electron",
+		role: "CLIs e desktop",
+		icons: ["go", "wails", "electron"],
 	},
 ];
