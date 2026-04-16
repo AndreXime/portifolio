@@ -24,13 +24,14 @@ import Container from "../../components/ui/Container.astro";
         </style>
     </head>
     <body class="bg-background antialiased">
-        <section class="py-2">
-            <Container class="relative">
+        <section class="h-full">
+            <Container
+                class="relative flex h-full flex-col justify-between py-14"
+            >
                 <div>
                     <AccentBar class="mb-8" />
                     <h1
-                        id="hero-heading"
-                        class="font-display max-w-[18ch] text-8xl font-semibold leading-[1.05] tracking-[-0.06em] text-foreground"
+                        class="font-display text-8xl font-semibold leading-[1.05] tracking-[-0.06em] text-foreground"
                     >
                         Construindo sistemas com
                         <span class="text-accent">clareza</span>
@@ -38,23 +39,21 @@ import Container from "../../components/ui/Container.astro";
                     </h1>
 
                     <p
-                        class="mt-8 max-w-2xl text-xl leading-relaxed text-muted-foreground"
+                        class="mt-8 max-w-2xl text-[1.35rem] leading-relaxed text-foreground"
                     >
-                        Olá, meu nome é <span class="font-bold text-accent"
+                        <span class="font-semibold text-accent"
                             >{site.authorName}</span
-                        >. Sou desenvolvedor de software especializado em
-                        ecossistema TypeScript. Meu foco é traduzir regras de
-                        negócio em código auto-documentado, criando APIs
-                        estáveis e interfaces que evoluem sem medo de
-                        refatoração. <span class="font-bold text-accent"
-                            >Atualmente buscando novos desafios em times de
-                            engenharia.</span
+                        > é desenvolvedor de software focado em sistemas claros e
+                        escaláveis, ligando APIs objetivas a interfaces intuitivas,
+                        de ponta a ponta.{" "}
+                        <span class="font-semibold text-accent"
+                            >Portfólio em andreximenes.xyz.</span
                         >
                     </p>
                 </div>
 
                 <dl
-                    class="mt-10 grid grid-cols-1 gap-10 border-t border-border pt-12 sm:grid-cols-2 md:grid-cols-3 md:gap-8"
+                    class="mt-10 grid grid-cols-3 gap-8 border-t border-border pt-12"
                 >
                     <div>
                         <dt
