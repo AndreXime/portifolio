@@ -24,22 +24,22 @@ export const experiences: readonly Experience[] = [
 		period: "10/2025 — 02/2026",
 		logo: stackup,
 		summary:
-			"Atuei no ciclo completo de desenvolvimento em uma software house de ritmo dinâmico, integrando um projeto de alta complexidade desde o estágio inicial. Minha contribuição focou na definição da arquitetura e na implementação de soluções escaláveis, transitando entre o frontend com Next.js e o backend com Hono, sempre priorizando a performance e a eficiência de custos em infraestrutura AWS.",
+			"Atuei no ciclo de vida completo (SDLC) de um projeto de alta complexidade para o setor de seguros, com interface direta ao cliente no levantamento e refinamento de requisitos. Em ritmo acelerado de software house, traduzi regras de domínio do mercado segurador em arquitetura técnica e em código sustentável, cobrindo frontend e backend desde o estágio inicial até a orquestração do deploy, com foco em performance e manutenibilidade.",
 		highlights: [
 			{
-				label: "Backend & Cloud",
+				label: "Frontend",
 				detail:
-					"Desenvolvi APIs com Hono e TypeScript, implementando uploads via S3 Signed URLs para reduzir tráfego na API e arquitetura orientada a eventos com AWS Lambda para OCR e conversão de documentos.",
+					"Rotas autenticadas centralizadas, sessão, limpeza de credenciais e redirects por perfil; menu e identidade em cookies assinados (somente leitura, TTL curto) para cortar chamadas repetidas ao backend. Multiportal com dezenas de jornadas na mesma base e fluxo de proposta em etapas com estado global e validações de domínio antes do envio.",
 			},
 			{
-				label: "Frontend & State",
+				label: "API e dados",
 				detail:
-					"Construí dashboards internos utilizando TailwindCSS, Shadcn UI, Zustand e TanStack Query para gerenciamento de estado e cache eficiente de requisições.",
+					"Núcleo de API de garantias (autenticação, propostas, contratos, administrativo, análise) com validação estrita de payloads, Prisma/PostgreSQL, migrações na subida do serviço e reconexão ao banco com backoff exponencial para cold start ou instabilidade.",
 			},
 			{
-				label: "Automação",
+				label: "Arquivos e regras de negócio",
 				detail:
-					"Implementei a geração dinâmica de contratos com docxtemplater, integrando campos flexíveis via JSON para suportar estruturas de dados não fixas.",
+					"Upload via URLs assinadas, buckets bruto/processado e pipeline assíncrono (OCR em português) reconciliado à proposta. Governança de ciclo de vida com token conferido no banco, perfis e transições de status explícitas. Peças jurídicas e comerciais com Docxtemplater e modelos versionados em armazenamento objeto.",
 			},
 		],
 	},

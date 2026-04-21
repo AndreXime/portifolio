@@ -53,7 +53,7 @@ import { Image } from "astro:assets";
                       <h3 class="font-display text-xl font-semibold leading-tight tracking-[-0.03em] text-foreground md:text-2xl">
                         {exp.role}
                       </h3>
-                      <p class="mt-0.5 font-mono text-sm text-accent md:text-base">
+                      <p class="mt-0.5 font-mono font-bold text-sm text-accent md:text-base">
                         {exp.company}
                       </p>
                     </div>
@@ -73,8 +73,8 @@ import { Image } from "astro:assets";
                       aria-label={`Destaques em ${exp.company}`}
                     >
                       {exp.highlights.map((h) => (
-                        <li class="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:gap-x-3">
-                          <span class="shrink-0 font-mono text-xs font-semibold uppercase tracking-[0.08em] leading-normal text-accent sm:min-w-[11rem]">
+                        <li class="flex flex-col gap-1">
+                          <span class="font-mono text-sm font-bold uppercase leading-normal text-accent">
                             {h.label}
                           </span>
                           <span class="min-w-0 font-sans text-sm font-normal leading-normal tracking-normal text-muted-foreground md:text-base">
