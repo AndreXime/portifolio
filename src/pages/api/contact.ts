@@ -1,19 +1,26 @@
 import type { APIRoute } from "astro";
+import { z } from "astro/zod";
 import nodemailer from "nodemailer";
+
 export const prerender = false;
+
+const contactBodySchema = z.object({
+	name: z.string().trim().min(1, "Todos os campos são obrigatórios"),
+	email: z.email("Email inválido").trim().min(1, "Todos os campos são obrigatórios"),
+	message: z.string().trim().min(1, "Todos os campos são obrigatórios"),
+});
 
 export const POST: APIRoute = async ({ request }) => {
 	try {
-		const { name, email, message } = await request.json();
+		const raw: unknown = await request.json();
+		const parsed = contactBodySchema.safeParse(raw);
 
-		if (!name || !email || !message) {
-			return new Response(JSON.stringify({ error: "Todos os campos são obrigatórios" }), { status: 400 });
+		if (!parsed.success) {
+			const message = parsed.error.issues[0]?.message ?? "Dados inválidos";
+			return new Response(JSON.stringify({ error: message }), { status: 400 });
 		}
 
-		const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-		if (!emailRegex.test(email)) {
-			return new Response(JSON.stringify({ error: "Email inválido" }), { status: 400 });
-		}
+		const { name, email, message } = parsed.data;
 
 		if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
 			return new Response(JSON.stringify({ error: "Servidor não configurado" }), { status: 500 });
