@@ -32,6 +32,11 @@ export const technologies: readonly TechItem[] = [
 		icons: ["nestjs", "express", "hono"],
 	},
 	{
+		name: "REST e OpenAPI",
+		role: "APIs e documentação",
+		icons: ["rest", "openapiinitiative"],
+	},
+	{
 		name: "PostgreSQL e Redis",
 		role: "Banco de dados",
 		icons: ["postgresql", "redis"],
@@ -60,10 +65,5 @@ export const technologies: readonly TechItem[] = [
 		name: "CI/CD e Cloud",
 		role: "Automação e deploy",
 		icons: ["githubactions", "amazonaws"],
-	},
-	{
-		name: "Go, Wails e Electron",
-		role: "CLIs e desktop",
-		icons: ["go", "wails", "electron"],
 	},
 ];

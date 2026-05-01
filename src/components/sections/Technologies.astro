@@ -5,7 +5,7 @@ import AccentBar from "../ui/AccentBar.astro";
 import Reveal from "../ui/Reveal.astro";
 import { technologies } from "../../content/technologies";
 
-const LOCAL_ICONS = new Set(["bullmq", "shadcn"]);
+const LOCAL_ICONS = new Set(["bullmq", "shadcn", "rest"]);
 
 function resolveIconName(slug: string) {
   return LOCAL_ICONS.has(slug) ? slug : `simple-icons:${slug}`;
