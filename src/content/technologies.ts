@@ -17,16 +17,6 @@ export const technologies: readonly TechItem[] = [
 		icons: ["nodedotjs", "bun"],
 	},
 	{
-		name: "Next.js, Astro e Vite",
-		role: "Frontend framework",
-		icons: ["nextdotjs", "astro", "vite"],
-	},
-	{
-		name: "TailwindCSS e ShadCN",
-		role: "Estilização",
-		icons: ["tailwindcss", "shadcn"],
-	},
-	{
 		name: "NestJS, Express e Hono",
 		role: "Backend frameworks",
 		icons: ["nestjs", "express", "hono"],
@@ -35,6 +25,16 @@ export const technologies: readonly TechItem[] = [
 		name: "REST e OpenAPI",
 		role: "APIs e documentação",
 		icons: ["rest", "openapiinitiative"],
+	},
+	{
+		name: "Next.js, Astro e Vite",
+		role: "Frontend framework",
+		icons: ["nextdotjs", "astro", "vite"],
+	},
+	{
+		name: "TailwindCSS e ShadCN",
+		role: "Estilização",
+		icons: ["tailwindcss", "shadcn"],
 	},
 	{
 		name: "PostgreSQL e Redis",

@@ -1,6 +1,6 @@
 import type { ImageMetadata } from "astro";
 
-import ibm from "./images/logos/ibm.webp";
+import edureka from "./images/logos/edureka.png";
 import meta from "./images/logos/meta.webp";
 import uva from "./images/logos/uva.webp";
 
@@ -34,11 +34,11 @@ export const formations: readonly Formation[] = [
 			"Certificação em desenvolvimento com React e JavaScript, cobrindo desde a criação de interfaces responsivas até o consumo de APIs REST. Inclui práticas com Git, testes unitários com Jest e fundamentos de UX/UI.",
 	},
 	{
-		title: "Get Started with Cloud Native, DevOps, Agile, and NoSQL",
-		institution: "IBM — Coursera",
-		period: "03/2026",
-		logo: ibm,
-		link: "https://coursera.org/verify/W0EQJWJ10E04",
+		title: "Modern Web Development with TypeScript",
+		institution: "Edureka — Coursera",
+		period: "05/2026",
+		logo: edureka,
+		link: "https://coursera.org/verify/specialization/TDOTGZTZV6HY",
 		isSecondary: true,
 	},
 ];
