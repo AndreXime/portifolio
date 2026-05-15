@@ -1,28 +1,32 @@
 ---
 order: 1
-title: "E-commerce"
-shortDescription: "Construí uma API REST de e-commerce cobrindo autenticação, catálogo, carrinho, wishlist, pedidos e perfil. O foco foi manter segurança de sessão e consistência de validação/erros, com integrações típicas do domínio. A base segue uma arquitetura modular por casos de uso e contratos tipados com documentação OpenAPI."
+title: "Ecommerce completo: domínio de pedidos e estoque no PostgreSQL, loja Astro e métricas prontas"
+shortDescription: "Eu estruturei um ecommerce full stack em monorepo com API REST em Hono rodando em Bun, persistência em PostgreSQL com Prisma, Redis para suporte a sessão e trabalho assíncrono, e loja SSR em Astro com ilhas Preact e Tailwind, tudo amarrado por validação com Zod e integração real (sem mock de backend no bundle). O núcleo técnico está nas decisões de servidor: JWT em cookies com refresh persistido, pedidos em transação com snapshot de itens e atualização de estoque condicional, RBAC para separar vitrine e painel admin, além de rate limiting, CSRF alinhado ao front e métricas Prometheus com contrato OpenAPI exposto em documentação interativa. O resultado é uma base enxuta para evoluir checkout e pagamento sem reescrever o domínio, mantendo o contrato como fonte da verdade entre Astro e a API."
 tech: ["TypeScript", "Hono", "PostgreSQL", "Redis", "OpenAPI", "AWS SDK"]
 imageUrl: "./images/ecommerce.webp"
-link: "https://ecommerce-api.andreximenes.xyz"
-github: "https://github.com/AndreXime/ecommerce-backend"
+link: "https://ecommerce.andreximenes.xyz"
+github: "https://github.com/AndreXime/ecommerce"
 ---
 
-# Problema
-O desafio foi implementar um backend de ecommerce que suportasse todo o ciclo de compra sem degradar segurança e consistência conforme o número de rotas e regras crescesse. Em especial, autenticação baseada em cookies tende a falhar em revogação de sessão, proteção contra CSRF e controle de permissões quando o sistema fica maior. Também havia a necessidade de padronizar validação e erros para reduzir divergências entre endpoints e facilitar evolução do contrato da API. Por fim, eu precisava de uma base operacional mínima (métricas e limites de requisição) para evitar pontos cegos em produção.
+### Contexto técnico
 
-# Solução
-Eu resolvi isso com um desenho modular centrado em casos de uso, separando camada HTTP, validação/contratos, lógica de negócio e persistência, mantendo o mesmo padrão estrutural em todos os recursos.
+Eu tratei o projeto como **dois deployables** no mesmo repositório: uma **API em Hono** e uma **loja em Astro**, compartilhando um contrato HTTP explícito. No backend, **Zod** não só valida entrada e saída como alimenta a **especificação OpenAPI**, o que reduz divergência entre documentação e comportamento real e barateia evoluções de cliente (web ou ferramentas de teste).
 
-Padronizei um pipeline de middlewares para CORS, CSRF, autenticação com RBAC, rate limiting em Redis e tratamento global de erros, o que torna o comportamento transversal previsível. Na autenticação, usei access token de curta duração e refresh token persistido no banco, com revogação por blocklist no Redis e invalidação de sessões via versionamento para cobrir logout e reset de senha sem janelas de uso indevido.
+Escolhi **Bun** como runtime pela simplicidade de desenvolvimento e build, e **Hono** pela composição de middlewares (CORS com credenciais, cabeçalhos de segurança, limitação de taxa global e mais restrita em autenticação) sem carregar um framework monolítico. **PostgreSQL** com **Prisma** concentra o modelo relacional (usuário, carrinho, pedido, tokens de refresh, catálogo); **Redis** aparece como **cache de revogação** de access token e como **backbone de filas** para e-mail e rotinas como carrinho abandonado. Para mídia de produto, o fluxo de admin passa por **URLs pré-assinadas** em **armazenamento objeto compatível com S3**, o que tira upload pesado do processo da API e mantém o bucket como fronteira clara de infraestrutura.
 
-Para infraestrutura, integrei PostgreSQL via ORM, filas com processamento assíncrono para tarefas de email, storage com URLs pré-assinadas e documentação OpenAPI gerada a partir dos schemas de validação.
+No front, **Astro** faz o trabalho de **SSR** nas vitrines e listagens (SEO e primeiro paint estável) e delega interatividade a **Preact** onde o estado muda no browser; **Tailwind** centraliza o design system. O trade-off consciente foi **cookies HttpOnly** em vez de guardar tokens em armazenamento acessível ao script da página: a web precisa sempre enviar **`credentials`**, repassar **Cookie** no SSR e tratar **401** com fluxo de **refresh** centralizado. Isso aumenta um pouco a complexidade de integração, mas alinha segurança e modelo de sessão com o navegador moderno.
 
-## Destaques
-- Arquitetura por **casos de uso** com contratos tipados e validação padronizada
-- Pipeline de segurança com **CSRF**, **RBAC**, **rate limiting** (Redis) e erro global
-- Sessão com **dual token**, revogação (JTI/blocklist) e **versionamento** de sessão
-- Integrações de produção: **PostgreSQL**, filas assíncronas, **URLs pré-assinadas** e **OpenAPI**
+### Desafios de engenharia (como e por quê)
 
-# Impacto
-O resultado foi um backend mais fácil de manter porque novas rotas seguem o mesmo contrato, a mesma validação e o mesmo fluxo de execução, reduzindo acoplamento e regressões. Em segurança, a combinação de dual token, revogação por JTI e versionamento de sessão diminui o risco de token reutilizável após eventos sensíveis e simplifica a governança de sessão. Operacionalmente, métricas no padrão Prometheus e visualização no Grafana deixam o comportamento HTTP observável e aceleram diagnóstico de incidentes. A arquitetura também escala de forma incremental, porque as preocupações transversais ficam centralizadas nos middlewares e as integrações externas ficam isoladas, permitindo evoluir domínio e regras sem reescrever a base.
+- **Pedido como unidade atômica:** consolidei criação de pedido em **transação de banco**: carregamento de produtos e opções, validação de variante, **snapshot** de preço e imagem nos itens, **decremento de estoque só quando há quantidade suficiente** (`updateMany` condicional) e ajuste de flags de disponibilidade, com esvaziamento do carrinho quando a origem é o carrinho ativo. Isso evita estado inconsistente sob concorrência moderada sem espalhar locks na aplicação.
+
+- **Sessão com revogação real:** além de **refresh token** persistido e rotação lógica no login, usei **blocklist em Redis** por JTI do access token até o TTL natural e **versão de sessão** após troca de senha para invalidar tokens antigos. O objetivo é que logout e incidentes de credencial tenham efeito antes do access expirar sozinho.
+
+- **Integração Astro e API sem “dois mundos”:** no SSR, as chamadas repassam o header de cookie para o backend; no cliente, um cliente HTTP único aplica **`credentials: include`**, trata erros de validação de forma uniforme e **serializa refresh** para não disparar corridas de renovação. Isso mantém a mesma semântica de sessão em páginas estáticas e ilhas interativas.
+
+- **Operação e observabilidade desde o ambiente local:** subi **PostgreSQL**, **Redis**, fila de e-mail para desenvolvimento, **Prometheus** e **Grafana** via **Compose**, com **emulador de serviços de nuvem** para o fluxo de armazenamento. Na API, há verificação de dependências na subida, **retry com backoff** na conexão com o banco e endpoint de **métricas** para acompanhar saúde e throughput em ambientes próximos de produção.
+
+- **Painel admin e uploads:** o gate de **`/admin`** usa uma chamada autorizada à listagem restrita de usuários; uploads passam pelo fluxo pré-assinado para não expor segredos de infraestrutura ao browser e para desacoplar largura de banda da compute da API.
+
+- **Limite conhecido tratado como fronteira de produto:** o checkout na web hoje fecha o fluxo na camada de apresentação enquanto a **API já implementa `POST /orders`** com as regras de estoque. Eu documentei essa separação de propósito: prioriza contrato e domínio estáveis antes de acoplar o botão final do wizard ao fechamento, o que evita “meio checkout” que quebra pedido sob carga.
+
