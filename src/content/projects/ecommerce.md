@@ -1,9 +1,9 @@
 ---
-order: 0
-title: "API para E-commerce"
+order: 1
+title: "E-commerce"
 shortDescription: "Construí uma API REST de e-commerce cobrindo autenticação, catálogo, carrinho, wishlist, pedidos e perfil. O foco foi manter segurança de sessão e consistência de validação/erros, com integrações típicas do domínio. A base segue uma arquitetura modular por casos de uso e contratos tipados com documentação OpenAPI."
 tech: ["TypeScript", "Hono", "PostgreSQL", "Redis", "OpenAPI", "AWS SDK"]
-imageUrl: "./images/api-ecommerce.webp"
+imageUrl: "./images/ecommerce.webp"
 link: "https://ecommerce-api.andreximenes.xyz"
 github: "https://github.com/AndreXime/ecommerce-backend"
 ---
