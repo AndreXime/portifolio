@@ -47,7 +47,7 @@ function ghostClass(light: boolean) {
 
 const variantClass: Record<NonNullable<typeof variant>, string> = {
   primary:
-    "group relative px-6 py-3 text-accent [&:disabled]:text-muted-foreground",
+    "group relative border border-transparent px-6 py-3 text-accent [&:disabled]:text-muted-foreground",
   secondary: secondaryClass(onLight),
   ghost: ghostClass(onLight),
 };
