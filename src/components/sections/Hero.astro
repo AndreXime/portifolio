@@ -1,4 +1,5 @@
 ---
+import { marked } from "marked";
 import Container from "../ui/Container.astro";
 import Button from "../ui/Button.astro";
 import AccentBar from "../ui/AccentBar.astro";
@@ -23,18 +24,10 @@ import { site } from "../../content/site";
         e escala.
       </h1>
 
-      <p
-        class="mt-8 max-w-2xl text-base leading-[1.75] text-muted-foreground md:text-lg md:leading-relaxed"
-      >
-        Olá, meu nome é <span class="font-bold text-accent"
-          >{site.authorName}</span
-        >. Sou desenvolvedor de software especializado em ecossistema
-        TypeScript. Meu foco é traduzir regras de negócio em código
-        auto-documentado, criando APIs estáveis e interfaces que evoluem sem
-        medo de refatoração. <span class="font-bold text-accent"
-          >Atualmente buscando novos desafios em times de engenharia.</span
-        >
-      </p>
+      <div
+        class="mt-8 max-w-2xl text-base leading-[1.75] text-muted-foreground md:text-lg md:leading-relaxed [&_strong]:font-bold [&_strong]:text-accent"
+        set:html={await marked.parse(site.heroIntroMarkdown)}
+      />
 
       <div
         class="mt-12 flex flex-col gap-4 sm:flex-row sm:flex-wrap sm:items-center sm:gap-8"

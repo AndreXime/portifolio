@@ -1,7 +1,9 @@
 ---
+import { marked } from "marked";
 import Container from "../ui/Container.astro";
 import AccentBar from "../ui/AccentBar.astro";
 import Reveal from "../ui/Reveal.astro";
+import { site } from "../../content/site";
 ---
 
 <section
@@ -39,29 +41,9 @@ import Reveal from "../ui/Reveal.astro";
       <div class="lg:col-span-7">
         <Reveal staggerMs={80}>
           <div
-            class="space-y-6 text-base leading-[1.6] text-muted-foreground md:text-lg md:leading-relaxed"
-          >
-            <p class="text-foreground">
-              Contribuo em backend e frontend. No backend, uso
-              <strong>Node.js ou Bun</strong> para APIs objetivas, seguras e previsíveis.
-              No frontend, cuido da experiência do usuário (UX e UI) com telas claras
-              e funcionais, hoje principalmente com <strong
-                >React/Next.js ou Astro</strong
-              >. Na prática, isso é ligar o comportamento da API ao que a pessoa
-              vê na tela, para que o carregamento, o erro e o sucesso fiquem
-              claros e coerentes.
-            </p>
-            <p>
-              Busco código claro e bem estruturado, no espírito de <em
-                >Clean Code</em
-              >, para facilitar revisão e evolução no dia a dia do time.
-              Equilibro cuidado técnico com pragmatismo. Quando uma solução
-              menor já resolve, evito complicar além do necessário. Entendo que
-              visão de longo prazo no código amadurece com tempo, revisão e
-              contexto de produto. Foco em entregar com consistência, aprender
-              com feedback e ir deixando o que toco mais sólido aos poucos.
-            </p>
-          </div>
+            class="space-y-6 text-base leading-[1.6] text-muted-foreground md:text-lg md:leading-relaxed [&>p:first-child]:text-foreground"
+            set:html={await marked.parse(site.aboutBodyMarkdown)}
+          />
         </Reveal>
       </div>
     </div>
