@@ -12,6 +12,11 @@ export default defineConfig({
 	site: "https://andreximenes.xyz",
 	env: {
 		schema: {
+			GITHUB_ACCESS_TOKEN: envField.string({
+				context: "server",
+				access: "secret",
+				optional: true,
+			}),
 			EMAIL_USER: envField.string({
 				context: "server",
 				access: "secret",
