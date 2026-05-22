@@ -1,3 +1,4 @@
+import { getSecret } from "astro:env/server";
 import type { APIRoute } from "astro";
 import { z } from "astro/zod";
 import nodemailer from "nodemailer";
@@ -22,21 +23,24 @@ export const POST: APIRoute = async ({ request }) => {
 
 		const { name, email, message } = parsed.data;
 
-		if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
+		const emailUser = getSecret("EMAIL_USER");
+		const emailPass = getSecret("EMAIL_PASS");
+
+		if (!emailUser || !emailPass) {
 			return new Response(JSON.stringify({ error: "Servidor não configurado" }), { status: 500 });
 		}
 
 		const transporter = nodemailer.createTransport({
 			service: "gmail",
 			auth: {
-				user: process.env.EMAIL_USER,
-				pass: process.env.EMAIL_PASS,
+				user: emailUser,
+				pass: emailPass,
 			},
 		});
 
 		await transporter.sendMail({
-			from: `"${name}" <${process.env.EMAIL_USER}>`,
-			to: process.env.EMAIL_USER,
+			from: `"${name}" <${emailUser}>`,
+			to: emailUser,
 			subject: `Nova mensagem de contato de ${name} no site do Portifolio`,
 			text: `Email: ${email}\n\n${message}`,
 			replyTo: email,
