@@ -1,7 +1,6 @@
 ---
+import { Icon } from "astro-icon/components";
 import Container from "../ui/Container.astro";
-import IconGithub from "../ui/icons/IconGithub.astro";
-import IconLinkedin from "../ui/icons/IconLinkedin.astro";
 import { site } from "../../content/site";
 
 const year = new Date().getFullYear();
@@ -31,7 +30,7 @@ const year = new Date().getFullYear();
           class="text-muted-foreground transition-colors duration-150 hover:text-accent focus-ring"
           aria-label="GitHub"
         >
-          <IconGithub class="size-[18px]" />
+          <Icon name="simple-icons:github" class="size-[18px]" />
         </a>
         <a
           href={site.linkedinUrl}
@@ -40,7 +39,7 @@ const year = new Date().getFullYear();
           class="text-muted-foreground transition-colors duration-150 hover:text-accent focus-ring"
           aria-label="LinkedIn"
         >
-          <IconLinkedin class="size-[18px]" />
+          <Icon name="simple-icons:linkedin" class="size-[18px]" />
         </a>
         <button
           data-scroll-to="inicio"

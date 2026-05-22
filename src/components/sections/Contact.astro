@@ -4,8 +4,7 @@ import AccentBar from "../ui/AccentBar.astro";
 import Reveal from "../ui/Reveal.astro";
 import Button from "../ui/Button.astro";
 import Input from "../ui/Input.astro";
-import IconGithub from "../ui/icons/IconGithub.astro";
-import IconLinkedin from "../ui/icons/IconLinkedin.astro";
+import { Icon } from "astro-icon/components";
 import { site } from "../../content/site";
 
 const mailto = `mailto:${site.email}?subject=Contato%20pelo%20portf%C3%B3lio`;
@@ -146,7 +145,7 @@ const mailto = `mailto:${site.email}?subject=Contato%20pelo%20portf%C3%B3lio`;
                   rel="noopener noreferrer"
                   class="inline-flex min-h-14 w-full items-center justify-center gap-3 border border-foreground px-6 py-4 font-semibold uppercase tracking-[0.1em] text-foreground transition-all duration-150 ease-[cubic-bezier(0.25,0,0,1)] hover:bg-foreground hover:text-background focus-ring active:translate-y-px md:min-h-16"
                 >
-                  <IconGithub class="size-6 shrink-0 md:size-7" />
+                  <Icon name="simple-icons:github" class="size-6 shrink-0 md:size-7" />
                   GitHub
                 </a>
                 <a
@@ -155,7 +154,7 @@ const mailto = `mailto:${site.email}?subject=Contato%20pelo%20portf%C3%B3lio`;
                   rel="noopener noreferrer"
                   class="inline-flex min-h-14 w-full items-center justify-center gap-3 border border-foreground px-6 py-4 font-semibold uppercase tracking-[0.1em] text-foreground transition-all duration-150 ease-[cubic-bezier(0.25,0,0,1)] hover:bg-foreground hover:text-background focus-ring active:translate-y-px md:min-h-16"
                 >
-                  <IconLinkedin class="size-6 shrink-0 md:size-7" />
+                  <Icon name="simple-icons:linkedin" class="size-6 shrink-0 md:size-7" />
                   LinkedIn
                 </a>
               </div>
