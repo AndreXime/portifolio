@@ -31,7 +31,7 @@ const hashTargetId = isHashLink ? href.split("#")[1] : undefined;
 const Tag = isHashLink ? "button" : href ? "a" : "button";
 
 const shared =
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-none font-semibold uppercase tracking-[0.1em] transition-all duration-150 ease-[cubic-bezier(0.25,0,0,1)] focus-ring active:translate-y-px disabled:pointer-events-none disabled:opacity-50";
+  "inline-flex cursor-pointer items-center justify-center gap-2 whitespace-nowrap rounded-none font-semibold uppercase tracking-[0.1em] transition-all duration-150 ease-[cubic-bezier(0.25,0,0,1)] focus-ring active:translate-y-px disabled:pointer-events-none disabled:opacity-50";
 
 function secondaryClass(light: boolean) {
   return light
@@ -47,7 +47,7 @@ function ghostClass(light: boolean) {
 
 const variantClass: Record<NonNullable<typeof variant>, string> = {
   primary:
-    "group relative py-3 text-accent [&:disabled]:text-muted-foreground",
+    "group relative px-6 py-3 text-accent [&:disabled]:text-muted-foreground",
   secondary: secondaryClass(onLight),
   ghost: ghostClass(onLight),
 };
@@ -67,10 +67,12 @@ const variantClass: Record<NonNullable<typeof variant>, string> = {
   </span>
   {
     variant === "primary" && (
-      <span
-        class="pointer-events-none absolute bottom-0 left-0 h-0.5 w-full origin-left scale-x-100 bg-accent transition-transform duration-150 ease-[cubic-bezier(0.25,0,0,1)] group-hover:scale-x-110"
-        aria-hidden="true"
-      />
+      <span class="pointer-events-none absolute inset-0" aria-hidden="true">
+        <span class="absolute top-0 left-0 h-0.5 w-0 bg-accent transition-[width] duration-150 ease-[cubic-bezier(0.25,0,0,1)] group-hover:w-full" />
+        <span class="absolute top-0 right-0 h-0 w-0.5 bg-accent transition-[height] duration-150 delay-75 ease-[cubic-bezier(0.25,0,0,1)] group-hover:h-full" />
+        <span class="absolute right-0 bottom-0 h-0.5 w-0 bg-accent transition-[width] duration-150 delay-150 ease-[cubic-bezier(0.25,0,0,1)] group-hover:w-full" />
+        <span class="absolute bottom-0 left-0 h-0 w-0.5 bg-accent transition-[height] duration-150 delay-[225ms] ease-[cubic-bezier(0.25,0,0,1)] group-hover:h-full" />
+      </span>
     )
   }
   {
