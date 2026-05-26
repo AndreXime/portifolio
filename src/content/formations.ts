@@ -1,7 +1,7 @@
 import type { ImageMetadata } from "astro";
 
 import edureka from "./images/logos/edureka.png";
-import meta from "./images/logos/meta.webp";
+import ibm from "./images/logos/ibm.webp";
 import uva from "./images/logos/uva.webp";
 
 export interface Formation {
@@ -25,13 +25,13 @@ export const formations: readonly Formation[] = [
 			"Graduação voltada aos fundamentos de computação com especial interesse em Engenharia de Software, Modelagem de dados, Algoritmos e Estrutura de dados.",
 	},
 	{
-		title: "Frontend Developer Certificate",
-		institution: "Meta — Coursera",
-		period: "03/2026",
-		logo: meta,
-		link: "https://coursera.org/verify/professional-cert/PLCI5UKSC5CS",
+		title: "IBM JavaScript Backend Developer",
+		institution: "IBM — Coursera",
+		period: "05/2026",
+		logo: ibm,
+		link: "https://coursera.org/verify/professional-cert/PKNMO2685DQL",
 		description:
-			"Certificação em desenvolvimento com React e JavaScript, cobrindo desde a criação de interfaces responsivas até o consumo de APIs REST. Inclui práticas com Git, testes unitários com Jest e fundamentos de UX/UI.",
+			"Certificação profissional cobrindo Node.js, Express, bancos de dados NoSQL e SQL, conteinerização com Docker, CI/CD e deploy de microsserviços em nuvem.",
 	},
 	{
 		title: "Modern Web Development with TypeScript",
