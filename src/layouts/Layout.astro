@@ -116,9 +116,10 @@ const schema = JSON.stringify({
     <script is:inline defer type="application/ld+json" set:html={schema} />
 
     {/* Ícones */}
-    <link rel="icon" href="/favicon.ico" />
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="shortcut icon" href="/favicon.ico" />
 
     {/* SEO Principal */}
     <title>{title}</title>
@@ -126,6 +127,7 @@ const schema = JSON.stringify({
     <link rel="canonical" href={canonicalURL} />
     <meta name="robots" content="index, follow" />
     <meta name="author" content="André Ricardo Ximenes" />
+    <meta name="apple-mobile-web-app-title" content="André Portifolio" />
 
     {/* Open Graph / Facebook / LinkedIn / WhatsApp */}
     <meta property="og:type" content="website" />

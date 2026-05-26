@@ -3,7 +3,7 @@ const siteBase = {
 	email: "andreximenesa20@gmail.com",
 	githubUrl: "https://github.com/AndreXime",
 	linkedinUrl: "https://www.linkedin.com/in/andreximenesdev",
-	resumePdfUrl: "/André-Curriculo.pdf",
+	resumePdfUrl: "/CV-Andre-Ximenes.pdf",
 };
 
 export const site = {
