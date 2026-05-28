@@ -31,11 +31,10 @@ import Container from "../../components/ui/Container.astro";
                 <div>
                     <AccentBar class="mb-8" />
                     <h1
-                        class="font-display text-8xl font-semibold leading-[1.05] tracking-[-0.06em] text-foreground"
+                        class="font-display text-7xl font-semibold leading-[1.05] tracking-[-0.06em] text-foreground"
                     >
-                        Construindo sistemas com
-                        <span class="text-accent">clareza</span>
-                        e escala.
+                        Construindo <span class="text-accent">APIs</span> eficientes,
+                        seguras e fáceis de manter.
                     </h1>
 
                     <p
@@ -43,11 +42,12 @@ import Container from "../../components/ui/Container.astro";
                     >
                         <span class="font-semibold text-accent"
                             >{site.authorName}</span
-                        > é desenvolvedor de software focado em sistemas claros e
-                        escaláveis, ligando APIs objetivas a interfaces intuitivas,
-                        de ponta a ponta.{" "}
+                        >
+                        {", "}
+                        {site.person.jobTitle.toLowerCase()}. APIs com NestJS, Hono
+                        e Node.js.{" "}
                         <span class="font-semibold text-accent"
-                            >Portfólio em andreximenes.xyz.</span
+                            >andreximenes.xyz</span
                         >
                     </p>
                 </div>
@@ -62,16 +62,18 @@ import Container from "../../components/ui/Container.astro";
                             Stack
                         </dt>
                         <dd class="mt-2 font-mono text-foreground">
-                            TS · React · Node.js
+                            {site.hero.stackLine}
                         </dd>
                     </div>
                     <div>
                         <dt
                             class="font-mono uppercase tracking-[0.15em] text-muted-foreground"
                         >
-                            Experiência
+                            {site.hero.availabilityLabel}
                         </dt>
-                        <dd class="mt-2 font-mono text-foreground">6 meses</dd>
+                        <dd class="mt-2 font-mono text-foreground">
+                            {site.hero.availabilityValue}
+                        </dd>
                     </div>
                     <div>
                         <dt
@@ -80,7 +82,7 @@ import Container from "../../components/ui/Container.astro";
                             Localização
                         </dt>
                         <dd class="mt-2 font-mono text-foreground">
-                            Remoto · BR
+                            {site.hero.locationValue}
                         </dd>
                     </div>
                 </dl>

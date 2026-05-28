@@ -2,9 +2,7 @@
 import { aboveTheFoldFontPreloads } from "../styles/fonts";
 import { site } from "../content/site";
 
-const title = "André Ximenes | Desenvolvedor Web";
-const description =
-  "Portfólio de André Ximenes, Desenvolvedor Web Fullstack especializado em TypeScript, React, Next.js e APIs Rest. Confira meus projetos e me conheça.";
+const { title, description, ogImageAlt } = site.seo;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const socialImageURL = new URL("/og-image.png", Astro.url);
@@ -18,8 +16,8 @@ const schema = JSON.stringify({
       url: Astro.site,
       name: title,
       description: description,
-      dateCreated: "2025-10-17T00:00:00+00:00", // Data aproximada de criação do site
-      dateModified: new Date().toISOString(), // Data atual da build
+      dateCreated: "2025-10-17T00:00:00+00:00",
+      dateModified: new Date().toISOString(),
       mainEntity: {
         "@id": `${Astro.site}#person`,
       },
@@ -33,14 +31,13 @@ const schema = JSON.stringify({
     {
       "@type": "Person",
       "@id": `${Astro.site}#person`,
-      name: "André Ricardo Ximenes Aragão",
+      name: site.person.fullName,
       givenName: "André",
       familyName: "Ximenes",
       alternateName: ["André Ricardo Ximenes", "andrexime"],
-      jobTitle: "Desenvolvedor Fullstack & Engenheiro de Software",
-      description:
-        "Desenvolvedor especializado em TypeScript e React com foco em arquitetura escalável e código limpo.",
-      image: new URL("/me.jpg", Astro.site),
+      jobTitle: site.person.jobTitle,
+      description: site.person.description,
+      image: new URL("/me.png", Astro.site),
       url: Astro.site,
 
       homeLocation: {
@@ -64,29 +61,20 @@ const schema = JSON.stringify({
 
       sameAs: [site.githubUrl, site.linkedinUrl],
 
-      // Habilidades Técnicas
       knowsAbout: [
-        { "@type": "Thing", name: "HTML" },
-        { "@type": "Thing", name: "CSS" },
-        { "@type": "Thing", name: "Tailwind CSS" },
-        { "@type": "Thing", name: "Javascript" },
         { "@type": "Thing", name: "TypeScript" },
+        { "@type": "Thing", name: "Node.js" },
+        { "@type": "Thing", name: "NestJS" },
+        { "@type": "Thing", name: "Hono" },
+        { "@type": "Thing", name: "PostgreSQL" },
+        { "@type": "Thing", name: "Prisma" },
         { "@type": "Thing", name: "React" },
         { "@type": "Thing", name: "Next.js" },
-        { "@type": "Thing", name: "Astro" },
-        { "@type": "Thing", name: "Node.js" },
-        { "@type": "Thing", name: "API Rest" },
+        { "@type": "Thing", name: "REST API" },
+        { "@type": "Thing", name: "OpenAPI" },
         { "@type": "Thing", name: "Software Architecture" },
       ],
 
-      // Experiência Atual
-      worksFor: {
-        "@type": "Organization",
-        name: "Stackup Software - Software House",
-        url: "https://stackupsoftware.netlify.app/",
-      },
-
-      // Educação
       alumniOf: {
         "@type": "EducationalOrganization",
         name: "Universidade Estadual do Vale do Acaraú",
@@ -115,21 +103,18 @@ const schema = JSON.stringify({
     }
     <script is:inline defer type="application/ld+json" set:html={schema} />
 
-    {/* Ícones */}
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="shortcut icon" href="/favicon.ico" />
 
-    {/* SEO Principal */}
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalURL} />
     <meta name="robots" content="index, follow" />
-    <meta name="author" content="André Ricardo Ximenes" />
+    <meta name="author" content={site.person.fullName} />
     <meta name="apple-mobile-web-app-title" content="André Portifolio" />
 
-    {/* Open Graph / Facebook / LinkedIn / WhatsApp */}
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:title" content={title} />
@@ -137,23 +122,16 @@ const schema = JSON.stringify({
     <meta property="og:image" content={socialImageURL} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta
-      property="og:image:alt"
-      content="André Ximenes - Desenvolvedor Web Fullstack especializado em TypeScript"
-    />
-    <meta property="og:site_name" content="André Ximenes | Desenvolvedor Web" />
+    <meta property="og:image:alt" content={ogImageAlt} />
+    <meta property="og:site_name" content={title} />
     <meta property="og:locale" content="pt_BR" />
 
-    {/* Twitter / X */}
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:url" content={canonicalURL} />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={socialImageURL} />
-    <meta
-      name="twitter:image:alt"
-      content="André Ximenes - Desenvolvedor Web Fullstack especializado em TypeScript"
-    />
+    <meta name="twitter:image:alt" content={ogImageAlt} />
   </head>
   <body class="min-h-screen overflow-x-hidden">
     <slot />
