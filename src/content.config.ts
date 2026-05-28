@@ -9,8 +9,12 @@ const projects = defineCollection({
 			order: z.number().int().min(0),
 			title: z.string(),
 			shortDescription: z.string(),
+			cardTagline: z.string().optional(),
+			featured: z.boolean().default(false),
 			tech: z.array(z.string()),
 			imageUrl: image(),
+			/** Recorte vertical só no card em destaque (desktop); mobile usa imageUrl */
+			featuredImageUrl: image().optional(),
 			link: z.string().optional(),
 			github: z.string(),
 		}),

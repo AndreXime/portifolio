@@ -1,4 +1,4 @@
-function closeProjectModal(modalRoot: HTMLElement, listEl: HTMLElement): void {
+function closeProjectModal(modalRoot: HTMLElement, sectionEl: HTMLElement): void {
 	if (modalRoot.classList.contains("hidden")) return;
 
 	modalRoot.classList.add("hidden");
@@ -12,12 +12,13 @@ function closeProjectModal(modalRoot: HTMLElement, listEl: HTMLElement): void {
 		panel.hidden = true;
 	});
 
-	listEl.querySelectorAll<HTMLButtonElement>("[data-project-expand]").forEach((btn) => {
+	sectionEl.querySelectorAll<HTMLButtonElement>("[data-project-expand]").forEach((btn) => {
 		btn.setAttribute("aria-expanded", "false");
 	});
 }
 
 function bindProjectsSection(
+	sectionEl: HTMLElement,
 	listEl: HTMLElement,
 	modalRoot: HTMLElement,
 	reducedMotion: boolean,
@@ -26,8 +27,8 @@ function bindProjectsSection(
 ): void {
 	let lastTrigger: HTMLButtonElement | null = null;
 
-	function getItems(): NodeListOf<HTMLLIElement> {
-		return listEl.querySelectorAll<HTMLLIElement>("li[data-project-id]");
+	function getProjectCards(): NodeListOf<HTMLElement> {
+		return sectionEl.querySelectorAll<HTMLElement>("[data-project-id]");
 	}
 
 	function getModalPanels(): NodeListOf<HTMLElement> {
@@ -104,9 +105,9 @@ function bindProjectsSection(
 			modalTitle.textContent = heading?.textContent?.trim() || "";
 		}
 
-		getItems().forEach((li) => {
-			const idx = li.getAttribute("data-project-id");
-			const expandBtn = li.querySelector<HTMLButtonElement>("[data-project-expand]");
+		getProjectCards().forEach((card) => {
+			const idx = card.getAttribute("data-project-id");
+			const expandBtn = card.querySelector<HTMLButtonElement>("[data-project-expand]");
 			expandBtn?.setAttribute("aria-expanded", idx === projectId ? "true" : "false");
 		});
 
@@ -129,15 +130,15 @@ function bindProjectsSection(
 		applyShowMoreState(!expanded);
 	});
 
-	listEl.addEventListener("click", (e: MouseEvent) => {
+	sectionEl.addEventListener("click", (e: MouseEvent) => {
 		const t = e.target;
 		if (!(t instanceof Element)) return;
 		const expand = t.closest<HTMLElement>("[data-project-expand]");
-		if (!expand || !listEl.contains(expand)) return;
+		if (!expand || !sectionEl.contains(expand)) return;
 		if (isModalOpen()) return;
 		lastTrigger = expand instanceof HTMLButtonElement ? expand : null;
-		const li = expand.closest<HTMLLIElement>("li[data-project-id]");
-		const projectId = li?.getAttribute("data-project-id");
+		const card = expand.closest<HTMLElement>("[data-project-id]");
+		const projectId = card?.getAttribute("data-project-id");
 		if (!projectId) return;
 		openModal(projectId);
 	});
@@ -147,13 +148,13 @@ function bindProjectsSection(
 		if (!(t instanceof Element)) return;
 		if (t.closest("[data-project-modal-close]")) {
 			e.preventDefault();
-			closeProjectModal(modalRoot, listEl);
+			closeProjectModal(modalRoot, sectionEl);
 			lastTrigger?.focus();
 			lastTrigger = null;
 			return;
 		}
 		if (t.closest("[data-project-modal-overlay]")) {
-			closeProjectModal(modalRoot, listEl);
+			closeProjectModal(modalRoot, sectionEl);
 			lastTrigger?.focus();
 			lastTrigger = null;
 		}
@@ -161,18 +162,21 @@ function bindProjectsSection(
 
 	document.addEventListener("keydown", (e: KeyboardEvent) => {
 		if (e.key !== "Escape") return;
-		closeProjectModal(modalRoot, listEl);
+		if (modalRoot.classList.contains("hidden")) return;
+		closeProjectModal(modalRoot, sectionEl);
 		lastTrigger?.focus();
 		lastTrigger = null;
 	});
 }
 
 export function setupProjectsSection(): void {
+	const sectionEl = document.getElementById("projetos");
 	const listEl = document.getElementById("projetos-list");
 	const modalRoot = document.getElementById("project-modal-root");
 	const showMoreRaw = document.getElementById("projects-show-more");
 	const showMoreWrap = document.getElementById("projects-show-more-wrap");
 
+	if (!(sectionEl instanceof HTMLElement)) return;
 	if (!(listEl instanceof HTMLElement)) return;
 	if (!(modalRoot instanceof HTMLElement)) return;
 
@@ -181,12 +185,12 @@ export function setupProjectsSection(): void {
 		return;
 	}
 
-	if (listEl.dataset.ready === "1") return;
-	listEl.dataset.ready = "1";
+	if (sectionEl.dataset.ready === "1") return;
+	sectionEl.dataset.ready = "1";
 
 	const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 	const showMore = showMoreRaw instanceof HTMLButtonElement ? showMoreRaw : undefined;
 	const showMoreWrapEl = showMoreWrap instanceof HTMLElement ? showMoreWrap : undefined;
 
-	bindProjectsSection(listEl, modalRoot, reducedMotion, showMore, showMoreWrapEl);
+	bindProjectsSection(sectionEl, listEl, modalRoot, reducedMotion, showMore, showMoreWrapEl);
 }

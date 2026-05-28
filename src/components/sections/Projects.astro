@@ -12,10 +12,18 @@ const PROJECTS_INITIAL = 2;
 const projectEntries = (await getCollection("projects")).sort(
   (a, b) => a.data.order - b.data.order,
 );
+const featuredProject = projectEntries.find((p) => p.data.featured) ?? null;
+const gridProjects = projectEntries.filter((p) => !p.data.featured);
 const renderedProjects = await Promise.all(
   projectEntries.map((p) => render(p)),
 );
-const showProjectsFooter = projectEntries.length > PROJECTS_INITIAL;
+const showProjectsFooter = gridProjects.length > PROJECTS_INITIAL;
+
+function projectImageAlt(project: (typeof projectEntries)[number]) {
+  const tagline = project.data.cardTagline?.trim();
+  if (tagline) return `Captura do projeto: ${tagline}`;
+  return `Captura do projeto ${project.data.title}`;
+}
 ---
 
 <section
@@ -25,36 +33,137 @@ const showProjectsFooter = projectEntries.length > PROJECTS_INITIAL;
 >
   <Container>
     <div
-      class="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between"
+      class="flex flex-col gap-10 lg:flex-row lg:items-end lg:justify-between lg:gap-16"
     >
-      <Reveal staggerMs={0}>
-        <AccentBar class="mb-8" />
-        <h2
-          id="projects-heading"
-          class="font-display max-w-xl text-3xl font-semibold leading-tight tracking-[-0.04em] text-foreground sm:text-4xl md:text-5xl"
-        >
-          Projetos
-        </h2>
+      <div class="max-w-2xl lg:max-w-none lg:flex-1">
+        <Reveal staggerMs={0}>
+          <AccentBar class="mb-8" />
+          <h2
+            id="projects-heading"
+            class="font-display text-3xl font-semibold leading-tight tracking-[-0.04em] text-foreground sm:text-4xl md:text-5xl lg:text-6xl"
+          >
+            Projetos
+          </h2>
+          <p
+            class="mt-4 font-mono text-xs uppercase tracking-[0.12em] text-muted-foreground md:text-sm md:tracking-[0.15em]"
+          >
+            Aplicações, APIs e experimentos em produção
+          </p>
+        </Reveal>
+      </div>
+      <Reveal staggerMs={120} class="shrink-0 lg:max-w-md">
         <p
-          class="mt-4 max-w-lg font-mono text-xs uppercase tracking-[0.12em] text-muted-foreground"
+          class="text-base leading-[1.6] text-muted-foreground md:text-lg md:leading-relaxed"
         >
-          Aplicações, APIs e experimentos em produção
+          {site.sections.projectsSubtitle}{" "}
+          <a
+            href={site.githubUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-accent underline decoration-2 underline-offset-4 transition-colors duration-150 hover:text-foreground focus-ring"
+          >
+            Ver meu GitHub
+          </a>
         </p>
-      </Reveal>
-
-      <Reveal staggerMs={120} class="shrink-0">
-        <Button href={site.githubUrl} variant="ghost" showArrow>
-          Ver GitHub
-        </Button>
       </Reveal>
     </div>
 
+    {
+      featuredProject && (
+        <div class="mt-16">
+          <Reveal staggerMs={0}>
+            <article
+              class="group flex flex-col overflow-hidden rounded-xl border border-border bg-background transition-colors duration-200 ease-[cubic-bezier(0.25,0,0,1)] hover:border-border-hover lg:flex-row"
+              data-project-id={featuredProject.id}
+            >
+              <div class="relative flex h-52 shrink-0 items-start justify-center overflow-hidden border-b border-border bg-muted lg:h-auto lg:min-h-[20rem] lg:w-56 lg:self-stretch lg:border-b-0 lg:border-r xl:w-64">
+                <span class="absolute top-4 left-4 z-10 bg-accent px-3 py-1 font-mono text-[10px] font-medium uppercase tracking-[0.12em] text-background">
+                  Em destaque
+                </span>
+                {featuredProject.data.featuredImageUrl ? (
+                  <>
+                    <Image
+                      src={featuredProject.data.imageUrl}
+                      alt={projectImageAlt(featuredProject)}
+                      width={800}
+                      height={450}
+                      sizes="100vw"
+                      class="h-full w-full object-cover object-top transition-transform duration-500 ease-[cubic-bezier(0.25,0,0,1)] group-hover:scale-105 lg:hidden"
+                      loading="eager"
+                      decoding="async"
+                    />
+                    <Image
+                      src={featuredProject.data.featuredImageUrl}
+                      alt={projectImageAlt(featuredProject)}
+                      width={1365}
+                      height={2800}
+                      sizes="(min-width: 1024px) 16rem, 0"
+                      class="hidden h-full max-h-full w-full object-contain object-top lg:block"
+                      loading="eager"
+                      decoding="async"
+                    />
+                  </>
+                ) : (
+                  <Image
+                    src={featuredProject.data.imageUrl}
+                    alt={projectImageAlt(featuredProject)}
+                    width={800}
+                    height={450}
+                    sizes="(max-width: 1024px) 100vw, 16rem"
+                    class="h-full w-full object-cover object-top transition-transform duration-500 ease-[cubic-bezier(0.25,0,0,1)] group-hover:scale-105 lg:object-contain"
+                    loading="eager"
+                    decoding="async"
+                  />
+                )}
+              </div>
+              <div class="flex flex-1 flex-col p-6 md:p-8">
+                <h3 class="font-display text-xl font-semibold tracking-[-0.03em] text-foreground md:text-2xl">
+                  {featuredProject.data.title}
+                </h3>
+                {featuredProject.data.cardTagline && (
+                  <p class="mt-2 font-mono text-xs uppercase tracking-[0.1em] text-accent">
+                    {featuredProject.data.cardTagline}
+                  </p>
+                )}
+                <p class="mt-4 flex-1 text-sm leading-relaxed text-foreground-variant md:text-base">
+                  {featuredProject.data.shortDescription}
+                </p>
+                <ul
+                  class="mt-6 flex flex-wrap gap-3 border-t border-border pt-6 font-mono text-xs uppercase tracking-[0.08em] text-muted-foreground"
+                  aria-label="Stack do projeto"
+                >
+                  {featuredProject.data.tech.map((t) => (
+                    <li>{t}</li>
+                  ))}
+                </ul>
+                <div class="mt-6">
+                  <Button
+                    type="button"
+                    variant="secondary"
+                    class="w-full justify-center sm:w-auto"
+                    data-project-expand
+                    aria-expanded="false"
+                    aria-controls="project-modal-root"
+                  >
+                    Ver detalhes
+                  </Button>
+                </div>
+              </div>
+            </article>
+          </Reveal>
+        </div>
+      )
+    }
+
     <ul
       id="projetos-list"
-      class="mt-16 grid list-none grid-cols-1 items-stretch gap-6 sm:grid-cols-2 lg:gap-8"
+      class:list={[
+        "list-none grid grid-cols-1 items-stretch gap-6 sm:grid-cols-2 lg:gap-8",
+        featuredProject ? "mt-8" : "mt-16",
+      ]}
     >
       {
-        projectEntries.map((project, index) => {
+        gridProjects.map((project, index) => {
           const isExtra = index >= PROJECTS_INITIAL;
           return (
             <li
@@ -67,7 +176,7 @@ const showProjectsFooter = projectEntries.length > PROJECTS_INITIAL;
                   <div class="relative block h-44 overflow-hidden border-b border-border sm:h-48">
                     <Image
                       src={project.data.imageUrl}
-                      alt=""
+                      alt={projectImageAlt(project)}
                       width={800}
                       height={450}
                       sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 40vw"
@@ -80,6 +189,11 @@ const showProjectsFooter = projectEntries.length > PROJECTS_INITIAL;
                     <h3 class="font-display text-xl font-semibold tracking-[-0.03em] text-foreground">
                       {project.data.title}
                     </h3>
+                    {project.data.cardTagline && (
+                      <p class="mt-2 font-mono text-xs uppercase tracking-[0.1em] text-accent">
+                        {project.data.cardTagline}
+                      </p>
+                    )}
                     <p class="mt-4 flex-1 text-sm leading-relaxed text-foreground-variant md:text-base">
                       {project.data.shortDescription}
                     </p>
@@ -196,7 +310,7 @@ const showProjectsFooter = projectEntries.length > PROJECTS_INITIAL;
                 <div class="relative block h-44 overflow-hidden rounded-lg border border-border sm:h-52">
                   <Image
                     src={project.data.imageUrl}
-                    alt=""
+                    alt={projectImageAlt(project)}
                     width={800}
                     height={450}
                     sizes="(max-width: 640px) 100vw, 42rem"
