@@ -80,7 +80,7 @@ const showProjectsFooter = projectEntries.length > PROJECTS_INITIAL;
                     <h3 class="font-display text-xl font-semibold tracking-[-0.03em] text-foreground">
                       {project.data.title}
                     </h3>
-                    <p class="mt-4 flex-1 text-sm leading-relaxed text-muted-foreground md:text-base">
+                    <p class="mt-4 flex-1 text-sm leading-relaxed text-foreground-variant md:text-base">
                       {project.data.shortDescription}
                     </p>
                     <ul
@@ -210,30 +210,6 @@ const showProjectsFooter = projectEntries.length > PROJECTS_INITIAL;
                 </h2>
                 <div
                   class:list={[
-                    "project-modal-md mt-4 max-w-none text-sm leading-relaxed text-muted-foreground md:text-base",
-                    "[&_h1]:font-display [&_h1]:mt-8 [&_h1]:text-xl [&_h1]:font-semibold [&_h1]:tracking-[-0.03em] [&_h1]:text-foreground md:[&_h1]:text-2xl",
-                    "[&_h1:first-child]:mt-0",
-                    "[&_h2]:font-display [&_h2]:mt-8 [&_h2]:text-lg [&_h2]:font-semibold [&_h2]:tracking-[-0.03em] [&_h2]:text-foreground md:[&_h2]:text-xl",
-                    "[&_h2:first-child]:mt-0",
-                    "[&_p]:mt-2 [&_p:first-child]:mt-0",
-                    "[&_ul]:mt-4 [&_ul]:list-disc [&_ul]:space-y-1 [&_ul]:pl-5 [&_ul]:text-muted-foreground",
-                    "[&_strong]:font-semibold [&_strong]:text-foreground",
-                    "[&_a]:text-accent [&_a]:underline [&_a]:decoration-accent/40 hover:[&_a]:decoration-accent",
-                    "[&_code]:rounded [&_code]:border [&_code]:border-border [&_code]:bg-muted [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:font-mono [&_code]:text-xs [&_code]:text-foreground",
-                  ]}
-                >
-                  <Content />
-                </div>
-                <ul
-                  class="mt-6 flex flex-wrap gap-3 border-t border-border pt-6 font-mono text-xs uppercase tracking-[0.08em] text-muted-foreground"
-                  aria-label="Stack do projeto"
-                >
-                  {project.data.tech.map((t) => (
-                    <li>{t}</li>
-                  ))}
-                </ul>
-                <div
-                  class:list={[
                     "mt-8 grid w-full gap-3",
                     hasLive ? "grid-cols-1 sm:grid-cols-2" : "grid-cols-1",
                   ]}
@@ -257,6 +233,32 @@ const showProjectsFooter = projectEntries.length > PROJECTS_INITIAL;
                     Ver código
                   </Button>
                 </div>
+                <div
+                  class:list={[
+                    "project-modal-md mt-4 max-w-none text-sm leading-relaxed text-foreground-variant md:text-base",
+                    "[&_h1]:font-display [&_h1]:mt-8 [&_h1]:text-xl [&_h1]:font-semibold [&_h1]:tracking-[-0.03em] [&_h1]:text-foreground md:[&_h1]:text-2xl",
+                    "[&_h1:first-child]:mt-0",
+                    "[&_h2]:font-display [&_h2]:mt-8 [&_h2]:text-lg [&_h2]:font-semibold [&_h2]:tracking-[-0.03em] [&_h2]:text-foreground md:[&_h2]:text-xl",
+                    "[&_h2:first-child]:mt-0",
+                    "[&_h3]:font-display [&_h3]:mt-8 [&_h3]:text-lg [&_h3]:font-semibold [&_h3]:tracking-[-0.03em] [&_h3]:text-foreground md:[&_h3]:text-xl",
+                    "[&_h3:first-child]:mt-0",
+                    "[&_p]:mt-2 [&_p:first-child]:mt-0",
+                    "[&_ul]:mt-4 [&_ul]:list-disc [&_ul]:space-y-1 [&_ul]:pl-5",
+                    "[&_strong]:font-semibold [&_strong]:text-foreground",
+                    "[&_a]:text-accent [&_a]:underline [&_a]:decoration-accent/40 hover:[&_a]:decoration-accent",
+                    "[&_code]:rounded [&_code]:border [&_code]:border-border [&_code]:bg-muted [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:font-mono [&_code]:text-xs [&_code]:text-foreground",
+                  ]}
+                >
+                  <Content />
+                </div>
+                <ul
+                  class="mt-6 flex flex-wrap gap-3 border-t border-border pt-6 font-mono text-xs uppercase tracking-[0.08em] text-muted-foreground"
+                  aria-label="Stack do projeto"
+                >
+                  {project.data.tech.map((t) => (
+                    <li>{t}</li>
+                  ))}
+                </ul>
               </div>
             );
           })

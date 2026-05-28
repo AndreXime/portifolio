@@ -4,6 +4,7 @@
 @theme inline {
 	--color-background: #0a0a0a;
 	--color-foreground: #fafafa;
+	--color-foreground-variant: #e0d7d7;
 	--color-muted: #1a1a1a;
 	--color-muted-foreground: #949494;
 	--color-accent: #ff3d00;
