@@ -11,42 +11,67 @@ import { site } from "../../content/site";
   aria-labelledby="about-heading"
 >
   <Container>
-    <Reveal staggerMs={0}>
-      <AccentBar class="mb-8" />
-      <h2
-        id="about-heading"
-        class="font-display text-3xl font-semibold leading-tight tracking-[-0.04em] text-foreground sm:text-4xl md:text-5xl lg:text-6xl"
-      >
-        Sobre
-      </h2>
-      <p
-        class="mt-4 font-mono text-xs uppercase tracking-[0.12em] text-muted-foreground md:text-sm md:tracking-[0.15em]"
-      >
-        Manifesto breve
-      </p>
-    </Reveal>
-
-    <div class="mt-16 grid grid-cols-1 gap-16 lg:grid-cols-12 lg:gap-12">
-      <div class="flex flex-col gap-8 lg:col-span-5">
-        <Reveal staggerMs={80}>
-          <img
-            src="/me.png"
-            alt={site.about.photoAlt}
-            width={448}
-            height={448}
-            class="w-full max-w-xs rounded-lg border border-border object-cover object-center sm:max-w-sm"
-            loading="lazy"
-            decoding="async"
-          />
-        </Reveal>
-
-        <Reveal staggerMs={100} class="hidden lg:block">
-          <p
-            class="font-serif text-2xl italic leading-snug tracking-tight text-foreground md:text-3xl"
+    <div
+      class="flex flex-col gap-10 lg:flex-row lg:items-end lg:justify-between lg:gap-16"
+    >
+      <div class="max-w-2xl lg:max-w-none lg:flex-1">
+        <Reveal staggerMs={0}>
+          <AccentBar class="mb-8" />
+          <h2
+            id="about-heading"
+            class="font-display text-3xl font-semibold leading-tight tracking-[-0.04em] text-foreground sm:text-4xl md:text-5xl lg:text-6xl"
           >
-            “Bom código é o que o próximo dev entende numa sexta à tarde.”
+            Sobre
+          </h2>
+          <p
+            class="mt-4 font-mono text-xs uppercase tracking-[0.12em] text-muted-foreground md:text-sm md:tracking-[0.15em]"
+          >
+            Manifesto breve
           </p>
         </Reveal>
+      </div>
+      <Reveal
+        staggerMs={120}
+        class="shrink-0 min-[500px]:hidden lg:block lg:max-w-md"
+      >
+        <p
+          class="font-serif text-2xl italic leading-[1.6] text-muted-foreground md:leading-relaxed"
+        >
+          “{site.about.quote}”
+        </p>
+      </Reveal>
+    </div>
+
+    <div class="mt-16 grid grid-cols-1 gap-16 lg:grid-cols-12 lg:gap-12">
+      <div class="lg:col-span-5">
+        <div
+          class="flex flex-col gap-8 min-[500px]:flex-row min-[500px]:items-center min-[500px]:gap-8 lg:flex-col lg:gap-8"
+        >
+          <Reveal
+            staggerMs={80}
+            class="shrink-0 min-[500px]:max-w-[42%] lg:max-w-none"
+          >
+            <img
+              src="/me.png"
+              alt={site.about.photoAlt}
+              width={448}
+              height={448}
+              class="w-full max-w-xs rounded-lg border border-border object-cover object-center sm:max-w-sm min-[500px]:max-w-none"
+              loading="lazy"
+              decoding="async"
+            />
+          </Reveal>
+          <Reveal
+            staggerMs={100}
+            class="hidden min-w-0 flex-1 min-[500px]:block lg:hidden"
+          >
+            <p
+              class="font-serif text-3xl italic tracking-tight text-foreground leading-relaxed"
+            >
+              “{site.about.quote}”
+            </p>
+          </Reveal>
+        </div>
       </div>
 
       <div class="lg:col-span-7">
@@ -76,11 +101,5 @@ import { site } from "../../content/site";
         </Reveal>
       </div>
     </div>
-
-    <Reveal staggerMs={0} class="mt-12 border-t border-border pt-10 lg:hidden">
-      <p class="font-serif text-xl italic leading-snug text-foreground">
-        “Bom código é o que o próximo dev entende numa sexta à tarde.”
-      </p>
-    </Reveal>
   </Container>
 </section>

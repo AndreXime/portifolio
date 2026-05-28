@@ -28,6 +28,7 @@ export const site = {
 	},
 	about: {
 		photoAlt: "André Ximenes, desenvolvedor backend",
+		quote: "Bom código é o que o próximo dev entende numa sexta à tarde.",
 	},
 	sections: {
 		projectsSubtitle:
