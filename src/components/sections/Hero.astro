@@ -3,6 +3,10 @@ import Container from "../ui/Container.astro";
 import Button from "../ui/Button.astro";
 import AccentBar from "../ui/AccentBar.astro";
 import Reveal from "../ui/Reveal.astro";
+import { site } from "../../content/site";
+
+const { hero } = site;
+const headlineParts = hero.headline.split(hero.headlineAccent);
 ---
 
 <section
@@ -17,19 +21,17 @@ import Reveal from "../ui/Reveal.astro";
         id="hero-heading"
         class="font-display max-w-[18ch] text-5xl font-semibold leading-[1.05] tracking-[-0.06em] text-foreground md:text-6xl lg:text-7xl"
       >
-        Construindo <span class="text-accent">APIs</span> eficientes, seguras e fáceis
-        de manter.
+        {headlineParts[0]}
+        <span class="text-accent">{hero.headlineAccent}</span>
+        {headlineParts[1]}
       </h1>
 
       <div
         class="mt-8 max-w-2xl text-base leading-[1.75] text-foreground-variant md:text-lg md:leading-relaxed"
       >
-        Olá, meu nome é <span class="text-foreground font-bold"
-          >André Ximenes</span
-        >. Sou desenvolvedor de software focado no ecossistema TypeScript, com
-        forte inclinação para o desenvolvimento backend. Crio APIs modulares e
-        auto-documentadas aplicando boas práticas de arquitetura. Atualmente
-        buscando minha próxima oportunidade como desenvolvedor júnior.
+        Olá, meu nome é <span class="font-bold text-foreground"
+          >{site.authorName}</span
+        >. {hero.intro}
       </div>
 
       <div
@@ -52,24 +54,28 @@ import Reveal from "../ui/Reveal.astro";
           Stack
         </dt>
         <dd class="mt-2 font-mono text-sm text-foreground">
-          TS · Nest.js · React
+          {hero.stackLine}
         </dd>
       </Reveal>
       <Reveal staggerMs={80}>
         <dt
           class="font-mono text-sm uppercase tracking-[0.15em] text-muted-foreground"
         >
-          Experiência
+          {hero.availabilityLabel}
         </dt>
-        <dd class="mt-2 font-mono text-sm text-foreground">6 meses</dd>
+        <dd class="mt-2 font-mono text-sm text-foreground">
+          {hero.availabilityValue}
+        </dd>
       </Reveal>
-      <Reveal staggerMs={240}>
+      <Reveal staggerMs={160}>
         <dt
           class="font-mono text-sm uppercase tracking-[0.15em] text-muted-foreground"
         >
           Localização
         </dt>
-        <dd class="mt-2 font-mono text-sm text-foreground">Remoto · BR</dd>
+        <dd class="mt-2 font-mono text-sm text-foreground">
+          {hero.locationValue}
+        </dd>
       </Reveal>
     </dl>
   </Container>
