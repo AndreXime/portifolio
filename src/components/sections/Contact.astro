@@ -50,8 +50,17 @@ const mailto = `mailto:${site.email}?subject=Contato%20pelo%20portf%C3%B3lio`;
         <Reveal staggerMs={80}>
           <form
             id="contact-form"
-            class="space-y-8 border border-border bg-card p-6 md:p-8"
+            class="relative space-y-8 border border-border bg-card p-6 md:p-8"
           >
+            <input
+              type="text"
+              name="website"
+              tabindex="-1"
+              autocomplete="off"
+              aria-hidden="true"
+              class="absolute size-px overflow-hidden opacity-0"
+            />
+            <input type="hidden" name="_ts" value="" data-contact-ts />
             <Input
               id="c-name"
               name="name"
@@ -191,13 +200,12 @@ const mailto = `mailto:${site.email}?subject=Contato%20pelo%20portf%C3%B3lio`;
         id="cta-heading"
         class="font-display max-w-3xl text-3xl font-semibold leading-[1.1] tracking-[-0.04em] sm:text-4xl md:text-5xl lg:text-6xl"
       >
-        Buscando um desenvolvedor focado em qualidade?
+        {site.contactCta.title}
       </h2>
       <p
         class="mt-6 max-w-xl text-base leading-relaxed text-background/70 md:text-lg"
       >
-        Estou disponível para novos desafios e colaborações em tempo integral.
-        Vamos conversar sobre como minha experiência pode somar ao seu time.
+        {site.contactCta.body}
       </p>
       <div
         class="mt-10 flex flex-col gap-4 sm:flex-row sm:items-center sm:gap-8"
