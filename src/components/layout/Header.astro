@@ -33,6 +33,7 @@ const links = [
           <Button
             variant="ghost"
             href={href}
+            data-nav-section={href.slice(1)}
             class="px-2.5 py-1.5 font-mono text-[11px] !font-medium uppercase !tracking-[0.1em] xl:px-3 xl:text-xs"
           >
             {label}
@@ -45,19 +46,23 @@ const links = [
       <summary
         class="flex size-11 cursor-pointer list-none items-center justify-center rounded-none border border-border text-foreground transition-colors duration-150 hover:border-border-hover [&::-webkit-details-marker]:hidden"
         aria-label="Menu"
+        aria-expanded="false"
+        aria-controls="nav-drawer-panel"
       >
         <IconMenu class="size-5 group-open:hidden" />
         <IconClose class="hidden size-5 group-open:block" />
       </summary>
       <div
+        id="nav-drawer-panel"
+        data-nav-drawer-panel
         class="absolute right-0 top-full z-50 mt-2 w-56 border border-border bg-card"
       >
         {
           links.map(({ href, label }) => (
             <a
               href={href}
+              data-nav-section={href.slice(1)}
               class="block border-b border-border px-4 py-3 font-mono text-xs uppercase tracking-[0.1em] text-muted-foreground transition-colors duration-150 last:border-b-0 hover:bg-muted hover:text-foreground focus-ring"
-              onclick="document.getElementById('nav-drawer')?.removeAttribute('open')"
             >
               {label}
             </a>

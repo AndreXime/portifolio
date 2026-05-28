@@ -1,8 +1,16 @@
 function initReveal() {
 	const TIMING = "cubic-bezier(0.25, 0, 0, 1)";
-
-	const nodes = document.querySelectorAll("[data-reveal-root]");
+	const nodes = document.querySelectorAll<HTMLElement>("[data-reveal-root]");
 	if (!nodes.length) return;
+
+	const prefersReducedMotion = window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches ?? false;
+
+	if (prefersReducedMotion) {
+		for (const el of nodes) {
+			el.classList.add("is-visible");
+		}
+		return;
+	}
 
 	const io = new IntersectionObserver(
 		(entries) => {

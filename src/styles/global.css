@@ -82,3 +82,7 @@
 		transition: none;
 	}
 }
+
+.is-nav-active {
+	color: var(--color-foreground);
+}
