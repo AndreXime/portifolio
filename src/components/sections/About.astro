@@ -1,9 +1,7 @@
 ---
-import { marked } from "marked";
 import Container from "../ui/Container.astro";
 import AccentBar from "../ui/AccentBar.astro";
 import Reveal from "../ui/Reveal.astro";
-import { site } from "../../content/site";
 ---
 
 <section
@@ -41,9 +39,27 @@ import { site } from "../../content/site";
       <div class="lg:col-span-7">
         <Reveal staggerMs={80}>
           <div
-            class="space-y-6 text-base leading-[1.6] text-muted-foreground md:text-lg md:leading-relaxed [&>p:first-child]:text-foreground"
-            set:html={await marked.parse(site.aboutBodyMarkdown)}
-          />
+            class="space-y-6 text-base leading-[1.6] md:text-lg md:leading-relaxed"
+          >
+            <p class="text-foreground">
+              Sou desenvolvedor focado no desenvolvimento de <strong
+                >backend com TypeScript</strong
+              >, utilizando ferramentas como <strong>Node.js, Bun e Hono</strong
+              > para estruturar microsserviços e APIs estáveis. Por ter experiência
+              prévia como fullstack trabalhando com <strong>Next.js</strong>,
+              possuo uma visão holística do ecossistema: sei exatamente como o
+              frontend consome os dados, o que me permite projetar rotas mais
+              eficientes, seguras e com excelente documentação.
+            </p>
+            <p class="text-foreground-variant">
+              Escrevo código limpo e modular, focado em facilitar a manutenção e
+              a escala do software. Entendo que o amadurecimento técnico vem com
+              o contexto de produto e colaboração, por isso priorizo a
+              consistência nas entregas, o aprendizado contínuo com o time e a
+              construção de soluções que resolvam desafios de engenharia sem
+              complexidade desnecessária.
+            </p>
+          </div>
         </Reveal>
       </div>
     </div>
