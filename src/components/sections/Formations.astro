@@ -12,20 +12,34 @@ import { Image } from "astro:assets";
   aria-labelledby="form-heading"
 >
   <Container>
-    <Reveal staggerMs={0}>
-      <AccentBar class="mb-8" />
-      <h2
-        id="form-heading"
-        class="font-display text-3xl font-semibold leading-tight tracking-[-0.04em] text-foreground sm:text-4xl md:text-5xl"
-      >
-        Formações
-      </h2>
-      <p
-        class="mt-4 max-w-xl font-mono text-xs uppercase tracking-[0.12em] text-muted-foreground"
-      >
-        Graduação, cursos e certificações
-      </p>
-    </Reveal>
+    <div
+      class="flex flex-col gap-10 lg:flex-row lg:items-end lg:justify-between lg:gap-16"
+    >
+      <div class="max-w-2xl lg:max-w-none lg:flex-1">
+        <Reveal staggerMs={0}>
+          <AccentBar class="mb-8" />
+          <h2
+            id="form-heading"
+            class="font-display text-3xl font-semibold leading-tight tracking-[-0.04em] text-foreground sm:text-4xl md:text-5xl lg:text-6xl"
+          >
+            Formações
+          </h2>
+          <p
+            class="mt-4 font-mono text-xs uppercase tracking-[0.12em] text-muted-foreground md:text-sm md:tracking-[0.15em]"
+          >
+            Graduação, cursos e certificações
+          </p>
+        </Reveal>
+      </div>
+      <Reveal staggerMs={120} class="shrink-0 lg:max-w-md">
+        <p
+          class="text-base leading-[1.6] text-muted-foreground md:text-lg md:leading-relaxed"
+        >
+          Graduação em andamento e cursos que reforçam a base técnica. O que
+          aparece aqui é o que mais dialoga com o que entrego hoje.
+        </p>
+      </Reveal>
+    </div>
 
     <ul class="mt-16 list-none space-y-0 border-t border-border lg:mt-20">
       {
@@ -71,7 +85,7 @@ import { Image } from "astro:assets";
                       </span>
                     </div>
                     {f.description && (
-                      <p class="mt-4 max-w-2xl text-base leading-[1.6] text-muted-foreground md:leading-relaxed">
+                      <p class="mt-4 max-w-2xl text-base leading-[1.6] text-foreground-variant md:leading-relaxed">
                         {f.description}
                       </p>
                     )}

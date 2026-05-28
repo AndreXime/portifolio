@@ -16,20 +16,34 @@ const mailto = `mailto:${site.email}?subject=Contato%20pelo%20portf%C3%B3lio`;
   aria-labelledby="contact-heading"
 >
   <Container>
-    <Reveal staggerMs={0}>
-      <AccentBar class="mb-8" />
-      <h2
-        id="contact-heading"
-        class="font-display max-w-2xl text-3xl font-semibold leading-tight tracking-[-0.04em] text-foreground sm:text-4xl md:text-5xl"
-      >
-        Contato
-      </h2>
-      <p
-        class="mt-4 max-w-xl font-mono text-xs uppercase tracking-[0.12em] text-muted-foreground"
-      >
-        Propostas, parcerias ou conversa técnica
-      </p>
-    </Reveal>
+    <div
+      class="flex flex-col gap-10 lg:flex-row lg:items-end lg:justify-between lg:gap-16"
+    >
+      <div class="max-w-2xl lg:max-w-none lg:flex-1">
+        <Reveal staggerMs={0}>
+          <AccentBar class="mb-8" />
+          <h2
+            id="contact-heading"
+            class="font-display text-3xl font-semibold leading-tight tracking-[-0.04em] text-foreground sm:text-4xl md:text-5xl lg:text-6xl"
+          >
+            Contato
+          </h2>
+          <p
+            class="mt-4 font-mono text-xs uppercase tracking-[0.12em] text-muted-foreground md:text-sm md:tracking-[0.15em]"
+          >
+            Propostas, parcerias ou conversa técnica
+          </p>
+        </Reveal>
+      </div>
+      <Reveal staggerMs={120} class="shrink-0 lg:max-w-md">
+        <p
+          class="text-base leading-[1.6] text-muted-foreground md:text-lg md:leading-relaxed"
+        >
+          Use o formulário, o e-mail ou as redes. Para vagas, inclua a descrição
+          ou o link do LinkedIn; costumo responder em até um dia útil.
+        </p>
+      </Reveal>
+    </div>
 
     <div
       class="mt-16 grid grid-cols-1 gap-16 border-t border-border pt-16 lg:grid-cols-12 lg:gap-12"
@@ -84,7 +98,7 @@ const mailto = `mailto:${site.email}?subject=Contato%20pelo%20portf%C3%B3lio`;
             <h3
               class="font-mono text-xs font-medium uppercase tracking-[0.15em] text-muted-foreground"
             >
-              Direto
+              Email
             </h3>
             <a
               href={mailto}
@@ -92,11 +106,7 @@ const mailto = `mailto:${site.email}?subject=Contato%20pelo%20portf%C3%B3lio`;
             >
               {site.email}
             </a>
-            <p class="mt-8 text-sm leading-relaxed text-muted-foreground">
-              Resposta em até um dia útil.Para propostas de contratação,
-              sinta-se à vontade para anexar a descrição da vaga ou o link do
-              LinkedIn.
-            </p>
+
             <div class="mt-8 border-t border-border pt-8">
               <p
                 class="font-mono text-xs font-medium uppercase tracking-[0.15em] text-muted-foreground"
@@ -145,7 +155,10 @@ const mailto = `mailto:${site.email}?subject=Contato%20pelo%20portf%C3%B3lio`;
                   rel="noopener noreferrer"
                   class="inline-flex min-h-14 w-full items-center justify-center gap-3 border border-foreground px-6 py-4 font-semibold uppercase tracking-[0.1em] text-foreground transition-all duration-150 ease-[cubic-bezier(0.25,0,0,1)] hover:bg-foreground hover:text-background focus-ring active:translate-y-px md:min-h-16"
                 >
-                  <Icon name="simple-icons:github" class="size-6 shrink-0 md:size-7" />
+                  <Icon
+                    name="simple-icons:github"
+                    class="size-6 shrink-0 md:size-7"
+                  />
                   GitHub
                 </a>
                 <a
@@ -154,7 +167,10 @@ const mailto = `mailto:${site.email}?subject=Contato%20pelo%20portf%C3%B3lio`;
                   rel="noopener noreferrer"
                   class="inline-flex min-h-14 w-full items-center justify-center gap-3 border border-foreground px-6 py-4 font-semibold uppercase tracking-[0.1em] text-foreground transition-all duration-150 ease-[cubic-bezier(0.25,0,0,1)] hover:bg-foreground hover:text-background focus-ring active:translate-y-px md:min-h-16"
                 >
-                  <Icon name="simple-icons:linkedin" class="size-6 shrink-0 md:size-7" />
+                  <Icon
+                    name="simple-icons:linkedin"
+                    class="size-6 shrink-0 md:size-7"
+                  />
                   LinkedIn
                 </a>
               </div>

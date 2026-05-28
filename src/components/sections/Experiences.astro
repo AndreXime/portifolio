@@ -12,20 +12,34 @@ import { Image } from "astro:assets";
   aria-labelledby="exp-heading"
 >
   <Container>
-    <Reveal staggerMs={0}>
-      <AccentBar class="mb-8" />
-      <h2
-        id="exp-heading"
-        class="font-display text-3xl font-semibold leading-tight tracking-[-0.04em] text-foreground sm:text-4xl md:text-5xl"
-      >
-        Experiências
-      </h2>
-      <p
-        class="mt-4 max-w-xl font-mono text-xs uppercase tracking-[0.12em] text-muted-foreground"
-      >
-        Trajetória profissional
-      </p>
-    </Reveal>
+    <div
+      class="flex flex-col gap-10 lg:flex-row lg:items-end lg:justify-between lg:gap-16"
+    >
+      <div class="max-w-2xl lg:max-w-none lg:flex-1">
+        <Reveal staggerMs={0}>
+          <AccentBar class="mb-8" />
+          <h2
+            id="exp-heading"
+            class="font-display text-3xl font-semibold leading-tight tracking-[-0.04em] text-foreground sm:text-4xl md:text-5xl lg:text-6xl"
+          >
+            Experiências
+          </h2>
+          <p
+            class="mt-4 font-mono text-xs uppercase tracking-[0.12em] text-muted-foreground md:text-sm md:tracking-[0.15em]"
+          >
+            Trajetória profissional
+          </p>
+        </Reveal>
+      </div>
+      <Reveal staggerMs={120} class="shrink-0 lg:max-w-md">
+        <p
+          class="text-base leading-[1.6] text-muted-foreground md:text-lg md:leading-relaxed"
+        >
+          Além de cargo e período, o que importa é o contexto e o que ficou de
+          relevante. Nos destaques, entregas e aprendizados.
+        </p>
+      </Reveal>
+    </div>
 
     <ul class="mt-16 list-none space-y-6 lg:mt-20">
       {
@@ -63,13 +77,13 @@ import { Image } from "astro:assets";
                   </div>
                 </header>
 
-                <div class="mt-6 min-w-0">
-                  <p class="text-base leading-[1.6] text-muted-foreground md:text-lg md:leading-relaxed">
+                <div class="mt-6 min-w-0 text-foreground-variant">
+                  <p class="text-base leading-[1.6]  md:text-lg md:leading-relaxed">
                     {exp.summary}
                   </p>
                   {exp.highlights && exp.highlights.length > 0 && (
                     <ul
-                      class="mt-6 space-y-4 border-t border-border pt-6 text-sm text-foreground md:text-base"
+                      class="mt-6 space-y-4 border-t border-border pt-6 text-sm md:text-base"
                       aria-label={`Destaques em ${exp.company}`}
                     >
                       {exp.highlights.map((h) => (
@@ -77,7 +91,7 @@ import { Image } from "astro:assets";
                           <span class="font-mono text-sm font-bold uppercase leading-normal text-accent">
                             {h.label}
                           </span>
-                          <span class="min-w-0 font-sans text-sm font-normal leading-normal tracking-normal text-muted-foreground md:text-base">
+                          <span class="min-w-0 font-sans text-sm font-normal leading-normal tracking-normal text-foreground-variant md:text-base">
                             {h.detail}
                           </span>
                         </li>
