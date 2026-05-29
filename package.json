@@ -8,7 +8,7 @@
 		"build": "astro build",
 		"preview": "astro preview",
 		"astro": "astro",
-		"generate-og": "tsx src/scripts/generate-og.ts",
+		"generate-og": "tsx generate-og.ts",
 		"check": "biome check . && tsc --noEmit",
 		"format": "biome check --write --no-errors-on-unmatched .",
 		"prepare": "husky"
