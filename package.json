@@ -23,7 +23,6 @@
 		"@tailwindcss/vite": "^4.3.0",
 		"astro": "^6.3.7",
 		"astro-icon": "^1.1.5",
-		"marked": "^18.0.4",
 		"nodemailer": "^8.0.8"
 	},
 	"devDependencies": {
