@@ -7,12 +7,12 @@ export const site = {
 	seo: {
 		title: "André Ximenes | Desenvolvedor Backend TypeScript",
 		description:
-			"Portfólio de André Ximenes, desenvolvedor backend TypeScript (júnior) com base fullstack. APIs com NestJS, Hono e Node.js. Projetos em produção e código aberto.",
+			"Portfólio de André Ximenes, desenvolvedor backend TypeScript com base fullstack. APIs com NestJS, Hono e Node.js. Projetos em produção e código aberto.",
 		ogImageAlt: "André Ximenes, desenvolvedor backend TypeScript especializado em APIs",
 	},
 	person: {
 		fullName: "André Ricardo Ximenes Aragão",
-		jobTitle: "Desenvolvedor Backend TypeScript (Júnior)",
+		jobTitle: "Desenvolvedor Backend TypeScript",
 		description:
 			"Desenvolvedor backend TypeScript com base fullstack. Foco em APIs modulares, contratos tipados e arquitetura sustentável.",
 	},

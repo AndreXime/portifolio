@@ -15,17 +15,19 @@ const links = [
 ] as const;
 ---
 
-<header class="fixed top-0 z-50 w-full border-b border-border bg-background">
+<header
+  class="fixed top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur-none"
+>
   <Container as="div" class="flex items-center justify-between py-4 md:py-5">
     <button
       data-scroll-to="inicio"
-      class="font-display cursor-pointer text-lg font-semibold tracking-[-0.04em] text-foreground transition-colors duration-150 hover:text-accent focus-ring"
+      class="font-display cursor-pointer text-left text-lg font-semibold leading-none tracking-tight text-foreground focus-ring md:text-xl"
     >
       {site.authorName}
     </button>
 
     <nav
-      class="hidden items-center gap-0.5 lg:flex xl:gap-1"
+      class="hidden items-center gap-1 lg:flex"
       aria-label="Principal"
     >
       {
@@ -34,7 +36,7 @@ const links = [
             variant="ghost"
             href={href}
             data-nav-section={href.slice(1)}
-            class="px-2.5 py-1.5 font-mono text-[11px] !font-medium uppercase !tracking-[0.1em] xl:px-3 xl:text-xs"
+            class="px-2.5 py-1.5 font-mono text-[11px] !font-medium uppercase !tracking-[0.1em]"
           >
             {label}
           </Button>
@@ -44,7 +46,7 @@ const links = [
 
     <details class="group relative lg:hidden" id="nav-drawer">
       <summary
-        class="flex size-11 cursor-pointer list-none items-center justify-center rounded-none border border-border text-foreground transition-colors duration-150 hover:border-border-hover [&::-webkit-details-marker]:hidden"
+        class="flex size-11 cursor-pointer list-none items-center justify-center rounded-none border border-border bg-card text-foreground transition-colors duration-150 hover:border-border-hover [&::-webkit-details-marker]:hidden"
         aria-label="Menu"
         aria-expanded="false"
         aria-controls="nav-drawer-panel"

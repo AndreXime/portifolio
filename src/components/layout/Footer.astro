@@ -6,23 +6,24 @@ import { site } from "../../content/site";
 const year = new Date().getFullYear();
 ---
 
-<footer class="border-t border-border bg-muted py-12 md:py-16">
+<footer class="border-t border-border bg-muted py-10 md:py-12">
   <Container>
     <div
-      class="flex flex-col gap-10 sm:flex-row sm:items-center sm:justify-between lg:gap-16"
+      class="grid grid-cols-1 gap-8 border border-border bg-card p-6 md:grid-cols-[1fr_auto] md:items-center md:p-8"
     >
       <div>
-        <p
-          class="font-mono text-xs uppercase tracking-[0.15em] text-muted-foreground"
-        >
-          Portfólio de {site.authorName} © {year}
+        <p class="font-mono text-[11px] uppercase tracking-[0.12em] text-muted-foreground">
+          Portfólio / {site.authorName}
         </p>
-        <p class="mt-2 max-w-md text-sm leading-relaxed text-muted-foreground">
-          Tipografia como linguagem — código como estrutura.
+        <p class="mt-2 font-display text-lg font-semibold text-foreground">
+          Desenvolvedor Backend TypeScript
+        </p>
+        <p class="mt-1 text-sm text-muted-foreground">
+          &copy; {year}. Código legível sustenta entrega constante.
         </p>
       </div>
 
-      <div class="flex flex-wrap items-center gap-6 sm:gap-8">
+      <div class="flex flex-wrap items-center gap-6">
         <a
           href={site.githubUrl}
           target="_blank"
@@ -36,16 +37,16 @@ const year = new Date().getFullYear();
           href={site.linkedinUrl}
           target="_blank"
           rel="noopener noreferrer"
-          class="text-muted-foreground transition-colors duration-150 hover:text-accent focus-ring"
+          class="text-muted-foreground transition-colors duration-150 hover:text-foreground focus-ring"
           aria-label="LinkedIn"
         >
           <Icon name="simple-icons:linkedin" class="size-[18px]" />
         </a>
         <button
           data-scroll-to="inicio"
-          class="font-mono text-xs cursor-pointer uppercase tracking-[0.1em] text-muted-foreground underline decoration-border decoration-2 underline-offset-4 transition-colors duration-150 hover:text-foreground hover:decoration-accent focus-ring"
+          class="cursor-pointer font-mono text-[11px] uppercase tracking-[0.12em] text-muted-foreground underline decoration-border decoration-1 underline-offset-4 transition-colors duration-150 hover:text-accent hover:decoration-accent focus-ring"
         >
-          Topo
+          Voltar ao topo
         </button>
       </div>
     </div>

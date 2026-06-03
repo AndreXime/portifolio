@@ -8,7 +8,6 @@ interface Props {
   disabled?: boolean;
   class?: string;
   showArrow?: boolean;
-  /** Para fundos claros (ex.: faixa CTA invertida) */
   onLight?: boolean;
 }
 
@@ -31,23 +30,24 @@ const hashTargetId = isHashLink ? href.split("#")[1] : undefined;
 const Tag = isHashLink ? "button" : href ? "a" : "button";
 
 const shared =
-  "inline-flex cursor-pointer items-center justify-center gap-2 whitespace-nowrap rounded-none font-semibold uppercase tracking-[0.1em] transition-all duration-150 ease-[cubic-bezier(0.25,0,0,1)] focus-ring active:translate-y-px disabled:pointer-events-none disabled:opacity-50";
+  "inline-flex cursor-pointer items-center justify-center gap-2 whitespace-nowrap rounded-none border font-mono text-xs font-medium uppercase tracking-[0.12em] transition-colors duration-150 ease-[cubic-bezier(0.25,0,0,1)] focus-ring active:translate-y-px disabled:pointer-events-none disabled:opacity-50";
 
 function secondaryClass(light: boolean) {
   return light
-    ? "border border-background px-6 py-3 text-background hover:bg-background hover:text-foreground"
-    : "border border-foreground px-6 py-3 text-foreground hover:bg-foreground hover:text-background";
+    ? "border-background bg-transparent px-5 py-3 text-background hover:bg-background hover:text-foreground"
+    : "border-foreground bg-transparent px-5 py-3 text-foreground hover:border-accent hover:bg-accent hover:text-accent-foreground";
 }
 
 function ghostClass(light: boolean) {
   return light
-    ? "group relative px-4 py-3 text-background/65 hover:text-background"
-    : "group relative px-4 py-3 text-muted-foreground hover:text-foreground";
+    ? "border-transparent px-4 py-3 text-background/70 hover:text-background"
+    : "border-transparent px-4 py-3 text-muted-foreground hover:text-accent";
 }
 
 const variantClass: Record<NonNullable<typeof variant>, string> = {
-  primary:
-    "group relative border border-transparent px-6 py-3 text-accent [&:disabled]:text-muted-foreground",
+  primary: onLight
+    ? "border-background bg-background px-5 py-3 text-foreground hover:bg-transparent hover:text-background"
+    : "border-accent bg-accent px-5 py-3 text-accent-foreground hover:bg-transparent hover:text-accent",
   secondary: secondaryClass(onLight),
   ghost: ghostClass(onLight),
 };
@@ -61,29 +61,6 @@ const variantClass: Record<NonNullable<typeof variant>, string> = {
   disabled={Tag === "button" ? disabled : undefined}
   data-scroll-to={isHashLink ? hashTargetId : undefined}
 >
-  <span class="relative z-10 inline-flex items-center gap-2">
-    <slot />
-    {showArrow && <IconArrow class="size-4 shrink-0" />}
-  </span>
-  {
-    variant === "primary" && (
-      <span class="pointer-events-none absolute inset-0" aria-hidden="true">
-        <span class="absolute top-0 left-0 h-0.5 w-0 bg-accent transition-[width] duration-150 ease-[cubic-bezier(0.25,0,0,1)] group-hover:w-full" />
-        <span class="absolute top-0 right-0 h-0 w-0.5 bg-accent transition-[height] duration-150 delay-75 ease-[cubic-bezier(0.25,0,0,1)] group-hover:h-full" />
-        <span class="absolute right-0 bottom-0 h-0.5 bg-accent transition-[width] duration-150 delay-150 ease-[cubic-bezier(0.25,0,0,1)] w-full" />
-        <span class="absolute bottom-0 left-0 h-0 w-0.5 bg-accent transition-[height] duration-150 delay-[225ms] ease-[cubic-bezier(0.25,0,0,1)] group-hover:h-full" />
-      </span>
-    )
-  }
-  {
-    variant === "ghost" && (
-      <span
-        class:list={[
-          "pointer-events-none absolute bottom-0 left-0 h-px w-full origin-left scale-x-0 transition-transform duration-150 ease-[cubic-bezier(0.25,0,0,1)] group-hover:scale-x-100",
-          onLight ? "bg-background" : "bg-foreground",
-        ]}
-        aria-hidden="true"
-      />
-    )
-  }
+  <slot />
+  {showArrow && <IconArrow class="size-3.5 shrink-0" />}
 </Tag>

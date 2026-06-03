@@ -14,33 +14,25 @@ function resolveIconName(slug: string) {
 
 <section
   id="tecnologias"
-  class="scroll-mt-20 border-b border-border bg-background py-20 md:py-28 lg:py-32"
+  class="scroll-mt-20 border-b border-border bg-background py-16 md:py-20 lg:py-24"
   aria-labelledby="tech-heading"
 >
   <Container>
-    <div
-      class="flex flex-col gap-10 lg:flex-row lg:items-end lg:justify-between lg:gap-16"
-    >
-      <div class="max-w-2xl lg:max-w-none lg:flex-1">
-        <Reveal staggerMs={0}>
-          <AccentBar class="mb-8" />
-          <h2
-            id="tech-heading"
-            class="font-display text-3xl font-semibold leading-tight tracking-[-0.04em] text-foreground sm:text-4xl md:text-5xl lg:text-6xl"
-          >
-            Tecnologias
-          </h2>
-          <p
-            class="mt-4 font-mono text-xs uppercase tracking-[0.12em] text-muted-foreground md:text-sm md:tracking-[0.15em]"
-          >
-            Stack que uso no dia a dia
-          </p>
-        </Reveal>
-      </div>
-      <Reveal staggerMs={120} class="shrink-0 lg:max-w-md">
-        <p
-          class="text-base leading-[1.6] text-muted-foreground md:text-lg md:leading-relaxed"
+    <div class="grid grid-cols-1 items-center gap-8 lg:grid-cols-12 lg:gap-10">
+      <Reveal staggerMs={0} class="lg:col-span-5">
+        <AccentBar class="mb-6" />
+        <h2
+          id="tech-heading"
+          class="font-display text-3xl font-semibold leading-tight tracking-tight text-foreground sm:text-4xl md:text-5xl"
         >
+          Tecnologias
+        </h2>
+        <p class="mt-4 font-mono text-[11px] uppercase tracking-[0.12em] text-muted-foreground">
+          Stack do dia a dia
+        </p>
+      </Reveal>
+      <Reveal staggerMs={80} class="flex items-center lg:col-span-7">
+        <p class="text-base leading-[1.7] text-foreground-variant md:text-lg">
           Não é uma lista de tudo que já usei, são as que mais pesam no que
           entrego hoje. Fora delas entram outras conforme o problema e sigo
           aprendendo o que fizer sentido em cada projeto.
@@ -49,28 +41,22 @@ function resolveIconName(slug: string) {
     </div>
 
     <ul
-      class="mt-16 grid list-none grid-cols-1 gap-6 sm:grid-cols-2 lg:mt-20 lg:grid-cols-3 lg:gap-8"
+      class="mt-14 grid list-none grid-cols-1 gap-px border border-border bg-border sm:grid-cols-2 lg:mt-16 lg:grid-cols-3"
     >
       {
         technologies.map((item, index) => (
-          <li>
-            <Reveal staggerMs={Math.min(index * 40, 320)}>
+          <li class="bg-background">
+            <Reveal staggerMs={Math.min(index * 40, 280)}>
               <article
-                class="group flex h-full flex-col border border-border bg-transparent p-6 transition-colors duration-200 ease-[cubic-bezier(0.25,0,0,1)] hover:border-border-hover md:p-8"
+                class="card-hover-flat group/card flex h-full flex-col p-6 md:p-7"
                 aria-label={item.name}
               >
-                <div class="relative">
-                  <span
-                    class="absolute -top-px left-0 h-1 w-16 bg-accent"
-                    aria-hidden="true"
-                  />
-                  <p class="pt-4 font-mono text-[11px] font-medium uppercase tracking-[0.15em] text-muted-foreground md:text-xs">
-                    {item.role}
-                  </p>
-                  <h3 class="font-display mt-3 text-lg font-semibold leading-snug tracking-[-0.03em] text-foreground md:text-xl">
-                    {item.name}
-                  </h3>
-                </div>
+                <p class="font-mono text-[11px] font-medium uppercase tracking-[0.12em] text-muted-foreground">
+                  {item.role}
+                </p>
+                <h3 class="card-hover-title mt-3 font-display text-lg font-semibold leading-snug text-foreground md:text-xl">
+                  {item.name}
+                </h3>
                 <ul
                   class="mt-6 flex list-none flex-wrap gap-3 border-t border-border pt-6"
                   aria-label={`Ícones de ${item.name}`}
@@ -78,10 +64,10 @@ function resolveIconName(slug: string) {
                   {item.icons.map((slug) => (
                     <li>
                       <span
-                        class="tech-logo inline-flex size-9 items-center justify-center text-foreground md:size-10"
+                        class="tech-logo inline-flex size-8 items-center justify-center border border-border bg-card text-foreground transition-colors duration-150 hover:border-accent hover:bg-accent/5 hover:text-accent md:size-9"
                         aria-hidden="true"
                       >
-                        <Icon name={resolveIconName(slug)} class="size-full" />
+                        <Icon name={resolveIconName(slug)} class="size-4 md:size-5" />
                       </span>
                     </li>
                   ))}

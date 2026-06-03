@@ -1,24 +1,24 @@
 @import "tailwindcss";
 
-/* Bold Typography — design tokens (dark) */
+/* Editorial / Swiss Design — design tokens */
 @theme inline {
-	--color-background: #0a0a0a;
-	--color-foreground: #fafafa;
-	--color-foreground-variant: #e0d7d7;
-	--color-muted: #1a1a1a;
-	--color-muted-foreground: #949494;
-	--color-accent: #ff3d00;
-	--color-accent-foreground: #0a0a0a;
-	--color-border: #262626;
-	--color-border-hover: #404040;
-	--color-input: #1a1a1a;
-	--color-card: #0f0f0f;
-	--color-card-foreground: #fafafa;
-	--color-ring: #ff3d00;
+	--color-background: #fafafa;
+	--color-foreground: #18181b;
+	--color-foreground-variant: #3f3f46;
+	--color-muted: #f4f4f5;
+	--color-muted-foreground: #71717a;
+	--color-accent: var(--color-orange-600);
+	--color-accent-foreground: #fafafa;
+	--color-border: #d4d4d8;
+	--color-border-hover: #a1a1aa;
+	--color-input: #ffffff;
+	--color-card: #ffffff;
+	--color-card-foreground: #18181b;
+	--color-ring: var(--color-orange-600);
 
-	--font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
-	--font-display: "Inter Tight", "Inter", ui-sans-serif, system-ui, sans-serif;
-	--font-serif: "Playfair Display", Georgia, serif;
+	--font-sans: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+	--font-display: "Source Serif 4", Georgia, "Times New Roman", serif;
+	--font-serif: "Source Serif 4", Georgia, serif;
 	--font-mono: "JetBrains Mono", ui-monospace, monospace;
 
 	--ease-out-crisp: cubic-bezier(0.25, 0, 0, 1);
@@ -27,6 +27,7 @@
 @layer base {
 	html {
 		scroll-behavior: smooth;
+		overflow-x: clip;
 	}
 
 	@media (prefers-reduced-motion: reduce) {
@@ -36,25 +37,14 @@
 	}
 
 	body {
-		@apply bg-background font-sans text-base leading-[1.6] text-foreground antialiased;
+		@apply min-h-screen overflow-x-clip bg-background font-sans text-base leading-[1.65] text-foreground antialiased;
 		font-feature-settings:
 			"kern" 1,
 			"liga" 1;
-		letter-spacing: -0.01em;
 	}
 
 	::selection {
 		@apply bg-accent text-accent-foreground;
-	}
-
-	/* Aplica filtro estático de televisão (ruído) sobre o layout. */
-	body::after {
-		content: "";
-		position: fixed;
-		inset: 0;
-		z-index: 40;
-		pointer-events: none;
-		background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
 	}
 }
 
@@ -64,10 +54,10 @@
 
 .reveal {
 	opacity: 0;
-	transform: translateY(20px);
+	transform: translateY(12px);
 	transition:
-		opacity 500ms var(--ease-out-crisp),
-		transform 500ms var(--ease-out-crisp);
+		opacity 400ms var(--ease-out-crisp),
+		transform 400ms var(--ease-out-crisp);
 }
 
 .reveal.is-visible {
@@ -84,5 +74,17 @@
 }
 
 .is-nav-active {
-	color: var(--color-foreground);
+	@apply text-accent underline decoration-accent decoration-2 underline-offset-4;
+}
+
+@utility card-hover-bordered {
+	@apply border border-border bg-card transition-colors duration-150 ease-[cubic-bezier(0.25,0,0,1)] hover:border-accent hover:bg-muted;
+}
+
+@utility card-hover-flat {
+	@apply transition-colors duration-150 ease-[cubic-bezier(0.25,0,0,1)] hover:bg-muted;
+}
+
+@utility card-hover-title {
+	@apply transition-colors duration-150 group-hover/card:text-accent;
 }

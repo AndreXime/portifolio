@@ -28,39 +28,31 @@ function projectImageAlt(project: (typeof projectEntries)[number]) {
 
 <section
   id="projetos"
-  class="scroll-mt-20 border-b border-border bg-muted py-20 md:py-28 lg:py-32"
+  class="scroll-mt-20 border-b border-border bg-muted py-16 md:py-20 lg:py-24"
   aria-labelledby="projects-heading"
 >
   <Container>
-    <div
-      class="flex flex-col gap-10 lg:flex-row lg:items-end lg:justify-between lg:gap-16"
-    >
-      <div class="max-w-2xl lg:max-w-none lg:flex-1">
-        <Reveal staggerMs={0}>
-          <AccentBar class="mb-8" />
-          <h2
-            id="projects-heading"
-            class="font-display text-3xl font-semibold leading-tight tracking-[-0.04em] text-foreground sm:text-4xl md:text-5xl lg:text-6xl"
-          >
-            Projetos
-          </h2>
-          <p
-            class="mt-4 font-mono text-xs uppercase tracking-[0.12em] text-muted-foreground md:text-sm md:tracking-[0.15em]"
-          >
-            Aplicações, APIs e experimentos em produção
-          </p>
-        </Reveal>
-      </div>
-      <Reveal staggerMs={120} class="shrink-0 lg:max-w-md">
-        <p
-          class="text-base leading-[1.6] text-muted-foreground md:text-lg md:leading-relaxed"
+    <div class="grid grid-cols-1 items-center gap-8 lg:grid-cols-12 lg:gap-10">
+      <Reveal staggerMs={0} class="lg:col-span-5">
+        <AccentBar class="mb-6" />
+        <h2
+          id="projects-heading"
+          class="font-display text-3xl font-semibold leading-tight tracking-tight text-foreground sm:text-4xl md:text-5xl"
         >
+          Projetos
+        </h2>
+        <p class="mt-4 font-mono text-[11px] uppercase tracking-[0.12em] text-muted-foreground">
+          Aplicações, APIs e experimentos
+        </p>
+      </Reveal>
+      <Reveal staggerMs={80} class="flex items-center lg:col-span-7">
+        <p class="text-base leading-[1.7] text-foreground-variant md:text-lg">
           {site.sections.projectsSubtitle}{" "}
           <a
             href={site.githubUrl}
             target="_blank"
             rel="noopener noreferrer"
-            class="text-accent underline decoration-2 underline-offset-4 transition-colors duration-150 hover:text-foreground focus-ring"
+            class="text-accent underline decoration-accent/40 decoration-1 underline-offset-4 transition-colors duration-150 hover:decoration-accent focus-ring"
           >
             Ver meu GitHub
           </a>
@@ -70,14 +62,14 @@ function projectImageAlt(project: (typeof projectEntries)[number]) {
 
     {
       featuredProject && (
-        <div class="mt-16">
+        <div class="mt-14 lg:mt-16">
           <Reveal staggerMs={0}>
             <article
-              class="group flex flex-col overflow-hidden rounded-xl border border-border bg-background transition-colors duration-200 ease-[cubic-bezier(0.25,0,0,1)] hover:border-border-hover lg:flex-row"
+              class="card-hover-bordered group/card grid grid-cols-1 lg:grid-cols-[16rem_1fr]"
               data-project-id={featuredProject.id}
             >
-              <div class="relative flex h-52 shrink-0 items-start justify-center overflow-hidden border-b border-border bg-muted lg:h-auto lg:min-h-[20rem] lg:w-56 lg:self-stretch lg:border-b-0 lg:border-r xl:w-64">
-                <span class="absolute top-4 left-4 z-10 bg-accent px-3 py-1 font-mono text-[10px] font-medium uppercase tracking-[0.12em] text-background">
+              <div class="relative flex min-h-48 items-start justify-center overflow-hidden border-b border-border bg-muted lg:min-h-[20rem] lg:border-b-0 lg:border-r">
+                <span class="absolute top-4 left-4 z-10 border border-accent bg-accent px-2 py-1 font-mono text-[10px] font-medium uppercase tracking-[0.12em] text-accent-foreground">
                   Em destaque
                 </span>
                 {featuredProject.data.featuredImageUrl ? (
@@ -88,7 +80,7 @@ function projectImageAlt(project: (typeof projectEntries)[number]) {
                       width={800}
                       height={450}
                       sizes="100vw"
-                      class="h-full w-full object-cover object-top transition-transform duration-500 ease-[cubic-bezier(0.25,0,0,1)] group-hover:scale-105 lg:hidden"
+                      class="h-full w-full object-cover object-top lg:hidden"
                       loading="eager"
                       decoding="async"
                     />
@@ -110,18 +102,18 @@ function projectImageAlt(project: (typeof projectEntries)[number]) {
                     width={800}
                     height={450}
                     sizes="(max-width: 1024px) 100vw, 16rem"
-                    class="h-full w-full object-cover object-top transition-transform duration-500 ease-[cubic-bezier(0.25,0,0,1)] group-hover:scale-105 lg:object-contain"
+                    class="h-full w-full object-cover object-top lg:object-contain"
                     loading="eager"
                     decoding="async"
                   />
                 )}
               </div>
-              <div class="flex flex-1 flex-col p-6 md:p-8">
-                <h3 class="font-display text-xl font-semibold tracking-[-0.03em] text-foreground md:text-2xl">
+              <div class="flex flex-col p-6 md:p-8">
+                <h3 class="card-hover-title font-display text-xl font-semibold text-foreground md:text-2xl">
                   {featuredProject.data.title}
                 </h3>
                 {featuredProject.data.cardTagline && (
-                  <p class="mt-2 font-mono text-xs uppercase tracking-[0.1em] text-accent">
+                  <p class="mt-2 font-mono text-[11px] uppercase tracking-[0.1em] text-muted-foreground">
                     {featuredProject.data.cardTagline}
                   </p>
                 )}
@@ -129,11 +121,13 @@ function projectImageAlt(project: (typeof projectEntries)[number]) {
                   {featuredProject.data.shortDescription}
                 </p>
                 <ul
-                  class="mt-6 flex flex-wrap gap-3 border-t border-border pt-6 font-mono text-xs uppercase tracking-[0.08em] text-muted-foreground"
+                  class="mt-6 flex flex-wrap gap-2 border-t border-border pt-6"
                   aria-label="Stack do projeto"
                 >
                   {featuredProject.data.tech.map((t) => (
-                    <li>{t}</li>
+                    <li class="border border-border px-2 py-1 font-mono text-[10px] uppercase tracking-[0.08em] text-muted-foreground">
+                      {t}
+                    </li>
                   ))}
                 </ul>
                 <div class="mt-6">
@@ -158,8 +152,8 @@ function projectImageAlt(project: (typeof projectEntries)[number]) {
     <ul
       id="projetos-list"
       class:list={[
-        "list-none grid grid-cols-1 items-stretch gap-6 sm:grid-cols-2 lg:gap-8",
-        featuredProject ? "mt-8" : "mt-16",
+        "list-none grid grid-cols-1 gap-6 sm:grid-cols-2 lg:gap-8",
+        featuredProject ? "mt-8" : "mt-14 lg:mt-16",
       ]}
     >
       {
@@ -171,8 +165,8 @@ function projectImageAlt(project: (typeof projectEntries)[number]) {
               data-project-extra={isExtra ? "" : undefined}
               data-project-id={project.id}
             >
-              <Reveal staggerMs={index * 80} class="h-full min-h-0">
-                <article class="group flex h-full flex-col overflow-hidden rounded-xl border border-border bg-background transition-colors duration-200 ease-[cubic-bezier(0.25,0,0,1)] hover:border-border-hover">
+              <Reveal staggerMs={index * 60} class="h-full min-h-0">
+                <article class="card-hover-bordered group/card flex h-full flex-col">
                   <div class="relative block h-44 overflow-hidden border-b border-border sm:h-48">
                     <Image
                       src={project.data.imageUrl}
@@ -180,17 +174,17 @@ function projectImageAlt(project: (typeof projectEntries)[number]) {
                       width={800}
                       height={450}
                       sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 40vw"
-                      class="h-full w-full object-cover object-top transition-transform duration-500 ease-[cubic-bezier(0.25,0,0,1)] group-hover:scale-105"
+                      class="h-full w-full object-cover object-top"
                       loading="lazy"
                       decoding="async"
                     />
                   </div>
                   <div class="flex flex-1 flex-col p-6 md:p-8">
-                    <h3 class="font-display text-xl font-semibold tracking-[-0.03em] text-foreground">
+                    <h3 class="card-hover-title font-display text-xl font-semibold text-foreground">
                       {project.data.title}
                     </h3>
                     {project.data.cardTagline && (
-                      <p class="mt-2 font-mono text-xs uppercase tracking-[0.1em] text-accent">
+                      <p class="mt-2 font-mono text-[11px] uppercase tracking-[0.1em] text-muted-foreground">
                         {project.data.cardTagline}
                       </p>
                     )}
@@ -198,11 +192,13 @@ function projectImageAlt(project: (typeof projectEntries)[number]) {
                       {project.data.shortDescription}
                     </p>
                     <ul
-                      class="mt-6 flex flex-wrap gap-3 border-t border-border pt-6 font-mono text-xs uppercase tracking-[0.08em] text-muted-foreground"
+                      class="mt-6 flex flex-wrap gap-2 border-t border-border pt-6"
                       aria-label="Stack do projeto"
                     >
                       {project.data.tech.map((t) => (
-                        <li>{t}</li>
+                        <li class="border border-border px-2 py-1 font-mono text-[10px] uppercase tracking-[0.08em] text-muted-foreground">
+                          {t}
+                        </li>
                       ))}
                     </ul>
                     <div class="mt-6">
@@ -240,7 +236,7 @@ function projectImageAlt(project: (typeof projectEntries)[number]) {
             <button
               type="button"
               id="projects-show-more"
-              class="inline-flex items-center justify-center border border-foreground px-6 py-3 font-semibold uppercase tracking-[0.1em] text-foreground transition-colors duration-150 ease-[cubic-bezier(0.25,0,0,1)] hover:bg-foreground hover:text-background focus-ring active:translate-y-px"
+              class="inline-flex items-center justify-center border border-foreground px-5 py-3 font-mono text-xs font-medium uppercase tracking-[0.12em] text-foreground transition-colors duration-150 hover:bg-foreground hover:text-background focus-ring active:translate-y-px"
               aria-expanded="false"
               aria-controls="projetos-list"
             >
@@ -260,7 +256,7 @@ function projectImageAlt(project: (typeof projectEntries)[number]) {
 >
   <div
     data-project-modal-overlay
-    class="absolute inset-0 bg-background/60 backdrop-blur-[5px]"
+    class="absolute inset-0 bg-foreground/40"
     aria-hidden="true"
   >
   </div>
@@ -271,21 +267,21 @@ function projectImageAlt(project: (typeof projectEntries)[number]) {
       role="dialog"
       aria-modal="true"
       tabindex="-1"
-      class="pointer-events-auto flex max-h-[min(90dvh,56rem)] w-full max-w-2xl flex-col overflow-hidden rounded-xl border border-border bg-background shadow-lg"
+      class="pointer-events-auto flex max-h-[min(90dvh,56rem)] w-full max-w-2xl flex-col overflow-hidden border border-border bg-background"
     >
       <div
         class="flex shrink-0 items-center justify-between gap-4 border-b border-border bg-background px-4 py-3"
       >
         <p
           data-project-modal-title
-          class="truncate font-display font-semibold text-foreground uppercase tracking-[0.12em]"
+          class="truncate font-mono text-xs font-medium uppercase tracking-[0.12em] text-foreground"
         >
           &nbsp;
         </p>
         <button
           type="button"
           data-project-modal-close
-          class="inline-flex items-center justify-center border border-foreground p-2 text-foreground transition-colors duration-150 ease-[cubic-bezier(0.25,0,0,1)] hover:bg-foreground hover:text-background focus-ring active:translate-y-px"
+          class="inline-flex items-center justify-center border border-foreground p-2 text-foreground transition-colors duration-150 hover:bg-foreground hover:text-background focus-ring active:translate-y-px"
           aria-label="Fechar modal"
         >
           <IconClose class="size-5" />
@@ -302,77 +298,79 @@ function projectImageAlt(project: (typeof projectEntries)[number]) {
             const headingId = `project-modal-heading-${project.id}`;
             const { Content } = renderedProjects[index];
             return (
-              <div
-                hidden
-                data-project-modal-panel={project.id}
-                class="p-4 md:p-8"
-              >
-                <div class="relative block h-44 overflow-hidden rounded-lg border border-border sm:h-52">
-                  <Image
-                    src={project.data.imageUrl}
-                    alt={projectImageAlt(project)}
-                    width={800}
-                    height={450}
-                    sizes="(max-width: 640px) 100vw, 42rem"
-                    class="h-full w-full object-cover object-top"
-                    loading="lazy"
-                    decoding="async"
-                  />
+              <div hidden data-project-modal-panel={project.id}>
+                <div class="px-3 pt-3 md:px-4 md:pt-4">
+                  <div class="relative block h-44 overflow-hidden border border-border sm:h-52">
+                    <Image
+                      src={project.data.imageUrl}
+                      alt={projectImageAlt(project)}
+                      width={800}
+                      height={450}
+                      sizes="(max-width: 640px) 100vw, 42rem"
+                      class="h-full w-full object-cover object-top"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </div>
                 </div>
-                <h2 id={headingId} data-project-modal-heading class="sr-only">
-                  {project.data.title}
-                </h2>
-                <div
-                  class:list={[
-                    "mt-8 grid w-full gap-3",
-                    hasLive ? "grid-cols-1 sm:grid-cols-2" : "grid-cols-1",
-                  ]}
-                >
-                  {hasLive && (
+                <div class="px-4 pb-4 pt-6 md:px-8 md:pb-8">
+                  <h2 id={headingId} data-project-modal-heading class="sr-only">
+                    {project.data.title}
+                  </h2>
+                  <div
+                    class:list={[
+                      "grid w-full gap-3",
+                      hasLive ? "grid-cols-1 sm:grid-cols-2" : "grid-cols-1",
+                    ]}
+                  >
+                    {hasLive && (
+                      <Button
+                        href={project.data.link}
+                        variant="primary"
+                        showArrow
+                        class="w-full justify-center"
+                      >
+                        Ver online
+                      </Button>
+                    )}
                     <Button
-                      href={project.data.link}
-                      variant="primary"
-                      showArrow
+                      href={project.data.github}
+                      variant={hasLive ? "secondary" : "primary"}
+                      showArrow={!hasLive}
                       class="w-full justify-center"
                     >
-                      Ver online
+                      Ver código
                     </Button>
-                  )}
-                  <Button
-                    href={project.data.github}
-                    variant={hasLive ? "secondary" : "primary"}
-                    showArrow={!hasLive}
-                    class="w-full justify-center"
+                  </div>
+                  <div
+                    class:list={[
+                      "project-modal-md mt-4 max-w-none text-sm leading-relaxed text-foreground-variant md:text-base",
+                      "[&_h1]:font-display [&_h1]:mt-8 [&_h1]:text-xl [&_h1]:font-semibold [&_h1]:text-foreground md:[&_h1]:text-2xl",
+                      "[&_h1:first-child]:mt-0",
+                      "[&_h2]:font-display [&_h2]:mt-8 [&_h2]:text-lg [&_h2]:font-semibold [&_h2]:text-foreground md:[&_h2]:text-xl",
+                      "[&_h2:first-child]:mt-0",
+                      "[&_h3]:font-display [&_h3]:mt-8 [&_h3]:text-lg [&_h3]:font-semibold [&_h3]:text-foreground md:[&_h3]:text-xl",
+                      "[&_h3:first-child]:mt-0",
+                      "[&_p]:mt-2 [&_p:first-child]:mt-0",
+                      "[&_ul]:mt-4 [&_ul]:list-disc [&_ul]:space-y-1 [&_ul]:pl-5",
+                      "[&_strong]:font-semibold [&_strong]:text-foreground",
+                      "[&_a]:text-accent [&_a]:underline [&_a]:decoration-accent/40 hover:[&_a]:decoration-accent",
+                      "[&_code]:border [&_code]:border-border [&_code]:bg-muted [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:font-mono [&_code]:text-xs [&_code]:text-foreground",
+                    ]}
                   >
-                    Ver código
-                  </Button>
+                    <Content />
+                  </div>
+                  <ul
+                    class="mt-6 flex flex-wrap gap-2 border-t border-border pt-6"
+                    aria-label="Stack do projeto"
+                  >
+                    {project.data.tech.map((t) => (
+                      <li class="border border-border px-2 py-1 font-mono text-[10px] uppercase tracking-[0.08em] text-muted-foreground">
+                        {t}
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-                <div
-                  class:list={[
-                    "project-modal-md mt-4 max-w-none text-sm leading-relaxed text-foreground-variant md:text-base",
-                    "[&_h1]:font-display [&_h1]:mt-8 [&_h1]:text-xl [&_h1]:font-semibold [&_h1]:tracking-[-0.03em] [&_h1]:text-foreground md:[&_h1]:text-2xl",
-                    "[&_h1:first-child]:mt-0",
-                    "[&_h2]:font-display [&_h2]:mt-8 [&_h2]:text-lg [&_h2]:font-semibold [&_h2]:tracking-[-0.03em] [&_h2]:text-foreground md:[&_h2]:text-xl",
-                    "[&_h2:first-child]:mt-0",
-                    "[&_h3]:font-display [&_h3]:mt-8 [&_h3]:text-lg [&_h3]:font-semibold [&_h3]:tracking-[-0.03em] [&_h3]:text-foreground md:[&_h3]:text-xl",
-                    "[&_h3:first-child]:mt-0",
-                    "[&_p]:mt-2 [&_p:first-child]:mt-0",
-                    "[&_ul]:mt-4 [&_ul]:list-disc [&_ul]:space-y-1 [&_ul]:pl-5",
-                    "[&_strong]:font-semibold [&_strong]:text-foreground",
-                    "[&_a]:text-accent [&_a]:underline [&_a]:decoration-accent/40 hover:[&_a]:decoration-accent",
-                    "[&_code]:rounded [&_code]:border [&_code]:border-border [&_code]:bg-muted [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:font-mono [&_code]:text-xs [&_code]:text-foreground",
-                  ]}
-                >
-                  <Content />
-                </div>
-                <ul
-                  class="mt-6 flex flex-wrap gap-3 border-t border-border pt-6 font-mono text-xs uppercase tracking-[0.08em] text-muted-foreground"
-                  aria-label="Stack do projeto"
-                >
-                  {project.data.tech.map((t) => (
-                    <li>{t}</li>
-                  ))}
-                </ul>
               </div>
             );
           })

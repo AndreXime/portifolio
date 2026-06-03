@@ -2,17 +2,12 @@ import type { ImageMetadata } from "astro";
 
 import stackup from "./images/logos/stackup.webp";
 
-export interface ExperienceHighlight {
-	readonly label: string;
-	readonly detail: string;
-}
-
 export interface Experience {
 	readonly role: string;
 	readonly company: string;
 	readonly period: string;
 	readonly summary: string;
-	readonly highlights?: readonly ExperienceHighlight[];
+	readonly highlights?: readonly string[];
 	/** Import em `src/content/images/logos/` — Astro redimensiona no build */
 	readonly logo?: ImageMetadata;
 }
@@ -26,21 +21,11 @@ export const experiences: readonly Experience[] = [
 		summary:
 			"Atuei no ciclo de vida completo (SDLC) de um projeto de alta complexidade para o setor de seguros, com interface direta ao cliente no levantamento e refinamento de requisitos. Em ritmo acelerado de software house, traduzi regras de domínio do mercado segurador em arquitetura técnica e em código sustentável, cobrindo frontend e backend desde o estágio inicial até a orquestração do deploy, com foco em performance e manutenibilidade.",
 		highlights: [
-			{
-				label: "Frontend",
-				detail:
-					"Rotas autenticadas centralizadas, sessão, limpeza de credenciais e redirects por perfil; menu e identidade em cookies assinados (somente leitura, TTL curto) para cortar chamadas repetidas ao backend. Multiportal com dezenas de jornadas na mesma base e fluxo de proposta em etapas com estado global e validações de domínio antes do envio.",
-			},
-			{
-				label: "API e dados",
-				detail:
-					"Núcleo de API de garantias (autenticação, propostas, contratos, administrativo, análise) com validação estrita de payloads, Prisma/PostgreSQL, migrações na subida do serviço e reconexão ao banco com backoff exponencial para cold start ou instabilidade.",
-			},
-			{
-				label: "Arquivos e regras de negócio",
-				detail:
-					"Upload via URLs assinadas, buckets bruto/processado e pipeline assíncrono (OCR em português) reconciliado à proposta. Governança de ciclo de vida com token conferido no banco, perfis e transições de status explícitas. Peças jurídicas e comerciais com Docxtemplater e modelos versionados em armazenamento objeto.",
-			},
+			"Projetei rotinas serverless com AWS Lambda acionadas por S3 Event Notifications para processar OCR e conversão de documentos DOCX para PDF, isolando essas operações do fluxo principal da API e reduzindo o consumo de CPU do servidor em mais de 50%.",
+			"Modelei bancos de dados relacionais no PostgreSQL com foco em integridade referencial, adotando colunas JSONB para suportar documentos de schema variável sem necessidade de migrations estruturais frequentes.",
+			"Eliminei o tráfego de arquivos binários pela API principal implementando pre-signed URLs no AWS S3, reduzindo o tamanho médio dos payloads em cerca de 70% e aliviando a carga no servidor de origem.",
+			"Escrevi e revisei manualmente migrations críticas via Prisma ORM, garantindo consistência e segurança dos dados em produção durante deploys de alta sensibilidade.",
+			"Construí um motor de geração de contratos dinâmicos com docxtemplater, injetando variáveis via JSON e automatizando a conversão para PDF reduzindo o tempo de emissão de documentos corporativos de minutos para segundos.",
 		],
 	},
 ];

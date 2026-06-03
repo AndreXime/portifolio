@@ -6,7 +6,7 @@ interface Props {
 const { class: className = "" } = Astro.props;
 ---
 
-<div
-  class:list={["h-1 w-16 bg-accent", className]}
+<hr
+  class:list={["h-px w-12 border-0 bg-accent", className]}
   aria-hidden="true"
-></div>
+/>
