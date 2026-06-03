@@ -1,0 +1,163 @@
+# Gerar descrição de projeto para o portfólio
+
+Use este prompt com o repositório do projeto indexado (@Codebase) ou anexando README, `package.json`, estrutura de pastas e trechos de código relevantes.
+
+Objetivo: produzir ou atualizar **um único arquivo** em `src/content/projects/<slug>.md`, pronto para o Astro Content Collections. O card do site mostra `title` + `shortDescription`; o modal "Ver detalhes" renderiza o corpo Markdown abaixo do frontmatter.
+
+---
+
+## Como analisar o repositório
+
+Priorize evidência no código, não suposição:
+
+1. README, ADRs ou docs em `/docs` (se existirem)
+2. `package.json` / workspaces (stack real, não lista de dependências para copiar)
+3. Entrypoints (`src/main`, `app/`, rotas, módulos Nest/Hono)
+4. Modelo de dados (Prisma schema, migrations, entidades)
+5. Fluxos críticos (auth, pedidos, multi-tenant, filas, uploads, CI)
+6. `docker-compose`, Terraform ou scripts de deploy (ambiente e observabilidade)
+
+Se algo não estiver no repositório, **não invente**. Omita ou descreva como limite conhecido.
+
+---
+
+## Tom e voz
+
+- Primeira pessoa ("Eu implementei...", "Escolhi...")
+- Técnico e direto, nível pleno/sênior júnior: decisões, trade-offs e impacto
+- Português do Brasil
+- Sem clichês ("solução inovadora", "apaixonado por tecnologia", "robusto" vazio)
+- Sem travessões (—); use vírgula, ponto ou dois-pontos
+- Sem introduções longas; vá ao problema e à decisão
+- Foque em **como** a engenharia sustenta a regra de negócio (não repita o `package.json`)
+
+---
+
+## Regra de vocabulário e abstração
+
+**Pode citar** frameworks e bibliotecas centrais da stack (ex.: NestJS, Hono, Next.js, Astro, Prisma, PostgreSQL, Redis, Zod, React).
+
+**Evite citar** pacotes de cola, conectores ou utilitários (ex.: `prom-client`, `@hono/prometheus`, `dotenv`, `pg-promise`). Abstraia pelo padrão:
+
+| No código | No texto |
+|-----------|----------|
+| prom-client, @hono/prometheus | métricas Prometheus / observabilidade |
+| dotenv, convict | gerenciamento de configuração |
+| nodemailer, resend SDK | e-mail transacional |
+| aws-sdk v3 client S3 | armazenamento objeto compatível com S3 |
+| bullmq, bee-queue | filas de trabalho assíncrono |
+
+No corpo Markdown, priorize **decisão arquitetural**; no array `tech`, liste só o que aparece no card (4 a 7 itens, legíveis em uma linha).
+
+---
+
+## Formato de saída (obrigatório)
+
+Responda **apenas** com o conteúdo do arquivo `.md`: frontmatter YAML + corpo Markdown. Sem explicação antes ou depois.
+
+### Frontmatter
+
+```yaml
+---
+order: <número inteiro; menor = aparece antes>
+title: "<valor de negócio + gancho técnico; uma linha; ~60–90 caracteres>"
+shortDescription: "<ver regras abaixo>"
+cardTagline: "<opcional; ~40–55 caracteres; mono no card; ex.: ATS multi-tenant · NestJS · produção>"
+featured: <true apenas se for o projeto principal do portfólio; no máximo um>
+tech: ["...", "..."]  # 4 a 7 itens
+imageUrl: "./images/<slug>.webp"
+featuredImageUrl: "./images/<slug>-vertical.png"  # opcional; só se featured: true e houver recorte vertical
+link: "<URL de deploy ou omitir a chave>"
+github: "<URL do repositório>"
+---
+```
+
+**`title`:** negócio primeiro, diferencial técnico depois. Ex.: "Plataforma de recrutamento multi-tenant: do site de carreiras ao pipeline auditável".
+
+**`shortDescription` (crítico para o card):**
+
+- **2 ou 3 frases**, no máximo ~320 caracteres no total
+- Frase 1: problema + o que o sistema entrega
+- Frase 2: diferencial técnico (stack principal + decisão forte)
+- Frase 3 (opcional): resultado ou limite conhecido tratado com honestidade
+- Não use markdown, bullets nem links no frontmatter
+
+**`cardTagline`:** opcional; frase curta estilo etiqueta para `alt` da imagem e subtítulo do card.
+
+**`tech`:** alinhado ao texto, sem redundância (não repita "TypeScript" e "TS").
+
+### Corpo Markdown (modal)
+
+Use **somente `##` (h2)** no corpo, nunca `#` (h1). Estrutura fixa:
+
+```markdown
+## Contexto técnico
+
+Um ou dois parágrafos densos: arquitetura (monólito modular, monorepo, BFF, etc.), por que as tecnologias core foram escolhidas, trade-offs conscientes (ex.: schema compartilhado vs database-per-tenant, cookies HttpOnly vs localStorage).
+
+## Desafios de engenharia (como e por quê)
+
+- **Nome curto do desafio:** o que foi feito, como, e por que essa abordagem (2–4 linhas por bullet)
+- (4 a 6 bullets; cada um deve ser verificável no repo ou na doc)
+```
+
+Opcional, **só se couber em uma frase com evidência**:
+
+```markdown
+## Limite conhecido
+
+Uma fronteira honesta do produto (ex.: checkout só na UI enquanto a API já fecha pedido). Não use como desculpa; mostre priorização.
+```
+
+**Não use** seções "Problema / Solução / Impacto" com h1; o site já estiliza h2/h3 no modal.
+
+---
+
+## Checklist antes de entregar
+
+- [ ] `shortDescription` tem no máximo 3 frases e cabe no card sem parecer bloco único interminável
+- [ ] `title` e `tech` não duplicam o mesmo conteúdo do corpo
+- [ ] Bullets citam comportamento real (transação, RLS em app, refresh com blocklist), não buzzwords
+- [ ] Nenhum nome de pacote de cola no texto
+- [ ] Sem travessões no arquivo inteiro
+- [ ] `github` e `link` (se houver) são URLs válidas
+- [ ] `order` coerente com os outros arquivos em `src/content/projects/`
+
+---
+
+## Anti-padrões (evitar)
+
+| Ruim | Melhor |
+|------|--------|
+| "Utilizei diversas tecnologias modernas para garantir escalabilidade." | "Fixei tenant no JWT e estendi o client Prisma com filtro de `tenantId` como segunda linha de defesa." |
+| Parágrafo único de 600 caracteres em `shortDescription` | 3 frases: problema, diferencial, resultado |
+| Listar 15 dependências do `package.json` | 5 bullets com decisões de engenharia |
+| "RAG inovador com IA de ponta" | "Pipeline local: ingestão, embeddings, busca por similaridade com limite de contexto e streaming com cancelamento" |
+
+---
+
+## Exemplo mínimo de qualidade (referência de forma, não copiar conteúdo)
+
+```yaml
+shortDescription: "Construí um ATS multi-tenant em TypeScript com NestJS e Next.js: empresas isoladas por tenant e candidato com perfil único entre vagas. O núcleo são máquinas de estado para vagas e candidaturas, pipeline versionado por vaga e defesa em profundidade no acesso a dados. Está em produção com upload direto para armazenamento objeto."
+```
+
+```markdown
+## Contexto técnico
+
+Modelei um monólito modular: API NestJS com casos de uso e JWT + RBAC; front Next.js com contratos tipados...
+
+## Desafios de engenharia (como e por quê)
+
+- **Pipeline versionado por vaga:** clone do template no publish para não retroagir mudanças em processos abertos...
+```
+
+---
+
+## Uso no Cursor
+
+1. Abra o repositório do projeto (ou monorepo) e referencie `@Codebase` + este arquivo `@src/content/prompts.txt`.
+2. Peça: "Gere `src/content/projects/<slug>.md` seguindo o prompt."
+3. Revise `shortDescription` no card e o modal localmente (`npm run dev` → seção Projetos).
+
+Se o projeto já tiver `.md`, peça **atualização** mantendo `order`, `imageUrl` e `featured`, salvo mudança explícita.

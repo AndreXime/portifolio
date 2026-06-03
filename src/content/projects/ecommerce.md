@@ -1,7 +1,7 @@
 ---
 order: 1
-title: "Ecommerce completo: domínio de pedidos e estoque no PostgreSQL, loja Astro e métricas prontas"
-shortDescription: "Eu estruturei um ecommerce full stack em monorepo com API REST em Hono rodando em Bun, persistência em PostgreSQL com Prisma, Redis para suporte a sessão e trabalho assíncrono, e loja SSR em Astro com ilhas Preact e Tailwind, tudo amarrado por validação com Zod e integração real (sem mock de backend no bundle). O núcleo técnico está nas decisões de servidor: JWT em cookies com refresh persistido, pedidos em transação com snapshot de itens e atualização de estoque condicional, RBAC para separar vitrine e painel admin, além de rate limiting, CSRF alinhado ao front e métricas Prometheus com contrato OpenAPI exposto em documentação interativa. O resultado é uma base enxuta para evoluir checkout e pagamento sem reescrever o domínio, mantendo o contrato como fonte da verdade entre Astro e a API."
+title: "Ecommerce full stack: API Hono, loja Astro e domínio de pedidos"
+shortDescription: "Construí um ecommerce full stack em monorepo: API REST em Hono (Bun), loja SSR em Astro e persistência em PostgreSQL com Prisma e Redis. O núcleo são sessão com JWT em cookies e refresh, pedidos em transação com estoque condicional, RBAC vitrine/admin e contrato OpenAPI com Zod. A API já fecha pedidos; o checkout na loja ainda evolui na camada de apresentação."
 tech: ["TypeScript", "Hono", "PostgreSQL", "Redis", "OpenAPI", "AWS SDK"]
 imageUrl: "./images/ecommerce.webp"
 link: "https://ecommerce.andreximenes.xyz"

@@ -1,7 +1,7 @@
 ---
 order: 2
 title: "Ollama Oracle: chat corporativo com RAG local"
-shortDescription: "Construí um chatbot corporativo com RAG 100% local para responder perguntas usando uma base interna de documentos. O foco foi oferecer consulta rastreável com fontes, sem depender de serviços externos. A base inclui ingestão, indexação vetorial e geração local com streaming e controles de qualidade no retrieval."
+shortDescription: "Construí um chat corporativo com RAG local sobre documentos internos: respostas com fonte, sem LLM externo. Pipeline em TypeScript e Bun com ingestão, embeddings, ChromaDB e Ollama em streaming com cancelamento na desconexão. Controles no retrieval (distância, contexto e deduplicação) antes de montar o prompt."
 tech: ["TypeScript", "Bun", "Ollama", "ChromaDB", "LangChain", "RAG"]
 imageUrl: "./images/ollama-oracle.webp"
 github: "https://github.com/AndreXime/ollama-oracle"
