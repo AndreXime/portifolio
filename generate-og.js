@@ -5,7 +5,7 @@ const OG_URL = "http://localhost:4321/og-image";
 
 const CHROMIUM_PATH = process.env.CHROMIUM_PATH ?? "/usr/bin/chromium";
 
-async function waitForServer(url: string, timeoutMs = 30_000): Promise<void> {
+async function waitForServer(url, timeoutMs = 30_000) {
 	const start = Date.now();
 
 	while (Date.now() - start < timeoutMs) {
@@ -22,7 +22,7 @@ async function waitForServer(url: string, timeoutMs = 30_000): Promise<void> {
 	throw new Error("Astro nao iniciou a tempo");
 }
 
-function stopAstroProcess(astro: ReturnType<typeof spawn>): void {
+function stopAstroProcess(astro) {
 	try {
 		if (astro.pid !== undefined) {
 			process.kill(-astro.pid, "SIGTERM");

@@ -8,7 +8,7 @@
 		"build": "astro build",
 		"preview": "astro preview",
 		"astro": "astro",
-		"generate-og": "tsx generate-og.ts",
+		"generate-og": "node generate-og.js",
 		"check": "biome check . && tsc --noEmit",
 		"format": "biome check --write --no-errors-on-unmatched .",
 		"prepare": "husky"
@@ -33,7 +33,6 @@
 		"husky": "^9.1.7",
 		"playwright": "^1.60.0",
 		"tailwindcss": "^4.3.0",
-		"tsx": "^4.22.3",
 		"typescript": "^6.0.3"
 	},
 	"overrides": {

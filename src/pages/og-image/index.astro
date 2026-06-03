@@ -4,89 +4,103 @@ import "../../styles/global.css";
 import { site } from "../../content/site";
 import AccentBar from "../../components/ui/AccentBar.astro";
 import Container from "../../components/ui/Container.astro";
+
+const { hero } = site;
+const headlineParts = hero.headline.split(hero.headlineAccent);
 ---
 
 <!doctype html>
 <html lang="pt-BR">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="robots" content="noindex" />
-        <style is:inline>
-            html,
-            body {
-                margin: 0;
-                padding: 0;
-                width: 1200px;
-                height: 630px;
-                overflow: hidden;
-                box-sizing: border-box;
-            }
-        </style>
-    </head>
-    <body class="bg-background antialiased">
-        <section class="h-full">
-            <Container
-                class="relative flex h-full flex-col justify-between py-14"
+  <head>
+    <meta charset="utf-8" />
+    <meta name="robots" content="noindex" />
+    <style is:inline>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        width: 1200px;
+        height: 630px;
+        overflow: hidden;
+        box-sizing: border-box;
+      }
+    </style>
+  </head>
+  <body class="bg-background antialiased">
+    <section class="h-full">
+      <Container class="flex h-full flex-col justify-between py-8">
+        <div>
+          <p
+            class="font-mono text-sm uppercase font-bold tracking-[0.14em] text-muted-foreground"
+          >
+            {site.person.jobTitle} · Portfólio
+          </p>
+          <AccentBar class="my-5" />
+          <h1
+            class="font-display max-w-2xl text-5xl font-semibold leading-[1.1] tracking-tight text-foreground"
+          >
+            {headlineParts[0]}
+            <em
+              class="text-accent not-italic underline decoration-accent decoration-2 underline-offset-[0.12em]"
             >
-                <div>
-                    <AccentBar class="mb-8" />
-                    <h1
-                        class="font-display text-7xl font-semibold leading-[1.05] tracking-[-0.06em] text-foreground"
-                    >
-                        Construindo <span class="text-accent">APIs</span> eficientes,
-                        seguras e fáceis de manter.
-                    </h1>
+              {hero.headlineAccent}
+            </em>
+            {headlineParts[1]}
+          </h1>
 
-                    <p
-                        class="mt-8 max-w-2xl text-[1.35rem] leading-relaxed text-foreground"
-                    >
-                        <span class="font-semibold text-accent"
-                            >{site.authorName}</span
-                        >
-                        {", "}
-                        {site.person.jobTitle.toLowerCase()}. APIs com NestJS, Hono
-                        e Node.js.{" "}
-                        <span class="font-semibold text-accent"
-                            >andreximenes.xyz</span
-                        >
-                    </p>
-                </div>
+          <p
+            class="mt-5 max-w-4xl py-5 text-xl leading-[1.6] text-foreground-variant"
+          >
+            Olá, sou <span class="font-semibold text-foreground"
+              >{site.authorName}</span
+            >. {site.person.description}
+            {hero.intro}
+          </p>
+        </div>
 
-                <dl
-                    class="mt-10 grid grid-cols-3 gap-8 border-t border-border pt-12"
-                >
-                    <div>
-                        <dt
-                            class="font-mono uppercase tracking-[0.15em] text-muted-foreground"
-                        >
-                            Stack
-                        </dt>
-                        <dd class="mt-2 font-mono text-foreground">
-                            {site.hero.stackLine}
-                        </dd>
-                    </div>
-                    <div>
-                        <dt
-                            class="font-mono uppercase tracking-[0.15em] text-muted-foreground"
-                        >
-                            {site.hero.availabilityLabel}
-                        </dt>
-                        <dd class="mt-2 font-mono text-foreground">
-                            {site.hero.availabilityValue}
-                        </dd>
-                    </div>
-                    <div>
-                        <dt
-                            class="font-mono uppercase tracking-[0.15em] text-muted-foreground"
-                        >
-                            Localização
-                        </dt>
-                        <dd class="mt-2 font-mono text-foreground">
-                            {site.hero.locationValue}
-                        </dd>
-                    </div>
-                </dl>
-            </Container>
-        </section>
-    </body>
+        <dl class="grid grid-cols-4 gap-6 border-t border-border pt-8">
+          <div>
+            <dt
+              class="font-mono text-sm uppercase tracking-[0.12em] text-muted-foreground"
+            >
+              Stack
+            </dt>
+            <dd class="mt-2 font-mono text-base text-foreground">
+              {hero.stackLine}
+            </dd>
+          </div>
+          <div>
+            <dt
+              class="font-mono text-sm uppercase tracking-[0.12em] text-muted-foreground"
+            >
+              {hero.availabilityLabel}
+            </dt>
+            <dd class="mt-2 font-mono text-base text-foreground">
+              {hero.availabilityValue}
+            </dd>
+          </div>
+          <div>
+            <dt
+              class="font-mono text-sm uppercase tracking-[0.12em] text-muted-foreground"
+            >
+              Localização
+            </dt>
+            <dd class="mt-2 font-mono text-base text-foreground">
+              {hero.locationValue}
+            </dd>
+          </div>
+          <div>
+            <dt
+              class="font-mono text-xs uppercase tracking-[0.12em] text-muted-foreground"
+            >
+              Contato
+            </dt>
+            <dd class="mt-2 font-mono text-sm text-foreground">
+              {site.email}
+            </dd>
+          </div>
+        </dl>
+      </Container>
+    </section>
+  </body>
 </html>
