@@ -20,17 +20,4 @@ const projects = defineCollection({
 		}),
 });
 
-const books = defineCollection({
-	loader: glob({ pattern: "**/*.md", base: "./src/content/books" }),
-	schema: ({ image }) =>
-		z.object({
-			order: z.number().int().min(0),
-			title: z.string(),
-			author: z.string(),
-			state: z.enum(["Lido", "Lendo atualmente", "Na lista de desejos"]),
-			tag: z.string(),
-			imageUrl: image(),
-		}),
-});
-
-export const collections = { projects, books };
+export const collections = { projects };
