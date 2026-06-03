@@ -41,7 +41,9 @@ function projectImageAlt(project: (typeof projectEntries)[number]) {
         >
           Projetos
         </h2>
-        <p class="mt-4 font-mono text-[11px] uppercase tracking-[0.12em] text-muted-foreground">
+        <p
+          class="mt-4 font-mono text-[11px] uppercase tracking-[0.12em] text-muted-foreground"
+        >
           Aplicações, APIs e experimentos
         </p>
       </Reveal>
@@ -294,9 +296,11 @@ function projectImageAlt(project: (typeof projectEntries)[number]) {
       >
         {
           projectEntries.map((project, index) => {
-            const hasLive = (project.data.link || "").trim().length > 0;
+            const liveLink = (project.data.link ?? "").trim();
+            const hasLive = liveLink.length > 0;
             const headingId = `project-modal-heading-${project.id}`;
-            const { Content } = renderedProjects[index];
+            const Content = renderedProjects[index]?.Content;
+
             return (
               <div hidden data-project-modal-panel={project.id}>
                 <div class="px-3 pt-3 md:px-4 md:pt-4">
@@ -325,7 +329,7 @@ function projectImageAlt(project: (typeof projectEntries)[number]) {
                   >
                     {hasLive && (
                       <Button
-                        href={project.data.link}
+                        href={liveLink}
                         variant="primary"
                         showArrow
                         class="w-full justify-center"
@@ -358,7 +362,7 @@ function projectImageAlt(project: (typeof projectEntries)[number]) {
                       "[&_code]:border [&_code]:border-border [&_code]:bg-muted [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:font-mono [&_code]:text-xs [&_code]:text-foreground",
                     ]}
                   >
-                    <Content />
+                    {Content && <Content />}
                   </div>
                   <ul
                     class="mt-6 flex flex-wrap gap-2 border-t border-border pt-6"

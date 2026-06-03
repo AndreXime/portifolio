@@ -1,12 +1,14 @@
 ---
 interface Props {
   class?: string;
-  as?: "div" | "section" | "header" | "footer" | "main";
+  element?: "div" | "section" | "header" | "footer" | "main";
 }
 
-const { class: className = "", as: Tag = "div" } = Astro.props;
+const { class: className = "", element: Tag = "div" } = Astro.props;
 ---
 
-<Tag class:list={["mx-auto w-full max-w-6xl px-5 md:px-10 lg:px-14", className]}>
+<Tag
+  class:list={["mx-auto w-full max-w-6xl px-5 md:px-10 lg:px-14", className]}
+>
   <slot />
 </Tag>
