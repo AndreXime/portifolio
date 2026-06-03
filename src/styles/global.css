@@ -18,7 +18,6 @@
 
 	--font-sans: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
 	--font-display: "Source Serif 4", Georgia, "Times New Roman", serif;
-	--font-serif: "Source Serif 4", Georgia, serif;
 	--font-mono: "JetBrains Mono", ui-monospace, monospace;
 
 	--ease-out-crisp: cubic-bezier(0.25, 0, 0, 1);
@@ -41,6 +40,11 @@
 		font-feature-settings:
 			"kern" 1,
 			"liga" 1;
+	}
+
+	strong,
+	b {
+		font-weight: 600;
 	}
 
 	::selection {
