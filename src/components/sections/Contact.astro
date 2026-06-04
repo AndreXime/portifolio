@@ -12,7 +12,7 @@ const mailto = `mailto:${site.email}?subject=Contato%20pelo%20portf%C3%B3lio`;
 
 <section
   id="contato"
-  class="scroll-mt-20 bg-background py-16 md:py-20 lg:py-24"
+  class="scroll-mt-20 border-b border-border bg-background py-16 md:py-20 lg:py-24"
   aria-labelledby="contact-heading"
 >
   <Container>
@@ -25,7 +25,9 @@ const mailto = `mailto:${site.email}?subject=Contato%20pelo%20portf%C3%B3lio`;
         >
           Contato
         </h2>
-        <p class="mt-4 font-mono text-[11px] uppercase tracking-[0.12em] text-muted-foreground">
+        <p
+          class="mt-4 font-mono text-[11px] uppercase tracking-[0.12em] text-muted-foreground"
+        >
           Propostas, parcerias ou conversa técnica
         </p>
       </Reveal>
@@ -37,7 +39,9 @@ const mailto = `mailto:${site.email}?subject=Contato%20pelo%20portf%C3%B3lio`;
       </Reveal>
     </div>
 
-    <div class="mt-14 grid grid-cols-1 gap-8 border-t border-border pt-14 lg:grid-cols-12 lg:gap-10">
+    <div
+      class="mt-14 grid grid-cols-1 gap-8 border-t border-border pt-14 lg:grid-cols-12 lg:gap-10"
+    >
       <div class="lg:col-span-7">
         <Reveal staggerMs={100}>
           <form
@@ -95,7 +99,9 @@ const mailto = `mailto:${site.email}?subject=Contato%20pelo%20portf%C3%B3lio`;
         <Reveal staggerMs={140}>
           <div class="card-hover-bordered group/card divide-y divide-border">
             <div class="p-6 md:p-8">
-              <h3 class="font-mono text-[11px] font-medium uppercase tracking-[0.12em] text-muted-foreground">
+              <h3
+                class="font-mono text-[11px] font-medium uppercase tracking-[0.12em] text-muted-foreground"
+              >
                 E-mail
               </h3>
               <a
@@ -107,7 +113,9 @@ const mailto = `mailto:${site.email}?subject=Contato%20pelo%20portf%C3%B3lio`;
             </div>
 
             <div class="p-6 md:p-8">
-              <p class="font-mono text-[11px] font-medium uppercase tracking-[0.12em] text-muted-foreground">
+              <p
+                class="font-mono text-[11px] font-medium uppercase tracking-[0.12em] text-muted-foreground"
+              >
                 Currículo
               </p>
               <a
@@ -138,7 +146,9 @@ const mailto = `mailto:${site.email}?subject=Contato%20pelo%20portf%C3%B3lio`;
             </div>
 
             <nav class="p-6 md:p-8" aria-label="Redes sociais">
-              <p class="font-mono text-[11px] font-medium uppercase tracking-[0.12em] text-muted-foreground">
+              <p
+                class="font-mono text-[11px] font-medium uppercase tracking-[0.12em] text-muted-foreground"
+              >
                 Redes
               </p>
               <div class="mt-4 flex flex-col gap-3">
@@ -157,10 +167,7 @@ const mailto = `mailto:${site.email}?subject=Contato%20pelo%20portf%C3%B3lio`;
                   rel="noopener noreferrer"
                   class="inline-flex min-h-12 w-full items-center justify-center gap-3 border border-foreground px-5 py-3 font-mono text-xs font-medium uppercase tracking-[0.12em] text-foreground transition-colors duration-150 hover:bg-foreground hover:text-background focus-ring active:translate-y-px"
                 >
-                  <Icon
-                    name="simple-icons:linkedin"
-                    class="size-5 shrink-0"
-                  />
+                  <Icon name="simple-icons:linkedin" class="size-5 shrink-0" />
                   LinkedIn
                 </a>
               </div>
@@ -169,31 +176,5 @@ const mailto = `mailto:${site.email}?subject=Contato%20pelo%20portf%C3%B3lio`;
         </Reveal>
       </aside>
     </div>
-
-    <Reveal staggerMs={180}>
-      <div
-        class="card-hover-bordered group/card mt-16 bg-muted p-8 md:p-10 lg:mt-20"
-        aria-labelledby="cta-heading"
-      >
-        <AccentBar class="mb-6" />
-        <h2
-          id="cta-heading"
-          class="font-display max-w-3xl text-2xl font-semibold leading-tight tracking-tight text-foreground sm:text-3xl md:text-4xl"
-        >
-          {site.contactCta.title}
-        </h2>
-        <p class="mt-4 max-w-2xl text-base leading-[1.7] text-foreground-variant md:text-lg">
-          {site.contactCta.body}
-        </p>
-        <div class="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
-          <Button href={site.linkedinUrl} variant="primary" showArrow>
-            Conectar no LinkedIn
-          </Button>
-          <Button href={site.resumePdfUrl} variant="secondary">
-            Baixar currículo (PDF)
-          </Button>
-        </div>
-      </div>
-    </Reveal>
   </Container>
 </section>

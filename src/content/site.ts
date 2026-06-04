@@ -36,7 +36,7 @@ export const site = {
 		projectsSubtitle:
 			"Projetos com deploy ou código aberto; priorizo domínio real e decisões de arquitetura documentadas.",
 	},
-	contactCta: {
+	cta: {
 		title: "Buscando um dev backend TypeScript?",
 		body: "Estou disponível para vagas júnior ou pleno inicial. Vamos conversar sobre seu projeto ou produto e como posso somar ao seu time.",
 	},
