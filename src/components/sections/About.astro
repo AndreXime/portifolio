@@ -2,7 +2,7 @@
 import Container from "../ui/Container.astro";
 import AccentBar from "../ui/AccentBar.astro";
 import Reveal from "../ui/Reveal.astro";
-import { site } from "../../content/site";
+import { site } from "../../content/index";
 ---
 
 <section
@@ -55,24 +55,16 @@ import { site } from "../../content/site";
 
       <Reveal staggerMs={140} class="lg:col-span-8">
         <div class="space-y-6 text-base leading-[1.7] md:text-lg">
-          <p class="text-foreground">
-            Sou desenvolvedor focado no desenvolvimento de <strong
-              >backend com TypeScript</strong
-            >, utilizando ferramentas como <strong>Node.js, Bun e Hono</strong> para
-            estruturar microsserviços e APIs estáveis. Por ter experiência prévia
-            como fullstack trabalhando com <strong>Next.js</strong>, possuo uma
-            visão holística do ecossistema: sei exatamente como o frontend
-            consome os dados, o que me permite projetar rotas mais eficientes,
-            seguras e com excelente documentação.
-          </p>
-          <p class="text-foreground-variant">
-            Escrevo código limpo e modular, focado em facilitar a manutenção e a
-            escala do software. Entendo que o amadurecimento técnico vem com o
-            contexto de produto e colaboração, por isso priorizo a consistência
-            nas entregas, o aprendizado contínuo com o time e a construção de
-            soluções que resolvam desafios de engenharia sem complexidade
-            desnecessária.
-          </p>
+          {
+            site.about.paragraphs.map((paragraph, index) => (
+              <p
+                class:list={[
+                  index === 0 ? "text-foreground" : "text-foreground-variant",
+                ]}
+                set:html={paragraph}
+              />
+            ))
+          }
         </div>
       </Reveal>
     </div>

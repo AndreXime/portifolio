@@ -4,14 +4,11 @@ import AccentBar from "../ui/AccentBar.astro";
 import Reveal from "../ui/Reveal.astro";
 import Button from "../ui/Button.astro";
 import IconClose from "../ui/icons/IconClose.astro";
-import { getCollection, render } from "astro:content";
-import { site } from "../../content/site";
+import { render } from "astro:content";
+import { projects as projectEntries, site } from "../../content/index";
 import { Image } from "astro:assets";
 
 const PROJECTS_INITIAL = 2;
-const projectEntries = (await getCollection("projects")).sort(
-  (a, b) => a.data.order - b.data.order,
-);
 const featuredProject = projectEntries.find((p) => p.data.featured) ?? null;
 const gridProjects = projectEntries.filter((p) => !p.data.featured);
 const renderedProjects = await Promise.all(
