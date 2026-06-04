@@ -21,7 +21,7 @@ export const site = {
 		headlineAccent: "APIs",
 		intro:
 			"Sou desenvolvedor de software focado no ecossistema TypeScript, com forte inclinação para o desenvolvimento backend. Crio APIs modulares e auto-documentadas aplicando boas práticas de arquitetura. Atualmente buscando minha próxima oportunidade como desenvolvedor júnior.",
-		stackLine: "TS · NestJS · React",
+		stackLine: "TS · NestJS · Node.js",
 		availabilityLabel: "Disponibilidade",
 		availabilityValue: "Aberto a oportunidades",
 		locationValue: "Remoto · BR",
@@ -31,11 +31,13 @@ export const site = {
 		quote: "Bom código é o que o próximo dev entende numa sexta à tarde.",
 	},
 	sections: {
+		experiencesIntro:
+			"Experiência recente em software house no setor de seguros. Hoje estou aberto a oportunidades; abaixo, o contexto e o que ficou de relevante, com destaques em entregas e aprendizados.",
 		projectsSubtitle:
 			"Projetos com deploy ou código aberto; priorizo domínio real e decisões de arquitetura documentadas.",
 	},
 	contactCta: {
 		title: "Buscando um dev backend TypeScript?",
-		body: "Estou disponível para vagas júnior ou pleno inicial. Vamos conversar sobre APIs, contratos tipados e como posso somar ao seu time.",
+		body: "Estou disponível para vagas júnior ou pleno inicial. Vamos conversar sobre seu projeto ou produto e como posso somar ao seu time.",
 	},
 } as const;

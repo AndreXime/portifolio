@@ -12,11 +12,13 @@ const year = new Date().getFullYear();
       class="grid grid-cols-1 gap-8 border border-border bg-card p-6 md:grid-cols-[1fr_auto] md:items-center md:p-8"
     >
       <div>
-        <p class="font-mono text-[11px] uppercase tracking-[0.12em] text-muted-foreground">
+        <p
+          class="font-mono text-[11px] uppercase tracking-[0.12em] text-muted-foreground"
+        >
           Portfólio / {site.authorName}
         </p>
         <p class="mt-2 font-display text-lg font-semibold text-foreground">
-          Desenvolvedor Backend TypeScript
+          {site.person.jobTitle}
         </p>
         <p class="mt-1 text-sm text-muted-foreground">
           &copy; {year}. Código legível sustenta entrega constante.
