@@ -15,19 +15,20 @@ formations:
     description: >-
       Certificação profissional cobrindo Node.js, Express, bancos de dados NoSQL e SQL,
       conteinerização com Docker, CI/CD e deploy de microsserviços em nuvem.
-  - title: "Get Started with Cloud Native, DevOps, Agile, and NoSQL"
+  - title: "Application Security for Developers and DevOps Professionals"
     institution: "IBM — Coursera"
-    period: "03/2026"
+    period: "05/2026"
     logo: "./images/logos/ibm.webp"
-    link: "https://coursera.org/verify/W0EQJWJ10E04"
+    link: "https://coursera.org/verify/D1INOT1JGD31"
     description: >-
-      Especialização introdutória em práticas cloud native, pipelines DevOps, metodologias ágeis
-      e bancos NoSQL aplicados a arquiteturas modernas.
+      Formação em DevSecOps e secure coding com OWASP, scanning de vulnerabilidades, gestão de
+      secrets e monitoramento com Prometheus e Grafana aplicados ao ciclo de desenvolvimento.
     featured: false
   - title: "Mastering NestJS"
     institution: "Packt — Coursera"
-    period: "2026"
+    period: "05/2026"
     logo: "./images/logos/packt.png"
+    link: "https://coursera.org/verify/GK1EYYFSR7WX"
     description: >-
       Curso prático sobre arquitetura modular com NestJS, cobrindo controllers, pipes, guards,
       middleware e integração com bancos relacionais e NoSQL para APIs escaláveis.
