@@ -6,9 +6,9 @@ const portfolio = defineCollection({
 	loader: glob({ pattern: "portfolio.md", base: "./src/content" }),
 	schema: z.object({
 		authorName: z.string(),
-		email: z.string().email(),
-		githubUrl: z.string().url(),
-		linkedinUrl: z.string().url(),
+		email: z.email(),
+		githubUrl: z.url(),
+		linkedinUrl: z.url(),
 		resumePdfUrl: z.string(),
 		seo: z.object({
 			title: z.string(),
@@ -73,7 +73,7 @@ const formations = defineCollection({
 					period: z.string(),
 					description: z.string().optional(),
 					logo: image(),
-					link: z.string().url().optional(),
+					link: z.url().optional(),
 					featured: z.boolean().default(false),
 				}),
 			),
