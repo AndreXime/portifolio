@@ -74,7 +74,7 @@ const formations = defineCollection({
 					description: z.string().optional(),
 					logo: image(),
 					link: z.string().url().optional(),
-					featured: z.boolean().default(true),
+					featured: z.boolean().default(false),
 				}),
 			),
 		}),
