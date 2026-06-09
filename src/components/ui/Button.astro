@@ -1,5 +1,5 @@
 ---
-import IconArrow from "./icons/IconArrow.astro";
+import { Icon } from "astro-icon/components";
 
 interface Props {
   variant?: "primary" | "secondary" | "ghost";
@@ -62,5 +62,5 @@ const variantClass: Record<NonNullable<typeof variant>, string> = {
   data-scroll-to={isHashLink ? hashTargetId : undefined}
 >
   <slot />
-  {showArrow && <IconArrow class="size-3.5 shrink-0" />}
+  {showArrow && <Icon name="arrow" class="size-3.5 shrink-0" />}
 </Tag>

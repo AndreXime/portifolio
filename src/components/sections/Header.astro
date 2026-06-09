@@ -1,8 +1,7 @@
 ---
 import Container from "../ui/Container.astro";
 import Button from "../ui/Button.astro";
-import IconMenu from "../ui/icons/IconMenu.astro";
-import IconClose from "../ui/icons/IconClose.astro";
+import { Icon } from "astro-icon/components";
 import { site } from "../../content/index";
 
 const links = [
@@ -51,8 +50,8 @@ const links = [
         aria-expanded="false"
         aria-controls="nav-drawer-panel"
       >
-        <IconMenu class="size-5 group-open:hidden" />
-        <IconClose class="hidden size-5 group-open:block" />
+        <Icon name="menu" class="size-5 group-open:hidden" />
+        <Icon name="close" class="hidden size-5 group-open:block" />
       </summary>
       <div
         id="nav-drawer-panel"

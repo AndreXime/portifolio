@@ -3,7 +3,7 @@ import Container from "../ui/Container.astro";
 import AccentBar from "../ui/AccentBar.astro";
 import Reveal from "../ui/Reveal.astro";
 import Button from "../ui/Button.astro";
-import IconClose from "../ui/icons/IconClose.astro";
+import { Icon } from "astro-icon/components";
 import { render } from "astro:content";
 import { projects as projectEntries, site } from "../../content/index";
 import { Image } from "astro:assets";
@@ -283,7 +283,7 @@ function projectImageAlt(project: (typeof projectEntries)[number]) {
           class="inline-flex items-center justify-center border border-foreground p-2 text-foreground transition-colors duration-150 hover:bg-foreground hover:text-background focus-ring active:translate-y-px"
           aria-label="Fechar modal"
         >
-          <IconClose class="size-5" />
+          <Icon name="close" class="size-5" />
         </button>
       </div>
       <div
