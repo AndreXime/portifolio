@@ -7,16 +7,16 @@ technologies:
     role: "Linguagem principal"
     icons: ["typescript"]
   - name: "Node.js e Bun"
-    role: "JavaScript runtimes"
+    role: "Runtimes JavaScript"
     icons: ["nodedotjs", "bun"]
   - name: "NestJS, Express e Hono"
-    role: "Backend frameworks"
+    role: "Frameworks de backend"
     icons: ["nestjs", "express", "hono"]
   - name: "REST e OpenAPI"
     role: "APIs e documentação"
     icons: ["rest", "openapiinitiative"]
   - name: "Next.js, Astro e Vite"
-    role: "Frontend framework"
+    role: "Frameworks de frontend"
     icons: ["nextdotjs", "astro", "vite"]
   - name: "TailwindCSS e ShadCN"
     role: "Estilização"
