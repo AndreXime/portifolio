@@ -78,7 +78,8 @@ function projectImageAlt(project: (typeof projectEntries)[number]) {
                       alt={projectImageAlt(featuredProject)}
                       width={800}
                       height={450}
-                      sizes="100vw"
+                      widths={[400, 640, 800]}
+                      sizes="(max-width: 639px) calc(100vw - 2.5rem), (max-width: 1023px) calc(100vw - 5rem), 0px"
                       class="h-full w-full object-cover object-top lg:hidden"
                       loading="eager"
                       decoding="async"
