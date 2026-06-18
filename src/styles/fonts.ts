@@ -2,11 +2,11 @@
  * Pesos carregados (mapeamento com classes Tailwind no site):
  *
  * IBM Plex Sans (font-sans): 400 corpo, 600 font-semibold (hero, strong, modal)
- * Source Serif 4 (font-display): 600 titulos, 500 citacao em Sobre
+ * Source Serif 4 (font-display): 600 titulos e citacao em Sobre
  * JetBrains Mono (font-mono): 400 rotulos, 500 font-medium (nav, botoes, tags)
  *
- * Nao importar 500 Plex, 700 Serif nem 700 Mono: sem uso no markup.
- * Preload: header + hero. Serif 500 abaixo da dobra, sem preload.
+ * Nao importar 500 Plex, 500/700 Serif nem 700 Mono: sem uso no markup.
+ * Preload: header + hero (Serif 600 no h1 e citacao).
  */
 
 import ibmPlexSansLatin400Woff2 from "@fontsource/ibm-plex-sans/files/ibm-plex-sans-latin-400-normal.woff2?url";
@@ -27,8 +27,7 @@ export const aboveTheFoldFontPreloads: readonly string[] = [
 import "@fontsource/ibm-plex-sans/latin-400.css";
 import "@fontsource/ibm-plex-sans/latin-600.css";
 
-// Source Serif 4 — titulos (600 semibold, 500 medium na citacao em Sobre)
-import "@fontsource/source-serif-4/latin-500.css";
+// Source Serif 4 — titulos e citacao (600 semibold)
 import "@fontsource/source-serif-4/latin-600.css";
 
 // JetBrains Mono — rotulos e botoes (400 regular, 500 medium)
