@@ -27,9 +27,17 @@ const year = new Date().getFullYear();
 
       <div class="flex flex-wrap items-center gap-6">
         <a
-          href={site.githubUrl}
+          href={site.resumePdfUrl}
           target="_blank"
           rel="noopener noreferrer"
+          class="font-mono text-[11px] uppercase tracking-[0.12em] text-muted-foreground underline decoration-border decoration-1 underline-offset-4 transition-colors duration-150 hover:text-accent hover:decoration-accent focus-ring"
+        >
+          Currículo (PDF)
+        </a>
+        <a
+          href={site.githubUrl}
+          target="_blank"
+          rel="me noopener noreferrer"
           class="text-muted-foreground transition-colors duration-150 hover:text-accent focus-ring"
           aria-label="GitHub"
         >
@@ -38,7 +46,7 @@ const year = new Date().getFullYear();
         <a
           href={site.linkedinUrl}
           target="_blank"
-          rel="noopener noreferrer"
+          rel="me noopener noreferrer"
           class="text-muted-foreground transition-colors duration-150 hover:text-foreground focus-ring"
           aria-label="LinkedIn"
         >

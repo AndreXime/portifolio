@@ -29,7 +29,12 @@ export default defineConfig({
 			}),
 		},
 	},
-	integrations: [icon(), sitemap({})],
+	integrations: [
+		icon(),
+		sitemap({
+			filter: (page) => !page.includes("/og-image") && !page.includes("/resumo") && !page.includes("/api/"),
+		}),
+	],
 	build: {
 		inlineStylesheets: "always",
 	},
