@@ -11,30 +11,18 @@ function scrollSmoothTo(id: string): boolean {
 	return behavior === "smooth";
 }
 
-document.addEventListener("customScroll", (event: Event) => {
-	if (!(event instanceof CustomEvent)) return;
+export function scrollToSection(id: string, onComplete?: () => void): void {
+	const scrollIsSmooth = scrollSmoothTo(id);
 
-	const detail = event.detail;
-	if (!detail || typeof detail !== "object") return;
-	const elementId = detail.id;
-	if (typeof elementId !== "string") return;
+	if (!onComplete) return;
 
-	const onComplete =
-		"onComplete" in detail && typeof detail.onComplete === "function" ? (detail.onComplete as () => void) : undefined;
-
-	const scrollIsSmooth = scrollSmoothTo(elementId);
-
-	if (onComplete) {
-		if (!scrollIsSmooth) {
-			// Já que o scroll é instantâneo só precisa de "2 frames" pra executar a ação
-			requestAnimationFrame(() => {
-				requestAnimationFrame(onComplete);
-			});
-			return;
-		}
-
-		// Tempo para animação de scroll smooth executar
-		const smoothScrollSettleMs = 400;
-		window.setTimeout(onComplete, smoothScrollSettleMs);
+	if (!scrollIsSmooth) {
+		requestAnimationFrame(() => {
+			requestAnimationFrame(onComplete);
+		});
+		return;
 	}
-});
+
+	const smoothScrollSettleMs = 400;
+	window.setTimeout(onComplete, smoothScrollSettleMs);
+}

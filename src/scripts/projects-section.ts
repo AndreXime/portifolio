@@ -1,3 +1,5 @@
+import { scrollToSection } from "./scroll-to";
+
 function bindProjectsList(listEl: HTMLElement, reducedMotion: boolean, showMore: HTMLButtonElement): void {
 	function applyShowMoreState(expanded: boolean): void {
 		const extras = listEl.querySelectorAll<HTMLLIElement>("li[data-project-extra]");
@@ -26,20 +28,13 @@ function bindProjectsList(listEl: HTMLElement, reducedMotion: boolean, showMore:
 			}
 		} else {
 			requestAnimationFrame(() => {
-				document.dispatchEvent(
-					new CustomEvent("customScroll", {
-						detail: {
-							id: "projetos",
-							onComplete() {
-								extras.forEach((li) => {
-									li.classList.add("hidden");
-								});
-								showMore.setAttribute("aria-expanded", "false");
-								showMore.textContent = "Ver mais";
-							},
-						},
-					}),
-				);
+				scrollToSection("projetos", () => {
+					extras.forEach((li) => {
+						li.classList.add("hidden");
+					});
+					showMore.setAttribute("aria-expanded", "false");
+					showMore.textContent = "Ver mais";
+				});
 			});
 		}
 	}

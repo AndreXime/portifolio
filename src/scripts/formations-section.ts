@@ -1,3 +1,5 @@
+import { scrollToSection } from "./scroll-to";
+
 function applyShowMoreState(
 	listEl: HTMLElement,
 	showMore: HTMLButtonElement,
@@ -35,20 +37,13 @@ function applyShowMoreState(
 	}
 
 	requestAnimationFrame(() => {
-		document.dispatchEvent(
-			new CustomEvent("customScroll", {
-				detail: {
-					id: "formacoes",
-					onComplete() {
-						extras.forEach((li) => {
-							li.classList.add("hidden");
-						});
-						showMore.setAttribute("aria-expanded", "false");
-						showMore.textContent = "Ver mais certificações";
-					},
-				},
-			}),
-		);
+		scrollToSection("formacoes", () => {
+			extras.forEach((li) => {
+				li.classList.add("hidden");
+			});
+			showMore.setAttribute("aria-expanded", "false");
+			showMore.textContent = "Ver mais certificações";
+		});
 	});
 }
 
