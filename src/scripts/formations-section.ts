@@ -48,16 +48,11 @@ function applyShowMoreState(
 }
 
 function setupFormationsSection(): void {
-	const sectionEl = document.getElementById("formacoes");
 	const listEl = document.getElementById("formacoes-list");
 	const showMoreRaw = document.getElementById("formations-show-more");
 
-	if (!(sectionEl instanceof HTMLElement)) return;
 	if (!(listEl instanceof HTMLElement)) return;
 	if (!(showMoreRaw instanceof HTMLButtonElement)) return;
-	if (sectionEl.dataset.ready === "1") return;
-
-	sectionEl.dataset.ready = "1";
 
 	const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 

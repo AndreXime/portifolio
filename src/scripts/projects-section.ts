@@ -46,20 +46,15 @@ function bindProjectsList(listEl: HTMLElement, reducedMotion: boolean, showMore:
 }
 
 function setupProjectsSection(): void {
-	const sectionEl = document.getElementById("projetos");
 	const listEl = document.getElementById("projetos-list");
 	const showMoreRaw = document.getElementById("projects-show-more");
 	const showMoreWrap = document.getElementById("projects-show-more-wrap");
 
-	if (!(sectionEl instanceof HTMLElement)) return;
 	if (!(listEl instanceof HTMLElement)) return;
 
 	const hasShowMore = Boolean(showMoreRaw) && Boolean(showMoreWrap);
 	if (!hasShowMore) return;
 	if (!(showMoreRaw instanceof HTMLButtonElement)) return;
-
-	if (sectionEl.dataset.ready === "1") return;
-	sectionEl.dataset.ready = "1";
 
 	const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 	bindProjectsList(listEl, reducedMotion, showMoreRaw);

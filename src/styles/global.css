@@ -64,6 +64,13 @@
 		transform 400ms var(--ease-out-crisp);
 }
 
+@media (scripting: none) {
+	.reveal {
+		opacity: 1;
+		transform: none;
+	}
+}
+
 .reveal.is-visible {
 	opacity: 1;
 	transform: translateY(0);

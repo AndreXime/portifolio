@@ -27,7 +27,9 @@ function resolveIconName(slug: string) {
         >
           Tecnologias
         </h2>
-        <p class="mt-4 font-mono text-[11px] uppercase tracking-[0.12em] text-muted-foreground">
+        <p
+          class="mt-4 font-mono text-[11px] uppercase tracking-[0.12em] text-muted-foreground"
+        >
           Stack do dia a dia
         </p>
       </Reveal>
@@ -67,7 +69,10 @@ function resolveIconName(slug: string) {
                         class="tech-logo inline-flex size-8 items-center justify-center border border-border bg-card text-foreground transition-colors duration-150 hover:border-accent hover:bg-accent/5 hover:text-accent md:size-9"
                         aria-hidden="true"
                       >
-                        <Icon name={resolveIconName(slug)} class="size-4 md:size-5" />
+                        <Icon
+                          name={resolveIconName(slug)}
+                          class="size-4 md:size-5"
+                        />
                       </span>
                     </li>
                   ))}
