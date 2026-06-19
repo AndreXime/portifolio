@@ -1,9 +1,10 @@
 ---
 import { aboveTheFoldFontPreloads } from "../styles/fonts";
-import { site } from "../content/index";
+import { experiences, projects, site } from "../content/index";
+import { buildPortfolioJsonLd } from "../lib/portfolio-json-ld";
 
 interface Props {
-	robots?: string;
+  robots?: string;
 }
 
 const { robots = "index, follow" } = Astro.props;
@@ -12,83 +13,19 @@ const { title, description, ogImageAlt } = site.seo;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const socialImageURL = new URL("/og-image.png", Astro.site);
+const siteOrigin = new URL("/", Astro.site ?? canonicalURL.origin).origin;
 
-const schema = JSON.stringify({
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "ProfilePage",
-      "@id": `${Astro.site}#profilepage`,
-      url: Astro.site,
-      name: title,
-      description: description,
-      dateCreated: "2025-10-17T00:00:00+00:00",
-      dateModified: new Date().toISOString(),
-      mainEntity: {
-        "@id": `${Astro.site}#person`,
-      },
-      isPartOf: {
-        "@type": "WebSite",
-        "@id": `${Astro.site}#website`,
-        name: "Portfólio de André Ximenes",
-        url: Astro.site,
-      },
-    },
-    {
-      "@type": "Person",
-      "@id": `${Astro.site}#person`,
-      name: site.person.fullName,
-      givenName: "André",
-      familyName: "Ximenes",
-      alternateName: ["André Ricardo Ximenes", "andrexime"],
-      jobTitle: site.person.jobTitle,
-      description: site.person.description,
-      image: new URL("/me.webp", Astro.site),
-      url: Astro.site,
-
-      homeLocation: {
-        "@type": "Place",
-        address: {
-          "@type": "PostalAddress",
-          addressLocality: "Sobral",
-          addressRegion: "CE",
-          addressCountry: "BR",
-        },
-      },
-
-      workLocation: {
-        "@type": "Place",
-        name: "Remote",
-        address: {
-          "@type": "PostalAddress",
-          addressCountry: "BR",
-        },
-      },
-
-      sameAs: [site.githubUrl, site.linkedinUrl],
-
-      knowsAbout: [
-        { "@type": "Thing", name: "TypeScript" },
-        { "@type": "Thing", name: "Node.js" },
-        { "@type": "Thing", name: "NestJS" },
-        { "@type": "Thing", name: "Hono" },
-        { "@type": "Thing", name: "PostgreSQL" },
-        { "@type": "Thing", name: "Prisma" },
-        { "@type": "Thing", name: "React" },
-        { "@type": "Thing", name: "Next.js" },
-        { "@type": "Thing", name: "REST API" },
-        { "@type": "Thing", name: "OpenAPI" },
-        { "@type": "Thing", name: "Software Architecture" },
-      ],
-
-      alumniOf: {
-        "@type": "EducationalOrganization",
-        name: "Universidade Estadual do Vale do Acaraú",
-        sameAs: "https://www.uva.ce.gov.br",
-      },
-    },
-  ],
-});
+const schema = JSON.stringify(
+  buildPortfolioJsonLd({
+    site: siteOrigin,
+    seo: site.seo,
+    person: site.person,
+    githubUrl: site.githubUrl,
+    linkedinUrl: site.linkedinUrl,
+    experiences,
+    projects,
+  }),
+);
 ---
 
 <!doctype html>
