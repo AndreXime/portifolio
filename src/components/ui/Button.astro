@@ -22,12 +22,7 @@ const {
   ...rest
 } = Astro.props;
 
-const isHashLink =
-  typeof href === "string" && (href.startsWith("#") || href.startsWith("/#"));
-
-const hashTargetId = isHashLink ? href.split("#")[1] : undefined;
-
-const Tag = isHashLink ? "button" : href ? "a" : "button";
+const Tag = href ? "a" : "button";
 
 const shared =
   "inline-flex cursor-pointer items-center justify-center gap-2 whitespace-nowrap rounded-none border font-mono text-xs font-medium uppercase tracking-[0.12em] transition-colors duration-150 ease-[cubic-bezier(0.25,0,0,1)] focus-ring active:translate-y-px disabled:pointer-events-none disabled:opacity-50";
@@ -57,9 +52,8 @@ const variantClass: Record<NonNullable<typeof variant>, string> = {
   {...rest}
   class:list={[shared, variantClass[variant], className]}
   href={Tag === "a" ? href : undefined}
-  type={Tag === "button" ? (isHashLink ? "button" : type) : undefined}
+  type={Tag === "button" ? type : undefined}
   disabled={Tag === "button" ? disabled : undefined}
-  data-scroll-to={isHashLink ? hashTargetId : undefined}
 >
   <slot />
   {showArrow && <Icon name="arrow" class="size-3.5 shrink-0" />}

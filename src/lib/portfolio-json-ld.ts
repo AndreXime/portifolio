@@ -1,4 +1,11 @@
-import type { Experience, JsonLdNode, PortfolioJsonLdInput, ProjectEntry } from "./portfolio-json-ld.types";
+import type {
+	Experience,
+	JsonLdNode,
+	PortfolioJsonLdInput,
+	ProjectEntry,
+	ProjectPageJsonLdInput,
+} from "./portfolio-json-ld.types";
+import { getProjectPageUrl } from "./project-page";
 
 export function buildPortfolioJsonLd(input: PortfolioJsonLdInput) {
 	const personId = schemaId(input.site, "person");
@@ -97,6 +104,68 @@ export function buildPortfolioJsonLd(input: PortfolioJsonLdInput) {
 	};
 }
 
+export function buildProjectPageJsonLd(input: ProjectPageJsonLdInput) {
+	const pageUrl = getProjectPageUrl(input.site, input.project.id);
+	const liveUrl = input.project.data.link?.trim();
+	const personId = schemaId(input.site, "person");
+	const sameAs = [input.project.data.github, ...(liveUrl ? [liveUrl] : [])];
+
+	const software: JsonLdNode = {
+		"@type": "SoftwareSourceCode",
+		"@id": pageUrl,
+		url: pageUrl,
+		name: input.project.data.title,
+		description: input.project.data.shortDescription,
+		codeRepository: input.project.data.github,
+		programmingLanguage: input.project.data.tech,
+		keywords: input.project.data.tech.join(", "),
+		image: new URL(input.project.data.imageUrl.src, input.site).href,
+		author: { "@id": personId },
+		sameAs,
+	};
+
+	return {
+		"@context": "https://schema.org",
+		"@graph": [
+			{
+				"@type": "WebPage",
+				"@id": `${pageUrl}#webpage`,
+				url: pageUrl,
+				name: input.project.data.title,
+				description: input.project.data.shortDescription,
+				isPartOf: { "@id": schemaId(input.site, "website") },
+				breadcrumb: { "@id": `${pageUrl}#breadcrumb` },
+				mainEntity: { "@id": pageUrl },
+			},
+			{
+				"@type": "BreadcrumbList",
+				"@id": `${pageUrl}#breadcrumb`,
+				itemListElement: [
+					{
+						"@type": "ListItem",
+						position: 1,
+						name: "Início",
+						item: input.site,
+					},
+					{
+						"@type": "ListItem",
+						position: 2,
+						name: "Projetos",
+						item: `${input.site}/#projetos`,
+					},
+					{
+						"@type": "ListItem",
+						position: 3,
+						name: input.project.data.title,
+						item: pageUrl,
+					},
+				],
+			},
+			software,
+		],
+	};
+}
+
 function slugify(text: string): string {
 	return text
 		.normalize("NFD")
@@ -154,22 +223,24 @@ function buildExperienceNodes(site: string, experiences: Experience[]): JsonLdNo
 
 function buildProjectNodes(site: string, projects: ProjectEntry[]): JsonLdNode[] {
 	return projects.map((project) => {
-		const id = schemaId(site, `project-${project.id}`);
+		const pageUrl = getProjectPageUrl(site, project.id);
 		const liveUrl = project.data.link?.trim();
+		const sameAs = [project.data.github, ...(liveUrl ? [liveUrl] : [])];
 
 		return {
 			"@type": "SoftwareSourceCode",
-			"@id": id,
+			"@id": pageUrl,
+			url: pageUrl,
 			name: project.data.title,
 			description: project.data.shortDescription,
 			codeRepository: project.data.github,
-			...(liveUrl ? { url: liveUrl } : {}),
 			programmingLanguage: project.data.tech,
 			keywords: project.data.tech.join(", "),
 			image: new URL(project.data.imageUrl.src, site).href,
 			author: {
 				"@id": schemaId(site, "person"),
 			},
+			sameAs,
 		};
 	});
 }
@@ -183,7 +254,7 @@ function buildProjectsItemList(site: string, projects: ProjectEntry[]): JsonLdNo
 			"@type": "ListItem",
 			position: index + 1,
 			item: {
-				"@id": schemaId(site, `project-${project.id}`),
+				"@id": getProjectPageUrl(site, project.id),
 			},
 		})),
 	};

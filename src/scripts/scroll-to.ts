@@ -38,19 +38,3 @@ document.addEventListener("customScroll", (event: Event) => {
 		window.setTimeout(onComplete, smoothScrollSettleMs);
 	}
 });
-
-document.addEventListener("DOMContentLoaded", () => {
-	const buttons = document.querySelectorAll<HTMLButtonElement>("button[data-scroll-to]");
-
-	for (const button of buttons) {
-		button.addEventListener("click", (event) => {
-			if (button.disabled) return;
-			event.preventDefault();
-
-			const elementId = button.getAttribute("data-scroll-to");
-			if (!elementId) return;
-
-			scrollSmoothTo(elementId);
-		});
-	}
-});

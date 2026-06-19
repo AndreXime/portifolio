@@ -35,6 +35,11 @@ export interface PortfolioJsonLdInput {
 	projects: ProjectEntry[];
 }
 
+export interface ProjectPageJsonLdInput {
+	site: string;
+	project: ProjectEntry;
+}
+
 export interface JsonLdNode {
 	"@type": string;
 	"@id"?: string;

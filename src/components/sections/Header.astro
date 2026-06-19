@@ -5,36 +5,36 @@ import { Icon } from "astro-icon/components";
 import { site } from "../../content/index";
 
 const links = [
-  { href: "#sobre", label: "Sobre" },
-  { href: "#experiencias", label: "Experiências" },
-  { href: "#projetos", label: "Projetos" },
-  { href: "#tecnologias", label: "Tecnologias" },
-  { href: "#formacoes", label: "Formações" },
-  { href: "#contato", label: "Contato" },
+  { href: "/#sobre", section: "sobre", label: "Sobre" },
+  { href: "/#experiencias", section: "experiencias", label: "Experiências" },
+  { href: "/#projetos", section: "projetos", label: "Projetos" },
+  { href: "/#tecnologias", section: "tecnologias", label: "Tecnologias" },
+  { href: "/#formacoes", section: "formacoes", label: "Formações" },
+  { href: "/#contato", section: "contato", label: "Contato" },
 ] as const;
 ---
 
 <header
   class="fixed top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur-none"
 >
-  <Container element="div" class="flex items-center justify-between py-4 md:py-5">
-    <button
-      data-scroll-to="inicio"
-      class="font-display cursor-pointer text-left text-lg font-semibold leading-none tracking-tight text-foreground focus-ring md:text-xl"
+  <Container
+    element="div"
+    class="flex items-center justify-between py-4 md:py-5"
+  >
+    <a
+      href="/#inicio"
+      class="font-display text-left text-lg font-semibold leading-none tracking-tight text-foreground transition-colors duration-150 hover:text-accent focus-ring md:text-xl"
     >
       {site.authorName}
-    </button>
+    </a>
 
-    <nav
-      class="hidden items-center gap-1 lg:flex"
-      aria-label="Principal"
-    >
+    <nav class="hidden items-center gap-1 lg:flex" aria-label="Principal">
       {
-        links.map(({ href, label }) => (
+        links.map(({ href, section, label }) => (
           <Button
             variant="ghost"
             href={href}
-            data-nav-section={href.slice(1)}
+            data-nav-section={section}
             class="px-2.5 py-1.5 font-mono text-[11px] !font-medium uppercase !tracking-[0.1em]"
           >
             {label}
@@ -59,10 +59,10 @@ const links = [
         class="absolute right-0 top-full z-50 mt-2 w-56 border border-border bg-card"
       >
         {
-          links.map(({ href, label }) => (
+          links.map(({ href, section, label }) => (
             <a
               href={href}
-              data-nav-section={href.slice(1)}
+              data-nav-section={section}
               class="block border-b border-border px-4 py-3 font-mono text-xs uppercase tracking-[0.1em] text-muted-foreground transition-colors duration-150 last:border-b-0 hover:bg-muted hover:text-foreground focus-ring"
             >
               {label}
