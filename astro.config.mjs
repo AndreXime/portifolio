@@ -40,6 +40,10 @@ export default defineConfig({
 	},
 	vite: {
 		plugins: [tailwindcss()],
+		build: {
+			// Scripts na home serem inline para evitar requisição extra
+			assetsInlineLimit: 8000,
+		},
 	},
 	adapter: vercel(),
 });

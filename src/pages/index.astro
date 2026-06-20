@@ -27,7 +27,7 @@ import CTA from "../components/sections/CTA.astro";
   </main>
   <Footer />
   <script>
-    // Entry point único da home: importa tudo aqui para bundlar em um arquivo só e evitar vários requests de JS.
+    // Entry point para Astro bundla os imports em um unico arquivo JS.
     import { initContactForm } from "./../scripts/contact-form";
     import { initFormationsSection } from "./../scripts/formations-section";
     import { initNavScrollSpy } from "./../scripts/nav-scroll-spy";
