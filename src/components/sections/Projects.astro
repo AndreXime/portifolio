@@ -74,8 +74,9 @@ const showProjectsFooter = gridProjects.length > PROJECTS_INITIAL;
                     <Image
                       src={featuredProject.data.featuredImageUrl}
                       alt={projectImageAlt(featuredProject)}
-                      width={1365}
-                      height={2800}
+                      width={512}
+                      height={1050}
+                      widths={[256, 512]}
                       sizes="(min-width: 1024px) 16rem, 0"
                       class="hidden h-full max-h-full w-full object-contain object-top lg:block"
                       loading="eager"

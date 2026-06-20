@@ -119,7 +119,7 @@ export function buildProjectPageJsonLd(input: ProjectPageJsonLdInput) {
 		codeRepository: input.project.data.github,
 		programmingLanguage: input.project.data.tech,
 		keywords: input.project.data.tech.join(", "),
-		image: new URL(input.project.data.imageUrl.src, input.site).href,
+		image: new URL(input.ogImageSrc, input.site).href,
 		author: { "@id": personId },
 		sameAs,
 	};

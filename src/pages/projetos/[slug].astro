@@ -1,6 +1,6 @@
 ---
 import { getCollection, render } from "astro:content";
-import { Image } from "astro:assets";
+import { getImage, Image } from "astro:assets";
 import { Icon } from "astro-icon/components";
 import Layout from "../../layouts/Layout.astro";
 import Header from "../../components/sections/Header.astro";
@@ -27,16 +27,26 @@ export async function getStaticPaths() {
 const { project } = Astro.props;
 const { Content } = await render(project);
 const liveLink = (project.data.link ?? "").trim();
+
+const ogImage = await getImage({
+	src: project.data.imageUrl,
+	width: 1200,
+	height: 630,
+	fit: "cover",
+	format: "webp",
+	quality: 80,
+});
 ---
 
 <Layout
   title={`${project.data.title} | ${site.authorName}`}
   description={project.data.shortDescription}
   ogImageAlt={projectImageAlt(project)}
-  ogImage={project.data.imageUrl.src}
+  ogImage={ogImage.src}
   jsonLd={buildProjectPageJsonLd({
     site: new URL("/", Astro.site).origin,
     project,
+    ogImageSrc: ogImage.src,
   })}
 >
   <Header />

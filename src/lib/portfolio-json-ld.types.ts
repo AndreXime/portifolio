@@ -38,6 +38,7 @@ export interface PortfolioJsonLdInput {
 export interface ProjectPageJsonLdInput {
 	site: string;
 	project: ProjectEntry;
+	ogImageSrc: string;
 }
 
 export interface JsonLdNode {
