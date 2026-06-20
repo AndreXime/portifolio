@@ -4,7 +4,7 @@ function getFocusableElements(container: HTMLElement): HTMLElement[] {
 	).filter((el) => !el.hasAttribute("disabled") && el.offsetParent !== null);
 }
 
-function initNavDrawer() {
+export function initNavDrawer(): void {
 	const drawer = document.getElementById("nav-drawer");
 	if (!(drawer instanceof HTMLDetailsElement)) return;
 

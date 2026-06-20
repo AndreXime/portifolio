@@ -45,7 +45,7 @@ function bindProjectsList(listEl: HTMLElement, reducedMotion: boolean, showMore:
 	});
 }
 
-function setupProjectsSection(): void {
+export function initProjectsSection(): void {
 	const listEl = document.getElementById("projetos-list");
 	const showMoreRaw = document.getElementById("projects-show-more");
 	const showMoreWrap = document.getElementById("projects-show-more-wrap");
@@ -59,5 +59,3 @@ function setupProjectsSection(): void {
 	const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 	bindProjectsList(listEl, reducedMotion, showMoreRaw);
 }
-
-document.addEventListener("DOMContentLoaded", setupProjectsSection);

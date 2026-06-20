@@ -47,7 +47,7 @@ function applyShowMoreState(
 	});
 }
 
-function setupFormationsSection(): void {
+export function initFormationsSection(): void {
 	const listEl = document.getElementById("formacoes-list");
 	const showMoreRaw = document.getElementById("formations-show-more");
 
@@ -61,5 +61,3 @@ function setupFormationsSection(): void {
 		applyShowMoreState(listEl, showMoreRaw, !expanded, reducedMotion);
 	});
 }
-
-document.addEventListener("DOMContentLoaded", setupFormationsSection);

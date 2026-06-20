@@ -1,6 +1,6 @@
 const MIN_SUBMIT_MS = 3000;
 
-function initContactForm() {
+export function initContactForm(): void {
 	const form = document.getElementById("contact-form");
 	const statusEl = document.getElementById("contact-form-status");
 	if (!(form instanceof HTMLFormElement) || !statusEl) {
@@ -95,5 +95,3 @@ function initContactForm() {
 		}
 	});
 }
-
-document.addEventListener("DOMContentLoaded", initContactForm);

@@ -26,7 +26,22 @@ import CTA from "../components/sections/CTA.astro";
     <CTA />
   </main>
   <Footer />
-  <script src="../scripts/reveal-observer.ts"></script>
-  <script src="../scripts/nav-drawer.ts"></script>
-  <script src="../scripts/nav-scroll-spy.ts"></script>
+  <script>
+    // Entry point único da home: importa tudo aqui para bundlar em um arquivo só e evitar vários requests de JS.
+    import { initContactForm } from "./../scripts/contact-form";
+    import { initFormationsSection } from "./../scripts/formations-section";
+    import { initNavScrollSpy } from "./../scripts/nav-scroll-spy";
+    import { initProjectsSection } from "./../scripts/projects-section";
+    import { initReveal } from "./../scripts/reveal-observer";
+
+    function initHomePage(): void {
+      initReveal();
+      initNavScrollSpy();
+      initProjectsSection();
+      initFormationsSection();
+      initContactForm();
+    }
+
+    document.addEventListener("DOMContentLoaded", initHomePage);
+  </script>
 </Layout>

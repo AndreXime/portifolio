@@ -1,4 +1,4 @@
-function initReveal() {
+export function initReveal(): void {
 	const TIMING = "cubic-bezier(0.25, 0, 0, 1)";
 	const nodes = document.querySelectorAll<HTMLElement>("[data-reveal-root]");
 	if (!nodes.length) return;
@@ -27,5 +27,3 @@ function initReveal() {
 
 	for (const el of nodes) io.observe(el);
 }
-
-document.addEventListener("DOMContentLoaded", initReveal);

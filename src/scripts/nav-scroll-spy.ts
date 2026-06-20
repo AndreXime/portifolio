@@ -13,7 +13,7 @@ function setActiveSection(sectionId: string | null) {
 	}
 }
 
-function initNavScrollSpy() {
+export function initNavScrollSpy(): void {
 	const sections = SECTION_IDS.map((id) => document.getElementById(id)).filter(
 		(el): el is HTMLElement => el instanceof HTMLElement,
 	);
@@ -60,5 +60,3 @@ function initNavScrollSpy() {
 		observer.observe(section);
 	}
 }
-
-document.addEventListener("DOMContentLoaded", initNavScrollSpy);
