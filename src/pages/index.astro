@@ -29,16 +29,32 @@ import CTA from "../components/sections/CTA.astro";
   <script>
     // Entry point para Astro bundla os imports em um unico arquivo JS.
     import { initContactForm } from "./../scripts/contact-form";
-    import { initFormationsSection } from "./../scripts/formations-section";
+    import { initExpandableList } from "./../scripts/expandable-list-section";
     import { initNavScrollSpy } from "./../scripts/nav-scroll-spy";
-    import { initProjectsSection } from "./../scripts/projects-section";
     import { initReveal } from "./../scripts/reveal-observer";
 
     function initHomePage(): void {
       initReveal();
       initNavScrollSpy();
-      initProjectsSection();
-      initFormationsSection();
+
+      initExpandableList({
+        listId: "projetos-list",
+        showMoreId: "projects-show-more",
+        extraItemSelector: "li[data-project-extra]",
+        scrollSectionId: "projetos",
+        expandLabel: "Ver menos projetos",
+        collapseLabel: "Ver mais projetos",
+      });
+
+      initExpandableList({
+        listId: "formacoes-list",
+        showMoreId: "formations-show-more",
+        extraItemSelector: "li[data-formation-extra]",
+        scrollSectionId: "formacoes",
+        expandLabel: "Ver menos certificações",
+        collapseLabel: "Ver mais certificações",
+      });
+
       initContactForm();
     }
 
