@@ -140,20 +140,25 @@ const showProjectsFooter = gridProjects.length > PROJECTS_INITIAL;
       )
     }
 
-    <ul
-      id="projetos-list"
-      class:list={[
-        "list-none grid grid-cols-1 gap-6 sm:grid-cols-2 lg:gap-8",
-        featuredProject ? "mt-8" : "mt-14 lg:mt-16",
-      ]}
+    <div
+      data-expandable-list
+      data-scroll-section="projetos"
+      data-expand-label="Ver menos projetos"
+      data-collapse-label="Ver mais projetos"
     >
+      <ul
+        class:list={[
+          "list-none grid grid-cols-1 gap-6 sm:grid-cols-2 lg:gap-8",
+          featuredProject ? "mt-8" : "mt-14 lg:mt-16",
+        ]}
+      >
       {
         gridProjects.map((project, index) => {
           const isExtra = index >= PROJECTS_INITIAL;
           return (
             <li
               class:list={["min-h-0 h-full", isExtra && "hidden"]}
-              data-project-extra={isExtra ? "" : undefined}
+              data-expandable-extra={isExtra ? "" : undefined}
             >
               <Reveal staggerMs={index * 60} class="h-full min-h-0">
                 <article class="card-hover-bordered group/card flex h-full flex-col">
@@ -216,31 +221,29 @@ const showProjectsFooter = gridProjects.length > PROJECTS_INITIAL;
           );
         })
       }
-    </ul>
+      </ul>
 
-    <div
-      id="projects-footer"
-      class:list={[
-        "mt-10 flex flex-col items-center justify-center gap-4 border-t border-border pt-10 sm:flex-row",
-        !showProjectsFooter && "hidden",
-      ]}
-      data-projects-footer
-    >
-      {
-        showProjectsFooter && (
-          <div id="projects-show-more-wrap" class="flex justify-center">
-            <button
-              type="button"
-              id="projects-show-more"
-              class="inline-flex items-center justify-center border border-foreground px-5 py-3 font-mono text-xs font-medium uppercase tracking-[0.12em] text-foreground transition-colors duration-150 hover:bg-foreground hover:text-background focus-ring active:translate-y-px"
-              aria-expanded="false"
-              aria-controls="projetos-list"
-            >
-              Ver mais
-            </button>
-          </div>
-        )
-      }
+      <div
+        class:list={[
+          "mt-10 flex flex-col items-center justify-center gap-4 border-t border-border pt-10 sm:flex-row",
+          !showProjectsFooter && "hidden",
+        ]}
+      >
+        {
+          showProjectsFooter && (
+            <div id="projects-show-more-wrap" class="flex justify-center">
+              <button
+                type="button"
+                class="inline-flex items-center justify-center border border-foreground px-5 py-3 font-mono text-xs font-medium uppercase tracking-[0.12em] text-foreground transition-colors duration-150 hover:bg-foreground hover:text-background focus-ring active:translate-y-px"
+                data-expandable-show-more
+                aria-expanded="false"
+              >
+                Ver mais projetos
+              </button>
+            </div>
+          )
+        }
+      </div>
     </div>
   </Container>
 </section>

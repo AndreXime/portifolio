@@ -3,27 +3,15 @@ import { scrollToSection } from "./scroll-to";
 interface ExpandableListConfig {
 	listEl: HTMLElement;
 	showMore: HTMLButtonElement;
-	extraItemSelector: string;
 	scrollSectionId: string;
 	expandLabel: string;
 	collapseLabel: string;
 	expanded: boolean;
-	reducedMotion: boolean;
-}
-
-interface initProps {
-	listId: string;
-	showMoreId: string;
-	extraItemSelector: string;
-	scrollSectionId: string;
-	expandLabel: string;
-	collapseLabel: string;
 }
 
 function applyShowMoreState(config: ExpandableListConfig): void {
-	const { listEl, showMore, extraItemSelector, scrollSectionId, expandLabel, collapseLabel, expanded, reducedMotion } =
-		config;
-	const extras = listEl.querySelectorAll<HTMLLIElement>(extraItemSelector);
+	const { listEl, showMore, scrollSectionId, expandLabel, collapseLabel, expanded } = config;
+	const extras = listEl.querySelectorAll<HTMLLIElement>("li[data-expandable-extra]");
 
 	if (expanded) {
 		extras.forEach((li) => {
@@ -43,13 +31,9 @@ function applyShowMoreState(config: ExpandableListConfig): void {
 			showMore.textContent = expandLabel;
 		};
 
-		if (reducedMotion) {
-			finishExpand();
-		} else {
-			requestAnimationFrame(() => {
-				requestAnimationFrame(finishExpand);
-			});
-		}
+		requestAnimationFrame(() => {
+			requestAnimationFrame(finishExpand);
+		});
 		return;
 	}
 
@@ -64,26 +48,32 @@ function applyShowMoreState(config: ExpandableListConfig): void {
 	});
 }
 
-export function initExpandableList(options: initProps): void {
-	const { listId, showMoreId, ...rest } = options;
-	// As vezes por exemplo não tem muitos projetos o astro nem renderiza o botão então nem precisa do script
-	const showMore = document.getElementById(showMoreId);
-	if (!(showMore instanceof HTMLButtonElement)) return;
+function initSingleExpandableList(root: HTMLElement): void {
+	const showMore = root.querySelector<HTMLButtonElement>("[data-expandable-show-more]");
+	if (!showMore) return;
 
-	const listEl = document.getElementById(listId);
-	if (!(listEl instanceof HTMLElement)) {
-		throw new Error(`Elemento não encontrado: ${listId}`);
-	}
+	const listEl = root.querySelector(":scope > ul");
+	if (!(listEl instanceof HTMLElement)) return;
+
+	const scrollSectionId = root.dataset.scrollSection;
+	const expandLabel = root.dataset.expandLabel;
+	const collapseLabel = root.dataset.collapseLabel;
+	if (!scrollSectionId || !expandLabel || !collapseLabel) return;
 
 	const baseConfig = {
 		listEl,
 		showMore,
-		reducedMotion: window.matchMedia("(prefers-reduced-motion: reduce)").matches,
-		...rest,
+		scrollSectionId,
+		expandLabel,
+		collapseLabel,
 	};
 
 	showMore.addEventListener("click", () => {
 		const expanded = showMore.getAttribute("aria-expanded") === "true";
 		applyShowMoreState({ ...baseConfig, expanded: !expanded });
 	});
+}
+
+export function initExpandableList(): void {
+	document.querySelectorAll<HTMLElement>("[data-expandable-list]").forEach(initSingleExpandableList);
 }

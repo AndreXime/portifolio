@@ -41,94 +41,94 @@ const showFormationsFooter = formations.some((f) => !f.featured);
       </Reveal>
     </div>
 
-    <ul
-      id="formacoes-list"
-      class="mt-14 list-none border border-border bg-card lg:mt-16"
+    <div
+      data-expandable-list
+      data-scroll-section="formacoes"
+      data-expand-label="Ver menos certificações"
+      data-collapse-label="Ver mais certificações"
     >
-      {
-        formationItems.map(({ formation, index }) => {
-          const isExtra = !formation.featured;
-          const { title, institution, period, logo, description, link } =
-            formation;
+      <ul class="mt-14 list-none border border-border bg-card lg:mt-16">
+        {
+          formationItems.map(({ formation, index }) => {
+            const isExtra = !formation.featured;
+            const { title, institution, period, logo, description, link } =
+              formation;
 
-          return (
-            <li
-              class:list={[
-                "border-b border-border last:border-b-0",
-                isExtra && "hidden",
-              ]}
-              data-formation-extra={isExtra ? "" : undefined}
-            >
-              <Reveal staggerMs={index * 60}>
-                <article class="card-hover-flat group/card grid grid-cols-1 gap-6 p-6 md:p-8 sm:grid-cols-[auto_1fr] sm:gap-8">
-                  <div class="flex size-16 shrink-0 items-center justify-center border border-border bg-muted transition-colors duration-150 group-hover/card:border-accent sm:size-20">
-                    <Image
-                      src={logo}
-                      alt={`Logo ${institution}`}
-                      format="webp"
-                      width={80}
-                      height={80}
-                      sizes="80px"
-                      class="max-h-12 max-w-12 object-contain p-2 sm:max-h-14 sm:max-w-14"
-                      loading="lazy"
-                      decoding="async"
-                    />
-                  </div>
-                  <div class="min-w-0">
-                    <h3 class="card-hover-title font-display text-xl font-semibold leading-tight text-foreground md:text-2xl">
-                      {title}
-                    </h3>
-                    <div class="mt-2 flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between sm:gap-4">
-                      <span class="font-mono text-sm text-foreground-variant">
-                        {institution}
-                      </span>
-                      <span class="font-mono text-xs uppercase tracking-[0.12em] text-muted-foreground">
-                        {period}
-                      </span>
+            return (
+              <li
+                class:list={[
+                  "border-b border-border last:border-b-0",
+                  isExtra && "hidden",
+                ]}
+                data-expandable-extra={isExtra ? "" : undefined}
+              >
+                <Reveal staggerMs={index * 60}>
+                  <article class="card-hover-flat group/card grid grid-cols-1 gap-6 p-6 md:p-8 sm:grid-cols-[auto_1fr] sm:gap-8">
+                    <div class="flex size-16 shrink-0 items-center justify-center border border-border bg-muted transition-colors duration-150 group-hover/card:border-accent sm:size-20">
+                      <Image
+                        src={logo}
+                        alt={`Logo ${institution}`}
+                        format="webp"
+                        width={80}
+                        height={80}
+                        sizes="80px"
+                        class="max-h-12 max-w-12 object-contain p-2 sm:max-h-14 sm:max-w-14"
+                        loading="lazy"
+                        decoding="async"
+                      />
                     </div>
-                    {description && (
-                      <p class="mt-4 max-w-2xl text-base leading-[1.7] text-foreground-variant">
-                        {description}
-                      </p>
-                    )}
-                    {link && (
-                      <p class="mt-5">
-                        <a
-                          href={link}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          class="font-mono text-xs font-medium uppercase tracking-[0.1em] text-accent underline decoration-accent/40 decoration-1 underline-offset-4 transition-colors duration-150 hover:decoration-accent focus-ring"
-                        >
-                          Ver credencial no Coursera
-                        </a>
-                      </p>
-                    )}
-                  </div>
-                </article>
-              </Reveal>
-            </li>
-          );
-        })
-      }
-    </ul>
+                    <div class="min-w-0">
+                      <h3 class="card-hover-title font-display text-xl font-semibold leading-tight text-foreground md:text-2xl">
+                        {title}
+                      </h3>
+                      <div class="mt-2 flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between sm:gap-4">
+                        <span class="font-mono text-sm text-foreground-variant">
+                          {institution}
+                        </span>
+                        <span class="font-mono text-xs uppercase tracking-[0.12em] text-muted-foreground">
+                          {period}
+                        </span>
+                      </div>
+                      {description && (
+                        <p class="mt-4 max-w-2xl text-base leading-[1.7] text-foreground-variant">
+                          {description}
+                        </p>
+                      )}
+                      {link && (
+                        <p class="mt-5">
+                          <a
+                            href={link}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="font-mono text-xs font-medium uppercase tracking-[0.1em] text-accent underline decoration-accent/40 decoration-1 underline-offset-4 transition-colors duration-150 hover:decoration-accent focus-ring"
+                          >
+                            Ver credencial no Coursera
+                          </a>
+                        </p>
+                      )}
+                    </div>
+                  </article>
+                </Reveal>
+              </li>
+            );
+          })
+        }
+      </ul>
 
-    {
-      showFormationsFooter && (
-        <div
-          id="formations-footer"
-          class="mt-10 flex flex-col items-center justify-center gap-4 border-t border-border pt-10"
-        >
-          <button
-            type="button"
-            id="formations-show-more"
-            class="inline-flex items-center justify-center border border-foreground px-5 py-3 font-mono text-xs font-medium uppercase tracking-[0.12em] text-foreground transition-colors duration-150 hover:bg-foreground hover:text-background focus-ring active:translate-y-px"
-            aria-expanded="false"
-            aria-controls="formacoes-list"
-          >
-            Ver mais certificações
-          </button>
-        </div>
-      )
-    }
+      {
+        showFormationsFooter && (
+          <div class="mt-10 flex flex-col items-center justify-center gap-4 border-t border-border pt-10">
+            <button
+              type="button"
+              class="inline-flex items-center justify-center border border-foreground px-5 py-3 font-mono text-xs font-medium uppercase tracking-[0.12em] text-foreground transition-colors duration-150 hover:bg-foreground hover:text-background focus-ring active:translate-y-px"
+              data-expandable-show-more
+              aria-expanded="false"
+            >
+              Ver mais certificações
+            </button>
+          </div>
+        )
+      }
+    </div>
   </Container>
 </section>
