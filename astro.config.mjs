@@ -32,7 +32,7 @@ export default defineConfig({
 	integrations: [
 		icon(),
 		sitemap({
-			filter: (page) => !page.includes("/og-image") && !page.includes("/resumo") && !page.includes("/api/"),
+			filter: (page) => !page.includes("/og-image") && !page.includes("/api/"),
 		}),
 	],
 	build: {
