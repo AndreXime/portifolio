@@ -1,4 +1,5 @@
 ---
+import Analytics from "@vercel/analytics/astro";
 import { aboveTheFoldFontPreloads } from "../styles/fonts";
 import { experiences, projects, site } from "../content/index";
 import { buildPortfolioJsonLd } from "../lib/portfolio-json-ld";
@@ -82,6 +83,7 @@ const schema = JSON.stringify(jsonLd);
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={socialImageURL} />
     <meta name="twitter:image:alt" content={ogImageAlt} />
+    <Analytics />
   </head>
   <body class="min-h-screen overflow-x-clip pt-0">
     <slot />
