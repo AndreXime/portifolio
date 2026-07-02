@@ -28,6 +28,7 @@ export const site = {
 	email: portfolio.email,
 	githubUrl: portfolio.githubUrl,
 	linkedinUrl: portfolio.linkedinUrl,
+	blogUrl: portfolio.blogUrl,
 	resumePdfUrl: portfolio.resumePdfUrl,
 	seo: portfolio.seo,
 	person: portfolio.person,

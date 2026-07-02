@@ -9,6 +9,7 @@ const portfolio = defineCollection({
 		email: z.email(),
 		githubUrl: z.url(),
 		linkedinUrl: z.url(),
+		blogUrl: z.url(),
 		resumePdfUrl: z.string(),
 		seo: z.object({
 			title: z.string(),
