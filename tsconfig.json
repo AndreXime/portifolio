@@ -5,6 +5,6 @@
 			"@/*": ["./src/*"]
 		}
 	},
-	"include": [".astro/types.d.ts", "**/*.ts", "**/*.tsx", "**/*.astro", "generate-og.js"],
+	"include": [".astro/types.d.ts", "**/*.ts", "**/*.tsx", "**/*.d.ts", "**/*.astro", "devtools/**/*.ts"],
 	"exclude": ["dist", "node_modules", "dist", ".vercel"]
 }

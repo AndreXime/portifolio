@@ -16,7 +16,28 @@ const FONT_EXTENSIONS = new Set([".woff", ".woff2", ".ttf", ".otf", ".eot"]);
 const REFERENCE_EXTENSIONS = new Set([".html", ".css", ".js", ".mjs", ".cjs"]);
 const WIDTH = 103;
 
-const FILE_COLUMNS = [
+interface DistFile {
+	path: string;
+	size: number;
+}
+
+interface EnrichedFile extends DistFile {
+	content: Buffer;
+	brotliSize: number;
+}
+
+interface TableColumn {
+	label: string;
+	width: number;
+	align: "left" | "center" | "right";
+}
+
+interface TableRow {
+	cells: string[];
+	colors: string[];
+}
+
+const FILE_COLUMNS: TableColumn[] = [
 	{ label: "raw", width: 12, align: "center" },
 	{ label: "brotli", width: 10, align: "center" },
 	{ label: "savings", width: 8, align: "center" },
@@ -33,14 +54,14 @@ const c = {
 	yellow: tty ? "\x1b[33m" : "",
 };
 
-async function main() {
+async function main(): Promise<void> {
 	const distPath = join(process.cwd(), DIST_DIR);
 
-	let allFiles;
+	let allFiles: DistFile[];
 	try {
 		allFiles = await walkDir(distPath);
-	} catch (error) {
-		if (error?.code === "ENOENT") {
+	} catch (error: unknown) {
+		if (error && typeof error === "object" && "code" in error && error.code === "ENOENT") {
 			console.error(`${c.bold}Directory not found:${c.reset} ${DIST_DIR}`);
 			console.error(`${c.dim}Run "npm run build" before analyzing dist.${c.reset}`);
 			process.exit(1);
@@ -48,7 +69,13 @@ async function main() {
 		throw error;
 	}
 
-	const groups = { html: [], js: [], css: [], image: [], font: [] };
+	const groups: Record<"html" | "js" | "css" | "image" | "font", DistFile[]> = {
+		html: [],
+		js: [],
+		css: [],
+		image: [],
+		font: [],
+	};
 
 	for (const file of allFiles) {
 		const ext = extname(file.path).toLowerCase();
@@ -69,7 +96,7 @@ async function main() {
 		prepareGroup(groups.font),
 	]);
 
-	const sections = [
+	const sections: [string, EnrichedFile[]][] = [
 		["HTML", html],
 		["JavaScript", js],
 		["CSS", css],
@@ -84,7 +111,7 @@ async function main() {
 	}
 }
 
-function printGroup(title, files, baseDir) {
+function printGroup(title: string, files: EnrichedFile[], baseDir: string): void {
 	const sorted = [...files].sort((a, b) => b.size - a.size);
 	const total = sorted.reduce((sum, file) => sum + file.size, 0);
 	const brotliTotal = sorted.reduce((sum, file) => sum + file.brotliSize, 0);
@@ -95,7 +122,7 @@ function printGroup(title, files, baseDir) {
 	const stats = `${count} ${label} · ${formatBytes(total)} → ${formatBytes(brotliTotal)} (${savingsPercent(total, brotliTotal)} smaller)`;
 	printCentered(stats, c.dim);
 
-	const rows = sorted.map((file) => {
+	const rows: TableRow[] = sorted.map((file) => {
 		const pct = savingsPercent(file.size, file.brotliSize);
 		return {
 			cells: [formatBytes(file.size), formatBytes(file.brotliSize), pct, relative(baseDir, file.path)],
@@ -106,21 +133,21 @@ function printGroup(title, files, baseDir) {
 	printTable(FILE_COLUMNS, rows);
 }
 
-async function prepareGroup(files) {
+async function prepareGroup(files: DistFile[]): Promise<EnrichedFile[]> {
 	return Promise.all(files.map(enrichWithContent));
 }
 
-async function prepareHtmlGroup(files) {
+async function prepareHtmlGroup(files: DistFile[]): Promise<EnrichedFile[]> {
 	const enriched = await prepareGroup(files);
 	return enriched.filter((file) => !hasRobotsNoindex(file.content));
 }
 
-async function prepareImageGroup(files, referenceContent) {
+async function prepareImageGroup(files: DistFile[], referenceContent: string): Promise<EnrichedFile[]> {
 	const used = files.filter((file) => referenceContent.includes(basename(file.path)));
 	return prepareGroup(used);
 }
 
-async function collectUserFacingReferenceContent(allFiles) {
+async function collectUserFacingReferenceContent(allFiles: DistFile[]): Promise<string> {
 	const referenceFiles = allFiles.filter((file) => REFERENCE_EXTENSIONS.has(extname(file.path).toLowerCase()));
 	const chunks = await Promise.all(
 		referenceFiles.map(async (file) => {
@@ -131,11 +158,11 @@ async function collectUserFacingReferenceContent(allFiles) {
 	return chunks.join("");
 }
 
-function stripJsonLd(html) {
+function stripJsonLd(html: string): string {
 	return html.replace(/<script[^>]*type\s*=\s*["']application\/ld\+json["'][^>]*>[\s\S]*?<\/script>/gi, "");
 }
 
-async function enrichWithContent(file) {
+async function enrichWithContent(file: DistFile): Promise<EnrichedFile> {
 	const content = await readFile(file.path);
 	const brotli = await brotliCompress(content);
 	return {
@@ -145,7 +172,7 @@ async function enrichWithContent(file) {
 	};
 }
 
-function hasRobotsNoindex(content) {
+function hasRobotsNoindex(content: Buffer): boolean {
 	const html = content.toString("utf8");
 	const tags = html.match(/<meta[^>]*>/gi) ?? [];
 	for (const tag of tags) {
@@ -156,7 +183,7 @@ function hasRobotsNoindex(content) {
 	return false;
 }
 
-async function walkDir(dir) {
+async function walkDir(dir: string): Promise<DistFile[]> {
 	const entries = await readdir(dir, { withFileTypes: true });
 	const nested = await Promise.all(
 		entries.map(async (entry) => {
@@ -169,7 +196,7 @@ async function walkDir(dir) {
 	return nested.flat();
 }
 
-function printTable(columns, rows) {
+function printTable(columns: TableColumn[], rows: TableRow[]): void {
 	console.log(tableBorder(columns, "┌", "┬", "┐"));
 	console.log(
 		tableRow(
@@ -187,11 +214,10 @@ function printTable(columns, rows) {
 	console.log(tableBorder(columns, "└", "┴", "┘"));
 }
 
-function tableRow(columns, cells, colors = [], aligns) {
+function tableRow(columns: TableColumn[], cells: string[], colors: string[] = []): string {
 	const body = columns
 		.map((column, index) => {
-			const align = aligns?.[index] ?? column.align;
-			const padded = padCell(cells[index] ?? "", column.width, align);
+			const padded = padCell(cells[index] ?? "", column.width, column.align);
 			const color = colors[index];
 			return color ? `${color}${padded}${c.reset}` : padded;
 		})
@@ -200,12 +226,12 @@ function tableRow(columns, cells, colors = [], aligns) {
 	return `${c.dim}│${c.reset}${body}${c.dim}│${c.reset}`;
 }
 
-function tableBorder(columns, left, mid, right) {
+function tableBorder(columns: TableColumn[], left: string, mid: string, right: string): string {
 	const body = columns.map((column) => "─".repeat(column.width)).join(mid);
 	return `${c.dim}${left}${body}${right}${c.reset}`;
 }
 
-function banner(title) {
+function banner(title: string): void {
 	const inner = ` ${title} `;
 	const pad = Math.max(0, WIDTH - inner.length);
 	const left = Math.floor(pad / 2);
@@ -215,7 +241,7 @@ function banner(title) {
 	);
 }
 
-function printCentered(text, style = "") {
+function printCentered(text: string, style = ""): void {
 	const width = WIDTH + 2;
 	const pad = Math.max(0, width - text.length);
 	const left = Math.floor(pad / 2);
@@ -224,18 +250,18 @@ function printCentered(text, style = "") {
 	console.log(`${" ".repeat(left)}${content}${" ".repeat(right)}`);
 }
 
-function formatBytes(bytes) {
+function formatBytes(bytes: number): string {
 	if (bytes < 1024) return `${bytes} B`;
 	if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(2)} KB`;
 	return `${(bytes / (1024 * 1024)).toFixed(2)} MB`;
 }
 
-function savingsPercent(raw, brotli) {
+function savingsPercent(raw: number, brotli: number): string {
 	if (raw === 0) return "-";
 	return `${Math.round((1 - brotli / raw) * 100)}%`;
 }
 
-function padCell(text, width, align = "right") {
+function padCell(text: string, width: number, align: "left" | "center" | "right" = "right"): string {
 	const plain = String(text);
 	if (plain.length > width) return plain.slice(0, width);
 	const gap = width - plain.length;

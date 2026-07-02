@@ -1,10 +1,13 @@
 // @ts-check
 
+import node from "@astrojs/node";
 import sitemap from "@astrojs/sitemap";
 import vercel from "@astrojs/vercel";
 import tailwindcss from "@tailwindcss/vite";
 import { defineConfig, envField } from "astro/config";
 import icon from "astro-icon";
+
+const isNode = process.env.ASTRO_NODE === "1";
 
 // https://astro.build/config
 export default defineConfig({
@@ -27,6 +30,11 @@ export default defineConfig({
 				access: "secret",
 				optional: true,
 			}),
+			ASTRO_NODE: envField.string({
+				context: "server",
+				access: "public",
+				optional: true,
+			}),
 		},
 	},
 	integrations: [
@@ -45,5 +53,5 @@ export default defineConfig({
 			assetsInlineLimit: 8000,
 		},
 	},
-	adapter: vercel(),
+	adapter: isNode ? node({ mode: "standalone" }) : vercel(),
 });

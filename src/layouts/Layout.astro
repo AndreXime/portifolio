@@ -33,6 +33,7 @@ const {
   }),
 } = Astro.props;
 
+const showAnalytics = import.meta.env.ASTRO_NODE !== "1";
 const socialImageURL = new URL(ogImage, Astro.site);
 const schema = JSON.stringify(jsonLd);
 ---
@@ -83,7 +84,7 @@ const schema = JSON.stringify(jsonLd);
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={socialImageURL} />
     <meta name="twitter:image:alt" content={ogImageAlt} />
-    <Analytics />
+    {showAnalytics ? <Analytics /> : null}
   </head>
   <body class="min-h-screen overflow-x-clip pt-0">
     <slot />

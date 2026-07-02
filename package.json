@@ -6,16 +6,17 @@
 	"scripts": {
 		"dev": "astro dev",
 		"build": "astro build",
-		"preview": "astro preview",
-		"astro": "astro",
-		"generate-og": "node generate-og.js",
-		"lighthouse": "node lighthouse.js",
+		"preview": "ASTRO_NODE=1 astro preview",
+		"generate-og": "tsx devtools/generate-og.ts",
+		"lighthouse": "tsx devtools/lighthouse.ts",
+		"analyze-dist": "tsx devtools/analyze-dist.ts",
 		"check": "biome check . && npx astro check",
 		"format": "biome check --write --no-errors-on-unmatched .",
 		"prepare": "husky"
 	},
 	"dependencies": {
 		"@astrojs/check": "^0.9.9",
+		"@astrojs/node": "^10.1.4",
 		"@astrojs/sitemap": "^3.7.2",
 		"@astrojs/vercel": "^10.0.7",
 		"@fontsource/ibm-plex-sans": "^5.2.8",
@@ -24,7 +25,7 @@
 		"@iconify-json/simple-icons": "^1.2.84",
 		"@tailwindcss/vite": "^4.3.0",
 		"@vercel/analytics": "^2.0.1",
-		"astro": "^6.3.7",
+		"astro": "^6.4.8",
 		"astro-icon": "^1.1.5",
 		"nodemailer": "^8.0.8"
 	},
@@ -38,7 +39,8 @@
 		"playwright": "^1.60.0",
 		"playwright-core": "^1.61.1",
 		"tailwindcss": "^4.3.0",
-		"typescript": "^6.0.3"
+		"typescript": "^6.0.3",
+		"tsx": "^4.21.0"
 	},
 	"overrides": {
 		"@vercel/routing-utils": {
