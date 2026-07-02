@@ -9,6 +9,7 @@
 		"preview": "astro preview",
 		"astro": "astro",
 		"generate-og": "node generate-og.js",
+		"lighthouse": "node lighthouse.js",
 		"check": "biome check . && npx astro check",
 		"format": "biome check --write --no-errors-on-unmatched .",
 		"prepare": "husky"
@@ -29,10 +30,13 @@
 	},
 	"devDependencies": {
 		"@biomejs/biome": "^2.4.15",
+		"@sparticuz/chromium": "^149.0.0",
 		"@types/node": "^25",
 		"@types/nodemailer": "^8.0.0",
 		"husky": "^9.1.7",
+		"lighthouse": "^13.4.0",
 		"playwright": "^1.60.0",
+		"playwright-core": "^1.61.1",
 		"tailwindcss": "^4.3.0",
 		"typescript": "^6.0.3"
 	},
