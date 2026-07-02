@@ -25,7 +25,7 @@ export async function startBrowser(): Promise<{ browser: Browser; cdpPort: numbe
 
 	const executablePath = await sparticuzChromium.executablePath();
 
-	console.log("Iniciando Chromium\n");
+	console.log("Iniciando Chromium");
 	browser = await chromium.launch({
 		executablePath,
 		headless: true,
@@ -37,7 +37,6 @@ export async function startBrowser(): Promise<{ browser: Browser; cdpPort: numbe
 
 export async function closeBrowser(): Promise<void> {
 	if (browser) {
-		console.log("\nEncerrando Chromium");
 		await browser.close();
 		browser = null;
 		cdpPort = null;

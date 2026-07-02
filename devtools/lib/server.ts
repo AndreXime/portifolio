@@ -22,8 +22,6 @@ export async function startPreviewServer(): Promise<string> {
 
 export function closePreviewServer(): void {
 	if (!server) return;
-
-	console.log("Encerrando servidor");
 	stopProcess(server);
 	server = null;
 }
