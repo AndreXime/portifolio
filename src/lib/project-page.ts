@@ -1,7 +1,6 @@
 interface ProjectImageAltInput {
 	data: {
 		title: string;
-		cardTagline?: string | undefined;
 	};
 }
 
@@ -14,8 +13,6 @@ export function getProjectPageUrl(site: string, id: string): string {
 }
 
 export function projectImageAlt(project: ProjectImageAltInput): string {
-	const tagline = project.data.cardTagline?.trim();
-	if (tagline) return `Captura do projeto: ${tagline}`;
 	return `Captura do projeto ${project.data.title}`;
 }
 

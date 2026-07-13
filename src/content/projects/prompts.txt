@@ -62,8 +62,6 @@ No corpo, priorize **decisão arquitetural**. Em `tech`, liste 4 a 7 itens legí
 order: 0
 title: "negócio primeiro, gancho técnico depois; uma linha; cerca de 60 a 90 caracteres"
 shortDescription: "ver regras abaixo"
-cardTagline: "opcional; cerca de 40 a 55 caracteres; ex.: ATS multi-tenant · NestJS · produção"
-featured: false
 tech: ["...", "..."]
 imageUrl: ""
 featuredImageUrl: ""
@@ -72,28 +70,26 @@ github: "URL do repositório"
 ---
 ```
 
-- `order`: inteiro; `0` por padrão, a menos que o autor peça outro valor
-- `featured`: `true` só se o autor pedir; caso contrário `false`
+- `order`: inteiro; define a ordem na listagem (`0` = layout em destaque na home)
 - `imageUrl` e `featuredImageUrl`: sempre `""`
-- `cardTagline` e `link`: opcionais; omita a chave se não houver valor útil
+- `link`: opcional; omita a chave se não houver valor útil
 - `github`: URL real do repositório analisado
+- `featuredImageUrl`: opcional; imagem vertical só para o projeto em `order: 0`
 
-**`title`:** negócio primeiro, diferencial técnico depois. Ex.: "Plataforma de recrutamento multi-tenant: do site de carreiras ao pipeline auditável".
+    **`title`:** negócio primeiro, diferencial técnico depois. Ex.: "Plataforma de recrutamento multi-tenant: do site de carreiras ao pipeline auditável".
 
-**`shortDescription` (resumo curto):**
+    **`shortDescription` (resumo curto):**
 
-- **2 ou 3 frases**, no máximo ~320 caracteres no total
-- Frase 1: problema + o que o sistema entrega
-- Frase 2: diferencial técnico (stack principal + decisão forte)
-- Frase 3 (opcional): resultado ou limite conhecido com honestidade
-- Sem markdown, bullets ou links
-- Antes de entregar, conte os caracteres; se passar de ~320, reescreva
+    - **2 ou 3 frases**, no máximo ~320 caracteres no total
+    - Frase 1: problema + o que o sistema entrega
+    - Frase 2: diferencial técnico (stack principal + decisão forte)
+    - Frase 3 (opcional): resultado ou limite conhecido com honestidade
+    - Sem markdown, bullets ou links
+    - Antes de entregar, conte os caracteres; se passar de ~320, reescreva
 
-**`cardTagline`:** etiqueta curta (produto · stack · estado), se couber.
+    ### Corpo Markdown
 
-### Corpo Markdown
-
-Use **somente `##` (h2)**, nunca `#` (h1) nem `###`. Estrutura fixa:
+    Use **somente `##` (h2)**, nunca `#` (h1) nem `###`. Estrutura fixa:
 
 ```markdown
 ## Contexto técnico

@@ -8,8 +8,8 @@ import { getProjectPagePath, projectImageAlt } from "../../lib/project-page";
 import { Image } from "astro:assets";
 
 const PROJECTS_INITIAL = 2;
-const featuredProject = projectEntries.find((p) => p.data.featured) ?? null;
-const gridProjects = projectEntries.filter((p) => !p.data.featured);
+const featuredProject = projectEntries[0] ?? null;
+const gridProjects = projectEntries.slice(1);
 const showProjectsFooter = gridProjects.length > PROJECTS_INITIAL;
 ---
 
@@ -54,10 +54,7 @@ const showProjectsFooter = gridProjects.length > PROJECTS_INITIAL;
         <div class="mt-14 lg:mt-16">
           <Reveal staggerMs={0}>
             <article class="card-hover-bordered group/card grid grid-cols-1 lg:grid-cols-[16rem_1fr]">
-              <div class="relative flex min-h-48 items-start justify-center overflow-hidden border-b border-border bg-muted lg:min-h-[20rem] lg:border-b-0 lg:border-r">
-                <span class="absolute top-4 left-4 z-10 border border-accent bg-accent px-2 py-1 font-mono text-[10px] font-medium uppercase tracking-[0.12em] text-accent-foreground">
-                  Em destaque
-                </span>
+              <div class="relative aspect-video overflow-hidden border-b border-border bg-muted lg:aspect-auto lg:flex lg:min-h-[20rem] lg:items-start lg:justify-center lg:border-b-0 lg:border-r">
                 {featuredProject.data.featuredImageUrl ? (
                   <>
                     <Image
@@ -105,11 +102,6 @@ const showProjectsFooter = gridProjects.length > PROJECTS_INITIAL;
                     {featuredProject.data.title}
                   </a>
                 </h3>
-                {featuredProject.data.cardTagline && (
-                  <p class="mt-2 font-mono text-xs uppercase tracking-[0.1em] text-muted-foreground">
-                    {featuredProject.data.cardTagline}
-                  </p>
-                )}
                 <p class="mt-4 flex-1 text-sm leading-relaxed text-foreground-variant md:text-base">
                   {featuredProject.data.shortDescription}
                 </p>
@@ -152,75 +144,70 @@ const showProjectsFooter = gridProjects.length > PROJECTS_INITIAL;
           featuredProject ? "mt-8" : "mt-14 lg:mt-16",
         ]}
       >
-      {
-        gridProjects.map((project, index) => {
-          const isExtra = index >= PROJECTS_INITIAL;
-          return (
-            <li
-              class:list={["min-h-0 h-full", isExtra && "hidden"]}
-              data-expandable-extra={isExtra ? "" : undefined}
-            >
-              <Reveal staggerMs={index * 60} class="h-full min-h-0">
-                <article class="card-hover-bordered group/card flex h-full flex-col">
-                  <a
-                    href={getProjectPagePath(project.id)}
-                    class="relative block h-44 overflow-hidden border-b border-border sm:h-48"
-                  >
-                    <Image
-                      src={project.data.imageUrl}
-                      alt={projectImageAlt(project)}
-                      width={800}
-                      height={450}
-                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 40vw"
-                      class="h-full w-full object-cover object-top"
-                      loading="lazy"
-                      decoding="async"
-                    />
-                  </a>
-                  <div class="flex flex-1 flex-col p-6 md:p-8">
-                    <h3 class="card-hover-title font-display text-xl font-semibold text-foreground">
-                      <a
-                        href={getProjectPagePath(project.id)}
-                        class="transition-colors duration-150 hover:text-accent focus-ring"
-                      >
-                        {project.data.title}
-                      </a>
-                    </h3>
-                    {project.data.cardTagline && (
-                      <p class="mt-2 font-mono text-xs uppercase tracking-[0.1em] text-muted-foreground">
-                        {project.data.cardTagline}
-                      </p>
-                    )}
-                    <p class="mt-4 flex-1 text-sm leading-relaxed text-foreground-variant md:text-base">
-                      {project.data.shortDescription}
-                    </p>
-                    <ul
-                      class="mt-6 flex flex-wrap gap-2 border-t border-border pt-6"
-                      aria-label="Stack do projeto"
+        {
+          gridProjects.map((project, index) => {
+            const isExtra = index >= PROJECTS_INITIAL;
+            return (
+              <li
+                class:list={["min-h-0 h-full", isExtra && "hidden"]}
+                data-expandable-extra={isExtra ? "" : undefined}
+              >
+                <Reveal staggerMs={index * 60} class="h-full min-h-0">
+                  <article class="card-hover-bordered group/card flex h-full flex-col">
+                    <a
+                      href={getProjectPagePath(project.id)}
+                      class="relative block aspect-video overflow-hidden border-b border-border"
                     >
-                      {project.data.tech.map((t) => (
-                        <li class="border border-border px-2 py-1 font-mono text-[10px] uppercase tracking-[0.08em] text-muted-foreground">
-                          {t}
-                        </li>
-                      ))}
-                    </ul>
-                    <div class="mt-6">
-                      <Button
-                        href={getProjectPagePath(project.id)}
-                        variant="secondary"
-                        showArrow
-                        class="w-full justify-center"
+                      <Image
+                        src={project.data.imageUrl}
+                        alt={projectImageAlt(project)}
+                        width={800}
+                        height={450}
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 40vw"
+                        class="h-full w-full object-cover object-top"
+                        loading="lazy"
+                        decoding="async"
+                      />
+                    </a>
+                    <div class="flex flex-1 flex-col p-6 md:p-8">
+                      <h3 class="card-hover-title font-display text-xl font-semibold text-foreground">
+                        <a
+                          href={getProjectPagePath(project.id)}
+                          class="transition-colors duration-150 hover:text-accent focus-ring"
+                        >
+                          {project.data.title}
+                        </a>
+                      </h3>
+                      <p class="mt-4 flex-1 text-sm leading-relaxed text-foreground-variant md:text-base">
+                        {project.data.shortDescription}
+                      </p>
+                      <ul
+                        class="mt-6 flex flex-wrap gap-2 border-t border-border pt-6"
+                        aria-label="Stack do projeto"
                       >
-                        Ver detalhes
-                      </Button>
+                        {project.data.tech.map((t) => (
+                          <li class="border border-border px-2 py-1 font-mono text-[10px] uppercase tracking-[0.08em] text-muted-foreground">
+                            {t}
+                          </li>
+                        ))}
+                      </ul>
+                      <div class="mt-6">
+                        <Button
+                          href={getProjectPagePath(project.id)}
+                          variant="secondary"
+                          showArrow
+                          class="w-full justify-center"
+                        >
+                          Ver detalhes
+                        </Button>
+                      </div>
                     </div>
-                  </div>
-                </article>
-              </Reveal>
-            </li>
-          );
-        })
-      }
+                  </article>
+                </Reveal>
+              </li>
+            );
+          })
+        }
       </ul>
 
       <div

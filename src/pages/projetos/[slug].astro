@@ -29,12 +29,12 @@ const { Content } = await render(project);
 const liveLink = (project.data.link ?? "").trim();
 
 const ogImage = await getImage({
-	src: project.data.imageUrl,
-	width: 1200,
-	height: 630,
-	fit: "cover",
-	format: "webp",
-	quality: 80,
+  src: project.data.imageUrl,
+  width: 1200,
+  height: 630,
+  fit: "cover",
+  format: "webp",
+  quality: 80,
 });
 ---
 
@@ -92,14 +92,16 @@ const ogImage = await getImage({
         </nav>
       </div>
 
-      <div class="relative mt-8 overflow-hidden border border-border">
+      <div
+        class="relative mt-8 aspect-[2/1] overflow-hidden border border-border"
+      >
         <Image
           src={project.data.imageUrl}
           alt={projectImageAlt(project)}
           width={1200}
-          height={675}
+          height={600}
           sizes="(max-width: 1024px) 100vw, 72rem"
-          class="h-52 w-full object-cover object-top sm:h-64 md:h-80"
+          class="h-full w-full object-cover object-top"
           loading="eager"
           decoding="async"
         />
@@ -111,13 +113,6 @@ const ogImage = await getImage({
         >
           {project.data.title}
         </h1>
-        {
-          project.data.cardTagline && (
-            <p class="mt-3 font-mono text-xs uppercase tracking-[0.1em] text-muted-foreground">
-              {project.data.cardTagline}
-            </p>
-          )
-        }
         <p
           class="mt-6 text-base leading-[1.7] text-foreground-variant md:text-lg"
         >
