@@ -1,8 +1,10 @@
 # Gerar descrição de projeto para o portfólio
 
-Use este prompt com o repositório do projeto indexado (@Codebase) ou anexando README, `package.json`, estrutura de pastas e trechos de código relevantes.
+Analise o repositório atual (código, README, `package.json`, estrutura e docs) e produza **apenas** um documento Markdown: frontmatter YAML + corpo, no formato abaixo.
 
-Objetivo: produzir ou atualizar **um único arquivo** em `src/content/projects/<slug>.md`, pronto para o Astro Content Collections. O card do site mostra `title` + `shortDescription`; o modal "Ver detalhes" renderiza o corpo Markdown abaixo do frontmatter.
+Não crie nem edite arquivos no repositório analisado. A saída é o texto completo do documento, pronto para o autor colar no portfólio. Sem explicação antes ou depois.
+
+`imageUrl` e `featuredImageUrl` devem ser sempre string vazia (`""`). Não invente paths de imagem.
 
 ---
 
@@ -24,7 +26,7 @@ Se algo não estiver no repositório, **não invente**. Omita ou descreva como l
 ## Tom e voz
 
 - Primeira pessoa ("Eu implementei...", "Escolhi...")
-- Técnico e direto, nível pleno/sênior júnior: decisões, trade-offs e impacto
+- Técnico e direto: decisões, trade-offs e impacto
 - Português do Brasil
 - Sem clichês ("solução inovadora", "apaixonado por tecnologia", "robusto" vazio)
 - Sem travessões (—); use vírgula, ponto ou dois-pontos
@@ -47,48 +49,51 @@ Se algo não estiver no repositório, **não invente**. Omita ou descreva como l
 | aws-sdk v3 client S3 | armazenamento objeto compatível com S3 |
 | bullmq, bee-queue | filas de trabalho assíncrono |
 
-No corpo Markdown, priorize **decisão arquitetural**; no array `tech`, liste só o que aparece no card (4 a 7 itens, legíveis em uma linha).
+No corpo, priorize **decisão arquitetural**. Em `tech`, liste 4 a 7 itens legíveis, alinhados ao texto, sem redundância (não "TypeScript" e "TS").
 
 ---
 
 ## Formato de saída (obrigatório)
 
-Responda **apenas** com o conteúdo do arquivo `.md`: frontmatter YAML + corpo Markdown. Sem explicação antes ou depois.
-
 ### Frontmatter
 
 ```yaml
 ---
-order: <número inteiro; menor = aparece antes>
-title: "<valor de negócio + gancho técnico; uma linha; ~60–90 caracteres>"
-shortDescription: "<ver regras abaixo>"
-cardTagline: "<opcional; ~40–55 caracteres; mono no card; ex.: ATS multi-tenant · NestJS · produção>"
-featured: <true apenas se for o projeto principal do portfólio; no máximo um>
-tech: ["...", "..."]  # 4 a 7 itens
-imageUrl: "./images/<slug>.webp"
-featuredImageUrl: "./images/<slug>-vertical.png"  # opcional; só se featured: true e houver recorte vertical
-link: "<URL de deploy ou omitir a chave>"
-github: "<URL do repositório>"
+order: 0
+title: "negócio primeiro, gancho técnico depois; uma linha; cerca de 60 a 90 caracteres"
+shortDescription: "ver regras abaixo"
+cardTagline: "opcional; cerca de 40 a 55 caracteres; ex.: ATS multi-tenant · NestJS · produção"
+featured: false
+tech: ["...", "..."]
+imageUrl: ""
+featuredImageUrl: ""
+link: "URL de deploy, ou omita a chave"
+github: "URL do repositório"
 ---
 ```
 
+- `order`: inteiro; `0` por padrão, a menos que o autor peça outro valor
+- `featured`: `true` só se o autor pedir; caso contrário `false`
+- `imageUrl` e `featuredImageUrl`: sempre `""`
+- `cardTagline` e `link`: opcionais; omita a chave se não houver valor útil
+- `github`: URL real do repositório analisado
+
 **`title`:** negócio primeiro, diferencial técnico depois. Ex.: "Plataforma de recrutamento multi-tenant: do site de carreiras ao pipeline auditável".
 
-**`shortDescription` (crítico para o card):**
+**`shortDescription` (resumo curto):**
 
 - **2 ou 3 frases**, no máximo ~320 caracteres no total
 - Frase 1: problema + o que o sistema entrega
 - Frase 2: diferencial técnico (stack principal + decisão forte)
-- Frase 3 (opcional): resultado ou limite conhecido tratado com honestidade
-- Não use markdown, bullets nem links no frontmatter
+- Frase 3 (opcional): resultado ou limite conhecido com honestidade
+- Sem markdown, bullets ou links
+- Antes de entregar, conte os caracteres; se passar de ~320, reescreva
 
-**`cardTagline`:** opcional; frase curta estilo etiqueta para `alt` da imagem e subtítulo do card.
+**`cardTagline`:** etiqueta curta (produto · stack · estado), se couber.
 
-**`tech`:** alinhado ao texto, sem redundância (não repita "TypeScript" e "TS").
+### Corpo Markdown
 
-### Corpo Markdown (modal)
-
-Use **somente `##` (h2)** no corpo, nunca `#` (h1). Estrutura fixa:
+Use **somente `##` (h2)**, nunca `#` (h1) nem `###`. Estrutura fixa:
 
 ```markdown
 ## Contexto técnico
@@ -98,7 +103,7 @@ Um ou dois parágrafos densos: arquitetura (monólito modular, monorepo, BFF, et
 ## Desafios de engenharia (como e por quê)
 
 - **Nome curto do desafio:** o que foi feito, como, e por que essa abordagem (2–4 linhas por bullet)
-- (4 a 6 bullets; cada um deve ser verificável no repo ou na doc)
+- (4 a 6 bullets; cada um verificável no repo ou na doc)
 ```
 
 Opcional, **só se couber em uma frase com evidência**:
@@ -109,19 +114,21 @@ Opcional, **só se couber em uma frase com evidência**:
 Uma fronteira honesta do produto (ex.: checkout só na UI enquanto a API já fecha pedido). Não use como desculpa; mostre priorização.
 ```
 
-**Não use** seções "Problema / Solução / Impacto" com h1; o site já estiliza h2/h3 no modal.
+Não use seções "Problema / Solução / Impacto".
 
 ---
 
 ## Checklist antes de entregar
 
-- [ ] `shortDescription` tem no máximo 3 frases e cabe no card sem parecer bloco único interminável
-- [ ] `title` e `tech` não duplicam o mesmo conteúdo do corpo
+- [ ] Saída é só o documento Markdown (sem criar arquivo no repo analisado)
+- [ ] `shortDescription` tem no máximo 3 frases e ≤ ~320 caracteres
+- [ ] `title` e `tech` não duplicam o corpo
 - [ ] Bullets citam comportamento real (transação, RLS em app, refresh com blocklist), não buzzwords
 - [ ] Nenhum nome de pacote de cola no texto
-- [ ] Sem travessões no arquivo inteiro
+- [ ] Sem travessões no documento inteiro
+- [ ] Só headings `##` no corpo
 - [ ] `github` e `link` (se houver) são URLs válidas
-- [ ] `order` coerente com os outros arquivos em `src/content/projects/`
+- [ ] `imageUrl` e `featuredImageUrl` são `""`
 
 ---
 
@@ -136,7 +143,7 @@ Uma fronteira honesta do produto (ex.: checkout só na UI enquanto a API já fec
 
 ---
 
-## Exemplo mínimo de qualidade (referência de forma, não copiar conteúdo)
+## Exemplo mínimo de qualidade (forma, não copiar conteúdo)
 
 ```yaml
 shortDescription: "Construí um ATS multi-tenant em TypeScript com NestJS e Next.js: empresas isoladas por tenant e candidato com perfil único entre vagas. O núcleo são máquinas de estado para vagas e candidaturas, pipeline versionado por vaga e defesa em profundidade no acesso a dados. Está em produção com upload direto para armazenamento objeto."
@@ -151,13 +158,3 @@ Modelei um monólito modular: API NestJS com casos de uso e JWT + RBAC; front Ne
 
 - **Pipeline versionado por vaga:** clone do template no publish para não retroagir mudanças em processos abertos...
 ```
-
----
-
-## Uso no Cursor
-
-1. Abra o repositório do projeto (ou monorepo) e referencie `@Codebase` + este arquivo `@src/content/prompts.txt`.
-2. Peça: "Gere `src/content/projects/<slug>.md` seguindo o prompt."
-3. Revise `shortDescription` no card e o modal localmente (`npm run dev` → seção Projetos).
-
-Se o projeto já tiver `.md`, peça **atualização** mantendo `order`, `imageUrl` e `featured`, salvo mudança explícita.
