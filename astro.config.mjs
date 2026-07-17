@@ -63,5 +63,5 @@ export default defineConfig({
 			assetsInlineLimit: 8000,
 		},
 	},
-	adapter: isNode ? node({ mode: "standalone" }) : vercel({ middlewareMode: "edge" }),
+	adapter: isNode ? node({ mode: "standalone" }) : vercel(),
 });

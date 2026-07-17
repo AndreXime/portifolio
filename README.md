@@ -40,8 +40,8 @@ Astro i18n nativo com `defaultLocale: "pt"` e `prefixDefaultLocale: false`:
 - Strings de interface em `src/i18n/locales/{pt,en}.ts`
 - Helpers em `src/i18n/` (`paths`, `context`); pages montam o contexto e passam props às sections
 
-**Redirect na raiz (`src/middleware.ts`, edge na Vercel)**  
-Só age em `/`. Visitantes vão para `/en` por padrão; ficam em PT só com cookie `PREFERRED_LOCALE=pt` ou `Accept-Language` em português. Bots não são redirecionados (veem `/` em PT). O seletor PT|EN no header grava o cookie.
+**Redirect na raiz (`middleware.ts` na raiz, Vercel Routing Middleware)**  
+Roda na edge **antes do CDN**. Só age em `/`. Visitantes vão para `/en` por padrão; ficam em PT só com cookie `PREFERRED_LOCALE=pt` ou `Accept-Language` em português. Bots não são redirecionados (veem `/` em PT). O seletor PT|EN no header grava o cookie.
 
 **SEO**: `hreflang` + `x-default`, canonical por locale, sitemap bilíngue.
 
@@ -65,7 +65,6 @@ src/
 ├── scripts/           # JS nativo (nav, reveal, projetos, contato)
 ├── styles/            # global.css (tokens), fonts.ts
 ├── layouts/           # Layout base + meta/SEO/hreflang
-├── middleware.ts      # Redirect de locale na /
 └── pages/
     ├── index.astro
     ├── en/            # Home e projetos em inglês
@@ -75,7 +74,7 @@ src/
     └── api/contact.ts # prerender: false (serverless na Vercel)
 ```
 
-Na raiz: `generate-og.js` (Playwright) gera `public/og-image.png`.
+Na raiz: `middleware.ts` (redirect de locale na `/`) e `devtools/generate-og.ts` (OG).
 
 ## Desenvolvimento
 
