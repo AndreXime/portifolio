@@ -33,8 +33,15 @@ const [site, experiences, projects, formations, technologies] = await Promise.al
 
 const ctx: PageContext = { locale, ui, site };
 const siteOrigin = new URL("/", Astro.site).origin;
+const jsonLdLabels = {
+  websiteName: ui.jsonLd.websiteName,
+  home: ui.projectPage.home,
+  projects: ui.projects.title,
+};
 const jsonLd = buildPortfolioJsonLd({
   site: siteOrigin,
+  locale,
+  labels: jsonLdLabels,
   seo: site.seo,
   person: site.person,
   githubUrl: site.githubUrl,

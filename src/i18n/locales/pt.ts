@@ -74,6 +74,7 @@ export const pt = {
 		errorGeneric: "Não foi possível enviar. Tente de novo em instantes.",
 		errorTooFast: "Aguarde alguns segundos antes de enviar.",
 		errorNetwork: "Falha de rede. Verifique sua conexão e tente novamente.",
+		errorRateLimit: "Muitas tentativas. Tente novamente mais tarde.",
 		success: "Mensagem enviada. Obrigado — respondo em até um dia útil.",
 	},
 	footer: {
@@ -104,5 +105,8 @@ export const pt = {
 	},
 	ogImage: {
 		portfolioLabel: "Portfólio",
+	},
+	jsonLd: {
+		websiteName: "Portfólio de André Ximenes",
 	},
 } as const;

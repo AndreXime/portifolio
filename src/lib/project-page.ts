@@ -1,5 +1,5 @@
 import type { Locale } from "../i18n";
-import { localizedPath } from "../i18n/paths";
+import { homeHash, localizedPath } from "../i18n/paths";
 
 interface ProjectImageAltInput {
 	data: {
@@ -7,15 +7,23 @@ interface ProjectImageAltInput {
 	};
 }
 
-export function getProjectPagePath(id: string, locale: Locale = "pt"): string {
+export function getProjectPagePath(id: string, locale: Locale): string {
 	return localizedPath(locale, `/projetos/${id}`);
 }
 
-export function getProjectPageUrl(site: string, id: string, locale: Locale = "pt"): string {
-	return `${site}${getProjectPagePath(id, locale)}`;
+export function getProjectPageUrl(site: string, id: string, locale: Locale): string {
+	return new URL(getProjectPagePath(id, locale), site).href;
 }
 
-export function projectImageAlt(project: ProjectImageAltInput, template = "Captura do projeto {title}"): string {
+export function localeHomeUrl(site: string, locale: Locale): string {
+	return new URL(localizedPath(locale, "/"), site).href;
+}
+
+export function localeProjectsHashUrl(site: string, locale: Locale): string {
+	return new URL(homeHash(locale, "projetos"), site).href;
+}
+
+export function projectImageAlt(project: ProjectImageAltInput, template: string): string {
 	return template.replace("{title}", project.data.title);
 }
 

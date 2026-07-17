@@ -1,3 +1,5 @@
+import type { Locale } from "../i18n";
+
 export interface Experience {
 	role: string;
 	company: string;
@@ -18,8 +20,16 @@ export interface ProjectEntry {
 	};
 }
 
+export interface JsonLdLabels {
+	websiteName: string;
+	home: string;
+	projects: string;
+}
+
 export interface PortfolioJsonLdInput {
 	site: string;
+	locale: Locale;
+	labels: JsonLdLabels;
 	seo: {
 		title: string;
 		description: string;
@@ -37,6 +47,8 @@ export interface PortfolioJsonLdInput {
 
 export interface ProjectPageJsonLdInput {
 	site: string;
+	locale: Locale;
+	labels: JsonLdLabels;
 	project: ProjectEntry;
 	ogImageSrc: string;
 }

@@ -1,3 +1,4 @@
+import type { Locale } from "../i18n";
 import type {
 	Experience,
 	JsonLdNode,
@@ -5,12 +6,13 @@ import type {
 	ProjectEntry,
 	ProjectPageJsonLdInput,
 } from "./portfolio-json-ld.types";
-import { getProjectPageUrl } from "./project-page";
+import { getProjectPageUrl, localeHomeUrl, localeProjectsHashUrl } from "./project-page";
 
 export function buildPortfolioJsonLd(input: PortfolioJsonLdInput) {
+	const homeUrl = localeHomeUrl(input.site, input.locale);
 	const personId = schemaId(input.site, "person");
 	const experienceNodes = buildExperienceNodes(input.site, input.experiences);
-	const projectNodes = buildProjectNodes(input.site, input.projects);
+	const projectNodes = buildProjectNodes(input.site, input.locale, input.projects);
 
 	const person: JsonLdNode = {
 		"@type": "Person",
@@ -22,7 +24,7 @@ export function buildPortfolioJsonLd(input: PortfolioJsonLdInput) {
 		jobTitle: input.person.jobTitle,
 		description: input.person.description,
 		image: new URL("/me.webp", input.site).href,
-		url: input.site,
+		url: homeUrl,
 		homeLocation: {
 			"@type": "Place",
 			address: {
@@ -74,7 +76,7 @@ export function buildPortfolioJsonLd(input: PortfolioJsonLdInput) {
 			{
 				"@type": "ProfilePage",
 				"@id": schemaId(input.site, "profilepage"),
-				url: input.site,
+				url: homeUrl,
 				name: input.seo.title,
 				description: input.seo.description,
 				dateCreated: "2025-10-17T00:00:00+00:00",
@@ -85,8 +87,8 @@ export function buildPortfolioJsonLd(input: PortfolioJsonLdInput) {
 				isPartOf: {
 					"@type": "WebSite",
 					"@id": schemaId(input.site, "website"),
-					name: "Portfólio de André Ximenes",
-					url: input.site,
+					name: input.labels.websiteName,
+					url: homeUrl,
 				},
 				...(projectNodes.length > 0
 					? {
@@ -98,14 +100,18 @@ export function buildPortfolioJsonLd(input: PortfolioJsonLdInput) {
 			},
 			person,
 			...experienceNodes,
-			...(projectNodes.length > 0 ? [buildProjectsItemList(input.site, input.projects)] : []),
+			...(projectNodes.length > 0
+				? [buildProjectsItemList(input.site, input.locale, input.labels.projects, input.projects)]
+				: []),
 			...projectNodes,
 		],
 	};
 }
 
 export function buildProjectPageJsonLd(input: ProjectPageJsonLdInput) {
-	const pageUrl = getProjectPageUrl(input.site, input.project.id);
+	const pageUrl = getProjectPageUrl(input.site, input.project.id, input.locale);
+	const homeUrl = localeHomeUrl(input.site, input.locale);
+	const projectsUrl = localeProjectsHashUrl(input.site, input.locale);
 	const liveUrl = input.project.data.link?.trim();
 	const personId = schemaId(input.site, "person");
 	const sameAs = [input.project.data.github, ...(liveUrl ? [liveUrl] : [])];
@@ -144,14 +150,14 @@ export function buildProjectPageJsonLd(input: ProjectPageJsonLdInput) {
 					{
 						"@type": "ListItem",
 						position: 1,
-						name: "Início",
-						item: input.site,
+						name: input.labels.home,
+						item: homeUrl,
 					},
 					{
 						"@type": "ListItem",
 						position: 2,
-						name: "Projetos",
-						item: `${input.site}/#projetos`,
+						name: input.labels.projects,
+						item: projectsUrl,
 					},
 					{
 						"@type": "ListItem",
@@ -221,9 +227,9 @@ function buildExperienceNodes(site: string, experiences: Experience[]): JsonLdNo
 	});
 }
 
-function buildProjectNodes(site: string, projects: ProjectEntry[]): JsonLdNode[] {
+function buildProjectNodes(site: string, locale: Locale, projects: ProjectEntry[]): JsonLdNode[] {
 	return projects.map((project) => {
-		const pageUrl = getProjectPageUrl(site, project.id);
+		const pageUrl = getProjectPageUrl(site, project.id, locale);
 		const liveUrl = project.data.link?.trim();
 		const sameAs = [project.data.github, ...(liveUrl ? [liveUrl] : [])];
 
@@ -245,16 +251,21 @@ function buildProjectNodes(site: string, projects: ProjectEntry[]): JsonLdNode[]
 	});
 }
 
-function buildProjectsItemList(site: string, projects: ProjectEntry[]): JsonLdNode {
+function buildProjectsItemList(
+	site: string,
+	locale: Locale,
+	projectsLabel: string,
+	projects: ProjectEntry[],
+): JsonLdNode {
 	return {
 		"@type": "ItemList",
 		"@id": schemaId(site, "projects"),
-		name: "Projetos",
+		name: projectsLabel,
 		itemListElement: projects.map((project, index) => ({
 			"@type": "ListItem",
 			position: index + 1,
 			item: {
-				"@id": getProjectPageUrl(site, project.id),
+				"@id": getProjectPageUrl(site, project.id, locale),
 			},
 		})),
 	};

@@ -53,6 +53,12 @@ const imageAlt = projectImageAlt(project, ui.projectPage.imageAlt);
   ogImage={ogImage.src}
   jsonLd={buildProjectPageJsonLd({
     site: new URL("/", Astro.site).origin,
+    locale,
+    labels: {
+      websiteName: ui.jsonLd.websiteName,
+      home: ui.projectPage.home,
+      projects: ui.projectPage.projects,
+    },
     project: { ...project, id: project.slug },
     ogImageSrc: ogImage.src,
   })}
