@@ -3,7 +3,7 @@ order: 2
 title: "Ollama Oracle: corporate chat with local RAG"
 shortDescription: "I built a corporate chat with local RAG over internal documents: sourced answers, no external LLM. TypeScript and Bun pipeline with ingestion, embeddings, ChromaDB, and Ollama streaming with cancellation on disconnect. Retrieval controls (distance, context, and deduplication) before assembling the prompt."
 tech: ["TypeScript", "Bun", "Ollama", "ChromaDB", "LangChain", "RAG"]
-imageUrl: "../../projects/images/ollama-oracle.png"
+imageUrl: "../../images/projects/ollama-oracle.png"
 link: "https://ollama-oracle.andreximenex.xyz"
 github: "https://github.com/AndreXime/ollama-oracle"
 ---
