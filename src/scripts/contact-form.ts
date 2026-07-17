@@ -1,26 +1,44 @@
 const MIN_SUBMIT_MS = 3000;
 
-const FALLBACK_MESSAGES = {
-	errorGeneric: "Não foi possível enviar. Tente de novo em instantes.",
-	errorTooFast: "Aguarde alguns segundos antes de enviar.",
-	errorNetwork: "Falha de rede. Verifique sua conexão e tente novamente.",
-	success: "Mensagem enviada. Obrigado — respondo em até um dia útil.",
-	submitting: "Enviando…",
-	submit: "Enviar mensagem",
-} as const;
+type ContactMessageKey =
+	| "errorGeneric"
+	| "errorTooFast"
+	| "errorNetwork"
+	| "errorRateLimit"
+	| "success"
+	| "submitting"
+	| "submit";
 
 const MESSAGE_DATASET_KEYS = {
 	errorGeneric: "msgErrorGeneric",
 	errorTooFast: "msgErrorFast",
 	errorNetwork: "msgErrorNetwork",
+	errorRateLimit: "msgErrorRateLimit",
 	success: "msgSuccess",
 	submitting: "msgSubmitting",
 	submit: "msgSubmit",
-} as const satisfies Record<keyof typeof FALLBACK_MESSAGES, keyof DOMStringMap>;
+} as const satisfies Record<ContactMessageKey, keyof DOMStringMap>;
 
-function readFormMessage(form: HTMLFormElement, key: keyof typeof FALLBACK_MESSAGES): string {
-	const value = form.dataset[MESSAGE_DATASET_KEYS[key]];
-	return value?.trim() || FALLBACK_MESSAGES[key];
+const API_ERROR_MESSAGE_KEYS = {
+	rate_limit: "errorRateLimit",
+	validation: "errorGeneric",
+	spam: "errorGeneric",
+	config: "errorGeneric",
+	server: "errorGeneric",
+} as const satisfies Record<string, ContactMessageKey>;
+
+function readFormMessage(form: HTMLFormElement, key: ContactMessageKey): string {
+	return form.dataset[MESSAGE_DATASET_KEYS[key]]?.trim() ?? "";
+}
+
+function resolveApiErrorMessage(form: HTMLFormElement, data: unknown): string {
+	const code =
+		typeof data === "object" && data !== null && "error" in data && typeof data.error === "string" ? data.error : "";
+	const messageKey =
+		code in API_ERROR_MESSAGE_KEYS
+			? API_ERROR_MESSAGE_KEYS[code as keyof typeof API_ERROR_MESSAGE_KEYS]
+			: "errorGeneric";
+	return readFormMessage(form, messageKey);
 }
 
 export function initContactForm(): void {
@@ -36,7 +54,8 @@ export function initContactForm(): void {
 	}
 
 	const labelEl = form.querySelector("[data-contact-submit-label]");
-	const defaultLabel = labelEl?.textContent?.trim() ?? FALLBACK_MESSAGES.submit;
+	const defaultLabel = labelEl?.textContent?.trim() || readFormMessage(form, "submit");
+	const locale = form.dataset.locale?.trim() || "pt";
 
 	const setStatus = (message: string, kind: "" | "error" | "success") => {
 		statusEl.textContent = message;
@@ -78,7 +97,7 @@ export function initContactForm(): void {
 			submitBtn.disabled = true;
 		}
 		if (labelEl) {
-			labelEl.textContent = readFormMessage(form, "submitting");
+			labelEl.textContent = readFormMessage(form, "submitting") || defaultLabel;
 		}
 		setStatus("", "");
 
@@ -86,18 +105,19 @@ export function initContactForm(): void {
 			const res = await fetch("/api/contact", {
 				method: "POST",
 				headers: { "Content-Type": "application/json" },
-				body: JSON.stringify({ name, email, message, website: honeypot, _ts: loadedAt }),
+				body: JSON.stringify({
+					name,
+					email,
+					message,
+					website: honeypot,
+					_ts: loadedAt,
+					locale,
+				}),
 			});
-			const data = await res.json().catch(() => ({}));
+			const data: unknown = await res.json().catch(() => ({}));
 
 			if (!res.ok) {
-				let errorMessage = readFormMessage(form, "errorGeneric");
-
-				if (typeof data?.error === "string") {
-					errorMessage = data.error;
-				}
-
-				setStatus(errorMessage, "error");
+				setStatus(resolveApiErrorMessage(form, data), "error");
 				return;
 			}
 

@@ -9,7 +9,7 @@ import type { PageContext } from "../../i18n/context";
 
 type Props = PageContext;
 
-const { ui, site } = Astro.props;
+const { locale, ui, site } = Astro.props;
 
 const mailto = `mailto:${site.email}?subject=${encodeURIComponent(ui.contact.mailSubject)}`;
 ---
@@ -50,11 +50,14 @@ const mailto = `mailto:${site.email}?subject=${encodeURIComponent(ui.contact.mai
           <form
             id="contact-form"
             class="card-hover-bordered group/card relative space-y-6 p-6 md:p-8"
+            data-locale={locale}
             data-msg-error-generic={ui.contact.errorGeneric}
             data-msg-error-fast={ui.contact.errorTooFast}
             data-msg-error-network={ui.contact.errorNetwork}
+            data-msg-error-rate-limit={ui.contact.errorRateLimit}
             data-msg-success={ui.contact.success}
             data-msg-submitting={ui.contact.submitting}
+            data-msg-submit={ui.contact.submit}
           >
             <input
               type="text"

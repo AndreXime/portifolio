@@ -2,8 +2,11 @@ import { getSecret } from "astro:env/server";
 import type { APIRoute } from "astro";
 import { z } from "astro/zod";
 import nodemailer from "nodemailer";
+import { resolveLocale } from "../../i18n";
 
 export const prerender = false;
+
+export type ContactErrorCode = "rate_limit" | "validation" | "spam" | "config" | "server";
 
 const MIN_SUBMIT_MS = 3000;
 const RATE_LIMIT_MAX = 5;
@@ -12,12 +15,20 @@ const RATE_LIMIT_WINDOW_MS = 60 * 60 * 1000;
 const rateLimitStore = new Map<string, { count: number; resetAt: number }>();
 
 const contactBodySchema = z.object({
-	name: z.string().trim().min(1, "Todos os campos são obrigatórios"),
-	email: z.email("Email inválido").trim().min(1, "Todos os campos são obrigatórios"),
-	message: z.string().trim().min(1, "Todos os campos são obrigatórios"),
+	name: z.string().trim().min(1),
+	email: z.email().trim().min(1),
+	message: z.string().trim().min(1),
 	website: z.string().optional(),
 	_ts: z.union([z.number(), z.string()]).optional(),
+	locale: z.string().optional(),
 });
+
+function jsonError(error: ContactErrorCode, status: number): Response {
+	return new Response(JSON.stringify({ error }), {
+		status,
+		headers: { "Content-Type": "application/json" },
+	});
+}
 
 function getClientIp(request: Request): string {
 	const forwarded = request.headers.get("x-forwarded-for");
@@ -61,28 +72,28 @@ export const POST: APIRoute = async ({ request }) => {
 	try {
 		const clientIp = getClientIp(request);
 		if (isRateLimited(clientIp)) {
-			return new Response(JSON.stringify({ error: "Muitas tentativas. Tente novamente mais tarde." }), { status: 429 });
+			return jsonError("rate_limit", 429);
 		}
 
 		const raw: unknown = await request.json();
 		const parsed = contactBodySchema.safeParse(raw);
 
 		if (!parsed.success) {
-			const message = parsed.error.issues[0]?.message ?? "Dados inválidos";
-			return new Response(JSON.stringify({ error: message }), { status: 400 });
+			return jsonError("validation", 400);
 		}
 
 		if (isSpamPayload(parsed.data)) {
-			return new Response(JSON.stringify({ error: "Não foi possível enviar." }), { status: 400 });
+			return jsonError("spam", 400);
 		}
 
 		const { name, email, message } = parsed.data;
+		const locale = resolveLocale(parsed.data.locale);
 
 		const emailUser = getSecret("EMAIL_USER");
 		const emailPass = getSecret("EMAIL_PASS");
 
 		if (!emailUser || !emailPass) {
-			return new Response(JSON.stringify({ error: "Servidor não configurado" }), { status: 500 });
+			return jsonError("config", 500);
 		}
 
 		const transporter = nodemailer.createTransport({
@@ -93,17 +104,25 @@ export const POST: APIRoute = async ({ request }) => {
 			},
 		});
 
+		const subject =
+			locale === "en"
+				? `New portfolio contact message from ${name}`
+				: `Nova mensagem de contato de ${name} no site do Portifolio`;
+
 		await transporter.sendMail({
 			from: `"${name}" <${emailUser}>`,
 			to: emailUser,
-			subject: `Nova mensagem de contato de ${name} no site do Portifolio`,
+			subject,
 			text: `Email: ${email}\n\n${message}`,
 			replyTo: email,
 		});
 
-		return new Response(JSON.stringify({ success: true }), { status: 200 });
+		return new Response(JSON.stringify({ success: true }), {
+			status: 200,
+			headers: { "Content-Type": "application/json" },
+		});
 	} catch (error) {
 		console.error(error);
-		return new Response(JSON.stringify({ success: false, error: "Erro interno no servidor" }), { status: 500 });
+		return jsonError("server", 500);
 	}
 };
