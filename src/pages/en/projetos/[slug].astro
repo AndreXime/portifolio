@@ -1,0 +1,18 @@
+---
+import { getProjects } from "../../../content/index";
+import ProjectPage from "../../../components/pages/ProjectPage.astro";
+import "../../../styles/global.css";
+
+export async function getStaticPaths() {
+  const projectEntries = await getProjects("en");
+
+  return projectEntries.map((project) => ({
+    params: { slug: project.slug },
+    props: { project, locale: "en" as const },
+  }));
+}
+
+const { project, locale } = Astro.props;
+---
+
+<ProjectPage project={project} locale={locale} />

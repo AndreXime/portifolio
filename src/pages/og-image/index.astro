@@ -1,10 +1,13 @@
 ---
 import "../../styles/fonts";
 import "../../styles/global.css";
-import { site } from "../../content/index";
+import { getSite } from "../../content/index";
+import { t } from "../../i18n";
 import AccentBar from "../../components/ui/AccentBar.astro";
 import Container from "../../components/ui/Container.astro";
 
+const ui = t("pt");
+const site = await getSite("pt");
 const { hero } = site;
 const headlineParts = hero.headline.split(hero.headlineAccent);
 ---
@@ -33,7 +36,7 @@ const headlineParts = hero.headline.split(hero.headlineAccent);
           <p
             class="font-mono text-sm uppercase tracking-[0.14em] text-muted-foreground"
           >
-            {site.person.jobTitle} · Portfólio
+            {site.person.jobTitle} · {ui.ogImage.portfolioLabel}
           </p>
           <AccentBar class="my-5" />
           <h1

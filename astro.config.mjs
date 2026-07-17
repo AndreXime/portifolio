@@ -13,6 +13,14 @@ const isNode = process.env.ASTRO_NODE === "1";
 export default defineConfig({
 	output: "static",
 	site: "https://andreximenes.xyz",
+	i18n: {
+		defaultLocale: "pt",
+		locales: ["pt", "en"],
+		routing: {
+			prefixDefaultLocale: false,
+			redirectToDefaultLocale: false,
+		},
+	},
 	env: {
 		schema: {
 			EMAIL_USER: envField.string({
@@ -36,6 +44,13 @@ export default defineConfig({
 		icon(),
 		sitemap({
 			filter: (page) => !page.includes("/og-image") && !page.includes("/api/"),
+			i18n: {
+				defaultLocale: "pt",
+				locales: {
+					pt: "pt-BR",
+					en: "en",
+				},
+			},
 		}),
 	],
 	build: {
@@ -48,5 +63,5 @@ export default defineConfig({
 			assetsInlineLimit: 8000,
 		},
 	},
-	adapter: isNode ? node({ mode: "standalone" }) : vercel(),
+	adapter: isNode ? node({ mode: "standalone" }) : vercel({ middlewareMode: "edge" }),
 });

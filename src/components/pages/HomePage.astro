@@ -1,0 +1,84 @@
+---
+import Header from "../sections/Header.astro";
+import Footer from "../sections/Footer.astro";
+import Hero from "../sections/Hero.astro";
+import About from "../sections/About.astro";
+import Experiences from "../sections/Experiences.astro";
+import Formations from "../sections/Formations.astro";
+import Technologies from "../sections/Technologies.astro";
+import Projects from "../sections/Projects.astro";
+import Contact from "../sections/Contact.astro";
+import CTA from "../sections/CTA.astro";
+import Layout from "../../layouts/Layout.astro";
+import {
+  getExperiences,
+  getFormations,
+  getProjects,
+  getSite,
+  getTechnologies,
+} from "../../content/index";
+import { buildPortfolioJsonLd } from "../../lib/portfolio-json-ld";
+import { resolveLocale, t } from "../../i18n";
+import type { PageContext } from "../../i18n/context";
+
+const locale = resolveLocale(Astro.currentLocale);
+const ui = t(locale);
+const [site, experiences, projects, formations, technologies] = await Promise.all([
+  getSite(locale),
+  getExperiences(locale),
+  getProjects(locale),
+  getFormations(locale),
+  getTechnologies(locale),
+]);
+
+const ctx: PageContext = { locale, ui, site };
+const siteOrigin = new URL("/", Astro.site).origin;
+const jsonLd = buildPortfolioJsonLd({
+  site: siteOrigin,
+  seo: site.seo,
+  person: site.person,
+  githubUrl: site.githubUrl,
+  linkedinUrl: site.linkedinUrl,
+  experiences,
+  projects: projects.map((project) => ({
+    ...project,
+    id: project.slug,
+  })),
+});
+---
+
+<Layout
+  locale={locale}
+  site={site}
+  title={site.seo.title}
+  description={site.seo.description}
+  jsonLd={jsonLd}
+>
+  <Header {...ctx} />
+  <main>
+    <Hero {...ctx} />
+    <About {...ctx} />
+    <Experiences {...ctx} experiences={experiences} />
+    <Projects {...ctx} projects={projects} />
+    <Technologies {...ctx} technologies={technologies} />
+    <Formations {...ctx} formations={formations} />
+    <Contact {...ctx} />
+    <CTA {...ctx} />
+  </main>
+  <Footer {...ctx} />
+  <script>
+    import { initContactForm } from "../../scripts/contact-form";
+    import { initExpandableList } from "../../scripts/expandable-list";
+    import { initNavScrollSpy } from "../../scripts/nav-scroll-spy";
+    import { initReveal } from "../../scripts/reveal-observer";
+
+    function initHomePage(): void {
+      initReveal();
+      initNavScrollSpy();
+      initExpandableList();
+      initContactForm();
+    }
+
+    document.addEventListener("DOMContentLoaded", initHomePage);
+  </script>
+</Layout>

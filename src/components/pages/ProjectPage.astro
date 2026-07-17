@@ -1,0 +1,184 @@
+---
+import { render } from "astro:content";
+import { getImage, Image } from "astro:assets";
+import { Icon } from "astro-icon/components";
+import Layout from "../../layouts/Layout.astro";
+import Header from "../sections/Header.astro";
+import Footer from "../sections/Footer.astro";
+import Container from "../ui/Container.astro";
+import Button from "../ui/Button.astro";
+import { getSite, type ProjectEntry } from "../../content/index";
+import { buildProjectPageJsonLd } from "../../lib/portfolio-json-ld";
+import {
+  projectImageAlt,
+  projectMarkdownClasses,
+} from "../../lib/project-page";
+import { resolveLocale, t, type Locale } from "../../i18n";
+import type { PageContext } from "../../i18n/context";
+import { homeHash, localizedPath } from "../../i18n/paths";
+
+interface Props {
+  project: ProjectEntry;
+  locale?: Locale;
+}
+
+const locale = resolveLocale(Astro.props.locale ?? Astro.currentLocale);
+const ui = t(locale);
+const site = await getSite(locale);
+const ctx: PageContext = { locale, ui, site };
+const { project } = Astro.props;
+const { Content } = await render(project);
+const liveLink = (project.data.link ?? "").trim();
+const projectsHash = homeHash(locale, "projetos");
+const homePath = localizedPath(locale, "/");
+
+const ogImage = await getImage({
+  src: project.data.imageUrl,
+  width: 1200,
+  height: 630,
+  fit: "cover",
+  format: "webp",
+  quality: 80,
+});
+
+const imageAlt = projectImageAlt(project, ui.projectPage.imageAlt);
+---
+
+<Layout
+  locale={locale}
+  site={site}
+  title={`${project.data.title} | ${site.authorName}`}
+  description={project.data.shortDescription}
+  ogImageAlt={imageAlt}
+  ogImage={ogImage.src}
+  jsonLd={buildProjectPageJsonLd({
+    site: new URL("/", Astro.site).origin,
+    project: { ...project, id: project.slug },
+    ogImageSrc: ogImage.src,
+  })}
+>
+  <Header {...ctx} />
+  <main class="border-b border-border bg-background pt-28 pb-16">
+    <Container>
+      <div
+        class="flex flex-col gap-4 lg:flex-row lg:flex-nowrap lg:items-center lg:justify-between lg:gap-x-4"
+      >
+        <a
+          href={projectsHash}
+          class="inline-flex shrink-0 items-center gap-2 self-start font-mono text-xs uppercase tracking-[0.12em] text-muted-foreground underline decoration-border decoration-1 underline-offset-4 transition-colors duration-150 hover:text-accent hover:decoration-accent focus-ring"
+        >
+          <Icon name="arrow-left" class="size-3.5 shrink-0" />
+          {ui.projectPage.back}
+        </a>
+
+        <nav aria-label={ui.projectPage.breadcrumb} class="min-w-0 lg:shrink">
+          <ol
+            class="flex flex-wrap items-center gap-x-2 gap-y-1 font-mono text-xs uppercase tracking-[0.12em] text-muted-foreground lg:justify-end"
+          >
+            <li class="shrink-0">
+              <a
+                href={homePath}
+                class="transition-colors duration-150 hover:text-accent focus-ring"
+              >
+                {ui.projectPage.home}
+              </a>
+            </li>
+            <li aria-hidden="true" class="shrink-0">/</li>
+            <li class="shrink-0">
+              <a
+                href={projectsHash}
+                class="transition-colors duration-150 hover:text-accent focus-ring"
+              >
+                {ui.projectPage.projects}
+              </a>
+            </li>
+            <li aria-hidden="true" class="shrink-0">/</li>
+            <li class="min-w-0 max-w-sm truncate flex-1 text-foreground">
+              {project.data.title}
+            </li>
+          </ol>
+        </nav>
+      </div>
+
+      <div
+        class="relative mt-8 aspect-[2/1] overflow-hidden border border-border"
+      >
+        <Image
+          src={project.data.imageUrl}
+          alt={imageAlt}
+          width={1200}
+          height={600}
+          sizes="(max-width: 1024px) 100vw, 72rem"
+          class="h-full w-full object-cover object-top"
+          loading="eager"
+          decoding="async"
+        />
+      </div>
+
+      <header class="mt-8">
+        <h1
+          class="font-display text-3xl font-semibold leading-tight tracking-tight text-foreground sm:text-4xl md:text-5xl"
+        >
+          {project.data.title}
+        </h1>
+        <p
+          class="mt-6 text-base leading-[1.7] text-foreground-variant md:text-lg"
+        >
+          {project.data.shortDescription}
+        </p>
+      </header>
+
+      <div
+        class:list={[
+          "mt-8 grid w-full gap-3",
+          liveLink ? "grid-cols-1 sm:grid-cols-2" : "grid-cols-1",
+        ]}
+      >
+        {
+          liveLink && (
+            <Button
+              href={liveLink}
+              variant="primary"
+              showArrow
+              class="w-full justify-center"
+            >
+              {ui.projectPage.viewLive}
+            </Button>
+          )
+        }
+        <Button
+          href={project.data.github}
+          variant={liveLink ? "secondary" : "primary"}
+          showArrow={!liveLink}
+          class="w-full justify-center"
+        >
+          {ui.projectPage.viewCode}
+        </Button>
+      </div>
+
+      <div class:list={projectMarkdownClasses} class="mt-10 max-w-3xl">
+        <Content />
+      </div>
+
+      <ul
+        class="mt-10 flex max-w-3xl flex-wrap gap-2 border-t border-border pt-8"
+        aria-label={ui.projectPage.stackAria}
+      >
+        {
+          project.data.tech.map((tech) => (
+            <li class="border border-border px-2 py-1 font-mono text-xs uppercase tracking-[0.08em] text-muted-foreground">
+              {tech}
+            </li>
+          ))
+        }
+      </ul>
+
+      <div class="mt-12 border-t border-border pt-8">
+        <Button href={projectsHash} variant="secondary" showArrow class="w-full">
+          {ui.projectPage.back}
+        </Button>
+      </div>
+    </Container>
+  </main>
+  <Footer {...ctx} />
+</Layout>

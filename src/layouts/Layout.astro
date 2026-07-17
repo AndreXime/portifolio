@@ -1,8 +1,15 @@
 ---
 import Analytics from "@vercel/analytics/astro";
 import { aboveTheFoldFontPreloads } from "../styles/fonts";
-import { experiences, projects, site } from "../content/index";
-import { buildPortfolioJsonLd } from "../lib/portfolio-json-ld";
+import { getSite, type SiteContent } from "../content/index";
+import {
+  defaultLocale,
+  htmlLang,
+  ogLocale,
+  resolveLocale,
+  type Locale,
+} from "../i18n";
+import { absoluteLocaleUrl, stripLocalePrefix } from "../i18n/paths";
 
 interface Props {
   robots?: string;
@@ -11,26 +18,27 @@ interface Props {
   ogImageAlt?: string;
   ogImage?: string;
   jsonLd?: Record<string, unknown>;
+  locale?: Locale;
+  site?: SiteContent;
 }
 
+const locale = resolveLocale(Astro.props.locale ?? Astro.currentLocale);
+const siteContent = Astro.props.site ?? (await getSite(locale));
+
+const barePath = stripLocalePrefix(Astro.url.pathname);
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
-const siteOrigin = new URL("/", Astro.site).origin;
+
+const ptAlternate = absoluteLocaleUrl("pt", barePath);
+const enAlternate = absoluteLocaleUrl("en", barePath);
+const xDefault = absoluteLocaleUrl(defaultLocale, barePath);
 
 const {
   robots = "index, follow",
-  title = site.seo.title,
-  description = site.seo.description,
-  ogImageAlt = site.seo.ogImageAlt,
+  title = siteContent.seo.title,
+  description = siteContent.seo.description,
+  ogImageAlt = siteContent.seo.ogImageAlt,
   ogImage = "/og-image.png",
-  jsonLd = buildPortfolioJsonLd({
-    site: siteOrigin,
-    seo: site.seo,
-    person: site.person,
-    githubUrl: site.githubUrl,
-    linkedinUrl: site.linkedinUrl,
-    experiences,
-    projects,
-  }),
+  jsonLd = {},
 } = Astro.props;
 
 const showAnalytics = import.meta.env.ASTRO_NODE !== "1";
@@ -39,7 +47,7 @@ const schema = JSON.stringify(jsonLd);
 ---
 
 <!doctype html>
-<html lang="pt-BR">
+<html lang={htmlLang(locale)}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -63,8 +71,11 @@ const schema = JSON.stringify(jsonLd);
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalURL} />
+    <link rel="alternate" hreflang="pt" href={ptAlternate} />
+    <link rel="alternate" hreflang="en" href={enAlternate} />
+    <link rel="alternate" hreflang="x-default" href={xDefault} />
     <meta name="robots" content={robots} />
-    <meta name="author" content={site.person.fullName} />
+    <meta name="author" content={siteContent.person.fullName} />
     <meta name="apple-mobile-web-app-title" content="André Portifolio" />
 
     <meta property="og:type" content="website" />
@@ -75,8 +86,12 @@ const schema = JSON.stringify(jsonLd);
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content={ogImageAlt} />
-    <meta property="og:site_name" content={site.seo.title} />
-    <meta property="og:locale" content="pt_BR" />
+    <meta property="og:site_name" content={siteContent.seo.title} />
+    <meta property="og:locale" content={ogLocale(locale)} />
+    <meta
+      property="og:locale:alternate"
+      content={locale === "pt" ? ogLocale("en") : ogLocale("pt")}
+    />
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:url" content={canonicalURL} />

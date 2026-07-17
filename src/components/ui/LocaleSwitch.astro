@@ -1,0 +1,47 @@
+---
+import type { Dictionary, Locale } from "../../i18n";
+import { switchLocalePath } from "../../i18n/paths";
+
+interface Props {
+  locale: Locale;
+  ui: Dictionary;
+  class?: string;
+}
+
+const { locale, ui } = Astro.props;
+const ptHref = switchLocalePath(Astro.url.pathname, "pt");
+const enHref = switchLocalePath(Astro.url.pathname, "en");
+---
+
+<nav
+  class:list={["flex items-center gap-1", Astro.props.class]}
+  aria-label={ui.language.label}
+>
+  <a
+    href={ptHref}
+    data-locale-switch="pt"
+    class:list={[
+      "px-2 py-1 font-mono text-xs uppercase tracking-[0.1em] transition-colors duration-150 focus-ring",
+      locale === "pt"
+        ? "text-foreground"
+        : "text-muted-foreground hover:text-foreground",
+    ]}
+    aria-current={locale === "pt" ? "page" : undefined}
+  >
+    {ui.language.pt}
+  </a>
+  <span class="text-muted-foreground" aria-hidden="true">|</span>
+  <a
+    href={enHref}
+    data-locale-switch="en"
+    class:list={[
+      "px-2 py-1 font-mono text-xs uppercase tracking-[0.1em] transition-colors duration-150 focus-ring",
+      locale === "en"
+        ? "text-foreground"
+        : "text-muted-foreground hover:text-foreground",
+    ]}
+    aria-current={locale === "en" ? "page" : undefined}
+  >
+    {ui.language.en}
+  </a>
+</nav>

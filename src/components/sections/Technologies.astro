@@ -3,7 +3,14 @@ import { Icon } from "astro-icon/components";
 import Container from "../ui/Container.astro";
 import AccentBar from "../ui/AccentBar.astro";
 import Reveal from "../ui/Reveal.astro";
-import { technologies } from "../../content/index";
+import type { TechnologyList } from "../../content/index";
+import type { PageContext } from "../../i18n/context";
+
+interface Props extends PageContext {
+  technologies: TechnologyList;
+}
+
+const { ui, technologies } = Astro.props;
 
 const LOCAL_ICONS = new Set(["bullmq", "shadcn", "rest"]);
 
@@ -25,19 +32,17 @@ function resolveIconName(slug: string) {
           id="tech-heading"
           class="font-display text-3xl font-semibold leading-tight tracking-tight text-foreground sm:text-4xl md:text-5xl"
         >
-          Tecnologias
+          {ui.technologies.title}
         </h2>
         <p
           class="mt-4 font-mono text-xs uppercase tracking-[0.12em] text-muted-foreground"
         >
-          Stack do dia a dia
+          {ui.technologies.subtitle}
         </p>
       </Reveal>
       <Reveal staggerMs={80} class="flex items-center lg:col-span-7">
         <p class="text-base leading-[1.7] text-foreground-variant md:text-lg">
-          Não é uma lista de tudo que já usei, são as que mais pesam no que
-          entrego hoje. Fora delas entram outras conforme o problema e sigo
-          aprendendo o que fizer sentido em cada projeto.
+          {ui.technologies.intro}
         </p>
       </Reveal>
     </div>

@@ -1,17 +1,26 @@
 ---
 import Container from "../ui/Container.astro";
 import Button from "../ui/Button.astro";
+import LocaleSwitch from "../ui/LocaleSwitch.astro";
 import { Icon } from "astro-icon/components";
-import { site } from "../../content/index";
+import { PREFERRED_LOCALE_COOKIE } from "../../i18n";
+import type { PageContext } from "../../i18n/context";
+import { homeHash } from "../../i18n/paths";
+
+type Props = PageContext;
+
+const { locale, ui, site } = Astro.props;
 
 const links = [
-  { href: "/#sobre", section: "sobre", label: "Sobre" },
-  { href: "/#experiencias", section: "experiencias", label: "Experiências" },
-  { href: "/#projetos", section: "projetos", label: "Projetos" },
-  { href: "/#tecnologias", section: "tecnologias", label: "Tecnologias" },
-  { href: "/#formacoes", section: "formacoes", label: "Formações" },
-  { href: "/#contato", section: "contato", label: "Contato" },
+  { hash: "sobre", section: "sobre", label: ui.nav.about },
+  { hash: "experiencias", section: "experiencias", label: ui.nav.experiences },
+  { hash: "projetos", section: "projetos", label: ui.nav.projects },
+  { hash: "tecnologias", section: "tecnologias", label: ui.nav.technologies },
+  { hash: "formacoes", section: "formacoes", label: ui.nav.formations },
+  { hash: "contato", section: "contato", label: ui.nav.contact },
 ] as const;
+
+const homeHref = homeHash(locale, "inicio");
 ---
 
 <header
@@ -22,56 +31,72 @@ const links = [
     class="flex items-center justify-between py-4 md:py-5"
   >
     <a
-      href="/#inicio"
+      href={homeHref}
       class="font-display text-left text-lg font-semibold leading-none tracking-tight text-foreground transition-colors duration-150 hover:text-accent focus-ring md:text-xl"
     >
       {site.authorName}
     </a>
 
-    <nav class="hidden items-center gap-1 lg:flex" aria-label="Principal">
-      {
-        links.map(({ href, section, label }) => (
-          <Button
-            variant="ghost"
-            href={href}
-            data-nav-section={section}
-            class="px-2.5 py-1.5 font-mono text-xs !font-medium uppercase !tracking-[0.1em]"
-          >
-            {label}
-          </Button>
-        ))
-      }
-    </nav>
-
-    <details class="group relative lg:hidden" id="nav-drawer">
-      <summary
-        class="flex size-11 cursor-pointer list-none items-center justify-center rounded-none border border-border bg-card text-foreground transition-colors duration-150 hover:border-border-hover [&::-webkit-details-marker]:hidden"
-        aria-label="Menu"
-        aria-expanded="false"
-        aria-controls="nav-drawer-panel"
-      >
-        <Icon name="menu" class="size-5 group-open:hidden" />
-        <Icon name="close" class="hidden size-5 group-open:block" />
-      </summary>
-      <div
-        id="nav-drawer-panel"
-        data-nav-drawer-panel
-        class="absolute right-0 top-full z-50 mt-2 w-56 border border-border bg-card"
-      >
+    <div class="hidden items-center gap-3 lg:flex">
+      <nav class="flex items-center gap-1" aria-label={ui.nav.main}>
         {
-          links.map(({ href, section, label }) => (
-            <a
-              href={href}
+          links.map(({ hash, section, label }) => (
+            <Button
+              variant="ghost"
+              href={homeHash(locale, hash)}
               data-nav-section={section}
-              class="block border-b border-border px-4 py-3 font-mono text-xs uppercase tracking-[0.1em] text-muted-foreground transition-colors duration-150 last:border-b-0 hover:bg-muted hover:text-foreground focus-ring"
+              class="px-2.5 py-1.5 font-mono text-xs !font-medium uppercase !tracking-[0.1em]"
             >
               {label}
-            </a>
+            </Button>
           ))
         }
-      </div>
-    </details>
+      </nav>
+      <LocaleSwitch locale={locale} ui={ui} class="border-l border-border pl-3" />
+    </div>
+
+    <div class="flex items-center gap-2 lg:hidden">
+      <LocaleSwitch locale={locale} ui={ui} />
+      <details class="group relative" id="nav-drawer">
+        <summary
+          class="flex size-11 cursor-pointer list-none items-center justify-center rounded-none border border-border bg-card text-foreground transition-colors duration-150 hover:border-border-hover [&::-webkit-details-marker]:hidden"
+          aria-label={ui.nav.menu}
+          aria-expanded="false"
+          aria-controls="nav-drawer-panel"
+        >
+          <Icon name="menu" class="size-5 group-open:hidden" />
+          <Icon name="close" class="hidden size-5 group-open:block" />
+        </summary>
+        <div
+          id="nav-drawer-panel"
+          data-nav-drawer-panel
+          class="absolute right-0 top-full z-50 mt-2 w-56 border border-border bg-card"
+        >
+          {
+            links.map(({ hash, section, label }) => (
+              <a
+                href={homeHash(locale, hash)}
+                data-nav-section={section}
+                class="block border-b border-border px-4 py-3 font-mono text-xs uppercase tracking-[0.1em] text-muted-foreground transition-colors duration-150 last:border-b-0 hover:bg-muted hover:text-foreground focus-ring"
+              >
+                {label}
+              </a>
+            ))
+          }
+        </div>
+      </details>
+    </div>
   </Container>
 </header>
 
 <script src="../../scripts/nav-drawer.ts"></script>
+<script is:inline define:vars={{ cookieName: PREFERRED_LOCALE_COOKIE }}>
+  document.querySelectorAll("[data-locale-switch]").forEach((el) => {
+    el.addEventListener("click", () => {
+      const next = el.getAttribute("data-locale-switch");
+      if (next === "pt" || next === "en") {
+        document.cookie = `${cookieName}=${next}; Path=/; Max-Age=31536000; SameSite=Lax`;
+      }
+    });
+  });
+</script>
