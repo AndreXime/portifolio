@@ -2,7 +2,11 @@
 import Container from "../ui/Container.astro";
 import AccentBar from "../ui/AccentBar.astro";
 import Reveal from "../ui/Reveal.astro";
-import { site } from "../../content/index";
+import type { PageContext } from "../../i18n/context";
+
+type Props = PageContext;
+
+const { ui, site } = Astro.props;
 ---
 
 <section
@@ -18,12 +22,12 @@ import { site } from "../../content/index";
           id="about-heading"
           class="font-display text-3xl font-semibold leading-tight tracking-tight text-foreground sm:text-4xl md:text-5xl"
         >
-          Sobre
+          {ui.about.title}
         </h2>
         <p
           class="mt-4 font-mono text-xs uppercase tracking-[0.12em] text-muted-foreground"
         >
-          Perfil técnico
+          {ui.about.subtitle}
         </p>
       </Reveal>
 

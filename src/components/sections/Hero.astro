@@ -4,7 +4,12 @@ import Container from "../ui/Container.astro";
 import Button from "../ui/Button.astro";
 import AccentBar from "../ui/AccentBar.astro";
 import Reveal from "../ui/Reveal.astro";
-import { site } from "../../content/index";
+import type { PageContext } from "../../i18n/context";
+import { homeHash } from "../../i18n/paths";
+
+type Props = PageContext;
+
+const { locale, ui, site } = Astro.props;
 
 const socialIconLinkClass =
   "inline-flex size-11 shrink-0 items-center justify-center border border-border bg-card text-muted-foreground transition-colors duration-150 hover:border-border-hover hover:text-accent focus-ring";
@@ -49,11 +54,11 @@ const headlineParts = hero.headline.split(hero.headlineAccent);
         <div
           class="mt-10 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center"
         >
-          <Button href="#projetos" variant="primary" showArrow>
-            Ver projetos
+          <Button href={homeHash(locale, "projetos")} variant="primary" showArrow>
+            {ui.hero.viewProjects}
           </Button>
-          <Button href="#contato" variant="secondary">
-            Entrar em contato
+          <Button href={homeHash(locale, "contato")} variant="secondary">
+            {ui.hero.contactCta}
           </Button>
           <div class="flex items-center gap-3">
             <a
@@ -84,13 +89,13 @@ const headlineParts = hero.headline.split(hero.headlineAccent);
       >
         <dl
           class="grid grid-cols-1 divide-y divide-border border border-border bg-card"
-          aria-label="Informações resumidas"
+          aria-label={ui.hero.summaryAria}
         >
           <div class="p-5 md:p-6">
             <dt
               class="font-mono text-xs uppercase tracking-[0.12em] text-muted-foreground"
             >
-              Stack
+              {ui.hero.stack}
             </dt>
             <dd class="mt-2 font-mono text-sm text-foreground">
               {hero.stackLine}
@@ -110,7 +115,7 @@ const headlineParts = hero.headline.split(hero.headlineAccent);
             <dt
               class="font-mono text-xs uppercase tracking-[0.12em] text-muted-foreground"
             >
-              Localização
+              {ui.hero.location}
             </dt>
             <dd class="mt-2 font-mono text-sm text-foreground">
               {hero.locationValue}

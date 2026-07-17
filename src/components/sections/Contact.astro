@@ -5,9 +5,13 @@ import Reveal from "../ui/Reveal.astro";
 import Button from "../ui/Button.astro";
 import Input from "../ui/Input.astro";
 import { Icon } from "astro-icon/components";
-import { site } from "../../content/index";
+import type { PageContext } from "../../i18n/context";
 
-const mailto = `mailto:${site.email}?subject=Contato%20pelo%20portf%C3%B3lio`;
+type Props = PageContext;
+
+const { ui, site } = Astro.props;
+
+const mailto = `mailto:${site.email}?subject=${encodeURIComponent(ui.contact.mailSubject)}`;
 ---
 
 <section
@@ -23,18 +27,17 @@ const mailto = `mailto:${site.email}?subject=Contato%20pelo%20portf%C3%B3lio`;
           id="contact-heading"
           class="font-display text-3xl font-semibold leading-tight tracking-tight text-foreground sm:text-4xl md:text-5xl"
         >
-          Contato
+          {ui.contact.title}
         </h2>
         <p
           class="mt-4 font-mono text-xs uppercase tracking-[0.12em] text-muted-foreground"
         >
-          Propostas, parcerias ou conversa técnica
+          {ui.contact.subtitle}
         </p>
       </Reveal>
       <Reveal staggerMs={80} class="flex items-center lg:col-span-7">
         <p class="text-base leading-[1.7] text-foreground-variant md:text-lg">
-          Use o formulário, o e-mail ou as redes. Para vagas, inclua a descrição
-          ou o link do LinkedIn; costumo responder em até um dia útil.
+          {ui.contact.intro}
         </p>
       </Reveal>
     </div>
@@ -47,6 +50,11 @@ const mailto = `mailto:${site.email}?subject=Contato%20pelo%20portf%C3%B3lio`;
           <form
             id="contact-form"
             class="card-hover-bordered group/card relative space-y-6 p-6 md:p-8"
+            data-msg-error-generic={ui.contact.errorGeneric}
+            data-msg-error-fast={ui.contact.errorTooFast}
+            data-msg-error-network={ui.contact.errorNetwork}
+            data-msg-success={ui.contact.success}
+            data-msg-submitting={ui.contact.submitting}
           >
             <input
               type="text"
@@ -60,28 +68,28 @@ const mailto = `mailto:${site.email}?subject=Contato%20pelo%20portf%C3%B3lio`;
             <Input
               id="c-name"
               name="name"
-              label="Nome"
-              placeholder="Como posso te chamar"
+              label={ui.contact.name}
+              placeholder={ui.contact.namePlaceholder}
               required
             />
             <Input
               id="c-email"
               name="email"
               type="email"
-              label="E-mail"
-              placeholder="voce@email.com"
+              label={ui.contact.email}
+              placeholder={ui.contact.emailPlaceholder}
               required
             />
             <Input
               id="c-message"
               name="message"
-              label="Mensagem"
-              placeholder="Diga como posso ajudar seu time ou empresa..."
+              label={ui.contact.message}
+              placeholder={ui.contact.messagePlaceholder}
               rows={5}
               required
             />
             <Button type="submit" variant="primary" class="min-h-12 w-full">
-              <span data-contact-submit-label>Enviar mensagem</span>
+              <span data-contact-submit-label>{ui.contact.submit}</span>
             </Button>
             <span
               id="contact-form-status"
@@ -101,7 +109,7 @@ const mailto = `mailto:${site.email}?subject=Contato%20pelo%20portf%C3%B3lio`;
               <h3
                 class="font-mono text-xs font-medium uppercase tracking-[0.12em] text-muted-foreground"
               >
-                E-mail
+                {ui.contact.emailHeading}
               </h3>
               <a
                 href={mailto}
@@ -115,7 +123,7 @@ const mailto = `mailto:${site.email}?subject=Contato%20pelo%20portf%C3%B3lio`;
               <p
                 class="font-mono text-xs font-medium uppercase tracking-[0.12em] text-muted-foreground"
               >
-                Currículo
+                {ui.contact.resumeHeading}
               </p>
               <a
                 href={site.resumePdfUrl}
@@ -140,15 +148,15 @@ const mailto = `mailto:${site.email}?subject=Contato%20pelo%20portf%C3%B3lio`;
                   <path d="M10 13h4"></path>
                   <path d="M10 17h4"></path>
                 </svg>
-                Ver currículo (PDF)
+                {ui.contact.resumeCta}
               </a>
             </div>
 
-            <nav class="p-6 md:p-8" aria-label="Redes sociais">
+            <nav class="p-6 md:p-8" aria-label={ui.contact.socialAria}>
               <p
                 class="font-mono text-xs font-medium uppercase tracking-[0.12em] text-muted-foreground"
               >
-                Redes
+                {ui.contact.socialHeading}
               </p>
               <div class="mt-4 flex flex-col gap-3">
                 <a

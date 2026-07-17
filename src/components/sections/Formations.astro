@@ -3,7 +3,14 @@ import Container from "../ui/Container.astro";
 import AccentBar from "../ui/AccentBar.astro";
 import Reveal from "../ui/Reveal.astro";
 import { Image } from "astro:assets";
-import { formations } from "../../content/index";
+import type { FormationList } from "../../content/index";
+import type { PageContext } from "../../i18n/context";
+
+interface Props extends PageContext {
+  formations: FormationList;
+}
+
+const { ui, formations } = Astro.props;
 
 const formationItems = formations.map((formation, index) => ({
   formation,
@@ -25,18 +32,17 @@ const showFormationsFooter = formations.some((f) => !f.featured);
           id="form-heading"
           class="font-display text-3xl font-semibold leading-tight tracking-tight text-foreground sm:text-4xl md:text-5xl"
         >
-          Formações
+          {ui.formations.title}
         </h2>
         <p
           class="mt-4 font-mono text-xs uppercase tracking-[0.12em] text-muted-foreground"
         >
-          Graduação, cursos e certificações
+          {ui.formations.subtitle}
         </p>
       </Reveal>
       <Reveal staggerMs={80} class="flex items-center lg:col-span-7">
         <p class="text-base leading-[1.7] text-foreground-variant md:text-lg">
-          Graduação em andamento e cursos que reforçam a base técnica. O que
-          aparece aqui é o que mais dialoga com o que entrego hoje.
+          {ui.formations.intro}
         </p>
       </Reveal>
     </div>
@@ -44,8 +50,8 @@ const showFormationsFooter = formations.some((f) => !f.featured);
     <div
       data-expandable-list
       data-scroll-section="formacoes"
-      data-expand-label="Ver menos certificações"
-      data-collapse-label="Ver mais certificações"
+      data-expand-label={ui.formations.expandLess}
+      data-collapse-label={ui.formations.expandMore}
     >
       <ul class="mt-14 list-none border border-border bg-card lg:mt-16">
         {
@@ -124,7 +130,7 @@ const showFormationsFooter = formations.some((f) => !f.featured);
               data-expandable-show-more
               aria-expanded="false"
             >
-              Ver mais certificações
+              {ui.formations.expandMore}
             </button>
           </div>
         )

@@ -3,9 +3,16 @@ import Container from "../ui/Container.astro";
 import AccentBar from "../ui/AccentBar.astro";
 import Reveal from "../ui/Reveal.astro";
 import Button from "../ui/Button.astro";
-import { projects as projectEntries, site } from "../../content/index";
+import type { ProjectEntry } from "../../content/index";
 import { getProjectPagePath, projectImageAlt } from "../../lib/project-page";
+import type { PageContext } from "../../i18n/context";
 import { Image } from "astro:assets";
+
+interface Props extends PageContext {
+  projects: ProjectEntry[];
+}
+
+const { locale, ui, site, projects: projectEntries } = Astro.props;
 
 const PROJECTS_INITIAL = 2;
 const featuredProject = projectEntries[0] ?? null;
@@ -26,12 +33,12 @@ const showProjectsFooter = gridProjects.length > PROJECTS_INITIAL;
           id="projects-heading"
           class="font-display text-3xl font-semibold leading-tight tracking-tight text-foreground sm:text-4xl md:text-5xl"
         >
-          Projetos
+          {ui.projects.title}
         </h2>
         <p
           class="mt-4 font-mono text-xs uppercase tracking-[0.12em] text-muted-foreground"
         >
-          Aplicações, APIs e experimentos
+          {ui.projects.subtitle}
         </p>
       </Reveal>
       <Reveal staggerMs={80} class="flex items-center lg:col-span-7">
@@ -43,7 +50,7 @@ const showProjectsFooter = gridProjects.length > PROJECTS_INITIAL;
             rel="noopener noreferrer"
             class="text-accent underline decoration-accent/40 decoration-1 underline-offset-4 transition-colors duration-150 hover:decoration-accent focus-ring"
           >
-            Ver meu GitHub
+            {ui.projects.githubCta}
           </a>
         </p>
       </Reveal>
@@ -59,7 +66,7 @@ const showProjectsFooter = gridProjects.length > PROJECTS_INITIAL;
                   <>
                     <Image
                       src={featuredProject.data.imageUrl}
-                      alt={projectImageAlt(featuredProject)}
+                      alt={projectImageAlt(featuredProject, ui.projectPage.imageAlt)}
                       width={800}
                       height={450}
                       widths={[400, 640, 800]}
@@ -70,7 +77,7 @@ const showProjectsFooter = gridProjects.length > PROJECTS_INITIAL;
                     />
                     <Image
                       src={featuredProject.data.featuredImageUrl}
-                      alt={projectImageAlt(featuredProject)}
+                      alt={projectImageAlt(featuredProject, ui.projectPage.imageAlt)}
                       width={512}
                       height={1050}
                       widths={[256, 512]}
@@ -83,7 +90,7 @@ const showProjectsFooter = gridProjects.length > PROJECTS_INITIAL;
                 ) : (
                   <Image
                     src={featuredProject.data.imageUrl}
-                    alt={projectImageAlt(featuredProject)}
+                    alt={projectImageAlt(featuredProject, ui.projectPage.imageAlt)}
                     width={800}
                     height={450}
                     sizes="(max-width: 1024px) 100vw, 16rem"
@@ -96,7 +103,7 @@ const showProjectsFooter = gridProjects.length > PROJECTS_INITIAL;
               <div class="flex flex-col p-6 md:p-8">
                 <h3 class="card-hover-title font-display text-xl font-semibold text-foreground md:text-2xl">
                   <a
-                    href={getProjectPagePath(featuredProject.id)}
+                    href={getProjectPagePath(featuredProject.slug, locale)}
                     class="transition-colors duration-150 hover:text-accent focus-ring"
                   >
                     {featuredProject.data.title}
@@ -107,7 +114,7 @@ const showProjectsFooter = gridProjects.length > PROJECTS_INITIAL;
                 </p>
                 <ul
                   class="mt-6 flex flex-wrap gap-2 border-t border-border pt-6"
-                  aria-label="Stack do projeto"
+                  aria-label={ui.projects.stackAria}
                 >
                   {featuredProject.data.tech.map((t) => (
                     <li class="border border-border px-2 py-1 font-mono text-[10px] uppercase tracking-[0.08em] text-muted-foreground">
@@ -117,12 +124,12 @@ const showProjectsFooter = gridProjects.length > PROJECTS_INITIAL;
                 </ul>
                 <div class="mt-6">
                   <Button
-                    href={getProjectPagePath(featuredProject.id)}
+                    href={getProjectPagePath(featuredProject.slug, locale)}
                     variant="secondary"
                     showArrow
                     class="w-full justify-center"
                   >
-                    Ver detalhes
+                    {ui.projects.viewDetails}
                   </Button>
                 </div>
               </div>
@@ -135,8 +142,8 @@ const showProjectsFooter = gridProjects.length > PROJECTS_INITIAL;
     <div
       data-expandable-list
       data-scroll-section="projetos"
-      data-expand-label="Ver menos projetos"
-      data-collapse-label="Ver mais projetos"
+      data-expand-label={ui.projects.expandLess}
+      data-collapse-label={ui.projects.expandMore}
     >
       <ul
         class:list={[
@@ -155,12 +162,12 @@ const showProjectsFooter = gridProjects.length > PROJECTS_INITIAL;
                 <Reveal staggerMs={index * 60} class="h-full min-h-0">
                   <article class="card-hover-bordered group/card flex h-full flex-col">
                     <a
-                      href={getProjectPagePath(project.id)}
+                      href={getProjectPagePath(project.slug, locale)}
                       class="relative block aspect-video overflow-hidden border-b border-border"
                     >
                       <Image
                         src={project.data.imageUrl}
-                        alt={projectImageAlt(project)}
+                        alt={projectImageAlt(project, ui.projectPage.imageAlt)}
                         width={800}
                         height={450}
                         sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 40vw"
@@ -172,7 +179,7 @@ const showProjectsFooter = gridProjects.length > PROJECTS_INITIAL;
                     <div class="flex flex-1 flex-col p-6 md:p-8">
                       <h3 class="card-hover-title font-display text-xl font-semibold text-foreground">
                         <a
-                          href={getProjectPagePath(project.id)}
+                          href={getProjectPagePath(project.slug, locale)}
                           class="transition-colors duration-150 hover:text-accent focus-ring"
                         >
                           {project.data.title}
@@ -183,7 +190,7 @@ const showProjectsFooter = gridProjects.length > PROJECTS_INITIAL;
                       </p>
                       <ul
                         class="mt-6 flex flex-wrap gap-2 border-t border-border pt-6"
-                        aria-label="Stack do projeto"
+                        aria-label={ui.projects.stackAria}
                       >
                         {project.data.tech.map((t) => (
                           <li class="border border-border px-2 py-1 font-mono text-[10px] uppercase tracking-[0.08em] text-muted-foreground">
@@ -193,12 +200,12 @@ const showProjectsFooter = gridProjects.length > PROJECTS_INITIAL;
                       </ul>
                       <div class="mt-6">
                         <Button
-                          href={getProjectPagePath(project.id)}
+                          href={getProjectPagePath(project.slug, locale)}
                           variant="secondary"
                           showArrow
                           class="w-full justify-center"
                         >
-                          Ver detalhes
+                          {ui.projects.viewDetails}
                         </Button>
                       </div>
                     </div>
@@ -225,7 +232,7 @@ const showProjectsFooter = gridProjects.length > PROJECTS_INITIAL;
                 data-expandable-show-more
                 aria-expanded="false"
               >
-                Ver mais projetos
+                {ui.projects.expandMore}
               </button>
             </div>
           )

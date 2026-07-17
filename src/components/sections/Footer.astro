@@ -1,8 +1,12 @@
 ---
 import { Icon } from "astro-icon/components";
 import Container from "../ui/Container.astro";
-import { site } from "../../content/index";
+import type { PageContext } from "../../i18n/context";
+import { homeHash } from "../../i18n/paths";
 
+type Props = PageContext;
+
+const { locale, ui, site } = Astro.props;
 const year = new Date().getFullYear();
 ---
 
@@ -15,13 +19,13 @@ const year = new Date().getFullYear();
         <p
           class="font-mono text-xs uppercase tracking-[0.12em] text-muted-foreground"
         >
-          Portfólio / {site.authorName}
+          {ui.footer.portfolioPrefix} {site.authorName}
         </p>
         <p class="mt-2 font-display text-lg font-semibold text-foreground">
           {site.person.jobTitle}
         </p>
         <p class="mt-1 text-sm text-muted-foreground">
-          &copy; {year}. Código legível sustenta entrega constante.
+          &copy; {year}. {ui.footer.tagline}
         </p>
       </div>
 
@@ -54,10 +58,10 @@ const year = new Date().getFullYear();
           <Icon name="simple-icons:linkedin" class="size-[23px]" />
         </a>
         <a
-          href="/#inicio"
+          href={homeHash(locale, "inicio")}
           class="cursor-pointer font-mono text-sm uppercase tracking-[0.12em] text-muted-foreground underline decoration-border decoration-1 underline-offset-4 transition-colors duration-150 hover:text-accent hover:decoration-accent focus-ring"
         >
-          Voltar ao topo
+          {ui.footer.backToTop}
         </a>
       </div>
     </div>

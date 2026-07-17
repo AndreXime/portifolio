@@ -22,8 +22,28 @@ Portfólio pessoal em Astro com foco em performance, legibilidade e conversão. 
 - **JS mínimo**: modal de projetos, “ver mais”, nav drawer, scroll spy, formulário de contato
 - **Reveal**: `IntersectionObserver` próprio, respeita `prefers-reduced-motion`
 - **CSS crítico**: `inlineStylesheets: "always"` no build
-- **SEO**: sitemap, JSON-LD, OG estática
+- **SEO**: sitemap com i18n, JSON-LD, OG estática, `hreflang`
+- **i18n**: PT em `/`, EN em `/en` (ver seção abaixo)
 - **Contato**: `POST /api/contact` com validação, honeypot, rate limit e envio SMTP
+
+## Internacionalização (i18n)
+
+Astro i18n nativo com `defaultLocale: "pt"` e `prefixDefaultLocale: false`:
+
+| Locale | URL |
+|--------|-----|
+| Português | `/`, `/projetos/[slug]` |
+| Inglês | `/en`, `/en/projetos/[slug]` |
+
+**Conteúdo e UI**
+- Markdown por locale em `src/content/pt/` e `src/content/en/`
+- Strings de interface em `src/i18n/locales/{pt,en}.ts`
+- Helpers em `src/i18n/` (`paths`, `context`); pages montam o contexto e passam props às sections
+
+**Redirect na raiz (`src/middleware.ts`, edge na Vercel)**  
+Só age em `/`. Visitantes vão para `/en` por padrão; ficam em PT só com cookie `PREFERRED_LOCALE=pt` ou `Accept-Language` em português. Bots não são redirecionados (veem `/` em PT). O seletor PT|EN no header grava o cookie.
+
+**SEO**: `hreflang` + `x-default`, canonical por locale, sitemap bilíngue.
 
 ## Performance
 
@@ -33,20 +53,26 @@ Lighthouse em produção: **~100** em Performance, Accessibility, Best Practices
 
 ```
 src/
-├── content/           # Collections + site.ts, experiences, formations, technologies
+├── content/
+│   ├── pt/            # Collections em português
+│   ├── en/            # Collections em inglês
+│   └── index.ts       # Helpers getSite, getProjects, etc.
+├── i18n/              # Locales, paths, PageContext
 ├── components/
-│   ├── layout/        # Header, Footer
-│   ├── sections/      # Hero, About, Experiences, Projects, Technologies, Formations, Contact
-│   └── ui/            # Button, Container, Input, Reveal, AccentBar, ícones
+│   ├── pages/         # HomePage, ProjectPage
+│   ├── sections/      # Hero, About, Experiences, Projects, ...
+│   └── ui/            # Button, Container, LocaleSwitch, ...
 ├── scripts/           # JS nativo (nav, reveal, projetos, contato)
-├── styles/            # global.css (tokens), fonts.ts (preload + @fontsource)
-├── layouts/           # Layout base + meta/SEO
+├── styles/            # global.css (tokens), fonts.ts
+├── layouts/           # Layout base + meta/SEO/hreflang
+├── middleware.ts      # Redirect de locale na /
 └── pages/
     ├── index.astro
+    ├── en/            # Home e projetos em inglês
+    ├── projetos/[slug].astro
     ├── 404.astro
-    ├── og-image/      # Template para captura da OG
-    └── api/
-        └── contact.ts # prerender: false (serverless na Vercel)
+    ├── og-image/
+    └── api/contact.ts # prerender: false (serverless na Vercel)
 ```
 
 Na raiz: `generate-og.js` (Playwright) gera `public/og-image.png`.

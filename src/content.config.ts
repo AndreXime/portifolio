@@ -2,52 +2,62 @@ import { defineCollection } from "astro:content";
 import { glob } from "astro/loaders";
 import { z } from "astro/zod";
 
-const portfolio = defineCollection({
-	loader: glob({ pattern: "portfolio.md", base: "./src/content" }),
-	schema: z.object({
-		authorName: z.string(),
-		email: z.email(),
-		githubUrl: z.url(),
-		linkedinUrl: z.url(),
-		blogUrl: z.url(),
-		resumePdfUrl: z.string(),
-		seo: z.object({
-			title: z.string(),
-			description: z.string(),
-			ogImageAlt: z.string(),
-		}),
-		person: z.object({
-			fullName: z.string(),
-			jobTitle: z.string(),
-			description: z.string(),
-		}),
-		hero: z.object({
-			headline: z.string(),
-			headlineAccent: z.string(),
-			intro: z.string(),
-			stackLine: z.string(),
-			availabilityLabel: z.string(),
-			availabilityValue: z.string(),
-			locationValue: z.string(),
-		}),
-		about: z.object({
-			photoAlt: z.string(),
-			quote: z.string(),
-			paragraphs: z.array(z.string()).min(1),
-		}),
-		sections: z.object({
-			experiencesIntro: z.string(),
-			projectsSubtitle: z.string(),
-		}),
-		cta: z.object({
-			title: z.string(),
-			body: z.string(),
-		}),
+const portfolioSchema = z.object({
+	authorName: z.string(),
+	email: z.email(),
+	githubUrl: z.url(),
+	linkedinUrl: z.url(),
+	blogUrl: z.url(),
+	resumePdfUrl: z.string(),
+	seo: z.object({
+		title: z.string(),
+		description: z.string(),
+		ogImageAlt: z.string(),
+	}),
+	person: z.object({
+		fullName: z.string(),
+		jobTitle: z.string(),
+		description: z.string(),
+	}),
+	hero: z.object({
+		headline: z.string(),
+		headlineAccent: z.string(),
+		intro: z.string(),
+		stackLine: z.string(),
+		availabilityLabel: z.string(),
+		availabilityValue: z.string(),
+		locationValue: z.string(),
+	}),
+	about: z.object({
+		photoAlt: z.string(),
+		quote: z.string(),
+		paragraphs: z.array(z.string()).min(1),
+	}),
+	sections: z.object({
+		experiencesIntro: z.string(),
+		projectsSubtitle: z.string(),
+	}),
+	cta: z.object({
+		title: z.string(),
+		body: z.string(),
 	}),
 });
 
+const portfolio = defineCollection({
+	loader: glob({
+		pattern: "*/portfolio.md",
+		base: "./src/content",
+		generateId: ({ entry }) => entry.replace(/\/portfolio\.md$/, ""),
+	}),
+	schema: portfolioSchema,
+});
+
 const experiences = defineCollection({
-	loader: glob({ pattern: "experiences.md", base: "./src/content" }),
+	loader: glob({
+		pattern: "*/experiences.md",
+		base: "./src/content",
+		generateId: ({ entry }) => entry.replace(/\/experiences\.md$/, ""),
+	}),
 	schema: ({ image }) =>
 		z.object({
 			experiences: z.array(
@@ -64,7 +74,11 @@ const experiences = defineCollection({
 });
 
 const formations = defineCollection({
-	loader: glob({ pattern: "formations.md", base: "./src/content" }),
+	loader: glob({
+		pattern: "*/formations.md",
+		base: "./src/content",
+		generateId: ({ entry }) => entry.replace(/\/formations\.md$/, ""),
+	}),
 	schema: ({ image }) =>
 		z.object({
 			formations: z.array(
@@ -82,7 +96,11 @@ const formations = defineCollection({
 });
 
 const technologies = defineCollection({
-	loader: glob({ pattern: "technologies.md", base: "./src/content" }),
+	loader: glob({
+		pattern: "*/technologies.md",
+		base: "./src/content",
+		generateId: ({ entry }) => entry.replace(/\/technologies\.md$/, ""),
+	}),
 	schema: z.object({
 		technologies: z.array(
 			z.object({
@@ -95,7 +113,15 @@ const technologies = defineCollection({
 });
 
 const projects = defineCollection({
-	loader: glob({ pattern: "**/*.md", base: "./src/content/projects" }),
+	loader: glob({
+		pattern: "*/projects/*.md",
+		base: "./src/content",
+		generateId: ({ entry }) => {
+			const withoutExt = entry.replace(/\.md$/, "");
+			const [locale, , slug] = withoutExt.split("/");
+			return `${locale}/${slug}`;
+		},
+	}),
 	schema: ({ image }) =>
 		z.object({
 			order: z.number().int().min(0),

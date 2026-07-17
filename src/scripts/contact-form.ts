@@ -1,5 +1,28 @@
 const MIN_SUBMIT_MS = 3000;
 
+const FALLBACK_MESSAGES = {
+	errorGeneric: "Não foi possível enviar. Tente de novo em instantes.",
+	errorTooFast: "Aguarde alguns segundos antes de enviar.",
+	errorNetwork: "Falha de rede. Verifique sua conexão e tente novamente.",
+	success: "Mensagem enviada. Obrigado — respondo em até um dia útil.",
+	submitting: "Enviando…",
+	submit: "Enviar mensagem",
+} as const;
+
+const MESSAGE_DATASET_KEYS = {
+	errorGeneric: "msgErrorGeneric",
+	errorTooFast: "msgErrorFast",
+	errorNetwork: "msgErrorNetwork",
+	success: "msgSuccess",
+	submitting: "msgSubmitting",
+	submit: "msgSubmit",
+} as const satisfies Record<keyof typeof FALLBACK_MESSAGES, keyof DOMStringMap>;
+
+function readFormMessage(form: HTMLFormElement, key: keyof typeof FALLBACK_MESSAGES): string {
+	const value = form.dataset[MESSAGE_DATASET_KEYS[key]];
+	return value?.trim() || FALLBACK_MESSAGES[key];
+}
+
 export function initContactForm(): void {
 	const form = document.getElementById("contact-form");
 	const statusEl = document.getElementById("contact-form-status");
@@ -13,7 +36,7 @@ export function initContactForm(): void {
 	}
 
 	const labelEl = form.querySelector("[data-contact-submit-label]");
-	const defaultLabel = labelEl?.textContent?.trim() ?? "Enviar mensagem";
+	const defaultLabel = labelEl?.textContent?.trim() ?? FALLBACK_MESSAGES.submit;
 
 	const setStatus = (message: string, kind: "" | "error" | "success") => {
 		statusEl.textContent = message;
@@ -36,13 +59,13 @@ export function initContactForm(): void {
 		const fd = new FormData(form);
 		const honeypot = String(fd.get("website") ?? "").trim();
 		if (honeypot.length > 0) {
-			setStatus("Não foi possível enviar. Tente de novo em instantes.", "error");
+			setStatus(readFormMessage(form, "errorGeneric"), "error");
 			return;
 		}
 
 		const loadedAt = Number(fd.get("_ts"));
 		if (!Number.isFinite(loadedAt) || Date.now() - loadedAt < MIN_SUBMIT_MS) {
-			setStatus("Aguarde alguns segundos antes de enviar.", "error");
+			setStatus(readFormMessage(form, "errorTooFast"), "error");
 			return;
 		}
 
@@ -55,7 +78,7 @@ export function initContactForm(): void {
 			submitBtn.disabled = true;
 		}
 		if (labelEl) {
-			labelEl.textContent = "Enviando…";
+			labelEl.textContent = readFormMessage(form, "submitting");
 		}
 		setStatus("", "");
 
@@ -68,7 +91,7 @@ export function initContactForm(): void {
 			const data = await res.json().catch(() => ({}));
 
 			if (!res.ok) {
-				let errorMessage = "Não foi possível enviar. Tente de novo em instantes.";
+				let errorMessage = readFormMessage(form, "errorGeneric");
 
 				if (typeof data?.error === "string") {
 					errorMessage = data.error;
@@ -78,13 +101,13 @@ export function initContactForm(): void {
 				return;
 			}
 
-			setStatus("Mensagem enviada. Obrigado — respondo em até um dia útil.", "success");
+			setStatus(readFormMessage(form, "success"), "success");
 			form.reset();
 			if (tsInput) {
 				tsInput.value = String(Date.now());
 			}
 		} catch {
-			setStatus("Falha de rede. Verifique sua conexão e tente novamente.", "error");
+			setStatus(readFormMessage(form, "errorNetwork"), "error");
 		} finally {
 			if (submitBtn instanceof HTMLButtonElement) {
 				submitBtn.disabled = false;

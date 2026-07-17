@@ -1,19 +1,22 @@
+import type { Locale } from "../i18n";
+import { localizedPath } from "../i18n/paths";
+
 interface ProjectImageAltInput {
 	data: {
 		title: string;
 	};
 }
 
-export function getProjectPagePath(id: string): string {
-	return `/projetos/${id}`;
+export function getProjectPagePath(id: string, locale: Locale = "pt"): string {
+	return localizedPath(locale, `/projetos/${id}`);
 }
 
-export function getProjectPageUrl(site: string, id: string): string {
-	return `${site}${getProjectPagePath(id)}`;
+export function getProjectPageUrl(site: string, id: string, locale: Locale = "pt"): string {
+	return `${site}${getProjectPagePath(id, locale)}`;
 }
 
-export function projectImageAlt(project: ProjectImageAltInput): string {
-	return `Captura do projeto ${project.data.title}`;
+export function projectImageAlt(project: ProjectImageAltInput, template = "Captura do projeto {title}"): string {
+	return template.replace("{title}", project.data.title);
 }
 
 export const projectMarkdownClasses = [

@@ -3,7 +3,11 @@ import Container from "../ui/Container.astro";
 import AccentBar from "../ui/AccentBar.astro";
 import Reveal from "../ui/Reveal.astro";
 import Button from "../ui/Button.astro";
-import { site } from "../../content/index";
+import type { PageContext } from "../../i18n/context";
+
+type Props = PageContext;
+
+const { ui, site } = Astro.props;
 ---
 
 <section
@@ -27,10 +31,10 @@ import { site } from "../../content/index";
         class="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center"
       >
         <Button href={site.linkedinUrl} variant="primary" showArrow onLight>
-          Conectar no LinkedIn
+          {ui.cta.linkedin}
         </Button>
         <Button href={site.resumePdfUrl} variant="secondary" onLight>
-          Baixar currículo (PDF)
+          {ui.cta.resume}
         </Button>
       </div>
     </Reveal>
