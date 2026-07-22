@@ -14,6 +14,7 @@ import {
   projectImageAlt,
   projectMarkdownClasses,
 } from "../../lib/project-page";
+import { getDominantColor } from "../../lib/dominant-color";
 import { resolveLocale, t, type Locale } from "../../i18n";
 import type { PageContext } from "../../i18n/context";
 import { homeHash, localizedPath } from "../../i18n/paths";
@@ -33,6 +34,7 @@ const liveLink = (project.data.link ?? "").trim();
 const projectsHash = homeHash(locale, "projetos");
 const projectsIndexPath = getProjectsIndexPath(locale);
 const homePath = localizedPath(locale, "/");
+const dominantColor = await getDominantColor(project.data.imageUrl);
 
 const ogImage = await getImage({
   src: project.data.imageUrl,
@@ -115,14 +117,15 @@ const imageAlt = projectImageAlt(project, ui.projectPage.imageAlt);
 
       <div
         class="relative mt-8 aspect-[2/1] overflow-hidden border border-border"
+        style={`background-color: ${dominantColor}`}
       >
         <Image
           src={project.data.imageUrl}
           alt={imageAlt}
-          width={1200}
-          height={600}
+          width={project.data.imageUrl.width}
+          height={project.data.imageUrl.height}
           sizes="(max-width: 1024px) 100vw, 72rem"
-          class="h-full w-full object-cover object-top"
+          class="relative z-10 h-full w-full object-contain"
           loading="eager"
           decoding="async"
         />
