@@ -30,9 +30,14 @@ export const en = {
 		subtitle: "Apps, APIs, and experiments",
 		githubCta: "See my GitHub",
 		stackAria: "Project stack",
-		expandMore: "Show more projects",
-		expandLess: "Show fewer projects",
 		viewDetails: "View details",
+		viewAll: "View all projects",
+	},
+	projectsIndex: {
+		title: "Projects",
+		subtitle: "All work in more detail",
+		seoDescription: "Full list of projects from André Ximenes' portfolio.",
+		backHome: "Back to home",
 	},
 	technologies: {
 		title: "Technologies",

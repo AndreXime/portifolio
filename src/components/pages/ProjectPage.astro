@@ -10,9 +10,11 @@ import Button from "../ui/Button.astro";
 import { getSite, type ProjectEntry } from "../../content/index";
 import { buildProjectPageJsonLd } from "../../lib/portfolio-json-ld";
 import {
+  getProjectsIndexPath,
   projectImageAlt,
   projectMarkdownClasses,
 } from "../../lib/project-page";
+import { getDominantColor } from "../../lib/dominant-color";
 import { resolveLocale, t, type Locale } from "../../i18n";
 import type { PageContext } from "../../i18n/context";
 import { homeHash, localizedPath } from "../../i18n/paths";
@@ -30,7 +32,9 @@ const { project } = Astro.props;
 const { Content } = await render(project);
 const liveLink = (project.data.link ?? "").trim();
 const projectsHash = homeHash(locale, "projetos");
+const projectsIndexPath = getProjectsIndexPath(locale);
 const homePath = localizedPath(locale, "/");
+const dominantColor = await getDominantColor(project.data.imageUrl);
 
 const ogImage = await getImage({
   src: project.data.imageUrl,
@@ -64,13 +68,17 @@ const imageAlt = projectImageAlt(project, ui.projectPage.imageAlt);
   })}
 >
   <Header {...ctx} />
-  <main class="border-b border-border bg-background pt-28 pb-16">
+  <main
+    class="border-b border-border bg-background pt-28 pb-16"
+    data-projects-index-href={projectsIndexPath}
+  >
     <Container>
       <div
         class="flex flex-col gap-4 lg:flex-row lg:flex-nowrap lg:items-center lg:justify-between lg:gap-x-4"
       >
         <a
           href={projectsHash}
+          data-projects-back
           class="inline-flex shrink-0 items-center gap-2 self-start font-mono text-xs uppercase tracking-[0.12em] text-muted-foreground underline decoration-border decoration-1 underline-offset-4 transition-colors duration-150 hover:text-accent hover:decoration-accent focus-ring"
         >
           <Icon name="arrow-left" class="size-3.5 shrink-0" />
@@ -93,6 +101,7 @@ const imageAlt = projectImageAlt(project, ui.projectPage.imageAlt);
             <li class="shrink-0">
               <a
                 href={projectsHash}
+                data-projects-back
                 class="transition-colors duration-150 hover:text-accent focus-ring"
               >
                 {ui.projectPage.projects}
@@ -108,14 +117,15 @@ const imageAlt = projectImageAlt(project, ui.projectPage.imageAlt);
 
       <div
         class="relative mt-8 aspect-[2/1] overflow-hidden border border-border"
+        style={`background-color: ${dominantColor}`}
       >
         <Image
           src={project.data.imageUrl}
           alt={imageAlt}
-          width={1200}
-          height={600}
+          width={project.data.imageUrl.width}
+          height={project.data.imageUrl.height}
           sizes="(max-width: 1024px) 100vw, 72rem"
-          class="h-full w-full object-cover object-top"
+          class="relative z-10 h-full w-full object-contain"
           loading="eager"
           decoding="async"
         />
@@ -180,11 +190,21 @@ const imageAlt = projectImageAlt(project, ui.projectPage.imageAlt);
       </ul>
 
       <div class="mt-12 border-t border-border pt-8">
-        <Button href={projectsHash} variant="secondary" showArrow class="w-full">
+        <Button
+          href={projectsHash}
+          variant="secondary"
+          showArrow
+          class="w-full"
+          data-projects-back
+        >
           {ui.projectPage.back}
         </Button>
       </div>
     </Container>
   </main>
   <Footer {...ctx} />
+  <script>
+    import { initProjectBackFromList } from "../../scripts/project-back-from-list";
+    initProjectBackFromList();
+  </script>
 </Layout>

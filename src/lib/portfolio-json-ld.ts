@@ -6,7 +6,7 @@ import type {
 	ProjectEntry,
 	ProjectPageJsonLdInput,
 } from "./portfolio-json-ld.types";
-import { getProjectPageUrl, localeHomeUrl, localeProjectsHashUrl } from "./project-page";
+import { getProjectPageUrl, getProjectsIndexUrl, localeHomeUrl } from "./project-page";
 
 export function buildPortfolioJsonLd(input: PortfolioJsonLdInput) {
 	const homeUrl = localeHomeUrl(input.site, input.locale);
@@ -111,7 +111,7 @@ export function buildPortfolioJsonLd(input: PortfolioJsonLdInput) {
 export function buildProjectPageJsonLd(input: ProjectPageJsonLdInput) {
 	const pageUrl = getProjectPageUrl(input.site, input.project.id, input.locale);
 	const homeUrl = localeHomeUrl(input.site, input.locale);
-	const projectsUrl = localeProjectsHashUrl(input.site, input.locale);
+	const projectsUrl = getProjectsIndexUrl(input.site, input.locale);
 	const liveUrl = input.project.data.link?.trim();
 	const personId = schemaId(input.site, "person");
 	const sameAs = [input.project.data.github, ...(liveUrl ? [liveUrl] : [])];
@@ -260,6 +260,7 @@ function buildProjectsItemList(
 	return {
 		"@type": "ItemList",
 		"@id": schemaId(site, "projects"),
+		url: getProjectsIndexUrl(site, locale),
 		name: projectsLabel,
 		itemListElement: projects.map((project, index) => ({
 			"@type": "ListItem",
