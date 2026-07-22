@@ -1,0 +1,146 @@
+---
+import { Image } from "astro:assets";
+import { Icon } from "astro-icon/components";
+import Layout from "../../layouts/Layout.astro";
+import Header from "../sections/Header.astro";
+import Footer from "../sections/Footer.astro";
+import Container from "../ui/Container.astro";
+import AccentBar from "../ui/AccentBar.astro";
+import Reveal from "../ui/Reveal.astro";
+import Button from "../ui/Button.astro";
+import { getProjects, getSite } from "../../content/index";
+import { getProjectPagePath, projectImageAlt } from "../../lib/project-page";
+import { getDominantColor } from "../../lib/dominant-color";
+import { resolveLocale, t, type Locale } from "../../i18n";
+import type { PageContext } from "../../i18n/context";
+import { homeHash } from "../../i18n/paths";
+
+interface Props {
+  locale?: Locale;
+}
+
+const locale = resolveLocale(Astro.props.locale ?? Astro.currentLocale);
+const ui = t(locale);
+const site = await getSite(locale);
+const projects = await getProjects(locale);
+const projectsWithColor = await Promise.all(
+  projects.map(async (project) => ({
+    project,
+    dominantColor: await getDominantColor(project.data.imageUrl),
+  })),
+);
+const ctx: PageContext = { locale, ui, site };
+const homeHref = homeHash(locale, "inicio");
+---
+
+<Layout
+  locale={locale}
+  site={site}
+  title={`${ui.projectsIndex.title} | ${site.authorName}`}
+  description={ui.projectsIndex.seoDescription}
+>
+  <Header {...ctx} />
+  <main class="border-b border-border bg-background pt-28 pb-16">
+    <Container>
+      <a
+        href={homeHref}
+        class="inline-flex shrink-0 items-center gap-2 self-start font-mono text-xs uppercase tracking-[0.12em] text-muted-foreground underline decoration-border decoration-1 underline-offset-4 transition-colors duration-150 hover:text-accent hover:decoration-accent focus-ring"
+      >
+        <Icon name="arrow-left" class="size-3.5 shrink-0" />
+        {ui.projectsIndex.backHome}
+      </a>
+
+      <div class="mt-10 max-w-3xl">
+        <AccentBar class="mb-6" />
+        <h1
+          class="font-display text-3xl font-semibold leading-tight tracking-tight text-foreground sm:text-4xl md:text-5xl"
+        >
+          {ui.projectsIndex.title}
+        </h1>
+        <p
+          class="mt-4 font-mono text-xs uppercase tracking-[0.12em] text-muted-foreground"
+        >
+          {ui.projects.subtitle}
+        </p>
+        <p
+          class="mt-6 text-base leading-[1.7] text-foreground-variant md:text-lg"
+        >
+          {ui.projectsIndex.subtitle}
+        </p>
+      </div>
+
+      <ul class="mt-14 list-none grid grid-cols-1 gap-10 lg:mt-16 lg:gap-14">
+        {
+          projectsWithColor.map(({ project, dominantColor }, index) => (
+            <li class="min-h-0 w-full">
+              <Reveal staggerMs={index * 60} class="h-full min-h-0 w-full">
+                <article class="group/card flex h-full w-full flex-col border-t border-accent pt-8">
+                  <a
+                    href={getProjectPagePath(project.slug, locale, {
+                      fromList: true,
+                    })}
+                    class="relative block w-full aspect-[5/2] overflow-hidden border border-border"
+                    style={`background-color: ${dominantColor}`}
+                  >
+                    <Image
+                      src={project.data.imageUrl}
+                      alt={projectImageAlt(project, ui.projectPage.imageAlt)}
+                      width={project.data.imageUrl.width}
+                      height={project.data.imageUrl.height}
+                      sizes="100vw"
+                      class="relative z-10 h-full w-full object-contain transition-transform duration-300 ease-out group-hover/card:scale-[1.02]"
+                      loading={index < 2 ? "eager" : "lazy"}
+                      decoding="async"
+                    />
+                  </a>
+                  <div class="flex flex-1 flex-col pt-6">
+                    <h2 class="font-display text-xl font-semibold text-foreground md:text-2xl">
+                      <a
+                        href={getProjectPagePath(project.slug, locale, {
+                          fromList: true,
+                        })}
+                        class="transition-colors duration-150 hover:text-accent focus-ring"
+                      >
+                        {project.data.title}
+                      </a>
+                    </h2>
+                    <p class="mt-4 flex-1 text-sm leading-relaxed text-foreground-variant md:text-base">
+                      {project.data.shortDescription}
+                    </p>
+                    <ul
+                      class="mt-6 flex flex-wrap gap-2"
+                      aria-label={ui.projects.stackAria}
+                    >
+                      {project.data.tech.map((tech) => (
+                        <li class="border border-border px-2 py-1 font-mono text-[10px] uppercase tracking-[0.08em] text-muted-foreground">
+                          {tech}
+                        </li>
+                      ))}
+                    </ul>
+                    <div class="mt-6">
+                      <Button
+                        href={getProjectPagePath(project.slug, locale, {
+                          fromList: true,
+                        })}
+                        variant="secondary"
+                        showArrow
+                        class="w-full justify-center"
+                      >
+                        {ui.projects.viewDetails}
+                      </Button>
+                    </div>
+                  </div>
+                </article>
+              </Reveal>
+            </li>
+          ))
+        }
+      </ul>
+    </Container>
+  </main>
+  <Footer {...ctx} />
+  <script>
+    import { initReveal } from "../../scripts/reveal-observer";
+    initReveal();
+  </script>
+</Layout>

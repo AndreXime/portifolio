@@ -7,8 +7,17 @@ interface ProjectImageAltInput {
 	};
 }
 
-export function getProjectPagePath(id: string, locale: Locale): string {
-	return localizedPath(locale, `/projetos/${id}`);
+export function getProjectsIndexPath(locale: Locale): string {
+	return localizedPath(locale, "/projetos");
+}
+
+export function getProjectsIndexUrl(site: string, locale: Locale): string {
+	return new URL(getProjectsIndexPath(locale), site).href;
+}
+
+export function getProjectPagePath(id: string, locale: Locale, options?: { fromList?: boolean }): string {
+	const path = localizedPath(locale, `/projetos/${id}`);
+	return options?.fromList ? `${path}?from=list` : path;
 }
 
 export function getProjectPageUrl(site: string, id: string, locale: Locale): string {
