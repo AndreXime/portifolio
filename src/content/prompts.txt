@@ -4,7 +4,9 @@ Analise o repositório atual (código, README, `package.json`, estrutura e docs)
 
 Não crie nem edite arquivos no repositório analisado. A saída é o texto completo do documento, pronto para o autor colar no portfólio. Sem explicação antes ou depois.
 
-`imageUrl` e `featuredImageUrl` devem ser sempre string vazia (`""`). Não invente paths de imagem.
+`imageUrl`: sempre string vazia (`""`). Não invente paths de imagem.
+
+`featuredImageUrl`: sempre string vazia (`""`). Não invente paths de imagem.
 
 ---
 
@@ -25,7 +27,7 @@ Se algo não estiver no repositório, **não invente**. Omita ou descreva como l
 
 ## Tom e voz
 
-- Primeira pessoa ("Eu implementei...", "Escolhi...")
+- Primeira pessoa, abrindo o resumo com "Eu construí..." (e no corpo: "Eu implementei...", "Escolhi...")
 - Técnico e direto: decisões, trade-offs e impacto
 - Português do Brasil
 - Sem clichês ("solução inovadora", "apaixonado por tecnologia", "robusto" vazio)
@@ -49,7 +51,9 @@ Se algo não estiver no repositório, **não invente**. Omita ou descreva como l
 | aws-sdk v3 client S3 | armazenamento objeto compatível com S3 |
 | bullmq, bee-queue | filas de trabalho assíncrono |
 
-No corpo, priorize **decisão arquitetural**. Em `tech`, liste 4 a 7 itens legíveis, alinhados ao texto, sem redundância (não "TypeScript" e "TS").
+A mesma regra vale para o array `tech`: itens legíveis e de produto (ex.: "PostgreSQL", "Hono"), nunca nome de SDK/pacote de cola (ex.: "AWS SDK", `prom-client`).
+
+No corpo, priorize **decisão arquitetural**. Em `tech`, liste 4 a 7 itens alinhados ao texto, sem redundância (não "TypeScript" e "TS").
 
 ---
 
@@ -59,37 +63,37 @@ No corpo, priorize **decisão arquitetural**. Em `tech`, liste 4 a 7 itens legí
 
 ```yaml
 ---
-order: 0
+order: 99
 title: "negócio primeiro, gancho técnico depois; uma linha; cerca de 60 a 90 caracteres"
 shortDescription: "ver regras abaixo"
 tech: ["...", "..."]
 imageUrl: ""
-featuredImageUrl: ""
 link: "URL de deploy, ou omita a chave"
 github: "URL do repositório"
 ---
 ```
 
-- `order`: inteiro; define a ordem na listagem (`0` = layout em destaque na home)
-- `imageUrl` e `featuredImageUrl`: sempre `""`
+- `order`: inteiro placeholder (`99`). O autor ajusta a ordem na listagem; `0` é exclusivo do projeto em destaque na home (não use `0` na saída gerada)
+- `imageUrl`: sempre `""`
+- `featuredImageUrl`: não inclua a chave
 - `link`: opcional; omita a chave se não houver valor útil
 - `github`: URL real do repositório analisado
-- `featuredImageUrl`: opcional; imagem vertical só para o projeto em `order: 0`
 
-    **`title`:** negócio primeiro, diferencial técnico depois. Ex.: "Plataforma de recrutamento multi-tenant: do site de carreiras ao pipeline auditável".
+**`title`:** negócio primeiro, diferencial técnico depois. Ex.: "Plataforma de recrutamento multi-tenant: do site de carreiras ao pipeline auditável".
 
-    **`shortDescription` (resumo curto):**
+**`shortDescription` (resumo curto):**
 
-    - **2 ou 3 frases**, no máximo ~320 caracteres no total
-    - Frase 1: problema + o que o sistema entrega
-    - Frase 2: diferencial técnico (stack principal + decisão forte)
-    - Frase 3 (opcional): resultado ou limite conhecido com honestidade
-    - Sem markdown, bullets ou links
-    - Antes de entregar, conte os caracteres; se passar de ~320, reescreva
+- Começa com "Eu construí..."
+- **2 ou 3 frases**, no máximo ~360 caracteres no total
+- Frase 1: problema + o que o sistema entrega
+- Frase 2: diferencial técnico (stack principal + decisão forte)
+- Frase 3 (opcional): resultado ou limite conhecido com honestidade
+- Sem markdown, bullets ou links
+- Antes de entregar, conte os caracteres; se passar de ~360, reescreva
 
-    ### Corpo Markdown
+### Corpo Markdown
 
-    Use **somente `##` (h2)**, nunca `#` (h1) nem `###`. Estrutura fixa:
+Use **somente `##` (h2)**, nunca `#` (h1) nem `###`. Estrutura fixa:
 
 ```markdown
 ## Contexto técnico
@@ -102,7 +106,9 @@ Um ou dois parágrafos densos: arquitetura (monólito modular, monorepo, BFF, et
 - (4 a 6 bullets; cada um verificável no repo ou na doc)
 ```
 
-Opcional, **só se couber em uma frase com evidência**:
+**Negrito:** apenas no rótulo curto do bullet (`**Nome:**`). Sem negrito nos parágrafos do corpo e sem negrito no restante do texto do bullet.
+
+Opcional, **só se couber em uma frase com evidência** e **só se a frase 3 do `shortDescription` ainda não cobrir o mesmo limite**:
 
 ```markdown
 ## Limite conhecido
@@ -110,21 +116,25 @@ Opcional, **só se couber em uma frase com evidência**:
 Uma fronteira honesta do produto (ex.: checkout só na UI enquanto a API já fecha pedido). Não use como desculpa; mostre priorização.
 ```
 
-Não use seções "Problema / Solução / Impacto".
+Não repita o mesmo limite como bullet em Desafios. Não use seções "Problema / Solução / Impacto".
 
 ---
 
 ## Checklist antes de entregar
 
 - [ ] Saída é só o documento Markdown (sem criar arquivo no repo analisado)
-- [ ] `shortDescription` tem no máximo 3 frases e ≤ ~320 caracteres
+- [ ] `shortDescription` começa com "Eu construí...", tem no máximo 3 frases e ≤ ~360 caracteres
+- [ ] `order` é placeholder (não `0`); `featuredImageUrl` está ausente
 - [ ] `title` e `tech` não duplicam o corpo
+- [ ] `tech` segue a regra de abstração (sem pacotes de cola / SDKs)
 - [ ] Bullets citam comportamento real (transação, RLS em app, refresh com blocklist), não buzzwords
+- [ ] Negrito só no rótulo dos bullets
 - [ ] Nenhum nome de pacote de cola no texto
 - [ ] Sem travessões no documento inteiro
 - [ ] Só headings `##` no corpo
 - [ ] `github` e `link` (se houver) são URLs válidas
-- [ ] `imageUrl` e `featuredImageUrl` são `""`
+- [ ] `imageUrl` é `""`
+- [ ] Se usou `## Limite conhecido`, não duplica a frase 3 do `shortDescription` nem um bullet de Desafios
 
 ---
 
@@ -136,13 +146,15 @@ Não use seções "Problema / Solução / Impacto".
 | Parágrafo único de 600 caracteres em `shortDescription` | 3 frases: problema, diferencial, resultado |
 | Listar 15 dependências do `package.json` | 5 bullets com decisões de engenharia |
 | "RAG inovador com IA de ponta" | "Pipeline local: ingestão, embeddings, busca por similaridade com limite de contexto e streaming com cancelamento" |
+| `tech: ["AWS SDK"]` ou negrito em todo termo técnico | `tech: ["PostgreSQL"]`; negrito só em `**Rótulo:**` |
+| `###` no corpo ou `order: 0` gerado | só `##`; `order: 99` |
 
 ---
 
 ## Exemplo mínimo de qualidade (forma, não copiar conteúdo)
 
 ```yaml
-shortDescription: "Construí um ATS multi-tenant em TypeScript com NestJS e Next.js: empresas isoladas por tenant e candidato com perfil único entre vagas. O núcleo são máquinas de estado para vagas e candidaturas, pipeline versionado por vaga e defesa em profundidade no acesso a dados. Está em produção com upload direto para armazenamento objeto."
+shortDescription: "Eu construí um ATS multi-tenant em TypeScript com NestJS e Next.js: empresas isoladas por tenant e candidato com perfil único entre vagas. O núcleo são máquinas de estado para vagas e candidaturas, pipeline versionado por vaga e defesa em profundidade no acesso a dados. Está em produção com upload direto para armazenamento objeto."
 ```
 
 ```markdown
