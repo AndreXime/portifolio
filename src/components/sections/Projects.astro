@@ -9,6 +9,7 @@ import {
   getProjectsIndexPath,
   projectImageAlt,
 } from "../../lib/project-page";
+import { getDominantColor } from "../../lib/dominant-color";
 import type { PageContext } from "../../i18n/context";
 import { Image } from "astro:assets";
 
@@ -22,6 +23,21 @@ const PROJECTS_HOME_GRID = 2;
 const featuredProject = projectEntries[0] ?? null;
 const gridProjects = projectEntries.slice(1, 1 + PROJECTS_HOME_GRID);
 const projectsIndexHref = getProjectsIndexPath(locale);
+
+const featuredLandscapeColor = featuredProject
+  ? await getDominantColor(featuredProject.data.imageUrl)
+  : null;
+const [featuredPortraitColor, gridProjectsWithColor] = await Promise.all([
+  featuredProject?.data.featuredImageUrl != null
+    ? getDominantColor(featuredProject.data.featuredImageUrl)
+    : Promise.resolve(featuredLandscapeColor),
+  Promise.all(
+    gridProjects.map(async (project) => ({
+      project,
+      dominantColor: await getDominantColor(project.data.imageUrl),
+    })),
+  ),
+]);
 ---
 
 <section
@@ -61,47 +77,62 @@ const projectsIndexHref = getProjectsIndexPath(locale);
     </div>
 
     {
-      featuredProject && (
+      featuredProject && featuredLandscapeColor && (
         <div class="mt-14 lg:mt-16">
           <Reveal staggerMs={0}>
             <article class="card-hover-bordered group/card grid grid-cols-1 lg:grid-cols-[16rem_1fr]">
-              <div class="relative aspect-video overflow-hidden border-b border-border bg-muted lg:aspect-auto lg:flex lg:min-h-[20rem] lg:items-start lg:justify-center lg:border-b-0 lg:border-r">
-                {featuredProject.data.featuredImageUrl ? (
+              <div class="relative aspect-video overflow-hidden border-b border-border lg:aspect-auto lg:flex lg:min-h-[20rem] lg:items-stretch lg:justify-center lg:border-b-0 lg:border-r">
+                {featuredProject.data.featuredImageUrl && featuredPortraitColor ? (
                   <>
+                    <div
+                      class="h-full w-full lg:hidden"
+                      style={`background-color: ${featuredLandscapeColor}`}
+                    >
+                      <Image
+                        src={featuredProject.data.imageUrl}
+                        alt={projectImageAlt(featuredProject, ui.projectPage.imageAlt)}
+                        width={featuredProject.data.imageUrl.width}
+                        height={featuredProject.data.imageUrl.height}
+                        widths={[400, 640, 800]}
+                        sizes="(max-width: 639px) calc(100vw - 2.5rem), (max-width: 1023px) calc(100vw - 5rem), 0px"
+                        class="h-full w-full object-contain"
+                        loading="eager"
+                        decoding="async"
+                      />
+                    </div>
+                    <div
+                      class="hidden h-full w-full lg:block"
+                      style={`background-color: ${featuredPortraitColor}`}
+                    >
+                      <Image
+                        src={featuredProject.data.featuredImageUrl}
+                        alt={projectImageAlt(featuredProject, ui.projectPage.imageAlt)}
+                        width={featuredProject.data.featuredImageUrl.width}
+                        height={featuredProject.data.featuredImageUrl.height}
+                        widths={[256, 512]}
+                        sizes="(min-width: 1024px) 16rem, 0"
+                        class="h-full max-h-full w-full object-contain"
+                        loading="eager"
+                        decoding="async"
+                      />
+                    </div>
+                  </>
+                ) : (
+                  <div
+                    class="h-full w-full"
+                    style={`background-color: ${featuredLandscapeColor}`}
+                  >
                     <Image
                       src={featuredProject.data.imageUrl}
                       alt={projectImageAlt(featuredProject, ui.projectPage.imageAlt)}
-                      width={800}
-                      height={450}
-                      widths={[400, 640, 800]}
-                      sizes="(max-width: 639px) calc(100vw - 2.5rem), (max-width: 1023px) calc(100vw - 5rem), 0px"
-                      class="h-full w-full object-cover object-top lg:hidden"
+                      width={featuredProject.data.imageUrl.width}
+                      height={featuredProject.data.imageUrl.height}
+                      sizes="(max-width: 1024px) 100vw, 16rem"
+                      class="h-full w-full object-contain"
                       loading="eager"
                       decoding="async"
                     />
-                    <Image
-                      src={featuredProject.data.featuredImageUrl}
-                      alt={projectImageAlt(featuredProject, ui.projectPage.imageAlt)}
-                      width={512}
-                      height={1050}
-                      widths={[256, 512]}
-                      sizes="(min-width: 1024px) 16rem, 0"
-                      class="hidden h-full max-h-full w-full object-contain object-top lg:block"
-                      loading="eager"
-                      decoding="async"
-                    />
-                  </>
-                ) : (
-                  <Image
-                    src={featuredProject.data.imageUrl}
-                    alt={projectImageAlt(featuredProject, ui.projectPage.imageAlt)}
-                    width={800}
-                    height={450}
-                    sizes="(max-width: 1024px) 100vw, 16rem"
-                    class="h-full w-full object-cover object-top lg:object-contain"
-                    loading="eager"
-                    decoding="async"
-                  />
+                  </div>
                 )}
               </div>
               <div class="flex flex-col p-6 md:p-8">
@@ -150,21 +181,22 @@ const projectsIndexHref = getProjectsIndexPath(locale);
       ]}
     >
       {
-        gridProjects.map((project, index) => (
+        gridProjectsWithColor.map(({ project, dominantColor }, index) => (
           <li class="min-h-0 h-full">
             <Reveal staggerMs={index * 60} class="h-full min-h-0">
               <article class="card-hover-bordered group/card flex h-full flex-col">
                 <a
                   href={getProjectPagePath(project.slug, locale)}
                   class="relative block aspect-video overflow-hidden border-b border-border"
+                  style={`background-color: ${dominantColor}`}
                 >
                   <Image
                     src={project.data.imageUrl}
                     alt={projectImageAlt(project, ui.projectPage.imageAlt)}
-                    width={800}
-                    height={450}
+                    width={project.data.imageUrl.width}
+                    height={project.data.imageUrl.height}
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 40vw"
-                    class="h-full w-full object-cover object-top"
+                    class="h-full w-full object-contain"
                     loading="lazy"
                     decoding="async"
                   />
