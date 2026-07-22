@@ -1,27 +1,21 @@
 ---
 order: 2
-title: "Ollama Oracle: chat corporativo com RAG local"
-shortDescription: "Construí um chat corporativo com RAG local sobre documentos internos: respostas com fonte, sem LLM externo. Pipeline em TypeScript e Bun com ingestão, embeddings, ChromaDB e Ollama em streaming com cancelamento na desconexão. Controles no retrieval (distância, contexto e deduplicação) antes de montar o prompt."
-tech: ["TypeScript", "Bun", "Ollama", "ChromaDB", "LangChain", "RAG"]
+title: "Chat corporativo com RAG local: políticas indexadas sem ir para a nuvem"
+shortDescription: "Eu construí um chatbot corporativo com RAG local para consultar políticas e runbooks sem enviar a base a APIs externas. Usei Bun, Hono, React, Ollama e Chroma, com retrieval híbrido (vetorial mais fallback lexical) e streaming NDJSON com cancelamento. O histórico fica desligado por padrão para não poluir o embed em modelos pequenos."
+tech: ["Bun", "Hono", "React", "Ollama", "ChromaDB", "LangChain"]
 imageUrl: "../../images/projects/ollama-oracle.png"
-link: "https://ollama-oracle.andreximenex.xyz"
 github: "https://github.com/AndreXime/ollama-oracle"
 ---
 
-# Problema
-Eu precisava disponibilizar conhecimento interno em formato de conversa, mas sem abrir mão de privacidade e previsibilidade de custo, evitando dependência de APIs externas. O conteúdo estava espalhado em textos e registros estruturados, o que exigia uma forma consistente de transformar isso em contexto recuperável. Além disso, era importante reduzir respostas “inventadas” e conseguir justificar a resposta com referências ao material usado. Por fim, eu precisava de uma experiência de uso responsiva, com resposta incremental, sem travar a interface em consultas mais longas.
+## Contexto técnico
 
-# Solução
-Eu implementei um pipeline de ingestão que varre documentos, normaliza formatos comuns e divide o conteúdo em trechos com sobreposição para melhorar a recuperação. Esses trechos são vetorizados por um modelo local de embeddings e persistidos em um banco vetorial, permitindo busca por similaridade com score.
+Eu modelei um monorepo Bun com workspaces: API Hono em TypeScript e UI React (Vite) servida pelo mesmo processo em produção. Escolhi Ollama e Chroma em Docker Compose para manter embeddings e geração no ambiente local, alinhado à regra de negócio de não expor a base corporativa a provedores externos. O pipeline separa ingestão one-shot (recria a coleção, parte→chunk, batches com concorrência limitada) do runtime de chat, com health live/ready que valida modelos no Ollama e existência da coleção no Chroma antes de marcar a app pronta.
 
-No runtime do chat, eu aplico filtros por distância e limites de contexto para controlar ruído, além de deduplicar trechos repetidos antes de montar o prompt. A resposta é gerada por um modelo local e entregue via streaming em eventos, com cancelamento automático quando o cliente desconecta para evitar trabalho desnecessário.
+## Desafios de engenharia (como e por quê)
 
-## Destaques
-- Pipeline de **ingestão** com normalização e chunking com sobreposição
-- **Embeddings locais** + banco vetorial para busca por similaridade com score
-- Controles de qualidade: **filtros**, limites de contexto e **deduplicação** no retrieval
-- Resposta com **streaming** e cancelamento em desconexão para evitar desperdício
-
-# Impacto
-Na prática, o sistema passou a responder com base em evidências do conteúdo indexado, reduzindo alucinações e tornando a saída mais auditável por meio de fontes. A separação entre ingestão, retrieval e geração deixou ajustes de qualidade e desempenho concentrados em parâmetros, sem reescrever o fluxo principal. O streaming melhorou a latência percebida e a rotina de abort em desconexões evitou desperdício de CPU e filas no modelo local. O resultado foi uma base conversacional que escala por volume de documentos com reindexação repetível e manutenção simples, já que cada integração crítica fica isolada e testável por comportamento.
-
+- **Retrieval com portões de distância:** recupero mais candidatos do que cabem no prompt, filtro por distância máxima por trecho e por distância do melhor match. Se o melhor embedding fica fraco demais, desligo o RAG puro em vez de forçar contexto irrelevante no modelo pequeno.
+- **Fallback lexical quando o vetor falha:** se a similaridade não passa no limiar, reavalio os candidatos por overlap de tokens (com prune dos matches fracos) e só então monto o prompt. Assim perguntas com vocabulário institucional ainda recuperam trechos úteis sem afrouxar o filtro vetorial de forma permanente.
+- **Modos de turno e anti-alucinação:** distingo rag, lexical_fallback, conversacional e limitação. Saudação vai pelo prompt conversacional; pergunta de negócio sem chunks bons devolve mensagem fixa pedindo reformulação, em vez de deixar o LLM inventar política.
+- **Stream NDJSON com abort no disconnect:** o endpoint emite ping, deltas e done com fontes; no abort do cliente corto o AbortController do Ollama sem evento de erro. A UI cancela o fetch anterior ao enviar nova pergunta, evitando corrida de respostas.
+- **Ingestão tipada por formato:** md/txt viram uma parte; csv vira uma parte por linha; json extrai subdocumentos. Metadados `source`/`partIndex`/`chunkIndex` viram referências `arquivo.md#p0-c12` nas fontes do chat.
+- **Proteção do endpoint e observabilidade:** rate limit por IP (1 req / 3s), validação Zod do body e teto de payload; gravo JSONL por turno (pergunta, resposta, distâncias, modo) para afinar limiares sem adivinhar qualidade só pelo UX.
