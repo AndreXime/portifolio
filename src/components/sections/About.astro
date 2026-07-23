@@ -44,7 +44,9 @@ const { ui, site } = Astro.props;
       class="mt-14 grid grid-cols-1 gap-10 border-t border-border pt-14 lg:grid-cols-12 lg:gap-12"
     >
       <Reveal staggerMs={100} class="lg:col-span-4">
-        <figure class="card-hover-bordered group/card p-2">
+        <figure
+          class="card-hover-bordered group/card mx-auto w-full max-w-72 p-2 sm:max-w-80 lg:mx-0 lg:max-w-none"
+        >
           <img
             src="/me.webp"
             alt={site.about.photoAlt}
