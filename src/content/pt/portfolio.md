@@ -36,7 +36,7 @@ hero:
 
 about:
   photoAlt: "André Ximenes, desenvolvedor backend"
-  quote: "Bom código é o que o próximo dev entende numa sexta à tarde."
+  quote: "Gosto quando o TypeScript me contradiz antes do usuário. Prefiro erro de tipagem na build a surpresa em produção."
   paragraphs:
     - >-
       Depois de atuar como fullstack, acabei preferindo o lado do servidor: modelar domínio,

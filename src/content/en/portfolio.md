@@ -36,7 +36,7 @@ hero:
 
 about:
   photoAlt: "André Ximenes, backend developer"
-  quote: "Good code is what the next dev understands on a Friday afternoon."
+  quote: "I like when TypeScript argues with me before the user does. I prefer a type error at build time to a surprise in production."
   paragraphs:
     - >-
       After working fullstack, I leaned into the server side: domain modeling, typed contracts,
