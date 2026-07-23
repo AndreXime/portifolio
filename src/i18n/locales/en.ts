@@ -43,7 +43,7 @@ export const en = {
 		title: "Technologies",
 		subtitle: "Day-to-day stack",
 		intro:
-			"This is not everything I have ever used — these are the tools that matter most in what I ship today. Others come in as the problem demands, and I keep learning what each project needs.",
+			"This is not everything I have ever used. These are the tools that matter most in what I ship today. Others come in as the problem demands, and I keep learning what each project needs.",
 	},
 	formations: {
 		title: "Education",
@@ -52,6 +52,7 @@ export const en = {
 			"An ongoing degree and courses that reinforce my technical foundation. What appears here is what most connects to what I deliver today.",
 		expandMore: "Show more certifications",
 		expandLess: "Show fewer certifications",
+		credentialCta: "View credential on Coursera",
 	},
 	cta: {
 		linkedin: "Connect on LinkedIn",
@@ -80,7 +81,7 @@ export const en = {
 		errorTooFast: "Please wait a few seconds before sending.",
 		errorNetwork: "Network error. Check your connection and try again.",
 		errorRateLimit: "Too many attempts. Please try again later.",
-		success: "Message sent. Thanks — I reply within one business day.",
+		success: "Message sent. Thanks. I reply within one business day.",
 	},
 	footer: {
 		portfolioPrefix: "Portfolio /",

@@ -52,6 +52,7 @@ export const pt = {
 			"Graduação em andamento e cursos que reforçam a base técnica. O que aparece aqui é o que mais dialoga com o que entrego hoje.",
 		expandMore: "Ver mais certificações",
 		expandLess: "Ver menos certificações",
+		credentialCta: "Ver credencial no Coursera",
 	},
 	cta: {
 		linkedin: "Conectar no LinkedIn",
@@ -80,7 +81,7 @@ export const pt = {
 		errorTooFast: "Aguarde alguns segundos antes de enviar.",
 		errorNetwork: "Falha de rede. Verifique sua conexão e tente novamente.",
 		errorRateLimit: "Muitas tentativas. Tente novamente mais tarde.",
-		success: "Mensagem enviada. Obrigado — respondo em até um dia útil.",
+		success: "Mensagem enviada. Obrigado. Respondo em até um dia útil.",
 	},
 	footer: {
 		portfolioPrefix: "Portfólio /",
