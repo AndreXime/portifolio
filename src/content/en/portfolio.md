@@ -39,23 +39,26 @@ about:
   quote: "Good code is what the next dev understands on a Friday afternoon."
   paragraphs:
     - >-
-      I am a developer focused on <strong>backend development with TypeScript</strong>,
-      using tools like <strong>Node.js, Bun, and Hono</strong> to structure
-      microservices and stable APIs. With prior fullstack experience working
-      with <strong>Next.js</strong>, I have a holistic view of the ecosystem: I know exactly
-      how the frontend consumes data, which allows me to design more efficient,
-      secure routes with excellent documentation.
+      After working fullstack, I leaned into the server side: domain modeling, typed contracts,
+      and how data reaches the client. Building UIs with <strong>Next.js</strong> taught me how
+      the front actually consumes an API: auth, errors, pagination, loading states. That
+      changes how I design routes, validation, and docs. I prefer APIs a team can evolve without
+      surprises over endpoints that only “work” on deploy day.
     - >-
-      I write clean, modular code focused on easing maintenance and software scale.
-      I understand that technical maturity comes with product context and collaboration,
-      which is why I prioritize consistency in deliveries, continuous learning with the team, and
-      building solutions that solve engineering challenges without unnecessary complexity.
+      At <strong>Stackup</strong> I worked close to the client on an insurance product, from
+      requirements to deploy. I felt the weight of sensitive migrations, keeping large files
+      out of the main API path, and technical decisions under deadline. I learned to favor
+      changes that lower production risk and make the team’s next step safer.
+    - >-
+      Since that contract ended I have prioritized my own <strong>TypeScript backend</strong>
+      projects (multi-tenant, ecommerce, local RAG) and ongoing training. I am looking for a
+      junior role on a team that values readable code, serious review, and steady delivery.
+      I want to apply what I built on my own inside a real product, alongside other people.
 
 sections:
   experiencesIntro: >-
-    Recent experience at a software house in the insurance sector.
-    I am currently open to opportunities; below is the context and what stood out,
-    with highlights in deliveries and learnings.
+    Recent experience at a software house in the insurance sector (through Feb 2026).
+    Below is the role context and what stood out.
   projectsSubtitle: >-
     Projects with deployment or open source; I prioritize real domain
     and documented architectural decisions.
@@ -63,6 +66,6 @@ sections:
 cta:
   title: "Looking for a TypeScript backend dev?"
   body: >-
-    I am available for junior or early mid-level roles.
+    I am available for junior roles.
     Let's talk about your project or product and how I can contribute to your team.
 ---

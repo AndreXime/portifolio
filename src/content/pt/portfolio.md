@@ -39,23 +39,28 @@ about:
   quote: "Bom código é o que o próximo dev entende numa sexta à tarde."
   paragraphs:
     - >-
-      Sou desenvolvedor focado no desenvolvimento de <strong>backend com TypeScript</strong>,
-      utilizando ferramentas como <strong>Node.js, Bun e Hono</strong> para estruturar
-      microsserviços e APIs estáveis. Por ter experiência prévia como fullstack trabalhando
-      com <strong>Next.js</strong>, possuo uma visão holística do ecossistema: sei exatamente
-      como o frontend consome os dados, o que me permite projetar rotas mais eficientes,
-      seguras e com excelente documentação.
+      Depois de atuar como fullstack, acabei preferindo o lado do servidor: modelar domínio,
+      contratos tipados e o caminho dos dados até o cliente. Ter construído telas com
+      <strong>Next.js</strong> me deu visão de como o front consome a API: autenticação,
+      erros, paginação, estados de loading. Isso muda o jeito de desenhar rotas, validações
+      e documentação. Prefiro APIs que o time consiga evoluir sem surpresa a endpoints que
+      só “funcionam” no dia do deploy.
     - >-
-      Escrevo código limpo e modular, focado em facilitar a manutenção e a escala do software.
-      Entendo que o amadurecimento técnico vem com o contexto de produto e colaboração,
-      por isso priorizo a consistência nas entregas, o aprendizado contínuo com o time e a
-      construção de soluções que resolvam desafios de engenharia sem complexidade desnecessária.
+      Na <strong>Stackup</strong> trabalhei próximo do cliente em um produto de seguros, do
+      levantamento de requisito ao deploy. Vi na prática o peso de migration sensível,
+      arquivo grande fora do fluxo principal da API e decisão técnica sob prazo. Aprendi a
+      priorizar mudanças que reduzam risco em produção e deixem o próximo passo do time
+      mais seguro.
+    - >-
+      Desde o fim do contrato priorizei projetos próprios em <strong>backend TypeScript</strong>
+      (multi-tenant, ecommerce, RAG local) e formação contínua. Busco uma vaga júnior em time
+      que valorize código legível, revisão séria e entrega estável. Quero aplicar o que
+      construí sozinho em um produto real, com gente do lado.
 
 sections:
   experiencesIntro: >-
-    Experiência recente em software house no setor de seguros.
-    Hoje estou aberto a oportunidades; abaixo, o contexto e o que ficou de relevante,
-    com destaques em entregas e aprendizados.
+    Experiência recente em software house no setor de seguros (até fev/2026).
+    Abaixo, o contexto da experiência e o que ficou de relevante.
   projectsSubtitle: >-
     Projetos com deploy ou código aberto; priorizo domínio real
     e decisões de arquitetura documentadas.
@@ -63,6 +68,6 @@ sections:
 cta:
   title: "Buscando um dev backend TypeScript?"
   body: >-
-    Estou disponível para vagas júnior ou pleno inicial.
+    Estou disponível para vagas júnior.
     Vamos conversar sobre seu projeto ou produto e como posso somar ao seu time.
 ---
