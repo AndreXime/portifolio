@@ -6,37 +6,37 @@ technologies:
   - name: "TypeScript"
     role: "Primary language"
     icons: ["typescript"]
-  - name: "Node.js e Bun"
+  - name: "Node.js & Bun"
     role: "JavaScript runtimes"
     icons: ["nodedotjs", "bun"]
-  - name: "NestJS, Express e Hono"
+  - name: "NestJS, Express & Hono"
     role: "Backend frameworks"
     icons: ["nestjs", "express", "hono"]
-  - name: "REST e OpenAPI"
+  - name: "REST & OpenAPI"
     role: "APIs and documentation"
     icons: ["rest", "openapiinitiative"]
-  - name: "Next.js, Astro e Vite"
-    role: "Frontend frameworks"
-    icons: ["nextdotjs", "astro", "vite"]
-  - name: "TailwindCSS e ShadCN"
-    role: "Styling"
-    icons: ["tailwindcss", "shadcn"]
-  - name: "PostgreSQL e Redis"
+  - name: "PostgreSQL & Redis"
     role: "Databases"
     icons: ["postgresql", "redis"]
-  - name: "Git e GitHub"
+  - name: "Prisma"
+    role: "ORM"
+    icons: ["prisma"]
+  - name: "Git & GitHub"
     role: "Version control"
     icons: ["git", "github"]
-  - name: "Docker e Linux"
+  - name: "Docker & Linux"
     role: "Infrastructure"
     icons: ["docker", "linux"]
   - name: "BullMQ"
     role: "Messaging and queues"
     icons: ["bullmq"]
-  - name: "Jest e React Testing Library"
+  - name: "Jest & React Testing Library"
     role: "Testing"
     icons: ["jest", "testinglibrary"]
-  - name: "CI/CD e Cloud"
+  - name: "GitHub Actions & AWS"
     role: "Automation and deploy"
     icons: ["githubactions", "amazonaws"]
+  - name: "Next.js, Astro, Vite & Tailwind"
+    role: "Frontend frameworks"
+    icons: ["nextdotjs", "astro", "vite", "tailwindcss"]
 ---

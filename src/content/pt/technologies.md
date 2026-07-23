@@ -15,15 +15,12 @@ technologies:
   - name: "REST e OpenAPI"
     role: "APIs e documentação"
     icons: ["rest", "openapiinitiative"]
-  - name: "Next.js, Astro e Vite"
-    role: "Frameworks de frontend"
-    icons: ["nextdotjs", "astro", "vite"]
-  - name: "TailwindCSS e ShadCN"
-    role: "Estilização"
-    icons: ["tailwindcss", "shadcn"]
   - name: "PostgreSQL e Redis"
     role: "Banco de dados"
     icons: ["postgresql", "redis"]
+  - name: "Prisma"
+    role: "ORM"
+    icons: ["prisma"]
   - name: "Git e GitHub"
     role: "Versionamento"
     icons: ["git", "github"]
@@ -36,7 +33,10 @@ technologies:
   - name: "Jest e React Testing Library"
     role: "Testes"
     icons: ["jest", "testinglibrary"]
-  - name: "CI/CD e Cloud"
+  - name: "GitHub Actions e AWS"
     role: "Automação e deploy"
     icons: ["githubactions", "amazonaws"]
+  - name: "Next.js, Astro, Vite e Tailwind"
+    role: "Frameworks de frontend"
+    icons: ["nextdotjs", "astro", "vite", "tailwindcss"]
 ---
