@@ -2,7 +2,7 @@
 experiences:
   - role: "Desenvolvedor Fullstack"
     company: "Stackup Software"
-    period: "10/2025 — 02/2026"
+    period: "10/2025 - 02/2026"
     logo: "../images/logos/stackup.webp"
     summary: >-
       Atuei no ciclo de vida completo (SDLC) de um projeto de alta complexidade para o setor

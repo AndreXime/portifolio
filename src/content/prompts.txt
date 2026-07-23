@@ -31,7 +31,7 @@ Se algo não estiver no repositório, **não invente**. Omita ou descreva como l
 - Técnico e direto: decisões, trade-offs e impacto
 - Português do Brasil
 - Sem clichês ("solução inovadora", "apaixonado por tecnologia", "robusto" vazio)
-- Sem travessões (—); use vírgula, ponto ou dois-pontos
+- Sem travessões (em dash/en dash); use vírgula, ponto ou dois-pontos
 - Sem introduções longas; vá ao problema e à decisão
 - Foque em **como** a engenharia sustenta a regra de negócio (não repita o `package.json`)
 
@@ -102,7 +102,7 @@ Um ou dois parágrafos densos: arquitetura (monólito modular, monorepo, BFF, et
 
 ## Desafios de engenharia (como e por quê)
 
-- **Nome curto do desafio:** o que foi feito, como, e por que essa abordagem (2–4 linhas por bullet)
+- **Nome curto do desafio:** o que foi feito, como, e por que essa abordagem (2-4 linhas por bullet)
 - (4 a 6 bullets; cada um verificável no repo ou na doc)
 ```
 

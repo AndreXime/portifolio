@@ -189,7 +189,7 @@ function parseExperiencePeriod(period: string): {
 	startDate?: string;
 	endDate?: string;
 } {
-	const [startRaw, endRaw] = period.split(/\s*[—–-]\s*/);
+	const [startRaw, endRaw] = period.split(/\s*-\s*/);
 
 	const toYearMonth = (value: string | undefined): string | undefined => {
 		if (!value) return undefined;
