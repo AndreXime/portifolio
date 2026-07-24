@@ -3,14 +3,15 @@ import { Icon } from "astro-icon/components";
 import Container from "../ui/Container.astro";
 import AccentBar from "../ui/AccentBar.astro";
 import Reveal from "../ui/Reveal.astro";
-import type { TechnologyList } from "../../content/index";
-import type { PageContext } from "../../lib/i18n/context";
+import type { TechnologyList } from "../../lib/content";
+import { getPageContext } from "../../lib/i18n/context";
 
-interface Props extends PageContext {
+interface Props {
   technologies: TechnologyList;
 }
 
-const { ui, technologies } = Astro.props;
+const { ui } = await getPageContext(Astro.currentLocale);
+const { technologies } = Astro.props;
 
 const LOCAL_ICONS = new Set(["bullmq", "shadcn", "rest"]);
 

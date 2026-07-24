@@ -3,7 +3,7 @@ order: 98
 title: "Operação de stacks Docker no terminal: TUI local com git e Compose"
 shortDescription: "Eu construí um painel no terminal para operar vários repositórios locais: git pull, Docker Compose, status de containers e logs, sem HTTP nem autenticação. A UI é React com Ink e o backend chama git e docker no host, com path seguro sob PROJECTS_ROOT e fallback quando o Compose falha. O build gera um binário único (~1,8 MB) instalável via npm link."
 tech: ["Ink", "React", "TypeScript", "Docker Compose", "Git", "esbuild"]
-imageUrl: "../../../content/images/projects/stackctl.png"
+imageUrl: "../../../assets/projects/stackctl.png"
 github: "https://github.com/AndreXime/stackctl"
 ---
 

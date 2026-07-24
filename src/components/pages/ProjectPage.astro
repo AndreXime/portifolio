@@ -7,7 +7,7 @@ import Header from "../sections/Header.astro";
 import Footer from "../sections/Footer.astro";
 import Container from "../ui/Container.astro";
 import Button from "../ui/Button.astro";
-import { getSite, type ProjectEntry } from "../../content/index";
+import type { ProjectEntry } from "../../lib/content";
 import { buildProjectPageJsonLd } from "../../lib/portfolio-json-ld";
 import {
   getProjectsIndexPath,
@@ -15,19 +15,14 @@ import {
   projectMarkdownClasses,
 } from "../../lib/project-page";
 import { getDominantColor } from "../../lib/dominant-color";
-import { resolveLocale, t, type Locale } from "../../locales";
-import type { PageContext } from "../../lib/i18n/context";
+import { getPageContext } from "../../lib/i18n/context";
 import { homeHash, localizedPath } from "../../lib/i18n/paths";
 
 interface Props {
   project: ProjectEntry;
-  locale?: Locale;
 }
 
-const locale = resolveLocale(Astro.props.locale ?? Astro.currentLocale);
-const ui = t(locale);
-const site = await getSite(locale);
-const ctx: PageContext = { locale, ui, site };
+const { locale, ui, site } = await getPageContext(Astro.currentLocale);
 const { project } = Astro.props;
 const { Content } = await render(project);
 const liveLink = (project.data.link ?? "").trim();
@@ -67,7 +62,7 @@ const imageAlt = projectImageAlt(project, ui.projectPage.imageAlt);
     ogImageSrc: ogImage.src,
   })}
 >
-  <Header {...ctx} />
+  <Header />
   <main
     class="border-b border-border bg-background pt-28 pb-16"
     data-projects-index-href={projectsIndexPath}
@@ -202,7 +197,7 @@ const imageAlt = projectImageAlt(project, ui.projectPage.imageAlt);
       </div>
     </Container>
   </main>
-  <Footer {...ctx} />
+  <Footer />
   <script>
     import { initProjectBackFromList } from "../../scripts/project-back-from-list";
     initProjectBackFromList();

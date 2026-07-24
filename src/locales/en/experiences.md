@@ -3,7 +3,7 @@ experiences:
   - role: "Fullstack Developer"
     company: "Stackup Software"
     period: "10/2025 - 02/2026"
-    logo: "../../content/images/logos/stackup.webp"
+    logo: "../../assets/logos/stackup.webp"
     summary: >-
       I worked on the full software development lifecycle (SDLC) of a highly complex project
       for the insurance sector, with direct client interaction in requirements gathering and

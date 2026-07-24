@@ -3,7 +3,7 @@ order: 99
 title: "Gerenciador de apps Linux sob demanda: Flatpak, APT e fwupd num só app"
 shortDescription: "Eu construí o Vekt, um gerenciador de apps sob demanda para Linux que unifica Flatpak, APT e firmware (fwupd) sem daemons em background. O núcleo é Tauri 2 com backend Rust e UI Preact: o frontend só chama comandos tipados, e processos longos emitem logs e progresso em tempo real. Fora do escopo: Snap, AppImage e serviços de sistema."
 tech: ["Tauri", "Rust", "Preact", "TypeScript", "Flatpak", "APT", "fwupd"]
-imageUrl: "../../../content/images/projects/vekt.png"
+imageUrl: "../../../assets/projects/vekt.png"
 github: "https://github.com/AndreXime/vekt"
 ---
 

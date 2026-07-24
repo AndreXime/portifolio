@@ -10,28 +10,19 @@ import Projects from "../sections/Projects.astro";
 import Contact from "../sections/Contact.astro";
 import CTA from "../sections/CTA.astro";
 import Layout from "../../layouts/Layout.astro";
-import {
-  getExperiences,
-  getFormations,
-  getProjects,
-  getSite,
-  getTechnologies,
-} from "../../content/index";
 import { buildPortfolioJsonLd } from "../../lib/portfolio-json-ld";
-import { resolveLocale, t } from "../../locales";
-import type { PageContext } from "../../lib/i18n/context";
+import { getHomePageContent } from "../../lib/i18n/context";
 
-const locale = resolveLocale(Astro.currentLocale);
-const ui = t(locale);
-const [site, experiences, projects, formations, technologies] = await Promise.all([
-  getSite(locale),
-  getExperiences(locale),
-  getProjects(locale),
-  getFormations(locale),
-  getTechnologies(locale),
-]);
+const {
+  locale,
+  ui,
+  site,
+  experiences,
+  projects,
+  formations,
+  technologies,
+} = await getHomePageContent(Astro.currentLocale);
 
-const ctx: PageContext = { locale, ui, site };
 const siteOrigin = new URL("/", Astro.site).origin;
 const jsonLdLabels = {
   websiteName: ui.jsonLd.websiteName,
@@ -61,18 +52,18 @@ const jsonLd = buildPortfolioJsonLd({
   description={site.seo.description}
   jsonLd={jsonLd}
 >
-  <Header {...ctx} />
+  <Header />
   <main>
-    <Hero {...ctx} />
-    <About {...ctx} />
-    <Experiences {...ctx} experiences={experiences} />
-    <Projects {...ctx} projects={projects} />
-    <Technologies {...ctx} technologies={technologies} />
-    <Formations {...ctx} formations={formations} />
-    <Contact {...ctx} />
-    <CTA {...ctx} />
+    <Hero />
+    <About />
+    <Experiences experiences={experiences} />
+    <Projects projects={projects} />
+    <Technologies technologies={technologies} />
+    <Formations formations={formations} />
+    <Contact />
+    <CTA />
   </main>
-  <Footer {...ctx} />
+  <Footer />
   <script>
     import { initContactForm } from "../../scripts/contact-form";
     import { initExpandableList } from "../../scripts/expandable-list";

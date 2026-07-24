@@ -3,21 +3,22 @@ import Container from "../ui/Container.astro";
 import AccentBar from "../ui/AccentBar.astro";
 import Reveal from "../ui/Reveal.astro";
 import Button from "../ui/Button.astro";
-import type { ProjectEntry } from "../../content/index";
+import type { ProjectEntry } from "../../lib/content";
 import {
   getProjectPagePath,
   getProjectsIndexPath,
   projectImageAlt,
 } from "../../lib/project-page";
 import { getDominantColor } from "../../lib/dominant-color";
-import type { PageContext } from "../../lib/i18n/context";
+import { getPageContext } from "../../lib/i18n/context";
 import { Image } from "astro:assets";
 
-interface Props extends PageContext {
+interface Props {
   projects: ProjectEntry[];
 }
 
-const { locale, ui, site, projects: projectEntries } = Astro.props;
+const { locale, ui, site } = await getPageContext(Astro.currentLocale);
+const { projects: projectEntries } = Astro.props;
 
 const PROJECTS_HOME_GRID = 2;
 const featuredProject = projectEntries[0] ?? null;
