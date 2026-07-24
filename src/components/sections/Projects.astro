@@ -10,14 +10,15 @@ import {
   projectImageAlt,
 } from "../../lib/project-page";
 import { getDominantColor } from "../../lib/dominant-color";
-import type { PageContext } from "../../lib/i18n/context";
+import { getPageContext } from "../../lib/i18n/context";
 import { Image } from "astro:assets";
 
-interface Props extends PageContext {
+interface Props {
   projects: ProjectEntry[];
 }
 
-const { locale, ui, site, projects: projectEntries } = Astro.props;
+const { locale, ui, site } = await getPageContext(Astro.currentLocale);
+const { projects: projectEntries } = Astro.props;
 
 const PROJECTS_HOME_GRID = 2;
 const featuredProject = projectEntries[0] ?? null;

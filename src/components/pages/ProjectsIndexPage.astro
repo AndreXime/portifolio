@@ -8,20 +8,13 @@ import Container from "../ui/Container.astro";
 import AccentBar from "../ui/AccentBar.astro";
 import Reveal from "../ui/Reveal.astro";
 import Button from "../ui/Button.astro";
-import { getProjects, getSite } from "../../content/index";
+import { getProjects } from "../../content/index";
 import { getProjectPagePath, projectImageAlt } from "../../lib/project-page";
 import { getDominantColor } from "../../lib/dominant-color";
-import { resolveLocale, t, type Locale } from "../../locales";
-import type { PageContext } from "../../lib/i18n/context";
+import { getPageContext } from "../../lib/i18n/context";
 import { homeHash } from "../../lib/i18n/paths";
 
-interface Props {
-  locale?: Locale;
-}
-
-const locale = resolveLocale(Astro.props.locale ?? Astro.currentLocale);
-const ui = t(locale);
-const site = await getSite(locale);
+const { locale, ui, site } = await getPageContext(Astro.currentLocale);
 const projects = await getProjects(locale);
 const projectsWithColor = await Promise.all(
   projects.map(async (project) => ({
@@ -29,7 +22,6 @@ const projectsWithColor = await Promise.all(
     dominantColor: await getDominantColor(project.data.imageUrl),
   })),
 );
-const ctx: PageContext = { locale, ui, site };
 const homeHref = homeHash(locale, "inicio");
 ---
 
@@ -39,7 +31,7 @@ const homeHref = homeHash(locale, "inicio");
   title={`${ui.projectsIndex.title} | ${site.authorName}`}
   description={ui.projectsIndex.seoDescription}
 >
-  <Header {...ctx} />
+  <Header />
   <main class="border-b border-border bg-background pt-28 pb-16">
     <Container>
       <a
@@ -138,7 +130,7 @@ const homeHref = homeHash(locale, "inicio");
       </ul>
     </Container>
   </main>
-  <Footer {...ctx} />
+  <Footer />
   <script>
     import { initReveal } from "../../scripts/reveal-observer";
     initReveal();

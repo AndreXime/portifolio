@@ -8,11 +8,11 @@ export async function getStaticPaths() {
 
   return projectEntries.map((project) => ({
     params: { slug: project.slug },
-    props: { project, locale: "pt" as const },
+    props: { project },
   }));
 }
 
-const { project, locale } = Astro.props;
+const { project } = Astro.props;
 ---
 
-<ProjectPage project={project} locale={locale} />
+<ProjectPage project={project} />

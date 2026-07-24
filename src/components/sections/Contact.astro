@@ -5,11 +5,9 @@ import Reveal from "../ui/Reveal.astro";
 import Button from "../ui/Button.astro";
 import Input from "../ui/Input.astro";
 import { Icon } from "astro-icon/components";
-import type { PageContext } from "../../lib/i18n/context";
+import { getPageContext } from "../../lib/i18n/context";
 
-type Props = PageContext;
-
-const { locale, ui, site } = Astro.props;
+const { locale, ui, site } = await getPageContext(Astro.currentLocale);
 
 const mailto = `mailto:${site.email}?subject=${encodeURIComponent(ui.contact.mailSubject)}`;
 ---

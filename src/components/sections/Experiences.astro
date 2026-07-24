@@ -4,13 +4,14 @@ import AccentBar from "../ui/AccentBar.astro";
 import Reveal from "../ui/Reveal.astro";
 import { Image } from "astro:assets";
 import type { ExperienceList } from "../../content/index";
-import type { PageContext } from "../../lib/i18n/context";
+import { getPageContext } from "../../lib/i18n/context";
 
-interface Props extends PageContext {
+interface Props {
   experiences: ExperienceList;
 }
 
-const { ui, site, experiences } = Astro.props;
+const { ui, site } = await getPageContext(Astro.currentLocale);
+const { experiences } = Astro.props;
 ---
 
 <section

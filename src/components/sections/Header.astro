@@ -4,12 +4,10 @@ import Button from "../ui/Button.astro";
 import LocaleSwitch from "../ui/LocaleSwitch.astro";
 import { Icon } from "astro-icon/components";
 import { PREFERRED_LOCALE_COOKIE } from "../../lib/i18n/locale";
-import type { PageContext } from "../../lib/i18n/context";
+import { getPageContext } from "../../lib/i18n/context";
 import { homeHash } from "../../lib/i18n/paths";
 
-type Props = PageContext;
-
-const { locale, ui, site } = Astro.props;
+const { locale, ui, site } = await getPageContext(Astro.currentLocale);
 
 const links = [
   { hash: "sobre", section: "sobre", label: ui.nav.about },
