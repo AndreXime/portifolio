@@ -1,9 +1,8 @@
-import { isLocale, type Locale } from "./locale";
-import { en } from "./locales/en";
-import { pt } from "./locales/pt";
+import { isLocale, type Locale } from "../lib/i18n/locale";
+import { en } from "./en/ui";
+import { pt } from "./pt/ui";
 
-export type { Locale } from "./locale";
-export { isLocale, PREFERRED_LOCALE_COOKIE } from "./locale";
+export type { Locale } from "../lib/i18n/locale";
 
 export const defaultLocale: Locale = "pt";
 export const locales: Locale[] = ["pt", "en"];

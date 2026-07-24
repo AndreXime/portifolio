@@ -1,5 +1,5 @@
 import { next } from "@vercel/functions";
-import { isLocale, PREFERRED_LOCALE_COOKIE } from "./src/i18n/locale";
+import { isLocale, PREFERRED_LOCALE_COOKIE } from "./src/lib/i18n/locale";
 
 export const config = {
 	matcher: "/",

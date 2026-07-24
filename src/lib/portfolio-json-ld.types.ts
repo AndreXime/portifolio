@@ -1,4 +1,4 @@
-import type { Locale } from "../i18n";
+import type { Locale } from "./i18n/locale";
 
 export interface Experience {
 	role: string;

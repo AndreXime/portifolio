@@ -11,9 +11,9 @@ import Button from "../ui/Button.astro";
 import { getProjects, getSite } from "../../content/index";
 import { getProjectPagePath, projectImageAlt } from "../../lib/project-page";
 import { getDominantColor } from "../../lib/dominant-color";
-import { resolveLocale, t, type Locale } from "../../i18n";
-import type { PageContext } from "../../i18n/context";
-import { homeHash } from "../../i18n/paths";
+import { resolveLocale, t, type Locale } from "../../locales";
+import type { PageContext } from "../../lib/i18n/context";
+import { homeHash } from "../../lib/i18n/paths";
 
 interface Props {
   locale?: Locale;

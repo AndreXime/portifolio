@@ -2,7 +2,7 @@ import { getSecret } from "astro:env/server";
 import type { APIRoute } from "astro";
 import { z } from "astro/zod";
 import nodemailer from "nodemailer";
-import { resolveLocale } from "../../i18n";
+import { resolveLocale } from "../../locales";
 
 export const prerender = false;
 

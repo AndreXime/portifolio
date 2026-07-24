@@ -3,9 +3,9 @@ import Container from "../ui/Container.astro";
 import Button from "../ui/Button.astro";
 import LocaleSwitch from "../ui/LocaleSwitch.astro";
 import { Icon } from "astro-icon/components";
-import { PREFERRED_LOCALE_COOKIE } from "../../i18n";
-import type { PageContext } from "../../i18n/context";
-import { homeHash } from "../../i18n/paths";
+import { PREFERRED_LOCALE_COOKIE } from "../../lib/i18n/locale";
+import type { PageContext } from "../../lib/i18n/context";
+import { homeHash } from "../../lib/i18n/paths";
 
 type Props = PageContext;
 

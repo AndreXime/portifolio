@@ -46,7 +46,7 @@ const portfolioSchema = z.object({
 const portfolio = defineCollection({
 	loader: glob({
 		pattern: "*/portfolio.md",
-		base: "./src/content",
+		base: "./src/locales",
 		generateId: ({ entry }) => entry.replace(/\/portfolio\.md$/, ""),
 	}),
 	schema: portfolioSchema,
@@ -55,7 +55,7 @@ const portfolio = defineCollection({
 const experiences = defineCollection({
 	loader: glob({
 		pattern: "*/experiences.md",
-		base: "./src/content",
+		base: "./src/locales",
 		generateId: ({ entry }) => entry.replace(/\/experiences\.md$/, ""),
 	}),
 	schema: ({ image }) =>
@@ -76,7 +76,7 @@ const experiences = defineCollection({
 const formations = defineCollection({
 	loader: glob({
 		pattern: "*/formations.md",
-		base: "./src/content",
+		base: "./src/locales",
 		generateId: ({ entry }) => entry.replace(/\/formations\.md$/, ""),
 	}),
 	schema: ({ image }) =>
@@ -98,7 +98,7 @@ const formations = defineCollection({
 const technologies = defineCollection({
 	loader: glob({
 		pattern: "*/technologies.md",
-		base: "./src/content",
+		base: "./src/locales",
 		generateId: ({ entry }) => entry.replace(/\/technologies\.md$/, ""),
 	}),
 	schema: z.object({
@@ -115,7 +115,7 @@ const technologies = defineCollection({
 const projects = defineCollection({
 	loader: glob({
 		pattern: "*/projects/*.md",
-		base: "./src/content",
+		base: "./src/locales",
 		generateId: ({ entry }) => {
 			const withoutExt = entry.replace(/\.md$/, "");
 			const [locale, , slug] = withoutExt.split("/");
