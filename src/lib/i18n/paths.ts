@@ -1,5 +1,5 @@
 import { getAbsoluteLocaleUrl, getRelativeLocaleUrl } from "astro:i18n";
-import type { Locale } from "./index";
+import type { Locale } from "./locale";
 
 /** Converte `/projetos/x` em `projetos/x`; home vira `undefined` (API do Astro). */
 function asRoutePath(path: string): string | undefined {

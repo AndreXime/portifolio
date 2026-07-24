@@ -1,5 +1,5 @@
-import type { Locale } from "../i18n";
-import { homeHash, localizedPath } from "../i18n/paths";
+import type { Locale } from "./i18n/locale";
+import { homeHash, localizedPath } from "./i18n/paths";
 
 interface ProjectImageAltInput {
 	data: {

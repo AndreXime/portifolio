@@ -3,8 +3,8 @@ order: 0
 title: "Plataforma de recrutamento multi-tenant: do site de carreiras ao pipeline auditável"
 shortDescription: "Construí um ATS multi-tenant de ponta a ponta em TypeScript, com NestJS na API e Next.js (React) no produto: empresas operam em isolamento lógico por tenant, enquanto o candidato mantém um perfil único que atravessa todas as candidaturas. O diferencial técnico está na combinação de máquinas de estado explícitas (vagas e candidaturas), pipeline customizável por vaga com auditoria, e uma segunda linha de defesa no acesso a dados via contexto de tenant e extensão do Prisma sobre PostgreSQL, além de upload direto para armazenamento objeto com URLs pré-assinadas e validação de domínio nos use cases."
 tech: ["TypeScript", "NestJS", "Next.js", "Prisma", "PostgreSQL", "Zod"]
-imageUrl: "../../images/projects/deploy-talent.png"
-featuredImageUrl: "../../images/projects/deploy-talent-mobile.png"
+imageUrl: "../../../content/images/projects/deploy-talent.png"
+featuredImageUrl: "../../../content/images/projects/deploy-talent-mobile.png"
 link: "https://deploy-talent.andreximenes.xyz"
 github: "https://github.com/AndreXime/deploy-talent"
 ---

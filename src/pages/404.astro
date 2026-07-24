@@ -3,8 +3,8 @@ import MainLayout from "@/layouts/Layout.astro";
 import Container from "@/components/ui/Container.astro";
 import Button from "@/components/ui/Button.astro";
 import { getSite } from "../content/index";
-import { resolveLocale, t } from "../i18n";
-import { localizedPath } from "../i18n/paths";
+import { resolveLocale, t } from "../locales";
+import { localizedPath } from "../lib/i18n/paths";
 import "../styles/global.css";
 
 const locale = resolveLocale(Astro.currentLocale);

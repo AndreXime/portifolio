@@ -18,8 +18,8 @@ import {
   getTechnologies,
 } from "../../content/index";
 import { buildPortfolioJsonLd } from "../../lib/portfolio-json-ld";
-import { resolveLocale, t } from "../../i18n";
-import type { PageContext } from "../../i18n/context";
+import { resolveLocale, t } from "../../locales";
+import type { PageContext } from "../../lib/i18n/context";
 
 const locale = resolveLocale(Astro.currentLocale);
 const ui = t(locale);

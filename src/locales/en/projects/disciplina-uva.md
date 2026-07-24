@@ -3,7 +3,7 @@ order: 4
 title: "UVA academic planning: progress, timetable, and conflicts in the browser"
 shortDescription: "I built an academic organizer for Computer Science at UVA: progress, flowchart, weekly timetable, and planner without relying on spreadsheets. The React and Vite SPA embeds the curriculum via CSV validated at build time and persists multiple profiles in the browser with Zustand. It runs client-only; updating the official curriculum requires a rebuild."
 tech: ["React", "Vite", "Zustand", "TypeScript", "Tailwind CSS", "React Flow"]
-imageUrl: "../../images/projects/disciplina-uva.png"
+imageUrl: "../../../content/images/projects/disciplina-uva.png"
 link: "https://disciplina-uva.andreximenes.xyz/"
 github: "https://github.com/AndreXime/organiza-cc-uva"
 ---
