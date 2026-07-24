@@ -37,7 +37,7 @@ const {
   title = siteContent.seo.title,
   description = siteContent.seo.description,
   ogImageAlt = siteContent.seo.ogImageAlt,
-  ogImage = "/og-image.png",
+  ogImage = locale === "en" ? "/og-image-en.png" : "/og-image.png",
   jsonLd = {},
 } = Astro.props;
 

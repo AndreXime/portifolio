@@ -14,6 +14,17 @@ seo:
     Production projects and open source.
   ogImageAlt: "André Ximenes, TypeScript backend developer specializing in APIs"
 
+ogImage:
+  eyebrow: "Portfolio"
+  titlePrefix: "TypeScript"
+  titleAccent: "Backend Developer"
+  description: >-
+    Specialized in designing and building modular, efficient, and
+    self-documented APIs. I apply solid architectural practices to
+    deliver secure, scalable, and maintainable solutions. I combine
+    technical vision and clear communication to build high-performance
+    products alongside the team.
+
 person:
   fullName: "André Ricardo Ximenes Aragão"
   jobTitle: "TypeScript Backend Developer"

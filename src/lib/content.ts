@@ -21,6 +21,7 @@ export async function getSite(locale: Locale) {
 		blogUrl: portfolio.blogUrl,
 		resumePdfUrl: portfolio.resumePdfUrl,
 		seo: portfolio.seo,
+		ogImage: portfolio.ogImage,
 		person: portfolio.person,
 		hero: portfolio.hero,
 		about: portfolio.about,

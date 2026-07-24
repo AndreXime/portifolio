@@ -1,0 +1,110 @@
+---
+import "../../styles/fonts";
+import "../../styles/global.css";
+import AccentBar from "../ui/AccentBar.astro";
+import Container from "../ui/Container.astro";
+import { getPageContext } from "../../lib/i18n/context";
+import { htmlLang } from "../../locales";
+
+const { locale, ui, site } = await getPageContext(Astro.currentLocale);
+const { hero, ogImage } = site;
+---
+
+<!doctype html>
+<html lang={htmlLang(locale)}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="robots" content="noindex" />
+    <style is:inline>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        width: 1200px;
+        height: 630px;
+        overflow: hidden;
+        box-sizing: border-box;
+      }
+    </style>
+  </head>
+  <body class="bg-background antialiased">
+    <section class="h-full">
+      <Container class="flex h-full flex-col justify-between py-8">
+        <div>
+          <p
+            class="font-mono text-2xl uppercase tracking-[0.14em] text-muted-foreground"
+          >
+            {ogImage.eyebrow}
+          </p>
+          <AccentBar class="my-5" />
+          <h1
+            class="font-display text-8xl font-semibold leading-[1.1] tracking-tight text-foreground"
+          >
+            {site.authorName}
+          </h1>
+          <h2
+            class="font-display mt-2 text-6xl font-semibold leading-[1.1] tracking-tight text-foreground"
+          >
+            {ogImage.titlePrefix}{" "}
+            <em
+              class="text-accent not-italic underline decoration-accent decoration-2 underline-offset-[0.12em]"
+            >
+              {ogImage.titleAccent}
+            </em>
+          </h2>
+
+          <p
+            class="mt-2 max-w-4xl py-5 text-2xl leading-[1.5] text-foreground-variant"
+          >
+            {ogImage.description}
+          </p>
+        </div>
+
+        <dl
+          class="grid grid-cols-4 gap-6 border-t border-border pt-6 text-base"
+        >
+          <div>
+            <dt
+              class="font-mono uppercase tracking-[0.12em] text-muted-foreground"
+            >
+              {ui.hero.stack}
+            </dt>
+            <dd class="mt-2 font-mono text-foreground">
+              {hero.stackLine}
+            </dd>
+          </div>
+          <div>
+            <dt
+              class="font-mono uppercase tracking-[0.12em] text-muted-foreground"
+            >
+              {hero.availabilityLabel}
+            </dt>
+            <dd class="mt-2 font-mono text-foreground">
+              {hero.availabilityValue}
+            </dd>
+          </div>
+          <div>
+            <dt
+              class="font-mono uppercase tracking-[0.12em] text-muted-foreground"
+            >
+              {ui.hero.location}
+            </dt>
+            <dd class="mt-2 font-mono text-foreground">
+              {hero.locationValue}
+            </dd>
+          </div>
+          <div>
+            <dt
+              class="font-mono text-sm uppercase tracking-[0.12em] text-muted-foreground"
+            >
+              {ui.nav.contact}
+            </dt>
+            <dd class="mt-2 font-mono text-base text-foreground">
+              {site.email}
+            </dd>
+          </div>
+        </dl>
+      </Container>
+    </section>
+  </body>
+</html>

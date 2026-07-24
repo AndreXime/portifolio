@@ -14,6 +14,12 @@ const portfolioSchema = z.object({
 		description: z.string(),
 		ogImageAlt: z.string(),
 	}),
+	ogImage: z.object({
+		eyebrow: z.string(),
+		titlePrefix: z.string(),
+		titleAccent: z.string(),
+		description: z.string(),
+	}),
 	person: z.object({
 		fullName: z.string(),
 		jobTitle: z.string(),
