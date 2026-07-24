@@ -3,19 +3,38 @@ import MainLayout from "@/layouts/Layout.astro";
 import Container from "@/components/ui/Container.astro";
 import Button from "@/components/ui/Button.astro";
 import { getSite } from "../lib/content";
+import { isLocale } from "../lib/i18n/locale";
 import { resolveLocale, t } from "../locales";
 import { localizedPath } from "../lib/i18n/paths";
 import "../styles/global.css";
 
-const locale = resolveLocale(Astro.currentLocale);
+// Em static, o host serve um único 404.html (defaultLocale). SSR permite
+// ler o pathname da request e devolver o idioma certo em produção.
+export const prerender = false;
+
+function localeFromPathname(pathname: string): string | undefined {
+  const firstSegment = pathname.split("/").filter(Boolean)[0];
+  if (firstSegment && isLocale(firstSegment)) {
+    return firstSegment;
+  }
+  return undefined;
+}
+
+const locale = resolveLocale(
+  localeFromPathname(Astro.url.pathname) ?? Astro.currentLocale,
+);
 const ui = t(locale);
 const site = await getSite(locale);
 ---
 
 <MainLayout robots="noindex, nofollow" locale={locale} site={site}>
-  <main class="flex min-h-screen items-center border-b border-border bg-background py-24">
+  <main
+    class="flex min-h-screen items-center border-b border-border bg-background py-24"
+  >
     <Container>
-      <p class="font-mono text-xs uppercase tracking-[0.12em] text-muted-foreground">
+      <p
+        class="font-mono text-xs uppercase tracking-[0.12em] text-muted-foreground"
+      >
         {ui.notFound.code}
       </p>
       <h1
@@ -23,7 +42,9 @@ const site = await getSite(locale);
       >
         {ui.notFound.title}
       </h1>
-      <p class="mt-6 max-w-lg text-base leading-[1.7] text-foreground-variant md:text-lg">
+      <p
+        class="mt-6 max-w-lg text-base leading-[1.7] text-foreground-variant md:text-lg"
+      >
         {ui.notFound.body}
       </p>
       <div class="mt-10">
