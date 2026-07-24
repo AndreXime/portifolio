@@ -3,7 +3,7 @@ order: 4
 title: "Planejamento acadêmico da UVA: progresso, grade e conflitos no navegador"
 shortDescription: "Eu construí um organizador acadêmico para Ciência da Computação na UVA: progresso, fluxograma, grade semanal e planejador sem depender de planilhas. A SPA em React e Vite embute a grade via CSV validado no build e persiste múltiplos perfis no navegador com Zustand. Roda só no cliente; atualizar a grade oficial exige rebuild."
 tech: ["React", "Vite", "Zustand", "TypeScript", "Tailwind CSS", "React Flow"]
-imageUrl: "../../../content/images/projects/disciplina-uva.png"
+imageUrl: "../../../assets/projects/disciplina-uva.png"
 link: "https://disciplina-uva.andreximenes.xyz/"
 github: "https://github.com/AndreXime/organiza-cc-uva"
 ---

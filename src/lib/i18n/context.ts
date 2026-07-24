@@ -1,3 +1,4 @@
+import { type Dictionary, resolveLocale, t } from "../../locales";
 import {
 	type ExperienceList,
 	type FormationList,
@@ -9,8 +10,7 @@ import {
 	type ProjectEntry,
 	type SiteContent,
 	type TechnologyList,
-} from "../../content/index";
-import { type Dictionary, resolveLocale, t } from "../../locales";
+} from "../content";
 import type { Locale } from "./locale";
 
 export interface PageContext {
