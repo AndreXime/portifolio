@@ -47,7 +47,7 @@ hero:
 
 about:
   photoAlt: "André Ximenes, desenvolvedor backend"
-  quote: "Gosto quando o TypeScript me contradiz antes do usuário. Prefiro erro de tipagem na build a surpresa em produção."
+  quote: "Prefiro quando o TypeScript reclama antes do usuário. Melhor erros na build do que surpresa em produção."
   paragraphs:
     - >-
       Depois de atuar como fullstack, acabei preferindo o lado do servidor: modelar domínio,
@@ -63,10 +63,7 @@ about:
       priorizar mudanças que reduzam risco em produção e deixem o próximo passo do time
       mais seguro.
     - >-
-      Desde o fim do contrato priorizei projetos próprios em <strong>backend TypeScript</strong>
-      (multi-tenant, ecommerce, RAG local) e formação contínua. Busco uma vaga júnior em time
-      que valorize código legível, revisão séria e entrega estável. Quero aplicar o que
-      construí sozinho em um produto real, com gente do lado.
+      Desde o fim do contrato priorizei projetos próprios e formações. Busco uma vaga júnior em time que valorize código legível, revisão séria e entrega estável. Quero aplicar o que construí sozinho em um produto real, com gente do lado.
 
 sections:
   experiencesIntro: >-

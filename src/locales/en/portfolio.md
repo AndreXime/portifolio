@@ -47,7 +47,7 @@ hero:
 
 about:
   photoAlt: "André Ximenes, backend developer"
-  quote: "I like when TypeScript argues with me before the user does. I prefer a type error at build time to a surprise in production."
+  quote: "I prefer when TypeScript complains before the user does. Better errors at build time than surprises in production."
   paragraphs:
     - >-
       After working fullstack, I leaned into the server side: domain modeling, typed contracts,
@@ -61,8 +61,7 @@ about:
       out of the main API path, and technical decisions under deadline. I learned to favor
       changes that lower production risk and make the team’s next step safer.
     - >-
-      Since that contract ended I have prioritized my own <strong>TypeScript backend</strong>
-      projects (multi-tenant, ecommerce, local RAG) and ongoing training. I am looking for a
+      Since that contract ended I have prioritized my own projects and training. I am looking for a
       junior role on a team that values readable code, serious review, and steady delivery.
       I want to apply what I built on my own inside a real product, alongside other people.
 
