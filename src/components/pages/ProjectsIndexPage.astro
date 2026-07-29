@@ -8,21 +8,67 @@ import Container from "../ui/Container.astro";
 import AccentBar from "../ui/AccentBar.astro";
 import Reveal from "../ui/Reveal.astro";
 import Button from "../ui/Button.astro";
-import { getProjects } from "../../lib/content";
+import { getProjects, type ProjectEntry } from "../../lib/content";
 import { getProjectPagePath, projectImageAlt } from "../../lib/project-page";
 import { getDominantColor } from "../../lib/dominant-color";
 import { getPageContext } from "../../lib/i18n/context";
 import { homeHash } from "../../lib/i18n/paths";
 
+interface ProjectWithColor {
+  project: ProjectEntry;
+  dominantColor: string;
+}
+
 const { locale, ui, site } = await getPageContext(Astro.currentLocale);
 const projects = await getProjects(locale);
-const projectsWithColor = await Promise.all(
-  projects.map(async (project) => ({
-    project,
-    dominantColor: await getDominantColor(project.data.imageUrl),
-  })),
-);
+
+const mainProjects = projects.filter((project) => !project.data.experimental);
+const experimentalProjects = projects.filter((project) => project.data.experimental);
+
+async function withDominantColor(entries: ProjectEntry[]): Promise<ProjectWithColor[]> {
+  return Promise.all(
+    entries.map(async (project) => ({
+      project,
+      dominantColor: await getDominantColor(project.data.imageUrl),
+    })),
+  );
+}
+
+const [mainWithColor, experimentalWithColor] = await Promise.all([
+  withDominantColor(mainProjects),
+  withDominantColor(experimentalProjects),
+]);
+
 const homeHref = homeHash(locale, "inicio");
+
+const sections = [
+  {
+    key: "main",
+    title: null as string | null,
+    subtitle: null as string | null,
+    headingId: null as string | null,
+    items: mainWithColor,
+    accentTop: true,
+  },
+  {
+    key: "experimental",
+    title: ui.projectsIndex.experimentalTitle,
+    subtitle: ui.projectsIndex.experimentalSubtitle,
+    headingId: "experimental-projects-heading",
+    items: experimentalWithColor,
+    accentTop: false,
+  },
+].filter((section) => section.items.length > 0);
+
+let revealCursor = 0;
+const sectionsWithReveal = sections.map((section) => {
+  const items = section.items.map((item) => {
+    const revealIndex = revealCursor;
+    revealCursor += 1;
+    return { ...item, revealIndex };
+  });
+  return { ...section, items };
+});
 ---
 
 <Layout
@@ -61,73 +107,122 @@ const homeHref = homeHash(locale, "inicio");
         </p>
       </div>
 
-      <ul class="mt-14 list-none grid grid-cols-1 gap-10 lg:mt-16 lg:gap-14">
-        {
-          projectsWithColor.map(({ project, dominantColor }, index) => (
-            <li class="min-h-0 w-full">
-              <Reveal staggerMs={index * 60} class="h-full min-h-0 w-full">
-                <article class="group/card flex h-full w-full flex-col border-t border-accent pt-8">
-                  <a
-                    href={getProjectPagePath(project.slug, locale, {
-                      fromList: true,
-                    })}
-                    class="relative block w-full aspect-[5/2] overflow-hidden border border-border"
-                    style={`background-color: ${dominantColor}`}
-                  >
-                    <Image
-                      src={project.data.imageUrl}
-                      alt={projectImageAlt(project, ui.projectPage.imageAlt)}
-                      width={project.data.imageUrl.width}
-                      height={project.data.imageUrl.height}
-                      sizes="100vw"
-                      class="relative z-10 h-full w-full object-contain transition-transform duration-300 ease-out group-hover/card:scale-[1.02]"
-                      loading={index < 2 ? "eager" : "lazy"}
-                      decoding="async"
-                    />
-                  </a>
-                  <div class="flex flex-1 flex-col pt-6">
-                    <h2 class="font-display text-xl font-semibold text-foreground md:text-2xl">
+      {
+        sectionsWithReveal.map((section, sectionIndex) => (
+          <section
+            class:list={[
+              sectionIndex > 0 && "mt-20 border-t border-border pt-16 lg:mt-24 lg:pt-20",
+            ]}
+            aria-labelledby={section.headingId ?? undefined}
+          >
+            {section.title && section.headingId && (
+              <div class="max-w-3xl">
+                <AccentBar class="mb-6" />
+                <h2
+                  id={section.headingId}
+                  class="font-display text-2xl font-semibold leading-tight tracking-tight text-foreground sm:text-3xl md:text-4xl"
+                >
+                  {section.title}
+                </h2>
+                {section.subtitle && (
+                  <p class="mt-4 font-mono text-xs uppercase tracking-[0.12em] text-muted-foreground">
+                    {section.subtitle}
+                  </p>
+                )}
+              </div>
+            )}
+
+            <ul
+              class:list={[
+                "list-none grid grid-cols-1 gap-10 lg:gap-14",
+                section.title ? "mt-14" : "mt-14 lg:mt-16",
+              ]}
+            >
+              {section.items.map(({ project, dominantColor, revealIndex }) => (
+                <li class="min-h-0 w-full">
+                  <Reveal staggerMs={revealIndex * 60} class="h-full min-h-0 w-full">
+                    <article
+                      class:list={[
+                        "group/card flex h-full w-full flex-col border-t pt-8",
+                        section.accentTop ? "border-accent" : "border-border",
+                      ]}
+                    >
                       <a
                         href={getProjectPagePath(project.slug, locale, {
                           fromList: true,
                         })}
-                        class="transition-colors duration-150 hover:text-accent focus-ring"
+                        class="relative block w-full aspect-[5/2] overflow-hidden border border-border"
+                        style={`background-color: ${dominantColor}`}
                       >
-                        {project.data.title}
+                        <Image
+                          src={project.data.imageUrl}
+                          alt={projectImageAlt(project, ui.projectPage.imageAlt)}
+                          width={project.data.imageUrl.width}
+                          height={project.data.imageUrl.height}
+                          sizes="100vw"
+                          class="relative z-10 h-full w-full object-contain transition-transform duration-300 ease-out group-hover/card:scale-[1.02]"
+                          loading={revealIndex < 2 ? "eager" : "lazy"}
+                          decoding="async"
+                        />
                       </a>
-                    </h2>
-                    <p class="mt-4 flex-1 text-sm leading-relaxed text-foreground-variant md:text-base">
-                      {project.data.shortDescription}
-                    </p>
-                    <ul
-                      class="mt-6 flex flex-wrap gap-2"
-                      aria-label={ui.projects.stackAria}
-                    >
-                      {project.data.tech.map((tech) => (
-                        <li class="border border-border px-2 py-1 font-mono text-[10px] uppercase tracking-[0.08em] text-muted-foreground">
-                          {tech}
-                        </li>
-                      ))}
-                    </ul>
-                    <div class="mt-6">
-                      <Button
-                        href={getProjectPagePath(project.slug, locale, {
-                          fromList: true,
-                        })}
-                        variant="secondary"
-                        showArrow
-                        class="w-full justify-center"
-                      >
-                        {ui.projects.viewDetails}
-                      </Button>
-                    </div>
-                  </div>
-                </article>
-              </Reveal>
-            </li>
-          ))
-        }
-      </ul>
+                      <div class="flex flex-1 flex-col pt-6">
+                        {section.key === "experimental" ? (
+                          <h3 class="font-display text-xl font-semibold text-foreground md:text-2xl">
+                            <a
+                              href={getProjectPagePath(project.slug, locale, {
+                                fromList: true,
+                              })}
+                              class="transition-colors duration-150 hover:text-accent focus-ring"
+                            >
+                              {project.data.title}
+                            </a>
+                          </h3>
+                        ) : (
+                          <h2 class="font-display text-xl font-semibold text-foreground md:text-2xl">
+                            <a
+                              href={getProjectPagePath(project.slug, locale, {
+                                fromList: true,
+                              })}
+                              class="transition-colors duration-150 hover:text-accent focus-ring"
+                            >
+                              {project.data.title}
+                            </a>
+                          </h2>
+                        )}
+                        <p class="mt-4 flex-1 text-sm leading-relaxed text-foreground-variant md:text-base">
+                          {project.data.shortDescription}
+                        </p>
+                        <ul
+                          class="mt-6 flex flex-wrap gap-2"
+                          aria-label={ui.projects.stackAria}
+                        >
+                          {project.data.tech.map((tech) => (
+                            <li class="border border-border px-2 py-1 font-mono text-[10px] uppercase tracking-[0.08em] text-muted-foreground">
+                              {tech}
+                            </li>
+                          ))}
+                        </ul>
+                        <div class="mt-6">
+                          <Button
+                            href={getProjectPagePath(project.slug, locale, {
+                              fromList: true,
+                            })}
+                            variant="secondary"
+                            showArrow
+                            class="w-full justify-center"
+                          >
+                            {ui.projects.viewDetails}
+                          </Button>
+                        </div>
+                      </div>
+                    </article>
+                  </Reveal>
+                </li>
+              ))}
+            </ul>
+          </section>
+        ))
+      }
     </Container>
   </main>
   <Footer />

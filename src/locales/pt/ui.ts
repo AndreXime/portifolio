@@ -38,6 +38,8 @@ export const pt = {
 		subtitle: "Todos os trabalhos em detalhe",
 		seoDescription: "Lista completa de projetos do portfólio de André Ximenes.",
 		backHome: "Voltar ao início",
+		experimentalTitle: "Experimentais",
+		experimentalSubtitle: "Protótipos, ferramentas e experimentos técnicos",
 	},
 	technologies: {
 		title: "Tecnologias",

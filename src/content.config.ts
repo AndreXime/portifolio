@@ -138,6 +138,7 @@ const projects = defineCollection({
 			featuredImageUrl: image().optional(),
 			link: z.string().optional(),
 			github: z.string(),
+			experimental: z.boolean().default(false),
 		}),
 });
 

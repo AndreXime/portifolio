@@ -1,5 +1,6 @@
 ---
 order: 99
+experimental: true
 title: "On-demand Linux app manager: Flatpak, APT, and fwupd in one app"
 shortDescription: "I built Vekt, an on-demand Linux app manager that unifies Flatpak, APT, and firmware (fwupd) with no background daemons. The core is Tauri 2 with a Rust backend and Preact UI: the frontend only calls typed commands, and long-running processes emit logs and progress in real time. Out of scope: Snap, AppImage, and system services."
 tech: ["Tauri", "Rust", "Preact", "TypeScript", "Flatpak", "APT", "fwupd"]
