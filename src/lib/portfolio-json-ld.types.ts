@@ -13,7 +13,7 @@ export interface ProjectEntry {
 	data: {
 		title: string;
 		shortDescription: string;
-		github: string;
+		github?: string | undefined;
 		tech: string[];
 		imageUrl: { src: string };
 		link?: string | undefined;

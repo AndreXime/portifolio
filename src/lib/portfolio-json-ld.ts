@@ -113,8 +113,9 @@ export function buildProjectPageJsonLd(input: ProjectPageJsonLdInput) {
 	const homeUrl = localeHomeUrl(input.site, input.locale);
 	const projectsUrl = getProjectsIndexUrl(input.site, input.locale);
 	const liveUrl = input.project.data.link?.trim();
+	const githubUrl = input.project.data.github?.trim();
 	const personId = schemaId(input.site, "person");
-	const sameAs = [input.project.data.github, ...(liveUrl ? [liveUrl] : [])];
+	const sameAs = [...(githubUrl ? [githubUrl] : []), ...(liveUrl ? [liveUrl] : [])];
 
 	const software: JsonLdNode = {
 		"@type": "SoftwareSourceCode",
@@ -122,7 +123,7 @@ export function buildProjectPageJsonLd(input: ProjectPageJsonLdInput) {
 		url: pageUrl,
 		name: input.project.data.title,
 		description: input.project.data.shortDescription,
-		codeRepository: input.project.data.github,
+		...(githubUrl ? { codeRepository: githubUrl } : {}),
 		programmingLanguage: input.project.data.tech,
 		keywords: input.project.data.tech.join(", "),
 		image: new URL(input.ogImageSrc, input.site).href,
@@ -231,7 +232,8 @@ function buildProjectNodes(site: string, locale: Locale, projects: ProjectEntry[
 	return projects.map((project) => {
 		const pageUrl = getProjectPageUrl(site, project.id, locale);
 		const liveUrl = project.data.link?.trim();
-		const sameAs = [project.data.github, ...(liveUrl ? [liveUrl] : [])];
+		const githubUrl = project.data.github?.trim();
+		const sameAs = [...(githubUrl ? [githubUrl] : []), ...(liveUrl ? [liveUrl] : [])];
 
 		return {
 			"@type": "SoftwareSourceCode",
@@ -239,7 +241,7 @@ function buildProjectNodes(site: string, locale: Locale, projects: ProjectEntry[
 			url: pageUrl,
 			name: project.data.title,
 			description: project.data.shortDescription,
-			codeRepository: project.data.github,
+			...(githubUrl ? { codeRepository: githubUrl } : {}),
 			programmingLanguage: project.data.tech,
 			keywords: project.data.tech.join(", "),
 			image: new URL(project.data.imageUrl.src, site).href,

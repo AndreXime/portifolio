@@ -26,6 +26,7 @@ const { locale, ui, site } = await getPageContext(Astro.currentLocale);
 const { project } = Astro.props;
 const { Content } = await render(project);
 const liveLink = (project.data.link ?? "").trim();
+const githubLink = (project.data.github ?? "").trim();
 const projectsHash = homeHash(locale, "projetos");
 const projectsIndexPath = getProjectsIndexPath(locale);
 const homePath = localizedPath(locale, "/");
@@ -139,33 +140,41 @@ const imageAlt = projectImageAlt(project, ui.projectPage.imageAlt);
         </p>
       </header>
 
-      <div
-        class:list={[
-          "mt-8 grid w-full gap-3",
-          liveLink ? "grid-cols-1 sm:grid-cols-2" : "grid-cols-1",
-        ]}
-      >
-        {
-          liveLink && (
-            <Button
-              href={liveLink}
-              variant="primary"
-              showArrow
-              class="w-full justify-center"
-            >
-              {ui.projectPage.viewLive}
-            </Button>
-          )
-        }
-        <Button
-          href={project.data.github}
-          variant={liveLink ? "secondary" : "primary"}
-          showArrow={!liveLink}
-          class="w-full justify-center"
-        >
-          {ui.projectPage.viewCode}
-        </Button>
-      </div>
+      {
+        (liveLink || githubLink) && (
+          <div
+            class:list={[
+              "mt-8 grid w-full gap-3",
+              liveLink && githubLink ? "grid-cols-1 sm:grid-cols-2" : "grid-cols-1",
+            ]}
+          >
+            {
+              liveLink && (
+                <Button
+                  href={liveLink}
+                  variant="primary"
+                  showArrow
+                  class="w-full justify-center"
+                >
+                  {ui.projectPage.viewLive}
+                </Button>
+              )
+            }
+            {
+              githubLink && (
+                <Button
+                  href={githubLink}
+                  variant={liveLink ? "secondary" : "primary"}
+                  showArrow={!liveLink}
+                  class="w-full justify-center"
+                >
+                  {ui.projectPage.viewCode}
+                </Button>
+              )
+            }
+          </div>
+        )
+      }
 
       <div class:list={projectMarkdownClasses} class="mt-10 max-w-3xl">
         <Content />

@@ -137,7 +137,7 @@ const projects = defineCollection({
 			imageUrl: image(),
 			featuredImageUrl: image().optional(),
 			link: z.string().optional(),
-			github: z.string(),
+			github: z.string().optional(),
 			experimental: z.boolean().default(false),
 		}),
 });
