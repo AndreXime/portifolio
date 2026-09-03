@@ -58,8 +58,8 @@ export function buildPortfolioJsonLd(input: PortfolioJsonLdInput) {
 		],
 		alumniOf: {
 			"@type": "EducationalOrganization",
-			name: "Universidade Estadual do Vale do Acaraú",
-			sameAs: "https://www.uva.ce.gov.br",
+			name: "Universidade Cesumar",
+			sameAs: "https://www.unicesumar.edu.br",
 		},
 		...(experienceNodes.length > 0
 			? {

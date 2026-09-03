@@ -1,12 +1,12 @@
 ---
 formations:
-  - title: "Ciência da Computação"
-    institution: "Univ. Estadual do Vale do Acaraú"
-    period: "2023 - Presente"
-    logo: "../../assets/logos/uva.webp"
+  - title: "Análise e Desenvolvimento de Sistemas"
+    institution: "UniCesumar"
+    period: "2026 - Presente"
+    logo: "../../assets/logos/unicesumar.png"
     description: >-
-      Graduação voltada aos fundamentos de computação com especial interesse em Engenharia de
-      Software, Modelagem de dados, Algoritmos e Estrutura de dados.
+      Graduação tecnológica em análise, projeto e desenvolvimento de sistemas, com ênfase em
+      engenharia de software, bancos de dados e construção de aplicações.
     featured: true
   - title: "IBM JavaScript Backend Developer"
     institution: "IBM - Coursera"

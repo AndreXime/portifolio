@@ -1,12 +1,12 @@
 ---
 formations:
-  - title: "Computer Science"
-    institution: "Univ. Estadual do Vale do Acaraú"
-    period: "2023 - Present"
-    logo: "../../assets/logos/uva.webp"
+  - title: "Systems Analysis and Development"
+    institution: "UniCesumar"
+    period: "2026 - Present"
+    logo: "../../assets/logos/unicesumar.png"
     description: >-
-      Undergraduate degree focused on computing fundamentals with a special interest in Software
-      Engineering, Data Modeling, Algorithms, and Data Structures.
+      Technology degree in systems analysis, design, and development, with emphasis on software
+      engineering, databases, and building applications.
     featured: true
   - title: "IBM JavaScript Backend Developer"
     institution: "IBM - Coursera"
