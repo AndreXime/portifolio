@@ -26,7 +26,7 @@ const { locale, ui, site } = await getPageContext(Astro.currentLocale);
       <HeroBody locale={locale} ui={ui} site={site} />
     </div>
     <div
-      class="hero-layer-wave absolute inset-x-0 top-0 z-[1] h-[calc(100%+var(--hero-spill))] w-full bg-accent text-accent-foreground pointer-events-none select-none [clip-path:url(#hero-wave-clip)] motion-reduce:hidden"
+      class="hero-layer-wave absolute inset-x-0 top-0 z-1 h-[calc(100%+var(--hero-spill))] w-full bg-accent text-accent-foreground pointer-events-none select-none [clip-path:url(#hero-wave-clip)] motion-reduce:hidden"
       aria-hidden="true"
       inert
     >

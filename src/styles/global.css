@@ -89,11 +89,11 @@
 }
 
 @utility card-hover-bordered {
-	@apply border border-border bg-card transition-colors duration-150 ease-[cubic-bezier(0.25,0,0,1)] hover:border-accent hover:bg-muted;
+	@apply border border-border bg-card transition-colors duration-150 ease-out-crisp hover:border-accent hover:bg-muted;
 }
 
 @utility card-hover-flat {
-	@apply transition-colors duration-150 ease-[cubic-bezier(0.25,0,0,1)] hover:bg-muted;
+	@apply transition-colors duration-150 ease-out-crisp hover:bg-muted;
 }
 
 @utility card-hover-title {
