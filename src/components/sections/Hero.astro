@@ -1,126 +1,42 @@
 ---
-import { Icon } from "astro-icon/components";
-import Container from "../ui/Container.astro";
-import Button from "../ui/Button.astro";
-import AccentBar from "../ui/AccentBar.astro";
-import Reveal from "../ui/Reveal.astro";
+import HeroBody from "./HeroBody.astro";
 import { getPageContext } from "../../lib/i18n/context";
-import { homeHash } from "../../lib/i18n/paths";
 
 const { locale, ui, site } = await getPageContext(Astro.currentLocale);
-
-const socialIconLinkClass =
-  "inline-flex size-11 shrink-0 items-center justify-center border border-border bg-card text-muted-foreground transition-colors duration-150 hover:border-border-hover hover:text-accent focus-ring";
-
-const { hero } = site;
-const headlineParts = hero.headline.split(hero.headlineAccent);
 ---
 
-<section
+<div
   id="inicio"
-  class="border-b border-border bg-background pt-28 pb-16 md:pt-36 md:pb-20 lg:pt-44 lg:pb-24"
-  aria-labelledby="hero-heading"
+  class="hero-scroll-scene h-[200vh] scroll-mt-0 motion-reduce:h-auto"
 >
-  <Container>
-    <div class="grid grid-cols-1 items-center gap-12 lg:grid-cols-12 lg:gap-10">
-      <Reveal staggerMs={0} class="lg:col-span-8">
-        <h1
-          id="hero-heading"
-          class="font-mono text-sm uppercase tracking-[0.14em] text-muted-foreground"
-        >
-          {site.authorName} · {site.person.jobTitle}
-        </h1>
-        <AccentBar class="my-6" />
-        <h2
-          class="font-display max-w-[16ch] text-4xl font-semibold leading-[1.08] tracking-tight text-foreground sm:text-5xl md:text-6xl lg:text-[4.25rem]"
-        >
-          {headlineParts[0]}
-          <em
-            class="text-accent not-italic underline decoration-accent decoration-2 underline-offset-[0.15em]"
-          >
-            {hero.headlineAccent}
-          </em>
-          {headlineParts[1]}
-        </h2>
-
-        <p
-          class="mt-8 max-w-2xl text-base leading-[1.75] text-foreground-variant md:text-lg"
-        >
-          {hero.intro}
-        </p>
-
-        <div
-          class="mt-10 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center"
-        >
-          <Button href={homeHash(locale, "projetos")} variant="primary" showArrow>
-            {ui.hero.viewProjects}
-          </Button>
-          <Button href={homeHash(locale, "contato")} variant="secondary">
-            {ui.hero.contactCta}
-          </Button>
-          <div class="flex items-center gap-3">
-            <a
-              href={site.githubUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              class={socialIconLinkClass}
-              aria-label="GitHub"
-            >
-              <Icon name="simple-icons:github" class="size-5" />
-            </a>
-            <a
-              href={site.linkedinUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              class={socialIconLinkClass}
-              aria-label="LinkedIn"
-            >
-              <Icon name="simple-icons:linkedin" class="size-5" />
-            </a>
-          </div>
-        </div>
-      </Reveal>
-
-      <Reveal
-        staggerMs={120}
-        class="flex flex-col justify-center lg:col-span-4 lg:col-start-9 lg:h-full"
-      >
-        <dl
-          class="grid grid-cols-1 divide-y divide-border border border-border bg-card"
-          aria-label={ui.hero.summaryAria}
-        >
-          <div class="p-5 md:p-6">
-            <dt
-              class="font-mono text-xs uppercase tracking-[0.12em] text-muted-foreground"
-            >
-              {ui.hero.stack}
-            </dt>
-            <dd class="mt-2 font-mono text-sm text-foreground">
-              {hero.stackLine}
-            </dd>
-          </div>
-          <div class="p-5 md:p-6">
-            <dt
-              class="font-mono text-xs uppercase tracking-[0.12em] text-muted-foreground"
-            >
-              {hero.availabilityLabel}
-            </dt>
-            <dd class="mt-2 font-mono text-sm text-foreground">
-              {hero.availabilityValue}
-            </dd>
-          </div>
-          <div class="p-5 md:p-6">
-            <dt
-              class="font-mono text-xs uppercase tracking-[0.12em] text-muted-foreground"
-            >
-              {ui.hero.location}
-            </dt>
-            <dd class="mt-2 font-mono text-sm text-foreground">
-              {hero.locationValue}
-            </dd>
-          </div>
-        </dl>
-      </Reveal>
+  <svg class="absolute size-0 overflow-hidden" aria-hidden="true" focusable="false">
+    <defs>
+      <clipPath id="hero-wave-clip" clipPathUnits="objectBoundingBox">
+        <path data-hero-wave-path d="M0 0H1V0H0Z"></path>
+      </clipPath>
+    </defs>
+  </svg>
+  <section
+    class="hero-scroll-tint sticky top-0 min-h-dvh overflow-visible [--hero-spill:3.5rem] motion-reduce:relative lg:[--hero-spill:4.5rem]"
+    aria-labelledby="hero-heading"
+  >
+    <div
+      class="flex min-h-dvh w-full flex-col justify-center bg-background pt-28 pb-16 md:pt-36 md:pb-20 lg:pt-44 lg:pb-24"
+    >
+      <HeroBody locale={locale} ui={ui} site={site} />
     </div>
-  </Container>
-</section>
+    <div
+      class="hero-layer-wave absolute inset-x-0 top-0 z-[1] h-[calc(100%+var(--hero-spill))] w-full bg-accent text-accent-foreground pointer-events-none select-none [clip-path:url(#hero-wave-clip)] motion-reduce:hidden"
+      aria-hidden="true"
+      inert
+    >
+      <div
+        class="box-border flex h-[calc(100%-var(--hero-spill))] min-h-dvh flex-col justify-center pt-28 pb-16 md:pt-36 md:pb-20 lg:pt-44 lg:pb-24"
+      >
+        <HeroBody locale={locale} ui={ui} site={site} mirrored />
+      </div>
+    </div>
+  </section>
+</div>
+
+<script src="../../scripts/hero-scroll-tint.ts"></script>

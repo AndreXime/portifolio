@@ -1,0 +1,200 @@
+---
+import { Icon } from "astro-icon/components";
+import Container from "../ui/Container.astro";
+import Button from "../ui/Button.astro";
+import AccentBar from "../ui/AccentBar.astro";
+import type { Locale } from "../../locales";
+import type { getPageContext } from "../../lib/i18n/context";
+import { homeHash } from "../../lib/i18n/paths";
+
+type PageContext = Awaited<ReturnType<typeof getPageContext>>;
+
+interface Props {
+  locale: Locale;
+  ui: PageContext["ui"];
+  site: PageContext["site"];
+  mirrored?: boolean;
+}
+
+const { locale, ui, site, mirrored = false } = Astro.props;
+const { hero } = site;
+const headlineParts = hero.headline.split(hero.headlineAccent);
+
+const btnShared =
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-none border font-mono text-xs font-medium uppercase tracking-[0.12em]";
+const primaryOnLight =
+  "border-background bg-background px-5 py-3 text-foreground";
+const secondaryOnLight =
+  "border-background bg-transparent px-5 py-3 text-background";
+const socialOnLight =
+  "inline-flex size-11 shrink-0 items-center justify-center border border-accent-foreground/60 bg-transparent text-accent-foreground";
+const socialInteractive =
+  "inline-flex size-11 shrink-0 items-center justify-center border border-border bg-card text-muted-foreground transition-colors duration-150 hover:border-border-hover hover:text-accent focus-ring";
+---
+
+<Container>
+  <div class="grid grid-cols-1 items-center gap-12 lg:grid-cols-12 lg:gap-10">
+    <div class="lg:col-span-8">
+      <h1
+        id={mirrored ? undefined : "hero-heading"}
+        class:list={[
+          "font-mono text-sm uppercase tracking-[0.14em]",
+          mirrored ? "text-accent-foreground" : "text-muted-foreground",
+        ]}
+      >
+        {site.authorName} · {site.person.jobTitle}
+      </h1>
+      <AccentBar class:list={["my-6", mirrored && "bg-accent-foreground"]} />
+      <h2
+        class:list={[
+          "font-display max-w-[16ch] text-4xl font-semibold leading-[1.08] tracking-tight sm:text-5xl md:text-6xl lg:text-[4.25rem]",
+          mirrored ? "text-accent-foreground" : "text-foreground",
+        ]}
+      >
+        {headlineParts[0]}
+        <em
+          class:list={[
+            "not-italic underline decoration-2 underline-offset-[0.15em]",
+            mirrored
+              ? "text-accent-foreground decoration-accent-foreground"
+              : "text-accent decoration-accent",
+          ]}
+        >
+          {hero.headlineAccent}
+        </em>
+        {headlineParts[1]}
+      </h2>
+      <p
+        class:list={[
+          "mt-8 max-w-2xl text-base leading-[1.75] md:text-lg",
+          mirrored ? "text-accent-foreground" : "text-foreground-variant",
+        ]}
+      >
+        {hero.intro}
+      </p>
+      <div class="mt-10 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
+        {
+          mirrored ? (
+            <>
+              <span class:list={[btnShared, primaryOnLight]}>
+                {ui.hero.viewProjects}
+                <Icon name="arrow" class="size-3.5 shrink-0" />
+              </span>
+              <span class:list={[btnShared, secondaryOnLight]}>
+                {ui.hero.contactCta}
+              </span>
+              <div class="flex items-center gap-3">
+                <span class={socialOnLight}>
+                  <Icon name="simple-icons:github" class="size-5" />
+                </span>
+                <span class={socialOnLight}>
+                  <Icon name="simple-icons:linkedin" class="size-5" />
+                </span>
+              </div>
+            </>
+          ) : (
+            <>
+              <Button
+                href={homeHash(locale, "projetos")}
+                variant="primary"
+                showArrow
+              >
+                {ui.hero.viewProjects}
+              </Button>
+              <Button href={homeHash(locale, "contato")} variant="secondary">
+                {ui.hero.contactCta}
+              </Button>
+              <div class="flex items-center gap-3">
+                <a
+                  href={site.githubUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class={socialInteractive}
+                  aria-label="GitHub"
+                >
+                  <Icon name="simple-icons:github" class="size-5" />
+                </a>
+                <a
+                  href={site.linkedinUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class={socialInteractive}
+                  aria-label="LinkedIn"
+                >
+                  <Icon name="simple-icons:linkedin" class="size-5" />
+                </a>
+              </div>
+            </>
+          )
+        }
+      </div>
+    </div>
+
+    <div class="flex flex-col justify-center lg:col-span-4 lg:col-start-9 lg:h-full">
+      <dl
+        class:list={[
+          "grid grid-cols-1 divide-y border",
+          mirrored
+            ? "divide-accent-foreground/50 border-accent-foreground/60 bg-accent-foreground/15"
+            : "divide-border border-border bg-card",
+        ]}
+        aria-label={mirrored ? undefined : ui.hero.summaryAria}
+      >
+        <div class="p-5 md:p-6">
+          <dt
+            class:list={[
+              "font-mono text-xs uppercase tracking-[0.12em]",
+              mirrored ? "text-accent-foreground" : "text-muted-foreground",
+            ]}
+          >
+            {ui.hero.stack}
+          </dt>
+          <dd
+            class:list={[
+              "mt-2 font-mono text-sm",
+              mirrored ? "text-accent-foreground" : "text-foreground",
+            ]}
+          >
+            {hero.stackLine}
+          </dd>
+        </div>
+        <div class="p-5 md:p-6">
+          <dt
+            class:list={[
+              "font-mono text-xs uppercase tracking-[0.12em]",
+              mirrored ? "text-accent-foreground" : "text-muted-foreground",
+            ]}
+          >
+            {hero.availabilityLabel}
+          </dt>
+          <dd
+            class:list={[
+              "mt-2 font-mono text-sm",
+              mirrored ? "text-accent-foreground" : "text-foreground",
+            ]}
+          >
+            {hero.availabilityValue}
+          </dd>
+        </div>
+        <div class="p-5 md:p-6">
+          <dt
+            class:list={[
+              "font-mono text-xs uppercase tracking-[0.12em]",
+              mirrored ? "text-accent-foreground" : "text-muted-foreground",
+            ]}
+          >
+            {ui.hero.location}
+          </dt>
+          <dd
+            class:list={[
+              "mt-2 font-mono text-sm",
+              mirrored ? "text-accent-foreground" : "text-foreground",
+            ]}
+          >
+            {hero.locationValue}
+          </dd>
+        </div>
+      </dl>
+    </div>
+  </div>
+</Container>
