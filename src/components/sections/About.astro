@@ -28,7 +28,7 @@ const { ui, site } = await getPageContext(Astro.currentLocale);
       </Reveal>
 
       <Reveal staggerMs={80} class="flex min-w-0 items-center lg:col-span-8">
-        <blockquote class="font-display min-w-0 text-xl font-extrabold leading-[1.5] text-foreground">
+        <blockquote class="font-display min-w-0 text-xl font-extrabold leading-normal text-foreground">
           &ldquo;
           {site.about.quote.split(/==(.*?)==/g).map((segment, index) =>
             index % 2 === 1 ? (
