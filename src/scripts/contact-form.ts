@@ -95,6 +95,7 @@ export function initContactForm(): void {
 		const submitBtn = form.querySelector('button[type="submit"]');
 		if (submitBtn instanceof HTMLButtonElement) {
 			submitBtn.disabled = true;
+			submitBtn.dataset.state = "loading";
 		}
 		if (labelEl) {
 			labelEl.textContent = readFormMessage(form, "submitting") || defaultLabel;
@@ -117,10 +118,16 @@ export function initContactForm(): void {
 			const data: unknown = await res.json().catch(() => ({}));
 
 			if (!res.ok) {
+				if (submitBtn instanceof HTMLButtonElement) {
+					submitBtn.dataset.state = "error";
+				}
 				setStatus(resolveApiErrorMessage(form, data), "error");
 				return;
 			}
 
+			if (submitBtn instanceof HTMLButtonElement) {
+				submitBtn.dataset.state = "success";
+			}
 			setStatus(readFormMessage(form, "success"), "success");
 			form.reset();
 			if (tsInput) {
@@ -131,6 +138,9 @@ export function initContactForm(): void {
 		} finally {
 			if (submitBtn instanceof HTMLButtonElement) {
 				submitBtn.disabled = false;
+				window.setTimeout(() => {
+					delete submitBtn.dataset.state;
+				}, 1200);
 			}
 			if (labelEl) {
 				labelEl.textContent = defaultLabel;

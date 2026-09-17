@@ -5,38 +5,16 @@ import { getPageContext } from "../../lib/i18n/context";
 const { locale, ui, site } = await getPageContext(Astro.currentLocale);
 ---
 
-<div
+<section
   id="inicio"
-  class="hero-scroll-scene h-[200vh] scroll-mt-0 motion-reduce:h-auto"
+  class="relative min-h-dvh overflow-hidden bg-hero text-hero-foreground scroll-mt-0"
+  aria-labelledby="hero-heading"
 >
-  <svg class="absolute size-0 overflow-hidden" aria-hidden="true" focusable="false">
-    <defs>
-      <clipPath id="hero-wave-clip" clipPathUnits="objectBoundingBox">
-        <path data-hero-wave-path d="M0 0H1V0H0Z"></path>
-      </clipPath>
-    </defs>
-  </svg>
-  <section
-    class="hero-scroll-tint sticky top-0 min-h-dvh overflow-visible [--hero-spill:3.5rem] motion-reduce:relative lg:[--hero-spill:4.5rem]"
-    aria-labelledby="hero-heading"
-  >
-    <div
-      class="flex min-h-dvh w-full flex-col justify-center bg-background pt-28 pb-16 md:pt-36 md:pb-20 lg:pt-44 lg:pb-24"
-    >
-      <HeroBody locale={locale} ui={ui} site={site} />
-    </div>
-    <div
-      class="hero-layer-wave absolute inset-x-0 top-0 z-1 h-[calc(100%+var(--hero-spill))] w-full bg-accent text-accent-foreground pointer-events-none select-none [clip-path:url(#hero-wave-clip)] motion-reduce:hidden"
-      aria-hidden="true"
-      inert
-    >
-      <div
-        class="box-border flex h-[calc(100%-var(--hero-spill))] min-h-dvh flex-col justify-center pt-28 pb-16 md:pt-36 md:pb-20 lg:pt-44 lg:pb-24"
-      >
-        <HeroBody locale={locale} ui={ui} site={site} mirrored />
-      </div>
-    </div>
-  </section>
-</div>
-
-<script src="../../scripts/hero-scroll-tint.ts"></script>
+  <div
+    class="pointer-events-none absolute inset-0 bg-[linear-gradient(160deg,var(--color-hero)_0%,var(--color-hero-2)_100%)]"
+    aria-hidden="true"
+  ></div>
+  <div class="relative flex min-h-dvh w-full flex-col justify-center pt-28 pb-16 md:pt-36 md:pb-20 lg:pt-40 lg:pb-24">
+    <HeroBody locale={locale} ui={ui} site={site} />
+  </div>
+</section>

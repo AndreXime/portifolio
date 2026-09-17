@@ -65,7 +65,7 @@ const imageAlt = projectImageAlt(project, ui.projectPage.imageAlt);
 >
   <Header />
   <main
-    class="border-b border-border bg-background pt-28 pb-16"
+    class="bg-background pt-28 pb-16"
     data-projects-index-href={projectsIndexPath}
   >
     <Container>
@@ -75,7 +75,7 @@ const imageAlt = projectImageAlt(project, ui.projectPage.imageAlt);
         <a
           href={projectsHash}
           data-projects-back
-          class="inline-flex shrink-0 items-center gap-2 self-start font-mono text-xs uppercase tracking-[0.12em] text-muted-foreground underline decoration-border decoration-1 underline-offset-4 transition-colors duration-150 hover:text-accent hover:decoration-accent focus-ring"
+          class="inline-flex shrink-0 items-center gap-2 self-start text-sm font-semibold text-muted-foreground underline decoration-border decoration-1 underline-offset-4 transition-colors duration-200 hover:text-accent hover:decoration-accent focus-ring"
         >
           <Icon name="arrow-left" class="size-3.5 shrink-0" />
           {ui.projectPage.back}
@@ -83,12 +83,12 @@ const imageAlt = projectImageAlt(project, ui.projectPage.imageAlt);
 
         <nav aria-label={ui.projectPage.breadcrumb} class="min-w-0 lg:shrink">
           <ol
-            class="flex flex-wrap items-center gap-x-2 gap-y-1 font-mono text-xs uppercase tracking-[0.12em] text-muted-foreground lg:justify-end"
+            class="flex flex-wrap items-center gap-x-2 gap-y-1 text-sm font-semibold text-muted-foreground lg:justify-end"
           >
             <li class="shrink-0">
               <a
                 href={homePath}
-                class="transition-colors duration-150 hover:text-accent focus-ring"
+                class="transition-colors duration-200 hover:text-accent focus-ring"
               >
                 {ui.projectPage.home}
               </a>
@@ -98,7 +98,7 @@ const imageAlt = projectImageAlt(project, ui.projectPage.imageAlt);
               <a
                 href={projectsHash}
                 data-projects-back
-                class="transition-colors duration-150 hover:text-accent focus-ring"
+                class="transition-colors duration-200 hover:text-accent focus-ring"
               >
                 {ui.projectPage.projects}
               </a>
@@ -111,30 +111,32 @@ const imageAlt = projectImageAlt(project, ui.projectPage.imageAlt);
         </nav>
       </div>
 
-      <div
-        class="relative mt-8 aspect-2/1 overflow-hidden border border-border"
-        style={`background-color: ${dominantColor}`}
-      >
-        <Image
-          src={project.data.imageUrl}
-          alt={imageAlt}
-          width={project.data.imageUrl.width}
-          height={project.data.imageUrl.height}
-          sizes="(max-width: 1024px) 100vw, 72rem"
-          class="relative z-10 h-full w-full object-contain"
-          loading="eager"
-          decoding="async"
-        />
+      <div class="mt-8 overflow-hidden rounded-card border border-border bg-card">
+        <div
+          class="aspect-2/1"
+          style={`background-color: ${dominantColor}`}
+        >
+          <Image
+            src={project.data.imageUrl}
+            alt={imageAlt}
+            width={project.data.imageUrl.width}
+            height={project.data.imageUrl.height}
+            sizes="(max-width: 1024px) 100vw, 72rem"
+            class="h-full w-full object-contain"
+            loading="eager"
+            decoding="async"
+          />
+        </div>
       </div>
 
       <header class="mt-8">
         <h1
-          class="font-display text-3xl font-semibold leading-tight tracking-tight text-foreground sm:text-4xl md:text-5xl"
+          class="font-display text-3xl font-extrabold leading-tight tracking-tight text-foreground sm:text-4xl"
         >
           {project.data.title}
         </h1>
         <p
-          class="mt-6 text-base leading-[1.7] text-foreground-variant md:text-lg"
+          class="mt-6 text-base leading-[1.7] text-foreground-variant"
         >
           {project.data.shortDescription}
         </p>
@@ -145,7 +147,7 @@ const imageAlt = projectImageAlt(project, ui.projectPage.imageAlt);
           <div
             class:list={[
               "mt-8 grid w-full gap-3",
-              liveLink && githubLink ? "grid-cols-1 sm:grid-cols-2" : "grid-cols-1",
+              liveLink && githubLink ? "grid-cols-1 lg:grid-cols-2" : "grid-cols-1",
             ]}
           >
             {
@@ -186,7 +188,7 @@ const imageAlt = projectImageAlt(project, ui.projectPage.imageAlt);
       >
         {
           project.data.tech.map((tech) => (
-            <li class="border border-border px-2 py-1 font-mono text-xs uppercase tracking-[0.08em] text-muted-foreground">
+            <li class="rounded-pill bg-muted px-3 py-1 text-xs font-semibold text-foreground">
               {tech}
             </li>
           ))

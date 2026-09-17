@@ -22,57 +22,59 @@ function resolveIconName(slug: string) {
 
 <section
   id="tecnologias"
-  class="scroll-mt-20 border-b border-border bg-background py-16 md:py-20 lg:py-24"
+  class="relative scroll-mt-20 overflow-hidden bg-hero py-16 text-hero-foreground md:py-20 lg:py-24"
   aria-labelledby="tech-heading"
 >
-  <Container>
+  <div
+    class="pointer-events-none absolute inset-0 bg-[linear-gradient(160deg,var(--color-hero)_0%,var(--color-hero-2)_60%,color-mix(in_srgb,var(--color-accent)_18%,var(--color-hero-2))_160%)]"
+    aria-hidden="true"
+  ></div>
+  <Container class="relative">
     <div class="grid grid-cols-1 items-center gap-8 lg:grid-cols-12 lg:gap-10">
       <Reveal staggerMs={0} class="lg:col-span-5">
         <AccentBar class="mb-6" />
         <h2
           id="tech-heading"
-          class="font-display text-3xl font-semibold leading-tight tracking-tight text-foreground sm:text-4xl md:text-5xl"
+          class="font-display text-3xl font-extrabold leading-tight tracking-tight text-hero-foreground sm:text-4xl md:text-5xl"
         >
           {ui.technologies.title}
         </h2>
-        <p
-          class="mt-4 font-mono text-xs uppercase tracking-[0.12em] text-muted-foreground"
-        >
+        <p class="mt-4 text-sm font-semibold text-hero-foreground/70">
           {ui.technologies.subtitle}
         </p>
       </Reveal>
       <Reveal staggerMs={80} class="flex items-center lg:col-span-7">
-        <p class="text-base leading-[1.7] text-foreground-variant md:text-lg">
+        <p class="text-base leading-[1.7] text-hero-foreground/85">
           {ui.technologies.intro}
         </p>
       </Reveal>
     </div>
 
     <ul
-      class="mt-14 grid list-none grid-cols-1 gap-px border border-border bg-border sm:grid-cols-2 lg:mt-16 lg:grid-cols-3"
+      class="mt-14 grid list-none grid-cols-1 gap-4 lg:mt-16 lg:grid-cols-3"
     >
       {
         technologies.map((item, index) => (
-          <li class="bg-background">
+          <li>
             <Reveal staggerMs={Math.min(index * 40, 280)}>
               <article
-                class="card-hover-flat group/card flex h-full flex-col p-6 md:p-7"
+                class="tech-card group/card flex h-full flex-col rounded-card bg-hero-foreground/10 p-6 text-hero-foreground md:p-7"
                 aria-label={item.name}
               >
-                <p class="font-mono text-xs font-medium uppercase tracking-[0.12em] text-muted-foreground">
+                <p class="relative z-10 text-xs font-semibold text-hero-foreground/70 transition-colors duration-200 group-hover/card:text-accent-foreground/80">
                   {item.role}
                 </p>
-                <h3 class="card-hover-title mt-3 font-display text-lg font-semibold leading-snug text-foreground md:text-xl">
+                <h3 class="relative z-10 mt-3 font-display text-lg font-extrabold leading-snug text-hero-foreground transition-colors duration-200 group-hover/card:text-accent-foreground">
                   {item.name}
                 </h3>
                 <ul
-                  class="mt-6 flex list-none flex-wrap gap-3 border-t border-border pt-6"
+                  class="relative z-10 mt-6 flex list-none flex-wrap gap-3"
                   aria-label={`Ícones de ${item.name}`}
                 >
                   {item.icons.map((slug) => (
                     <li>
                       <span
-                        class="tech-logo inline-flex size-8 items-center justify-center border border-border bg-card text-foreground transition-colors duration-150 hover:border-accent hover:bg-accent/5 hover:text-accent md:size-9"
+                        class="tech-logo inline-flex size-8 items-center justify-center rounded-pill bg-hero-foreground/15 text-hero-foreground transition-colors duration-200 group-hover/card:bg-accent-foreground/15 group-hover/card:text-accent-foreground md:size-9"
                         aria-hidden="true"
                       >
                         <Icon
@@ -93,6 +95,38 @@ function resolveIconName(slug: string) {
 </section>
 
 <style is:global>
+  .tech-card {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+    transition: transform var(--dur-short) var(--ease-out);
+  }
+
+  .tech-card::before {
+    content: "";
+    position: absolute;
+    z-index: 0;
+    pointer-events: none;
+    top: 50%;
+    left: 50%;
+    width: 220%;
+    aspect-ratio: 1;
+    border-radius: 999px;
+    background-color: var(--color-accent);
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 1;
+    transition: transform 800ms var(--ease-out);
+    will-change: transform;
+  }
+
+  .tech-card:hover {
+    transform: translateY(-2px);
+  }
+
+  .tech-card:hover::before {
+    transform: translate(-50%, -50%) scale(1);
+  }
+
   .tech-logo svg {
     max-height: 100%;
     max-width: 100%;
@@ -105,5 +139,25 @@ function resolveIconName(slug: string) {
 
   .tech-logo svg :where(line, polyline) {
     stroke: currentColor;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .tech-card {
+      transition: none;
+    }
+
+    .tech-card::before {
+      transition: opacity var(--dur-micro) var(--ease-out);
+      transform: translate(-50%, -50%) scale(1);
+      opacity: 0;
+    }
+
+    .tech-card:hover {
+      transform: none;
+    }
+
+    .tech-card:hover::before {
+      opacity: 1;
+    }
   }
 </style>

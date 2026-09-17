@@ -9,7 +9,7 @@ const { ui, site } = await getPageContext(Astro.currentLocale);
 
 <section
   id="sobre"
-  class="scroll-mt-20 border-b border-border bg-muted py-16 md:py-20 lg:py-24"
+  class="scroll-mt-20 bg-muted py-16 md:py-20 lg:py-24"
   aria-labelledby="about-heading"
 >
   <Container>
@@ -18,39 +18,41 @@ const { ui, site } = await getPageContext(Astro.currentLocale);
         <AccentBar class="mb-6" />
         <h2
           id="about-heading"
-          class="font-display text-3xl font-semibold leading-tight tracking-tight text-foreground sm:text-4xl md:text-5xl"
+          class="font-display text-3xl font-extrabold leading-tight tracking-tight text-foreground sm:text-4xl md:text-5xl"
         >
           {ui.about.title}
         </h2>
-        <p
-          class="mt-4 font-mono text-xs uppercase tracking-[0.12em] text-muted-foreground"
-        >
+        <p class="mt-4 text-sm font-semibold text-muted-foreground">
           {ui.about.subtitle}
         </p>
       </Reveal>
 
-      <Reveal staggerMs={80} class="flex items-center lg:col-span-8">
-        <blockquote
-          class="border-l-2 border-accent pl-5 font-display text-xl font-semibold leading-snug text-foreground md:text-2xl"
-        >
-          &ldquo;{site.about.quote}&rdquo;
+      <Reveal staggerMs={80} class="flex min-w-0 items-center lg:col-span-8">
+        <blockquote class="font-display min-w-0 text-xl font-extrabold leading-[1.5] text-foreground">
+          &ldquo;
+          {site.about.quote.split(/==(.*?)==/g).map((segment, index) =>
+            index % 2 === 1 ? (
+              <mark class="highlight-quote">{segment}</mark>
+            ) : (
+              segment
+            ),
+          )}
+          &rdquo;
         </blockquote>
       </Reveal>
     </div>
 
     <div
-      class="mt-14 grid grid-cols-1 gap-10 border-t border-border pt-14 lg:grid-cols-12 lg:gap-12"
+      class="mt-14 grid grid-cols-1 gap-10 pt-4 lg:grid-cols-12 lg:gap-12"
     >
       <Reveal staggerMs={100} class="lg:col-span-4">
-        <figure
-          class="card-hover-bordered group/card mx-auto w-full max-w-72 p-2 sm:max-w-80 lg:mx-0 lg:max-w-none"
-        >
+        <figure class="mx-auto w-full max-w-72 overflow-hidden rounded-card bg-accent p-1 sm:max-w-80 lg:mx-0 lg:max-w-none">
           <img
             src="/me.webp"
             alt={site.about.photoAlt}
             width={424}
             height={424}
-            class="aspect-square w-full object-cover object-center"
+            class="aspect-square w-full rounded-[calc(var(--radius-card)-0.35rem)] object-cover object-center"
             loading="lazy"
             decoding="async"
           />
@@ -58,7 +60,7 @@ const { ui, site } = await getPageContext(Astro.currentLocale);
       </Reveal>
 
       <Reveal staggerMs={140} class="lg:col-span-8">
-        <div class="space-y-6 text-base leading-[1.7] md:text-lg">
+        <div class="space-y-6 text-base leading-[1.7]">
           {
             site.about.paragraphs.map((paragraph, index) => (
               <p

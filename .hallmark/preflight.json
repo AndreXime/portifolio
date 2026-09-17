@@ -1,0 +1,8 @@
+{
+	"date": "2026-09-16",
+	"framework": "Astro 7",
+	"fonts": "Bricolage Grotesque 800 + Geist Sans 400/600",
+	"palette": "studied-DNA OKLCH in tokens.css",
+	"motion": "CSS reveal only",
+	"spacing": "Tailwind v4 + Hallmark 4pt tokens"
+}

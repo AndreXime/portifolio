@@ -1,5 +1,4 @@
 ---
-import { Image } from "astro:assets";
 import { Icon } from "astro-icon/components";
 import Layout from "../../layouts/Layout.astro";
 import Header from "../sections/Header.astro";
@@ -7,37 +6,17 @@ import Footer from "../sections/Footer.astro";
 import Container from "../ui/Container.astro";
 import AccentBar from "../ui/AccentBar.astro";
 import Reveal from "../ui/Reveal.astro";
-import Button from "../ui/Button.astro";
-import { getProjects, type ProjectEntry } from "../../lib/content";
-import { getProjectPagePath, projectImageAlt } from "../../lib/project-page";
-import { getDominantColor } from "../../lib/dominant-color";
+import ProjectTile from "../ui/ProjectTile.astro";
+import { getProjects } from "../../lib/content";
+import { getProjectPagePath } from "../../lib/project-page";
 import { getPageContext } from "../../lib/i18n/context";
 import { homeHash } from "../../lib/i18n/paths";
-
-interface ProjectWithColor {
-  project: ProjectEntry;
-  dominantColor: string;
-}
 
 const { locale, ui, site } = await getPageContext(Astro.currentLocale);
 const projects = await getProjects(locale);
 
 const mainProjects = projects.filter((project) => !project.data.experimental);
 const experimentalProjects = projects.filter((project) => project.data.experimental);
-
-async function withDominantColor(entries: ProjectEntry[]): Promise<ProjectWithColor[]> {
-  return Promise.all(
-    entries.map(async (project) => ({
-      project,
-      dominantColor: await getDominantColor(project.data.imageUrl),
-    })),
-  );
-}
-
-const [mainWithColor, experimentalWithColor] = await Promise.all([
-  withDominantColor(mainProjects),
-  withDominantColor(experimentalProjects),
-]);
 
 const homeHref = homeHash(locale, "inicio");
 
@@ -47,25 +26,23 @@ const sections = [
     title: null as string | null,
     subtitle: null as string | null,
     headingId: null as string | null,
-    items: mainWithColor,
-    accentTop: true,
+    items: mainProjects,
   },
   {
     key: "experimental",
     title: ui.projectsIndex.experimentalTitle,
     subtitle: ui.projectsIndex.experimentalSubtitle,
     headingId: "experimental-projects-heading",
-    items: experimentalWithColor,
-    accentTop: false,
+    items: experimentalProjects,
   },
 ].filter((section) => section.items.length > 0);
 
 let revealCursor = 0;
 const sectionsWithReveal = sections.map((section) => {
-  const items = section.items.map((item) => {
+  const items = section.items.map((project) => {
     const revealIndex = revealCursor;
     revealCursor += 1;
-    return { ...item, revealIndex };
+    return { project, revealIndex };
   });
   return { ...section, items };
 });
@@ -78,11 +55,11 @@ const sectionsWithReveal = sections.map((section) => {
   description={ui.projectsIndex.seoDescription}
 >
   <Header />
-  <main class="border-b border-border bg-background pt-28 pb-16">
+  <main class="bg-muted pt-28 pb-16">
     <Container>
       <a
         href={homeHref}
-        class="inline-flex shrink-0 items-center gap-2 self-start font-mono text-xs uppercase tracking-[0.12em] text-muted-foreground underline decoration-border decoration-1 underline-offset-4 transition-colors duration-150 hover:text-accent hover:decoration-accent focus-ring"
+        class="inline-flex shrink-0 items-center gap-2 self-start text-sm font-semibold text-muted-foreground underline decoration-border decoration-1 underline-offset-4 transition-colors duration-200 hover:text-accent hover:decoration-accent focus-ring"
       >
         <Icon name="arrow-left" class="size-3.5 shrink-0" />
         {ui.projectsIndex.backHome}
@@ -91,28 +68,22 @@ const sectionsWithReveal = sections.map((section) => {
       <div class="mt-10 max-w-3xl">
         <AccentBar class="mb-6" />
         <h1
-          class="font-display text-3xl font-semibold leading-tight tracking-tight text-foreground sm:text-4xl md:text-5xl"
+          class="font-display text-3xl font-extrabold leading-tight tracking-tight text-foreground sm:text-4xl md:text-5xl"
         >
           {ui.projectsIndex.title}
         </h1>
-        <p
-          class="mt-4 font-mono text-xs uppercase tracking-[0.12em] text-muted-foreground"
-        >
+        <p class="mt-4 text-sm font-semibold text-muted-foreground">
           {ui.projects.subtitle}
         </p>
-        <p
-          class="mt-6 text-base leading-[1.7] text-foreground-variant md:text-lg"
-        >
+        <p class="mt-6 text-base leading-[1.7] text-foreground-variant">
           {ui.projectsIndex.subtitle}
         </p>
       </div>
 
       {
-        sectionsWithReveal.map((section, sectionIndex) => (
+        sectionsWithReveal.map((section) => (
           <section
-            class:list={[
-              sectionIndex > 0 && "mt-20 border-t border-border pt-16 lg:mt-24 lg:pt-20",
-            ]}
+            class:list={[section.title && "mt-20 lg:mt-24"]}
             aria-labelledby={section.headingId ?? undefined}
           >
             {section.title && section.headingId && (
@@ -120,12 +91,12 @@ const sectionsWithReveal = sections.map((section) => {
                 <AccentBar class="mb-6" />
                 <h2
                   id={section.headingId}
-                  class="font-display text-2xl font-semibold leading-tight tracking-tight text-foreground sm:text-3xl md:text-4xl"
+                  class="font-display text-2xl font-extrabold leading-tight tracking-tight text-foreground sm:text-3xl md:text-4xl"
                 >
                   {section.title}
                 </h2>
                 {section.subtitle && (
-                  <p class="mt-4 font-mono text-xs uppercase tracking-[0.12em] text-muted-foreground">
+                  <p class="mt-4 text-sm font-semibold text-muted-foreground">
                     {section.subtitle}
                   </p>
                 )}
@@ -134,88 +105,23 @@ const sectionsWithReveal = sections.map((section) => {
 
             <ul
               class:list={[
-                "list-none grid grid-cols-1 gap-10 lg:gap-14",
-                section.title ? "mt-14" : "mt-14 lg:mt-16",
+                "list-none grid grid-cols-1 gap-6 lg:grid-cols-2 lg:gap-8",
+                section.title ? "mt-10" : "mt-14 lg:mt-16",
               ]}
             >
-              {section.items.map(({ project, dominantColor, revealIndex }) => (
-                <li class="min-h-0 w-full">
-                  <Reveal staggerMs={revealIndex * 60} class="h-full min-h-0 w-full">
-                    <article
-                      class:list={[
-                        "group/card flex h-full w-full flex-col border-t pt-8",
-                        section.accentTop ? "border-accent" : "border-border",
-                      ]}
-                    >
-                      <a
-                        href={getProjectPagePath(project.slug, locale, {
-                          fromList: true,
-                        })}
-                        class="relative block w-full aspect-5/2 overflow-hidden border border-border"
-                        style={`background-color: ${dominantColor}`}
-                      >
-                        <Image
-                          src={project.data.imageUrl}
-                          alt={projectImageAlt(project, ui.projectPage.imageAlt)}
-                          width={project.data.imageUrl.width}
-                          height={project.data.imageUrl.height}
-                          sizes="100vw"
-                          class="relative z-10 h-full w-full object-contain transition-transform duration-300 ease-out group-hover/card:scale-[1.02]"
-                          loading={revealIndex < 2 ? "eager" : "lazy"}
-                          decoding="async"
-                        />
-                      </a>
-                      <div class="flex flex-1 flex-col pt-6">
-                        {section.key === "experimental" ? (
-                          <h3 class="font-display text-xl font-semibold text-foreground md:text-2xl">
-                            <a
-                              href={getProjectPagePath(project.slug, locale, {
-                                fromList: true,
-                              })}
-                              class="transition-colors duration-150 hover:text-accent focus-ring"
-                            >
-                              {project.data.title}
-                            </a>
-                          </h3>
-                        ) : (
-                          <h2 class="font-display text-xl font-semibold text-foreground md:text-2xl">
-                            <a
-                              href={getProjectPagePath(project.slug, locale, {
-                                fromList: true,
-                              })}
-                              class="transition-colors duration-150 hover:text-accent focus-ring"
-                            >
-                              {project.data.title}
-                            </a>
-                          </h2>
-                        )}
-                        <p class="mt-4 flex-1 text-sm leading-relaxed text-foreground-variant md:text-base">
-                          {project.data.shortDescription}
-                        </p>
-                        <ul
-                          class="mt-6 flex flex-wrap gap-2"
-                          aria-label={ui.projects.stackAria}
-                        >
-                          {project.data.tech.map((tech) => (
-                            <li class="border border-border px-2 py-1 font-mono text-[10px] uppercase tracking-[0.08em] text-muted-foreground">
-                              {tech}
-                            </li>
-                          ))}
-                        </ul>
-                        <div class="mt-6">
-                          <Button
-                            href={getProjectPagePath(project.slug, locale, {
-                              fromList: true,
-                            })}
-                            variant="secondary"
-                            showArrow
-                            class="w-full justify-center"
-                          >
-                            {ui.projects.viewDetails}
-                          </Button>
-                        </div>
-                      </div>
-                    </article>
+              {section.items.map(({ project, revealIndex }) => (
+                <li class="min-h-0 h-full">
+                  <Reveal staggerMs={revealIndex * 60} class="h-full min-h-0">
+                    <ProjectTile
+                      project={project}
+                      href={getProjectPagePath(project.slug, locale, {
+                        fromList: true,
+                      })}
+                      ctaLabel={ui.projects.viewDetails}
+                      stackAria={ui.projects.stackAria}
+                      imageAltTemplate={ui.projectPage.imageAlt}
+                      eager={revealIndex < 2}
+                    />
                   </Reveal>
                 </li>
               ))}

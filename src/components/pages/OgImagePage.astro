@@ -1,7 +1,6 @@
 ---
 import "../../styles/fonts";
 import "../../styles/global.css";
-import AccentBar from "../ui/AccentBar.astro";
 import Container from "../ui/Container.astro";
 import { getPageContext } from "../../lib/i18n/context";
 import { htmlLang } from "../../locales";
@@ -27,79 +26,62 @@ const { hero, ogImage } = site;
       }
     </style>
   </head>
-  <body class="bg-background antialiased">
-    <section class="h-full">
+  <body class="bg-hero text-hero-foreground antialiased">
+    <section class="h-full bg-[linear-gradient(160deg,var(--color-hero)_0%,var(--color-hero-2)_100%)]">
       <Container class="flex h-full flex-col justify-between py-8">
         <div>
-          <p
-            class="font-mono text-2xl uppercase tracking-[0.14em] text-muted-foreground"
-          >
+          <p class="text-2xl font-semibold text-accent">
             {ogImage.eyebrow}
           </p>
-          <AccentBar class="my-5" />
           <h1
-            class="font-display text-8xl font-semibold leading-[1.1] tracking-tight text-foreground"
+            class="font-display mt-4 text-8xl font-extrabold leading-[1.05] tracking-tight text-hero-foreground"
           >
             {site.authorName}
           </h1>
           <h2
-            class="font-display mt-2 text-6xl font-semibold leading-[1.1] tracking-tight text-foreground"
+            class="font-display mt-2 text-6xl font-extrabold leading-[1.1] tracking-tight text-hero-foreground"
           >
             {ogImage.titlePrefix}{" "}
-            <em
-              class="text-accent not-italic underline decoration-accent decoration-2 underline-offset-[0.12em]"
-            >
+            <span class="rounded-md bg-accent px-2 text-accent-foreground">
               {ogImage.titleAccent}
-            </em>
+            </span>
           </h2>
 
-          <p
-            class="mt-2 max-w-4xl py-5 text-2xl leading-normal text-foreground-variant"
-          >
+          <p class="mt-6 max-w-4xl text-lg leading-normal text-hero-foreground/85">
             {ogImage.description}
           </p>
         </div>
 
-        <dl
-          class="grid grid-cols-4 gap-6 border-t border-border pt-6 text-base"
-        >
-          <div>
-            <dt
-              class="font-mono uppercase tracking-[0.12em] text-muted-foreground"
-            >
+        <dl class="grid grid-cols-4 gap-6 pt-6 text-base">
+          <div class="rounded-card bg-hero-foreground/10 p-4">
+            <dt class="text-sm font-semibold text-hero-foreground/70">
               {ui.hero.stack}
             </dt>
-            <dd class="mt-2 font-mono text-foreground">
+            <dd class="mt-2 font-semibold text-hero-foreground">
               {hero.stackLine}
             </dd>
           </div>
-          <div>
-            <dt
-              class="font-mono uppercase tracking-[0.12em] text-muted-foreground"
-            >
+          <div class="rounded-card bg-accent p-4 text-accent-foreground">
+            <dt class="text-sm font-semibold text-accent-foreground/80">
               {hero.availabilityLabel}
             </dt>
-            <dd class="mt-2 font-mono text-foreground">
+            <dd class="mt-2 font-semibold">
               {hero.availabilityValue}
             </dd>
           </div>
-          <div>
-            <dt
-              class="font-mono uppercase tracking-[0.12em] text-muted-foreground"
-            >
+          <div class="rounded-card bg-hero-foreground/10 p-4">
+            <dt class="text-sm font-semibold text-hero-foreground/70">
               {ui.hero.location}
             </dt>
-            <dd class="mt-2 font-mono text-foreground">
+            <dd class="mt-2 font-semibold text-hero-foreground">
               {hero.locationValue}
             </dd>
           </div>
-          <div>
-            <dt
-              class="font-mono text-sm uppercase tracking-[0.12em] text-muted-foreground"
-            >
+          <div class="rounded-card bg-hero-foreground/10 p-4">
+            <dt class="text-sm font-semibold text-hero-foreground/70">
               {ui.nav.contact}
             </dt>
-            <dd class="mt-2 font-mono text-base text-foreground">
+            <dd class="mt-2 font-semibold text-hero-foreground">
               {site.email}
             </dd>
           </div>

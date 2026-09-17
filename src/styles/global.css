@@ -1,26 +1,41 @@
+@import "../../tokens.css";
 @import "tailwindcss";
 
-/* Editorial / Swiss Design — design tokens */
+/* Hallmark · genre: playful · macrostructure: Catalogue · theme: studied-DNA · design-system: design.md · designed-as-app
+ * nav: N1b · footer: Ft3 · enrichment: none
+ */
+
 @theme inline {
-	--color-background: #fafafa;
-	--color-foreground: #18181b;
-	--color-foreground-variant: #3f3f46;
-	--color-muted: #f4f4f5;
-	--color-muted-foreground: #71717a;
-	--color-accent: var(--color-orange-600);
-	--color-accent-foreground: #fafafa;
-	--color-border: #d4d4d8;
-	--color-border-hover: #a1a1aa;
-	--color-input: #ffffff;
-	--color-card: #ffffff;
-	--color-card-foreground: #18181b;
-	--color-ring: var(--color-orange-600);
+	--color-background: var(--color-paper);
+	--color-foreground: var(--color-ink);
+	--color-foreground-variant: var(--color-ink-2);
+	--color-muted: var(--color-paper-2);
+	--color-muted-foreground: oklch(48% 0.02 250);
+	--color-accent: #ff7518;
+	--color-accent-foreground: #ffffff;
+	--color-accent-hover: #e35c00;
+	--color-border: var(--color-rule);
+	--color-border-hover: var(--color-ink-2);
+	--color-input: var(--color-paper);
+	--color-card: var(--color-paper);
+	--color-card-foreground: var(--color-ink);
+	--color-ring: var(--color-focus);
+	--color-hero: oklch(22% 0.025 250);
+	--color-hero-2: oklch(28% 0.03 250);
+	--color-hero-foreground: oklch(97% 0.018 80);
+	--color-danger: oklch(55% 0.2 25);
+	--color-success: oklch(48% 0.14 155);
 
-	--font-sans: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
-	--font-display: "Source Serif 4", Georgia, "Times New Roman", serif;
-	--font-mono: "JetBrains Mono", ui-monospace, monospace;
+	--font-sans: "Geist Sans", ui-sans-serif, system-ui, sans-serif;
+	--font-display: "Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
+	--font-mono: ui-monospace, monospace;
 
-	--ease-out-crisp: cubic-bezier(0.25, 0, 0, 1);
+	--radius-card: 1.25rem;
+	--radius-pill: 999px;
+	--radius-input: 0.75rem;
+
+	--ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+	--ease-out-crisp: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 @layer base {
@@ -42,6 +57,15 @@
 			"liga" 1;
 	}
 
+	h1,
+	h2,
+	h3,
+	h4 {
+		font-family: var(--font-display);
+		font-style: normal;
+		font-weight: 800;
+	}
+
 	strong,
 	b {
 		font-weight: 600;
@@ -60,8 +84,8 @@
 	opacity: 0;
 	transform: translateY(12px);
 	transition:
-		opacity 400ms var(--ease-out-crisp),
-		transform 400ms var(--ease-out-crisp);
+		opacity var(--dur-long) var(--ease-out),
+		transform var(--dur-long) var(--ease-out);
 }
 
 @media (scripting: none) {
@@ -85,17 +109,48 @@
 }
 
 .is-nav-active {
-	@apply text-accent underline decoration-accent decoration-2 underline-offset-4;
+	@apply bg-accent text-accent-foreground;
+}
+
+.highlight-quote {
+	box-decoration-break: clone;
+	-webkit-box-decoration-break: clone;
+	background-color: transparent;
+	background-image: linear-gradient(var(--color-highlight), var(--color-highlight));
+	background-repeat: no-repeat;
+	background-size: 100% 0.62em;
+	background-position: 0 0.52em;
+	color: inherit;
+	font: inherit;
+	padding-inline: 0.16em;
 }
 
 @utility card-hover-bordered {
-	@apply border border-border bg-card transition-colors duration-150 ease-out-crisp hover:border-accent hover:bg-muted;
+	@apply rounded-card border border-border bg-card transition-[transform,background-color] duration-200 ease-out hover:-translate-y-0.5;
 }
 
 @utility card-hover-flat {
-	@apply transition-colors duration-150 ease-out-crisp hover:bg-muted;
+	@apply rounded-card transition-[transform,background-color] duration-200 ease-out hover:-translate-y-0.5 hover:bg-muted;
 }
 
 @utility card-hover-title {
-	@apply transition-colors duration-150 group-hover/card:text-accent;
+	@apply transition-colors duration-200 group-hover/card:text-accent;
+}
+
+@utility hero-stat-card {
+	@apply rounded-card px-4 py-4 transition-[transform,background-color] duration-200 ease-out hover:-translate-y-0.5 lg:px-5 lg:py-5;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.card-hover-bordered,
+	.card-hover-flat,
+	.hero-stat-card {
+		transition: background-color var(--dur-micro) var(--ease-out);
+	}
+
+	.card-hover-bordered:hover,
+	.card-hover-flat:hover,
+	.hero-stat-card:hover {
+		transform: none;
+	}
 }

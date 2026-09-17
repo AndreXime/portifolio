@@ -6,7 +6,7 @@ interface Props {
 const { class: className = "" } = Astro.props;
 ---
 
-<hr
-  class:list={["h-px w-12 border-0 bg-accent", className]}
+<span
+  class:list={["inline-block h-2 w-10 rounded-pill bg-accent", className]}
   aria-hidden="true"
-/>
+></span>

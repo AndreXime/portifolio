@@ -9,6 +9,8 @@ interface Props {
   class?: string;
   showArrow?: boolean;
   onLight?: boolean;
+  target?: string;
+  rel?: string;
 }
 
 const {
@@ -19,30 +21,32 @@ const {
   class: className = "",
   showArrow = false,
   onLight = false,
+  target,
+  rel,
   ...rest
 } = Astro.props;
 
 const Tag = href ? "a" : "button";
 
 const shared =
-  "inline-flex cursor-pointer items-center justify-center gap-2 whitespace-nowrap rounded-none border font-mono text-xs font-medium uppercase tracking-[0.12em] transition-colors duration-150 ease-out-crisp focus-ring active:translate-y-px disabled:pointer-events-none disabled:opacity-50";
+  "btn inline-flex min-h-11 cursor-pointer items-center justify-center gap-2 whitespace-nowrap rounded-pill border font-sans text-sm font-semibold transition-[transform,background-color,color,border-color,opacity] duration-200 ease-out focus-ring active:translate-y-px disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50";
 
 function secondaryClass(light: boolean) {
   return light
-    ? "border-background bg-transparent px-5 py-3 text-background hover:bg-background hover:text-foreground"
-    : "border-foreground bg-transparent px-5 py-3 text-foreground hover:border-accent hover:bg-accent hover:text-accent-foreground";
+    ? "border-hero-foreground bg-transparent px-5 py-3 text-hero-foreground hover:bg-hero-foreground hover:text-hero"
+    : "border-foreground bg-transparent px-5 py-3 text-foreground hover:bg-foreground hover:text-background";
 }
 
 function ghostClass(light: boolean) {
   return light
-    ? "border-transparent px-4 py-3 text-background/70 hover:text-background"
-    : "border-transparent px-4 py-3 text-muted-foreground hover:text-accent";
+    ? "border-transparent px-3 py-2 text-hero-foreground/80 hover:bg-hero-foreground/10 hover:text-hero-foreground"
+    : "border-transparent px-3 py-2 text-muted-foreground hover:bg-muted hover:text-foreground";
 }
 
 const variantClass: Record<NonNullable<typeof variant>, string> = {
   primary: onLight
     ? "border-background bg-background px-5 py-3 text-foreground hover:bg-transparent hover:text-background"
-    : "border-accent bg-accent px-5 py-3 text-accent-foreground hover:bg-transparent hover:text-accent",
+    : "border-accent bg-accent px-5 py-3 text-accent-foreground hover:bg-accent-hover",
   secondary: secondaryClass(onLight),
   ghost: ghostClass(onLight),
 };
@@ -54,7 +58,39 @@ const variantClass: Record<NonNullable<typeof variant>, string> = {
   href={Tag === "a" ? href : undefined}
   type={Tag === "button" ? type : undefined}
   disabled={Tag === "button" ? disabled : undefined}
+  target={Tag === "a" ? target : undefined}
+  rel={Tag === "a" ? rel : undefined}
 >
+  <span
+    class="btn-spinner hidden size-4 shrink-0 animate-spin rounded-pill border-2 border-current border-t-transparent"
+    aria-hidden="true"
+  ></span>
   <slot />
   {showArrow && <Icon name="arrow" class="size-3.5 shrink-0" />}
 </Tag>
+
+<style>
+  .btn[data-state="loading"] .btn-spinner {
+    display: inline-block;
+  }
+
+  .btn[data-state="error"] {
+    border-color: var(--color-danger);
+    color: var(--color-danger);
+    background: transparent;
+  }
+
+  .btn[data-state="success"] {
+    border-color: var(--color-success);
+    background: var(--color-success);
+    color: var(--color-hero-foreground);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .btn,
+    .btn-spinner {
+      animation: none;
+      transition: none;
+    }
+  }
+</style>

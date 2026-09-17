@@ -47,7 +47,7 @@ hero:
 
 about:
   photoAlt: "André Ximenes, backend developer"
-  quote: "I prefer when TypeScript complains before the user does. Better errors at build time than surprises in production."
+  quote: "I prefer when ==TypeScript== complains before the user does. Better errors at ==build== time than surprises in production."
   paragraphs:
     - >-
       After working fullstack, I leaned into the server side: domain modeling, typed contracts,

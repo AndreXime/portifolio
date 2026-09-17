@@ -47,7 +47,7 @@ hero:
 
 about:
   photoAlt: "André Ximenes, desenvolvedor backend"
-  quote: "Prefiro quando o TypeScript reclama antes do usuário. Melhor erros na build do que surpresa em produção."
+  quote: "Prefiro quando o ==TypeScript== reclama antes do usuário. Melhor erros na ==build== do que surpresa em produção."
   paragraphs:
     - >-
       Depois de atuar como fullstack, acabei preferindo o lado do servidor: modelar domínio,

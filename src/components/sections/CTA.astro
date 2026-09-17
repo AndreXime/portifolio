@@ -10,7 +10,7 @@ const { ui, site } = await getPageContext(Astro.currentLocale);
 
 <section
   id="cta"
-  class="scroll-mt-20 border-b border-accent bg-accent py-16 text-accent-foreground md:py-20 lg:py-24"
+  class="scroll-mt-20 bg-accent py-16 text-accent-foreground md:py-20 lg:py-24"
   aria-labelledby="cta-heading"
 >
   <Container>
@@ -18,11 +18,11 @@ const { ui, site } = await getPageContext(Astro.currentLocale);
       <AccentBar class="bg-accent-foreground" />
       <h2
         id="cta-heading"
-        class="font-display mt-6 max-w-3xl text-2xl font-semibold leading-tight tracking-tight sm:text-3xl md:text-4xl"
+        class="font-display mt-6 text-2xl font-extrabold leading-tight tracking-tight sm:text-3xl md:text-5xl"
       >
         {site.cta.title}
       </h2>
-      <p class="mt-4 max-w-2xl text-base leading-[1.7] text-accent-foreground/90 md:text-lg">
+      <p class="mt-4 max-w-2xl text-base leading-[1.7] text-accent-foreground/90">
         {site.cta.body}
       </p>
       <div

@@ -21,23 +21,22 @@ const enHref = switchLocalePath(Astro.url.pathname, "en");
     href={ptHref}
     data-locale-switch="pt"
     class:list={[
-      "px-2 py-1 font-mono text-xs uppercase tracking-widest transition-colors duration-150 focus-ring",
+      "rounded-pill px-3 py-1.5 text-sm font-semibold transition-colors duration-200 focus-ring",
       locale === "pt"
-        ? "text-foreground"
+        ? "bg-accent text-accent-foreground"
         : "text-muted-foreground hover:text-foreground",
     ]}
     aria-current={locale === "pt" ? "page" : undefined}
   >
     {ui.language.pt}
   </a>
-  <span class="text-muted-foreground" aria-hidden="true">|</span>
   <a
     href={enHref}
     data-locale-switch="en"
     class:list={[
-      "px-2 py-1 font-mono text-xs uppercase tracking-widest transition-colors duration-150 focus-ring",
+      "rounded-pill px-3 py-1.5 text-sm font-semibold transition-colors duration-200 focus-ring",
       locale === "en"
-        ? "text-foreground"
+        ? "bg-accent text-accent-foreground"
         : "text-muted-foreground hover:text-foreground",
     ]}
     aria-current={locale === "en" ? "page" : undefined}
