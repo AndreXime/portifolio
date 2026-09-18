@@ -3,7 +3,7 @@ import type { Locale } from "./locale";
 
 /** Converte `/projetos/x` em `projetos/x`; home vira `undefined` (API do Astro). */
 function asRoutePath(path: string): string | undefined {
-	const clean = path.replace(/^\/+|\/+$/g, "");
+	const clean = path.replace(/^\/+/, "").replace(/\/+$/, "");
 	return clean.length === 0 ? undefined : clean;
 }
 

@@ -55,7 +55,7 @@ function waveConfig(
 } {
 	const isDesktop = window.matchMedia("(min-width: 1024px)").matches;
 	const spill = Math.max(wave.offsetHeight - hero.offsetHeight, 1);
-	const restRatio = isDesktop ? 0.5 : 0.5;
+	const restRatio = 0.5;
 	const endY = 1 - (spill * restRatio) / wave.offsetHeight;
 	const startY = -0.08;
 

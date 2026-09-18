@@ -1,7 +1,10 @@
 import { type ChildProcess, spawn, spawnSync } from "node:child_process";
+import { dirname, join } from "node:path";
+import { fileURLToPath } from "node:url";
 
 const PREVIEW_PORT = 4321;
 const NODE_ENV = { ASTRO_NODE: "1" };
+const ASTRO_CLI = join(dirname(fileURLToPath(import.meta.resolve("astro/package.json"))), "bin", "astro.mjs");
 
 let server: ChildProcess | null = null;
 const localUrl = `http://localhost:${PREVIEW_PORT}`;
@@ -10,7 +13,7 @@ export async function startPreviewServer(): Promise<string> {
 	await ensureBuild();
 
 	console.log(`Iniciando servidor em ${localUrl}`);
-	server = spawn("npx", ["astro", "preview", "--port", String(PREVIEW_PORT)], {
+	server = spawn(process.execPath, [ASTRO_CLI, "preview", "--port", String(PREVIEW_PORT)], {
 		stdio: "pipe",
 		detached: true,
 		env: { ...process.env, ...NODE_ENV },
@@ -58,7 +61,7 @@ function stopProcess(child: ChildProcess): void {
 
 async function ensureBuild(): Promise<void> {
 	console.log("Executando build");
-	const result = spawnSync("npm", ["run", "build"], {
+	const result = spawnSync(process.execPath, [ASTRO_CLI, "build"], {
 		stdio: "pipe",
 		env: { ...process.env, ...NODE_ENV },
 	});

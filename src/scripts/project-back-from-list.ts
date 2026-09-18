@@ -4,8 +4,8 @@ export function initProjectBackFromList(): void {
 		return;
 	}
 
-	const host = document.querySelector("[data-projects-index-href]");
-	const listHref = host?.getAttribute("data-projects-index-href");
+	const host = document.querySelector<HTMLElement>("[data-projects-index-href]");
+	const listHref = host?.dataset.projectsIndexHref;
 	if (!listHref) {
 		return;
 	}

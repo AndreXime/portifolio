@@ -31,6 +31,11 @@ function readFormMessage(form: HTMLFormElement, key: ContactMessageKey): string 
 	return form.dataset[MESSAGE_DATASET_KEYS[key]]?.trim() ?? "";
 }
 
+function readFormField(fd: FormData, name: string): string {
+	const value = fd.get(name);
+	return typeof value === "string" ? value : "";
+}
+
 function resolveApiErrorMessage(form: HTMLFormElement, data: unknown): string {
 	const code =
 		typeof data === "object" && data !== null && "error" in data && typeof data.error === "string" ? data.error : "";
@@ -76,21 +81,21 @@ export function initContactForm(): void {
 		}
 
 		const fd = new FormData(form);
-		const honeypot = String(fd.get("website") ?? "").trim();
+		const honeypot = readFormField(fd, "website").trim();
 		if (honeypot.length > 0) {
 			setStatus(readFormMessage(form, "errorGeneric"), "error");
 			return;
 		}
 
-		const loadedAt = Number(fd.get("_ts"));
+		const loadedAt = Number(readFormField(fd, "_ts"));
 		if (!Number.isFinite(loadedAt) || Date.now() - loadedAt < MIN_SUBMIT_MS) {
 			setStatus(readFormMessage(form, "errorTooFast"), "error");
 			return;
 		}
 
-		const name = String(fd.get("name") ?? "").trim();
-		const email = String(fd.get("email") ?? "").trim();
-		const message = String(fd.get("message") ?? "").trim();
+		const name = readFormField(fd, "name").trim();
+		const email = readFormField(fd, "email").trim();
+		const message = readFormField(fd, "message").trim();
 
 		const submitBtn = form.querySelector('button[type="submit"]');
 		if (submitBtn instanceof HTMLButtonElement) {

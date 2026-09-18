@@ -3,7 +3,7 @@ const SECTION_IDS = ["sobre", "experiencias", "formacoes", "tecnologias", "proje
 function setActiveSection(sectionId: string | null) {
 	const links = document.querySelectorAll<HTMLElement>("[data-nav-section]");
 	for (const link of links) {
-		const isActive = link.getAttribute("data-nav-section") === sectionId;
+		const isActive = link.dataset.navSection === sectionId;
 		link.classList.toggle("is-nav-active", isActive);
 		if (isActive) {
 			link.setAttribute("aria-current", "location");

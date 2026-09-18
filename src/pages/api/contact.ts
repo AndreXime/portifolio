@@ -60,7 +60,7 @@ function isSpamPayload(data: z.infer<typeof contactBodySchema>): boolean {
 		return true;
 	}
 
-	const loadedAt = typeof data._ts === "string" ? Number(data._ts) : (data._ts ?? NaN);
+	const loadedAt = typeof data._ts === "string" ? Number(data._ts) : (data._ts ?? Number.NaN);
 	if (!Number.isFinite(loadedAt) || Date.now() - loadedAt < MIN_SUBMIT_MS) {
 		return true;
 	}
@@ -98,6 +98,7 @@ export const POST: APIRoute = async ({ request }) => {
 
 		const transporter = nodemailer.createTransport({
 			service: "gmail",
+			secure: true,
 			auth: {
 				user: emailUser,
 				pass: emailPass,

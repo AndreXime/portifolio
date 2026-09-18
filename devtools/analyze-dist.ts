@@ -154,7 +154,7 @@ function hasRobotsNoindex(content: Buffer): boolean {
 	const tags = html.match(/<meta[^>]*>/gi) ?? [];
 	for (const tag of tags) {
 		if (!/name\s*=\s*["']robots["']/i.test(tag)) continue;
-		const robotsContent = tag.match(/content\s*=\s*["']([^"']*)["']/i)?.[1] ?? "";
+		const robotsContent = /content\s*=\s*["']([^"']*)["']/i.exec(tag)?.[1] ?? "";
 		if (/noindex/i.test(robotsContent)) return true;
 	}
 	return false;

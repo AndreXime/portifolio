@@ -72,7 +72,7 @@ async function runLighthouseAudit(url?: string): Promise<LighthouseReport> {
 function printLighthouseReport(report: LighthouseReport): void {
 	console.log("Resultados:");
 	for (const category of report.categories) {
-		const scoreLabel = category.score === null ? "n/a" : category.score;
+		const scoreLabel = category.score ?? "n/a";
 		console.log(`  ${category.title}: ${scoreLabel}`);
 
 		if (category.score === 100) continue;
@@ -106,4 +106,4 @@ async function main() {
 	}
 }
 
-main();
+await main();

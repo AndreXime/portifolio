@@ -4,7 +4,11 @@ import type { Locale } from "./i18n/locale";
 type LocaleKeyedCollection = "portfolio" | "experiences" | "formations" | "technologies";
 
 async function requireEntry<C extends LocaleKeyedCollection>(collection: C, locale: Locale) {
-	const entry = await getEntry(collection, locale);
+	const pending = getEntry(collection, locale);
+	if (!pending) {
+		throw new Error(`${collection} não encontrado para locale "${locale}".`);
+	}
+	const entry = await pending;
 	if (!entry) {
 		throw new Error(`${collection} não encontrado para locale "${locale}".`);
 	}
@@ -54,7 +58,11 @@ export async function getProjects(locale: Locale) {
 }
 
 export async function getProject(locale: Locale, slug: string) {
-	const entry = await getEntry("projects", `${locale}/${slug}`);
+	const pending = getEntry("projects", `${locale}/${slug}`);
+	if (!pending) {
+		return undefined;
+	}
+	const entry = await pending;
 	if (!entry) {
 		return undefined;
 	}
