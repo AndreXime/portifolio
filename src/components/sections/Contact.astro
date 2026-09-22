@@ -45,7 +45,7 @@ const mailto = `mailto:${site.email}?subject=${encodeURIComponent(ui.contact.mai
         <Reveal staggerMs={100}>
           <form
             id="contact-form"
-            class="card-hover-bordered relative space-y-6 p-6 md:p-8"
+            class="bg-muted card-hover-bordered relative space-y-6 p-6 md:p-8"
             data-locale={locale}
             data-msg-error-generic={ui.contact.errorGeneric}
             data-msg-error-fast={ui.contact.errorTooFast}
@@ -103,7 +103,7 @@ const mailto = `mailto:${site.email}?subject=${encodeURIComponent(ui.contact.mai
 
       <aside class="min-w-0 lg:col-span-5">
         <Reveal staggerMs={140}>
-          <div class="overflow-hidden rounded-card border border-border bg-card">
+          <div class="bg-muted overflow-hidden rounded-card border border-border">
             <div class="min-w-0 p-6 md:p-8">
               <h3 class="text-sm font-semibold text-muted-foreground">
                 {ui.contact.emailHeading}
@@ -123,7 +123,7 @@ const mailto = `mailto:${site.email}?subject=${encodeURIComponent(ui.contact.mai
               <Button
                 href={site.resumePdfUrl}
                 variant="secondary"
-                class="mt-4 w-full justify-center"
+                class="mt-4 w-full justify-center bg-background! hover:bg-foreground!"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -156,7 +156,7 @@ const mailto = `mailto:${site.email}?subject=${encodeURIComponent(ui.contact.mai
                 <Button
                   href={site.githubUrl}
                   variant="secondary"
-                  class="w-full justify-center"
+                  class="w-full justify-center bg-background! hover:bg-foreground!"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -166,7 +166,7 @@ const mailto = `mailto:${site.email}?subject=${encodeURIComponent(ui.contact.mai
                 <Button
                   href={site.linkedinUrl}
                   variant="secondary"
-                  class="w-full justify-center"
+                  class="w-full justify-center bg-background! hover:bg-foreground!"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
