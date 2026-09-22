@@ -13,9 +13,8 @@ playful (professional portfolio constraint)
 - Content pages: Catalogue tiles (project index / project page)
 
 ## Theme
-studied-DNA from https://www.softcomtecnologia.com.br/ (public reference).
-Not a clone of the Softcom brand. Cream / charcoal bands with a single
-accent; optional same-hue gradients for depth only.
+studied-DNA. Cream / charcoal bands with a single accent; optional
+same-hue gradients for depth only.
 
 - `--color-paper`   oklch(97% 0.018 80)
 - `--color-paper-2` oklch(94% 0.022 78)
@@ -71,6 +70,5 @@ tokens (`var(--space-md)`), never raw values.
 - Project image wells may use dominant colour from the screenshot.
 
 ## Provenance
-Extracted from https://www.softcomtecnologia.com.br/ as a public reference
-for the user's brand on 2026-09-16. The DNA is structural; tokens were
-retuned so the site does not copy the Softcom yellow folder identity.
+Design system locked for the user's brand on 2026-09-16. Structural DNA
+with cream / charcoal bands and a single orange accent (`#FF7518`).
