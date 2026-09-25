@@ -18,21 +18,21 @@ technologies:
   - name: "PostgreSQL & Redis"
     role: "Databases"
     icons: ["postgresql", "redis"]
-  - name: "Prisma"
-    role: "ORM"
-    icons: ["prisma"]
+  - name: "Prisma & BullMQ"
+    role: "ORM and messaging"
+    icons: ["prisma", "bullmq"]
+  - name: "S3 & SMTP"
+    role: "Object Storage and Mail Transfer"
+    icons: ["amazons3", "amazonsimpleemailservice"]
   - name: "Git & GitHub"
     role: "Version control"
     icons: ["git", "github"]
   - name: "Docker & Linux"
     role: "Infrastructure"
     icons: ["docker", "linux"]
-  - name: "BullMQ"
-    role: "Messaging and queues"
-    icons: ["bullmq"]
-  - name: "Jest & React Testing Library"
+  - name: "Jest, Vitest & React Testing Library"
     role: "Testing"
-    icons: ["jest", "testinglibrary"]
+    icons: ["jest", "vitest", "testinglibrary"]
   - name: "GitHub Actions & AWS"
     role: "Automation and deploy"
     icons: ["githubactions", "amazonaws"]
