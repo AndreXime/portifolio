@@ -1,7 +1,8 @@
 ---
-order: 1
+order: 2
+experimental: true
 title: "Full stack ecommerce: Hono API, Astro storefront, and order domain"
-shortDescription: "I built a full stack ecommerce in a monorepo: REST API in Hono (Bun), SSR storefront in Astro, and persistence in PostgreSQL with Prisma and Redis. The core is JWT session in cookies with refresh, transactional orders with conditional stock, CEP-based shipping, storefront/admin RBAC, and OpenAPI contract with Zod. The storefront already creates real orders; payment is still simulated in the presentation layer."
+shortDescription: "Full stack ecommerce lab in a monorepo to practice API, storefront, and order domain together. REST API in Hono (Bun), SSR storefront in Astro, and persistence in PostgreSQL with Prisma and Redis. The core covers JWT session in cookies with refresh, atomic orders with stock, CEP-based shipping, and an OpenAPI contract with Zod. The storefront already creates real orders; payment is still simulated in the presentation layer."
 tech: ["TypeScript", "Hono", "Astro", "PostgreSQL", "Redis", "Prisma"]
 imageUrl: "../../../assets/projects/ecommerce.png"
 link: "https://ecommerce.andreximenes.xyz"

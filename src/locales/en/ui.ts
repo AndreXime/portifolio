@@ -27,7 +27,7 @@ export const en = {
 	},
 	projects: {
 		title: "Projects",
-		subtitle: "Apps, APIs, and experiments",
+		subtitle: "Real business and technical labs",
 		githubCta: "See my GitHub",
 		stackAria: "Project stack",
 		viewDetails: "View details",
@@ -38,8 +38,6 @@ export const en = {
 		subtitle: "All work in more detail",
 		seoDescription: "Full list of projects from André Ximenes' portfolio.",
 		backHome: "Back to home",
-		experimentalTitle: "Experimental",
-		experimentalSubtitle: "Prototypes, tools, and technical experiments",
 	},
 	technologies: {
 		title: "Technologies",

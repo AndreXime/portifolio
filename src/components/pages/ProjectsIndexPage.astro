@@ -15,37 +15,12 @@ import { homeHash } from "../../lib/i18n/paths";
 const { locale, ui, site } = await getPageContext(Astro.currentLocale);
 const projects = await getProjects(locale);
 
-const mainProjects = projects.filter((project) => !project.data.experimental);
-const experimentalProjects = projects.filter((project) => project.data.experimental);
-
 const homeHref = homeHash(locale, "inicio");
 
-const sections = [
-  {
-    key: "main",
-    title: null as string | null,
-    subtitle: null as string | null,
-    headingId: null as string | null,
-    items: mainProjects,
-  },
-  {
-    key: "experimental",
-    title: ui.projectsIndex.experimentalTitle,
-    subtitle: ui.projectsIndex.experimentalSubtitle,
-    headingId: "experimental-projects-heading",
-    items: experimentalProjects,
-  },
-].filter((section) => section.items.length > 0);
-
-let revealCursor = 0;
-const sectionsWithReveal = sections.map((section) => {
-  const items = section.items.map((project) => {
-    const revealIndex = revealCursor;
-    revealCursor += 1;
-    return { project, revealIndex };
-  });
-  return { ...section, items };
-});
+const projectsWithReveal = projects.map((project, revealIndex) => ({
+  project,
+  revealIndex,
+}));
 ---
 
 <Layout
@@ -80,55 +55,28 @@ const sectionsWithReveal = sections.map((section) => {
         </p>
       </div>
 
-      {
-        sectionsWithReveal.map((section) => (
-          <section
-            class:list={[section.title && "mt-20 lg:mt-24"]}
-            aria-labelledby={section.headingId ?? undefined}
-          >
-            {section.title && section.headingId && (
-              <div class="max-w-3xl">
-                <AccentBar class="mb-6" />
-                <h2
-                  id={section.headingId}
-                  class="font-display text-2xl font-extrabold leading-tight tracking-tight text-foreground sm:text-3xl md:text-4xl"
-                >
-                  {section.title}
-                </h2>
-                {section.subtitle && (
-                  <p class="mt-4 text-sm font-semibold text-muted-foreground">
-                    {section.subtitle}
-                  </p>
-                )}
-              </div>
-            )}
-
-            <ul
-              class:list={[
-                "list-none grid grid-cols-1 gap-6 lg:grid-cols-2 lg:gap-8",
-                section.title ? "mt-10" : "mt-14 lg:mt-16",
-              ]}
-            >
-              {section.items.map(({ project, revealIndex }) => (
-                <li class="min-h-0 h-full">
-                  <Reveal staggerMs={revealIndex * 60} class="h-full min-h-0">
-                    <ProjectTile
-                      project={project}
-                      href={getProjectPagePath(project.slug, locale, {
-                        fromList: true,
-                      })}
-                      ctaLabel={ui.projects.viewDetails}
-                      stackAria={ui.projects.stackAria}
-                      imageAltTemplate={ui.projectPage.imageAlt}
-                      eager={revealIndex < 2}
-                    />
-                  </Reveal>
-                </li>
-              ))}
-            </ul>
-          </section>
-        ))
-      }
+      <ul
+        class="mt-14 list-none grid grid-cols-1 gap-6 lg:mt-16 lg:grid-cols-2 lg:gap-8"
+      >
+        {
+          projectsWithReveal.map(({ project, revealIndex }) => (
+            <li class="min-h-0 h-full">
+              <Reveal staggerMs={revealIndex * 60} class="h-full min-h-0">
+                <ProjectTile
+                  project={project}
+                  href={getProjectPagePath(project.slug, locale, {
+                    fromList: true,
+                  })}
+                  ctaLabel={ui.projects.viewDetails}
+                  stackAria={ui.projects.stackAria}
+                  imageAltTemplate={ui.projectPage.imageAlt}
+                  eager={revealIndex < 2}
+                />
+              </Reveal>
+            </li>
+          ))
+        }
+      </ul>
     </Container>
   </main>
   <Footer />

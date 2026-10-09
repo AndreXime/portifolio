@@ -2,7 +2,7 @@
 order: 4
 experimental: true
 title: "API de mocks para prototipar UIs: CSV no SQLite, filtros e contratos OpenAPI"
-shortDescription: "Eu construí o Mockê, uma API pública de mocks com datasets prontos (produtos, CEPs, filmes e mais) para prototipar frontends sem backend real. O núcleo é Hono no Bun com cache SQLite: sync atômico por hash do manifesto em data/, filtros e busca em SQL, OpenAPI tipado, mutações fake e auth mock. A reimportação ocorre só no boot quando os arquivos mudam; não há watch em runtime."
+shortDescription: "Lab de API pública de mocks com datasets prontos (produtos, CEPs, filmes e mais) para prototipar frontends sem backend real. O núcleo é Hono no Bun com cache SQLite alimentado pelos arquivos em data/. Tem filtros, busca e sort em SQL, OpenAPI tipado, mutações fake e auth mock. A reimportação só roda no boot quando o manifesto muda, sem watch em runtime."
 tech: ["Bun", "Hono", "SQLite", "Zod", "OpenAPI", "Docker"]
 imageUrl: "../../../assets/projects/mocke.png"
 github: "https://github.com/AndreXime/mocke"

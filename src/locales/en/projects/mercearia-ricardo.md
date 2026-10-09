@@ -1,7 +1,7 @@
 ---
-order: 2
+order: 0
 title: "Grocery storefront with WhatsApp CTA on Cloudflare Workers Free"
-shortDescription: "I built the Mercearia Ricardo Aragão storefront: editable catalog and WhatsApp chat, no checkout or inventory. Astro SSR on Workers Free, photos on R2, and a long edge cache invalidated when the owner saves. The React admin lets the shop update copy and shelf on its own, with auth tuned to the Free plan CPU ceiling."
+shortDescription: "Storefront for a real business, Mercearia Ricardo Aragão: editable catalog and WhatsApp chat, no checkout or inventory. The owner updates copy, photos, and the shelf from the admin without needing a developer for every change. It runs as Astro SSR on Workers Free, with photos on R2 and a long edge cache invalidated on save. Auth and ops were tuned to the Free plan CPU and quota limits, prioritizing zero cost and simple maintenance."
 tech: ["Astro", "Cloudflare Workers", "D1", "R2", "React", "Tailwind CSS"]
 imageUrl: "../../../assets/projects/mercearia-ricardo.png"
 link: "https://mercearia-ricardo.sitely.page"

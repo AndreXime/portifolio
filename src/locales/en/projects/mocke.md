@@ -2,7 +2,7 @@
 order: 4
 experimental: true
 title: "Mock API for prototyping UIs: CSV into SQLite, filters, and OpenAPI contracts"
-shortDescription: "I built Mockê, a public mock API with ready-made datasets (products, postal codes, movies, and more) to prototype frontends without a real backend. The core is Hono on Bun with SQLite cache: atomic sync by hash of the manifest under data/, SQL filters and search, typed OpenAPI, fake mutations, and mock auth. Reimport happens only at boot when the files change; there is no runtime watch."
+shortDescription: "Lab for a public mock API with ready-made datasets (products, postal codes, movies, and more) to prototype frontends without a real backend. The core is Hono on Bun with a SQLite cache fed by files under data/. It has SQL filters, search and sort, typed OpenAPI, fake mutations, and mock auth. Reimport runs only at boot when the manifest changes, with no runtime watch."
 tech: ["Bun", "Hono", "SQLite", "Zod", "OpenAPI", "Docker"]
 imageUrl: "../../../assets/projects/mocke.png"
 github: "https://github.com/AndreXime/mocke"

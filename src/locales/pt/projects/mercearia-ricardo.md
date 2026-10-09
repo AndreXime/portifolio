@@ -1,7 +1,7 @@
 ---
-order: 2
+order: 0
 title: "Vitrine de mercearia com CTA no WhatsApp, no plano Free da Cloudflare"
-shortDescription: "Eu construí a vitrine da Mercearia Ricardo Aragão: catálogo editável e conversa no WhatsApp, sem checkout nem estoque. Astro SSR no Workers Free, fotos no R2 e cache longo na borda invalidado quando o dono salva. O admin em React deixa a loja atualizar textos e prateleira sozinha, com autenticação calibrada ao teto de CPU do plano Free."
+shortDescription: "Vitrine para um negócio real, a Mercearia Ricardo Aragão: catálogo editável e conversa no WhatsApp, sem checkout nem estoque. O dono atualiza textos, fotos e prateleira pelo admin, sem depender de desenvolvedor a cada mudança. Roda em Astro SSR no Workers Free, com fotos no R2 e cache longo na borda invalidado no save. Auth e operação foram calibrados ao teto de CPU e às cotas do plano Free, priorizando custo zero e manutenção simples."
 tech: ["Astro", "Cloudflare Workers", "D1", "R2", "React", "Tailwind CSS"]
 imageUrl: "../../../assets/projects/mercearia-ricardo.png"
 link: "https://mercearia-ricardo.sitely.page"

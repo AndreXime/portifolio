@@ -2,7 +2,7 @@
 order: 3
 experimental: true
 title: "Corporate chat with local RAG: indexed policies without going to the cloud"
-shortDescription: "I built a corporate chatbot with local RAG to query policies and runbooks without sending the corpus to external APIs. I used Bun, Hono, React, Ollama, and Chroma, with hybrid retrieval (vector plus lexical rerank and fallback) and NDJSON streaming with cancellation. History is off by default so it does not pollute the embed on small models."
+shortDescription: "Lab for a local RAG chatbot to query policies and runbooks without sending the corpus to external APIs. Stack on Bun, Hono, React, Ollama, and Chroma, with embeddings and generation kept in the local environment. Retrieval is hybrid: vector search with lexical rerank and fallback when similarity is weak. NDJSON streaming with cancellation, and history off by default so it does not pollute the embed on small models."
 tech: ["Bun", "Hono", "React", "Ollama", "ChromaDB", "LangChain"]
 imageUrl: "../../../assets/projects/ollama-oracle.png"
 github: "https://github.com/AndreXime/ollama-oracle"

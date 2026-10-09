@@ -1,7 +1,8 @@
 ---
-order: 1
+order: 2
+experimental: true
 title: "Ecommerce full stack: API Hono, loja Astro e domínio de pedidos"
-shortDescription: "Eu construí um ecommerce full stack em monorepo: API REST em Hono (Bun), loja SSR em Astro e persistência em PostgreSQL com Prisma e Redis. O núcleo são sessão JWT em cookies com refresh, pedidos em transação com estoque condicional, frete por CEP, RBAC vitrine/admin e contrato OpenAPI com Zod. A loja já cria pedidos de verdade; o pagamento ainda é simulado na apresentação."
+shortDescription: "Lab full stack de ecommerce em monorepo para exercitar API, vitrine e domínio de pedidos juntos. API REST em Hono (Bun), loja SSR em Astro e persistência em PostgreSQL com Prisma e Redis. O núcleo cobre sessão JWT em cookies com refresh, pedido atômico com estoque, frete por CEP e contrato OpenAPI com Zod. A loja já cria pedidos de verdade; o pagamento ainda é simulado na apresentação."
 tech: ["TypeScript", "Hono", "Astro", "PostgreSQL", "Redis", "Prisma"]
 imageUrl: "../../../assets/projects/ecommerce.png"
 link: "https://ecommerce.andreximenes.xyz"
