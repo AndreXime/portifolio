@@ -4,6 +4,8 @@ Portfólio pessoal em Astro com foco em performance, legibilidade e conversão. 
 
 **Acesse:** [https://andreximenes.xyz](https://andreximenes.xyz)
 
+<video src="./public/videos/intro.mp4" controls muted playsinline width="100%"></video>
+
 ## Stack
 
 - **[Astro](https://astro.build/)** - SSG com adapter Vercel e rota de API para contato
@@ -74,7 +76,7 @@ src/
     └── api/contact.ts # prerender: false (serverless na Vercel)
 ```
 
-Na raiz: `middleware.ts` (redirect de locale na `/`) e `devtools/generate-og.ts` (OG).
+Na raiz: `middleware.ts` (redirect de locale na `/`), `devtools/generate-og.ts` (OG) e `intro-video/` (fonte Remotion da intro). O MP4 versionado fica em `public/videos/intro.mp4`.
 
 ## Desenvolvimento
 

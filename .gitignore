@@ -45,3 +45,7 @@ dist
 .cursorrules
 *.html
 docs
+
+# intro-video (Remotion)
+intro-video/node_modules
+intro-video/out

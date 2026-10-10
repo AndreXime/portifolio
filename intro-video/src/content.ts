@@ -1,0 +1,53 @@
+export const content = {
+	name: "André Ximenes",
+	role: "Desenvolvedor Backend TypeScript",
+	siteUrl: "andreximenes.xyz",
+	ctaHeadline: "Vamos construir algo juntos?",
+	links: [
+		{ label: "Portfólio", url: "andreximenes.xyz" },
+		{ label: "LinkedIn", url: "linkedin.com/in/andreximenesdev" },
+		{ label: "GitHub", url: "github.com/AndreXime" },
+	],
+	experiencesLabel: "Experiência",
+	technologiesHeadline: "Algumas das tecnologias que domino",
+	projectsLabel: "Projetos de laboratório pessoais",
+	projects: [
+		{
+			name: "Deploy Talent",
+			tagline: "ATS multi-tenant: carreiras, pipeline e auditoria",
+			highlights: ["NestJS + Next.js + Prisma", "Isolamento por tenant", "Pipeline por vaga com auditoria"],
+			url: "deploy-talent.andreximenes.xyz",
+		},
+		{
+			name: "Ecommerce",
+			tagline: "API Hono, loja Astro e domínio de pedidos",
+			highlights: ["Hono + Bun + Prisma", "Pedido atômico com estoque", "JWT, Redis e OpenAPI"],
+			url: "ecommerce.andreximenes.xyz",
+		},
+	],
+	experience: {
+		role: "Desenvolvedor Fullstack",
+		company: "Stackup Software",
+		period: "10/2025 — 02/2026",
+		highlights: ["Lambda + S3 · OCR e DOCX→PDF", "PostgreSQL + Prisma em produção", "Pre-signed URLs · payloads −70%"],
+	},
+	/** Slugs simple-icons (ícone + título na cena de tech). */
+	techIconSlugs: [
+		"typescript",
+		"nodedotjs",
+		"bun",
+		"nestjs",
+		"postgresql",
+		"redis",
+		"prisma",
+		"docker",
+		"githubactions",
+		"git",
+		"github",
+		"nextdotjs",
+		"astro",
+		"vite",
+		"tailwindcss",
+		"jest",
+	],
+} as const;
