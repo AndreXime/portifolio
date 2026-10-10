@@ -4,7 +4,7 @@ Portfólio pessoal em Astro com foco em performance, legibilidade e conversão. 
 
 **Acesse:** [https://andreximenes.xyz](https://andreximenes.xyz)
 
-<video src="./public/videos/intro.mp4" controls muted playsinline width="100%"></video>
+<video src="https://github.com/user-attachments/assets/07a05c74-e649-4c27-a191-a27bef41ea44" controls muted playsinline width="100%"></video>
 
 ## Stack
 
