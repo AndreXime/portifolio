@@ -7,7 +7,6 @@ export const prerender = false;
 
 export type ContactErrorCode = "validation" | "spam" | "config" | "server";
 
-const MIN_SUBMIT_MS = 3000;
 const WEB3FORMS_ENDPOINT = "https://api.web3forms.com/submit";
 
 const contactBodySchema = z.object({
@@ -15,7 +14,6 @@ const contactBodySchema = z.object({
 	email: z.email().trim().min(1),
 	message: z.string().trim().min(1),
 	website: z.string().optional(),
-	_ts: z.union([z.number(), z.string()]).optional(),
 	locale: z.string().optional(),
 });
 
@@ -29,19 +27,6 @@ function jsonError(error: ContactErrorCode, status: number): Response {
 		status,
 		headers: { "Content-Type": "application/json" },
 	});
-}
-
-function isSpamPayload(data: z.infer<typeof contactBodySchema>): boolean {
-	if ((data.website ?? "").trim().length > 0) {
-		return true;
-	}
-
-	const loadedAt = typeof data._ts === "string" ? Number(data._ts) : (data._ts ?? Number.NaN);
-	if (!Number.isFinite(loadedAt) || Date.now() - loadedAt < MIN_SUBMIT_MS) {
-		return true;
-	}
-
-	return false;
 }
 
 function isWeb3FormsResponse(value: unknown): value is Web3FormsResponse {
@@ -63,7 +48,7 @@ export const POST: APIRoute = async ({ request }) => {
 			return jsonError("validation", 400);
 		}
 
-		if (isSpamPayload(parsed.data)) {
+		if ((parsed.data.website ?? "").trim().length > 0) {
 			return jsonError("spam", 400);
 		}
 

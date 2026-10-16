@@ -44,11 +44,7 @@ export function initContactForm(): void {
 		return;
 	}
 
-	const tsInput = form.querySelector<HTMLInputElement>("[data-contact-ts]");
-	if (tsInput) {
-		tsInput.value = String(Date.now());
-	}
-
+	const readyAt = Date.now() + MIN_SUBMIT_MS;
 	const labelEl = form.querySelector("[data-contact-submit-label]");
 	const defaultLabel = labelEl?.textContent?.trim() || readFormMessage(form, "submit");
 	const locale = form.dataset.locale?.trim() || "pt";
@@ -78,8 +74,7 @@ export function initContactForm(): void {
 			return;
 		}
 
-		const loadedAt = Number(readFormField(fd, "_ts"));
-		if (!Number.isFinite(loadedAt) || Date.now() - loadedAt < MIN_SUBMIT_MS) {
+		if (Date.now() < readyAt) {
 			setStatus(readFormMessage(form, "errorTooFast"), "error");
 			return;
 		}
@@ -102,14 +97,7 @@ export function initContactForm(): void {
 			const res = await fetch("/api/contact", {
 				method: "POST",
 				headers: { "Content-Type": "application/json" },
-				body: JSON.stringify({
-					name,
-					email,
-					message,
-					website: honeypot,
-					_ts: loadedAt,
-					locale,
-				}),
+				body: JSON.stringify({ name, email, message, website: honeypot, locale }),
 			});
 			const data: unknown = await res.json().catch(() => ({}));
 
@@ -126,9 +114,6 @@ export function initContactForm(): void {
 			}
 			setStatus(readFormMessage(form, "success"), "success");
 			form.reset();
-			if (tsInput) {
-				tsInput.value = String(Date.now());
-			}
 		} catch {
 			setStatus(readFormMessage(form, "errorNetwork"), "error");
 		} finally {
