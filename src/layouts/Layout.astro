@@ -137,5 +137,29 @@ const localeRedirectOnRoot = Astro.url.pathname === "/";
   </head>
   <body class="min-h-screen overflow-x-clip pt-0">
     <slot />
+    <script is:inline>
+      (function () {
+        function injectCloudflareBeacon() {
+          var script = document.createElement("script");
+          script.type = "module";
+          script.src = "https://static.cloudflareinsights.com/beacon.min.js";
+          script.setAttribute(
+            "data-cf-beacon",
+            '{"token":"aaa3a3da428b46fab8e46c95cacceeb3"}',
+          );
+          document.body.appendChild(script);
+        }
+
+        function scheduleBeacon() {
+          if ("requestIdleCallback" in window) {
+            requestIdleCallback(injectCloudflareBeacon, { timeout: 5000 });
+            return;
+          }
+          setTimeout(injectCloudflareBeacon, 100);
+        }
+
+        window.addEventListener("load", scheduleBeacon, { once: true });
+      })();
+    </script>
   </body>
 </html>
