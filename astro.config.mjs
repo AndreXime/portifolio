@@ -1,18 +1,16 @@
 // @ts-check
 
-import node from "@astrojs/node";
+import cloudflare from "@astrojs/cloudflare";
 import sitemap from "@astrojs/sitemap";
-import vercel from "@astrojs/vercel";
 import tailwindcss from "@tailwindcss/vite";
 import { defineConfig, envField } from "astro/config";
 import icon from "astro-icon";
-
-const isNode = process.env.ASTRO_NODE === "1";
 
 // https://astro.build/config
 export default defineConfig({
 	output: "static",
 	site: "https://andreximenes.xyz",
+	session: false,
 	i18n: {
 		defaultLocale: "pt",
 		locales: ["pt", "en"],
@@ -23,19 +21,9 @@ export default defineConfig({
 	},
 	env: {
 		schema: {
-			EMAIL_USER: envField.string({
+			WEB3FORMS_ACCESS_KEY: envField.string({
 				context: "server",
 				access: "secret",
-				optional: true,
-			}),
-			EMAIL_PASS: envField.string({
-				context: "server",
-				access: "secret",
-				optional: true,
-			}),
-			ASTRO_NODE: envField.string({
-				context: "server",
-				access: "public",
 				optional: true,
 			}),
 		},
@@ -63,5 +51,7 @@ export default defineConfig({
 			assetsInlineLimit: 8000,
 		},
 	},
-	adapter: isNode ? node({ mode: "standalone" }) : vercel(),
+	adapter: cloudflare({
+		imageService: "compile",
+	}),
 });

@@ -3,53 +3,65 @@ import MainLayout from "@/layouts/Layout.astro";
 import Container from "@/components/ui/Container.astro";
 import Button from "@/components/ui/Button.astro";
 import { getSite } from "../lib/content";
-import { isLocale } from "../lib/i18n/locale";
-import { resolveLocale, t } from "../locales";
+import { t } from "../locales";
 import { localizedPath } from "../lib/i18n/paths";
 import "../styles/global.css";
 
-export const prerender = false;
-
-function localeFromPathname(pathname: string): string | undefined {
-  const firstSegment = pathname.split("/").filter(Boolean)[0];
-  if (firstSegment && isLocale(firstSegment)) {
-    return firstSegment;
-  }
-  return undefined;
-}
-
-const locale = resolveLocale(
-  localeFromPathname(Astro.url.pathname) ?? Astro.currentLocale,
-);
-const ui = t(locale);
+const locale = "pt";
+const pt = t("pt");
+const en = t("en");
 const site = await getSite(locale);
 ---
 
 <MainLayout robots="noindex, nofollow" locale={locale} site={site}>
   <main
     class="relative flex min-h-dvh items-center overflow-hidden bg-hero py-24 text-hero-foreground"
+    data-not-found
+    data-pt-code={pt.notFound.code}
+    data-pt-title={pt.notFound.title}
+    data-pt-body={pt.notFound.body}
+    data-pt-cta={pt.notFound.cta}
+    data-pt-home={localizedPath("pt", "/")}
+    data-en-code={en.notFound.code}
+    data-en-title={en.notFound.title}
+    data-en-body={en.notFound.body}
+    data-en-cta={en.notFound.cta}
+    data-en-home={localizedPath("en", "/")}
   >
     <div
       class="pointer-events-none absolute inset-0 bg-[linear-gradient(160deg,var(--color-hero)_0%,var(--color-hero-2)_100%)]"
       aria-hidden="true"
     ></div>
     <Container class="relative">
-      <p class="text-sm font-semibold text-accent">
-        {ui.notFound.code}
+      <p class="text-sm font-semibold text-accent" data-not-found-code>
+        {pt.notFound.code}
       </p>
       <h1
         class="font-display mt-6 text-6xl font-extrabold leading-none tracking-tight text-hero-foreground md:text-8xl"
+        data-not-found-title
       >
-        {ui.notFound.title}
+        {pt.notFound.title}
       </h1>
-      <p class="mt-6 max-w-lg text-base leading-[1.7] text-hero-foreground/80">
-        {ui.notFound.body}
+      <p
+        class="mt-6 max-w-lg text-base leading-[1.7] text-hero-foreground/80"
+        data-not-found-body
+      >
+        {pt.notFound.body}
       </p>
       <div class="mt-10">
-        <Button href={localizedPath(locale, "/")} variant="primary" showArrow>
-          {ui.notFound.cta}
+        <Button
+          href={localizedPath("pt", "/")}
+          variant="primary"
+          showArrow
+          data-not-found-cta
+        >
+          <span data-not-found-cta-label>{pt.notFound.cta}</span>
         </Button>
       </div>
     </Container>
   </main>
+  <script>
+    import { initNotFound } from "../scripts/not-found";
+    initNotFound();
+  </script>
 </MainLayout>

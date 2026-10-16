@@ -1,26 +1,17 @@
 const MIN_SUBMIT_MS = 3000;
 
-type ContactMessageKey =
-	| "errorGeneric"
-	| "errorTooFast"
-	| "errorNetwork"
-	| "errorRateLimit"
-	| "success"
-	| "submitting"
-	| "submit";
+type ContactMessageKey = "errorGeneric" | "errorTooFast" | "errorNetwork" | "success" | "submitting" | "submit";
 
 const MESSAGE_DATASET_KEYS = {
 	errorGeneric: "msgErrorGeneric",
 	errorTooFast: "msgErrorFast",
 	errorNetwork: "msgErrorNetwork",
-	errorRateLimit: "msgErrorRateLimit",
 	success: "msgSuccess",
 	submitting: "msgSubmitting",
 	submit: "msgSubmit",
 } as const satisfies Record<ContactMessageKey, keyof DOMStringMap>;
 
 const API_ERROR_MESSAGE_KEYS = {
-	rate_limit: "errorRateLimit",
 	validation: "errorGeneric",
 	spam: "errorGeneric",
 	config: "errorGeneric",

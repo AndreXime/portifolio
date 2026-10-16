@@ -1,5 +1,4 @@
 ---
-import Analytics from "@vercel/analytics/astro";
 import { aboveTheFoldFontPreloads } from "../styles/fonts";
 import { getSite, type SiteContent } from "../lib/content";
 import {
@@ -10,6 +9,7 @@ import {
   type Locale,
 } from "../locales";
 import { absoluteLocaleUrl, stripLocalePrefix } from "../lib/i18n/paths";
+import { PREFERRED_LOCALE_COOKIE } from "../lib/i18n/locale";
 
 interface Props {
   robots?: string;
@@ -41,9 +41,9 @@ const {
   jsonLd = {},
 } = Astro.props;
 
-const showAnalytics = import.meta.env.ASTRO_NODE !== "1";
 const socialImageURL = new URL(ogImage, Astro.site);
 const schema = JSON.stringify(jsonLd);
+const localeRedirectOnRoot = Astro.url.pathname === "/";
 ---
 
 <!doctype html>
@@ -51,6 +51,41 @@ const schema = JSON.stringify(jsonLd);
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    {
+      localeRedirectOnRoot ? (
+        <script is:inline define:vars={{ cookieName: PREFERRED_LOCALE_COOKIE }}>
+          (function () {
+            var BOT_UA =
+              /googlebot|bingbot|yandex|baiduspider|duckduckbot|slurp|facebookexternalhit|twitterbot|linkedinbot|embedly|quora link preview|showyoubot|outbrain|pinterest|applebot|semrushbot|ahrefsbot|rogerbot|screaming frog|ia_archiver/i;
+            if (BOT_UA.test(navigator.userAgent)) return;
+
+            function readCookie(name) {
+              var parts = document.cookie.split(";");
+              for (var i = 0; i < parts.length; i++) {
+                var part = parts[i].trim();
+                var eq = part.indexOf("=");
+                if (eq === -1) continue;
+                if (part.slice(0, eq) === name) {
+                  return decodeURIComponent(part.slice(eq + 1));
+                }
+              }
+              return "";
+            }
+
+            var preferred = readCookie(cookieName);
+            if (preferred === "pt") return;
+            if (preferred === "en") {
+              location.replace("/en/");
+              return;
+            }
+
+            var lang = (navigator.language || "").toLowerCase();
+            if (lang.indexOf("pt") === 0) return;
+            location.replace("/en/");
+          })();
+        </script>
+      ) : null
+    }
     {
       aboveTheFoldFontPreloads.map((href) => (
         <link
@@ -99,7 +134,6 @@ const schema = JSON.stringify(jsonLd);
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={socialImageURL} />
     <meta name="twitter:image:alt" content={ogImageAlt} />
-    {showAnalytics ? <Analytics /> : null}
   </head>
   <body class="min-h-screen overflow-x-clip pt-0">
     <slot />

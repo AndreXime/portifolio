@@ -3,20 +3,20 @@ import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const PREVIEW_PORT = 4321;
-const NODE_ENV = { ASTRO_NODE: "1" };
 const ASTRO_CLI = join(dirname(fileURLToPath(import.meta.resolve("astro/package.json"))), "bin", "astro.mjs");
+const WRANGLER_CLI = join(dirname(fileURLToPath(import.meta.resolve("wrangler/package.json"))), "bin", "wrangler.js");
 
 let server: ChildProcess | null = null;
-const localUrl = `http://localhost:${PREVIEW_PORT}`;
+const localUrl = `http://127.0.0.1:${PREVIEW_PORT}`;
 
 export async function startPreviewServer(): Promise<string> {
 	await ensureBuild();
 
 	console.log(`Iniciando servidor em ${localUrl}`);
-	server = spawn(process.execPath, [ASTRO_CLI, "preview", "--port", String(PREVIEW_PORT)], {
+	server = spawn(process.execPath, [WRANGLER_CLI, "dev", "--ip", "127.0.0.1", "--port", String(PREVIEW_PORT)], {
 		stdio: "pipe",
 		detached: true,
-		env: { ...process.env, ...NODE_ENV },
+		env: process.env,
 	});
 
 	await waitForServer(localUrl);
@@ -43,7 +43,7 @@ async function waitForServer(url: string, timeoutMs = 60_000): Promise<void> {
 		await new Promise((resolve) => setTimeout(resolve, 500));
 	}
 
-	throw new Error("Servidor Astro nao iniciou a tempo");
+	throw new Error("Servidor Wrangler nao iniciou a tempo");
 }
 
 function stopProcess(child: ChildProcess): void {
@@ -63,7 +63,7 @@ async function ensureBuild(): Promise<void> {
 	console.log("Executando build");
 	const result = spawnSync(process.execPath, [ASTRO_CLI, "build"], {
 		stdio: "pipe",
-		env: { ...process.env, ...NODE_ENV },
+		env: process.env,
 	});
 	if (result.status !== 0) {
 		throw new Error("Error ao fazer build");

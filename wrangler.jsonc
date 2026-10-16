@@ -1,0 +1,15 @@
+{
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"name": "andre-portifolio",
+	"compatibility_date": "2026-10-16",
+	"compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
+	"main": "@astrojs/cloudflare/entrypoints/server",
+	"assets": {
+		"binding": "ASSETS",
+		"directory": "./dist",
+		"not_found_handling": "404-page"
+	},
+	"observability": {
+		"enabled": true
+	}
+}

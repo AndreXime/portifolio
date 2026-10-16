@@ -1,18 +1,14 @@
 import { getSecret } from "astro:env/server";
 import type { APIRoute } from "astro";
 import { z } from "astro/zod";
-import nodemailer from "nodemailer";
 import { resolveLocale } from "../../locales";
 
 export const prerender = false;
 
-export type ContactErrorCode = "rate_limit" | "validation" | "spam" | "config" | "server";
+export type ContactErrorCode = "validation" | "spam" | "config" | "server";
 
 const MIN_SUBMIT_MS = 3000;
-const RATE_LIMIT_MAX = 5;
-const RATE_LIMIT_WINDOW_MS = 60 * 60 * 1000;
-
-const rateLimitStore = new Map<string, { count: number; resetAt: number }>();
+const WEB3FORMS_ENDPOINT = "https://api.web3forms.com/submit";
 
 const contactBodySchema = z.object({
 	name: z.string().trim().min(1),
@@ -23,36 +19,16 @@ const contactBodySchema = z.object({
 	locale: z.string().optional(),
 });
 
+interface Web3FormsResponse {
+	success: boolean;
+	message?: string;
+}
+
 function jsonError(error: ContactErrorCode, status: number): Response {
 	return new Response(JSON.stringify({ error }), {
 		status,
 		headers: { "Content-Type": "application/json" },
 	});
-}
-
-function getClientIp(request: Request): string {
-	const forwarded = request.headers.get("x-forwarded-for");
-	if (forwarded) {
-		return forwarded.split(",")[0]?.trim() ?? "unknown";
-	}
-	return request.headers.get("x-real-ip") ?? "unknown";
-}
-
-function isRateLimited(ip: string): boolean {
-	const now = Date.now();
-	const entry = rateLimitStore.get(ip);
-
-	if (!entry || now >= entry.resetAt) {
-		rateLimitStore.set(ip, { count: 1, resetAt: now + RATE_LIMIT_WINDOW_MS });
-		return false;
-	}
-
-	if (entry.count >= RATE_LIMIT_MAX) {
-		return true;
-	}
-
-	entry.count += 1;
-	return false;
 }
 
 function isSpamPayload(data: z.infer<typeof contactBodySchema>): boolean {
@@ -68,13 +44,18 @@ function isSpamPayload(data: z.infer<typeof contactBodySchema>): boolean {
 	return false;
 }
 
+function isWeb3FormsResponse(value: unknown): value is Web3FormsResponse {
+	if (typeof value !== "object" || value === null) {
+		return false;
+	}
+	if (!("success" in value) || typeof value.success !== "boolean") {
+		return false;
+	}
+	return true;
+}
+
 export const POST: APIRoute = async ({ request }) => {
 	try {
-		const clientIp = getClientIp(request);
-		if (isRateLimited(clientIp)) {
-			return jsonError("rate_limit", 429);
-		}
-
 		const raw: unknown = await request.json();
 		const parsed = contactBodySchema.safeParse(raw);
 
@@ -89,34 +70,37 @@ export const POST: APIRoute = async ({ request }) => {
 		const { name, email, message } = parsed.data;
 		const locale = resolveLocale(parsed.data.locale);
 
-		const emailUser = getSecret("EMAIL_USER");
-		const emailPass = getSecret("EMAIL_PASS");
-
-		if (!emailUser || !emailPass) {
+		const accessKey = getSecret("WEB3FORMS_ACCESS_KEY");
+		if (!accessKey) {
 			return jsonError("config", 500);
 		}
-
-		const transporter = nodemailer.createTransport({
-			service: "gmail",
-			secure: true,
-			auth: {
-				user: emailUser,
-				pass: emailPass,
-			},
-		});
 
 		const subject =
 			locale === "en"
 				? `New portfolio contact message from ${name}`
 				: `Nova mensagem de contato de ${name} no site do Portifolio`;
 
-		await transporter.sendMail({
-			from: `"${name}" <${emailUser}>`,
-			to: emailUser,
-			subject,
-			text: `Email: ${email}\n\n${message}`,
-			replyTo: email,
+		const upstream = await fetch(WEB3FORMS_ENDPOINT, {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+				Accept: "application/json",
+			},
+			body: JSON.stringify({
+				access_key: accessKey,
+				name,
+				email,
+				message,
+				subject,
+				replyto: email,
+				from_name: name,
+			}),
 		});
+
+		const upstreamBody: unknown = await upstream.json().catch(() => null);
+		if (!upstream.ok || !isWeb3FormsResponse(upstreamBody) || !upstreamBody.success) {
+			return jsonError("server", 502);
+		}
 
 		return new Response(JSON.stringify({ success: true }), {
 			status: 200,
