@@ -63,7 +63,7 @@ export const POST: APIRoute = async ({ request }) => {
 		const subject =
 			locale === "en"
 				? `New portfolio contact message from ${name}`
-				: `Nova mensagem de contato de ${name} no site do Portifolio`;
+				: `Nova mensagem de contato de ${name} no site do Portfólio`;
 
 		const upstream = await fetch(WEB3FORMS_ENDPOINT, {
 			method: "POST",
