@@ -21,12 +21,12 @@ https://github.com/user-attachments/assets/61cf6383-fdb2-47fb-bcc4-afba660114f0
 
 - **Imagens**: `astro:assets` (WebP, lazy load, `sizes` adequados)
 - **Fontes**: pesos alinhados ao markup; preload só no primeiro paint
-- **JS mínimo**: modal de projetos, “ver mais”, nav drawer, scroll spy, formulário de contato
+- **JS mínimo**: “ver mais”, nav drawer, scroll spy, formulário de contato, navegação das páginas de projeto
 - **Reveal**: `IntersectionObserver` próprio, respeita `prefers-reduced-motion`
 - **CSS crítico**: `inlineStylesheets: "always"` no build
 - **SEO**: sitemap com i18n, JSON-LD, OG estática, `hreflang`
 - **i18n**: PT em `/`, EN em `/en` (ver seção abaixo)
-- **Contato**: `POST /api/contact` com validação, honeypot, tempo mínimo e Web3Forms
+- **Contato**: `POST /api/contact` com validação, honeypot e Web3Forms
 
 ## Internacionalização (i18n)
 
